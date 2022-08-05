@@ -243,5 +243,7 @@ public interface AppModule extends ApplicationModule {
     void callDailyStockStatementproc(String LV_UNIT, String LV_SID, String LV_LocationFilter, Date FRDATE);
 
     void callApprovedPurchaseIndent(String LV_UNIT, Date FRDATE, Date TODATE);
+
+    void callShortExcessRegister(String LV_UNIT, Date FRDATE, Date TODATE, String LV_REPTYPE);
 }
 

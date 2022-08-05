@@ -407,6 +407,9 @@
   <ViewUsage
     Name="ApprovedPurchaseIndentVO1"
     ViewObjectName="model.inventory.views.ApprovedPurchaseIndentVO"/>
+  <ViewUsage
+    Name="ShortExcessRegisterVO1"
+    ViewObjectName="model.inventory.views.ShortExcessRegisterVO"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -8108,6 +8111,25 @@
       <Parameter
         Name="TODATE"
         Type="java.util.Date"/>
+    </Method>
+    <Method
+      Name="callShortExcessRegister"
+      MethodName="callShortExcessRegister">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="FRDATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TODATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="LV_REPTYPE"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
 </AppModule>

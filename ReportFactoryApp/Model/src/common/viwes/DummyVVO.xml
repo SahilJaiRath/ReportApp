@@ -438,6 +438,10 @@
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
+  <ViewAccessor
+    Name="ShortExcessRegister_RepTypeVVO1"
+    ViewObjectName="common.viwes.ShortExcessRegister_RepTypeVVO"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_UnitCode"
     ListVOName="UnitVVO1"
@@ -1782,6 +1786,25 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="ShortDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ShortExcessRegister_RepType"
+    ListVOName="ShortExcessRegister_RepTypeVVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="LOV_ShortExcessRegister_RepType_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ShortExcessRegister_RepType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Return1"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Display"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -3347,6 +3370,26 @@
           Value="10"/>
         <CONTROLTYPE
           Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShortExcessRegister_RepType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_ShortExcessRegister_RepType">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+        <CONTROLTYPE
+          Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

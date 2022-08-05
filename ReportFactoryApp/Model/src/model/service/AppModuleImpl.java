@@ -4247,6 +4247,42 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     }
     }
     }
+
+
+    /**
+     * Container's getter for ShortExcessRegisterVO1.
+     * @return ShortExcessRegisterVO1
+     */
+    public ViewObjectImpl getShortExcessRegisterVO1() {
+        return (ViewObjectImpl) findViewObject("ShortExcessRegisterVO1");
+    }
+    
+    public void callShortExcessRegister(String LV_UNIT,Date FRDATE,Date TODATE , String LV_REPTYPE){
+        ViewObjectImpl vo = this.getShortExcessRegisterVO1();
+        System.out.println(LV_UNIT + "--"  + LV_REPTYPE + "--" + FRDATE + "--" + TODATE+"--");
+        
+    if ( LV_UNIT != null &&  FRDATE != null && TODATE != null && LV_REPTYPE !=null) {
+        System.out.println("Inside condition!");
+    try {
+
+        
+       
+        vo.setNamedWhereClauseParam("P117_FR_DT", FRDATE);
+        vo.setNamedWhereClauseParam("P117_TO_DT", TODATE);
+        vo.setNamedWhereClauseParam("P117_UNIT", LV_UNIT);
+        vo.setNamedWhereClauseParam("P117_TYPE", LV_REPTYPE);
+       
+        vo.executeQuery();
+        
+        
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    
+    }
+    }
+    }
+
     
     
 }
