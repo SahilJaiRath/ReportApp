@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="TDS Report" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name "
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:188px;" labelStyle="width:100px"  >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date "
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id5" contentStyle="width:180px;" labelStyle="width:100px"  >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id6" contentStyle="width:180px;" labelStyle="width:100px"  >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{TDSReportBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export to Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="TDS Report.xls"
+                                             title="Export to Excel"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.TDSVVO1.collectionModel}" var="row" rows="#{bindings.TDSVVO1.rangeSize}"
+              emptyText="#{bindings.TDSVVO1.viewable ? 'No data to display.' : 'Access Denied.'}" rowBandingInterval="0"
+              selectedRowKeys="#{bindings.TDSVVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.TDSVVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.TDSVVO1.rangeSize}" filterModel="#{bindings.TDSVVO1Query.queryDescriptor}"
+              filterVisible="false" queryListener="#{bindings.TDSVVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.SerialNo.name}" filterable="true" sortable="true"
+                 headerText="Serial No" id="c1">
+        <af:outputText value="#{row.SerialNo}" shortDesc="#{bindings.TDSVVO1.hints.SerialNo.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.DeducCode.name}" filterable="true" sortable="true"
+                 headerText="Deduc Code" id="c2">
+        <af:outputText value="#{row.DeducCode}" shortDesc="#{bindings.TDSVVO1.hints.DeducCode.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.DeductionDescription.name}" filterable="true" sortable="true"
+                 headerText="Deduction Description" id="c25">
+        <af:outputText value="#{row.DeductionDescription}"
+                       shortDesc="#{bindings.TDSVVO1.hints.DeductionDescription.tooltip}" id="ot25"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.PanNo.name}" filterable="true" sortable="true"
+                 headerText="Pan No" id="c3">
+        <af:outputText value="#{row.PanNo}" shortDesc="#{bindings.TDSVVO1.hints.PanNo.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.PartyName.name}" filterable="true" sortable="true"
+                 headerText="Party Name" id="c9">
+        <af:outputText value="#{row.PartyName}" shortDesc="#{bindings.TDSVVO1.hints.PartyName.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.PartyAddress.name}" filterable="true" sortable="true"
+                 headerText="Party Address" id="c10">
+        <af:outputText value="#{row.PartyAddress}" shortDesc="#{bindings.TDSVVO1.hints.PartyAddress.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.Section1.name}" filterable="true" sortable="true"
+                 headerText="Section" id="c16">
+        <af:outputText value="#{row.Section1}" shortDesc="#{bindings.TDSVVO1.hints.Section1.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.DocAmt.name}" filterable="true" sortable="true"
+                 headerText="Doc Amount" id="c11">
+        <af:outputText value="#{row.DocAmt}" shortDesc="#{bindings.TDSVVO1.hints.DocAmt.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TDSVVO1.hints.DocAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.TdsAmt.name}" filterable="true" sortable="true"
+                 headerText="TDS Amount" id="c14">
+        <af:outputText value="#{row.TdsAmt}" shortDesc="#{bindings.TDSVVO1.hints.TdsAmt.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TDSVVO1.hints.TdsAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.Surcharge.name}" filterable="true" sortable="true"
+                 headerText="Surcharge" id="c17">
+        <af:outputText value="#{row.Surcharge}" shortDesc="#{bindings.TDSVVO1.hints.Surcharge.tooltip}" id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.Ecess.name}" filterable="true" sortable="true"
+                 headerText="Ecess" id="c18">
+        <af:outputText value="#{row.Ecess}" shortDesc="#{bindings.TDSVVO1.hints.Ecess.tooltip}" id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.TotalTax.name}" filterable="true" sortable="true"
+                 headerText="Total Tax" id="c19">
+        <af:outputText value="#{row.TotalTax}" shortDesc="#{bindings.TDSVVO1.hints.TotalTax.tooltip}" id="ot19">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TDSVVO1.hints.TotalTax.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.DateOfDeduction.name}" filterable="true" sortable="true"
+                 headerText="Date of Deduction" id="c20">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.TDSVVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DateOfDeduction.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.TDSVVO1.hints.DateOfDeduction.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DateOfDeduction}" shortDesc="#{bindings.TDSVVO1.hints.DateOfDeduction.tooltip}"
+                       id="ot20">
+          <af:convertDateTime pattern="#{bindings.TDSVVO1.hints.DateOfDeduction.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.TdsRate.name}" filterable="true" sortable="true"
+                 headerText="TDS Rate" id="c12">
+        <af:outputText value="#{row.TdsRate}" shortDesc="#{bindings.TDSVVO1.hints.TdsRate.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TDSVVO1.hints.TdsRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.DocNo.name}" filterable="true" sortable="true"
+                 headerText="Doc No" id="c6">
+        <af:outputText value="#{row.DocNo}" shortDesc="#{bindings.TDSVVO1.hints.DocNo.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.Narration.name}" filterable="true" sortable="true"
+                 headerText="Narration" id="c21">
+        <af:outputText value="#{row.Narration}" shortDesc="#{bindings.TDSVVO1.hints.Narration.tooltip}" id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.VouNo.name}" filterable="true" sortable="true"
+                 headerText="Voucher No" id="c22">
+        <af:outputText value="#{row.VouNo}" shortDesc="#{bindings.TDSVVO1.hints.VouNo.tooltip}" id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.GlCode.name}" filterable="true" sortable="true"
+                 headerText="GL Code" id="c23">
+        <af:outputText value="#{row.GlCode}" shortDesc="#{bindings.TDSVVO1.hints.GlCode.tooltip}" id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.ApprovalDate.name}" filterable="true" sortable="true"
+                 headerText="Approval Date " id="c24">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.TDSVVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ApprovalDate.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.TDSVVO1.hints.ApprovalDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ApprovalDate}" shortDesc="#{bindings.TDSVVO1.hints.ApprovalDate.tooltip}" id="ot24">
+          <af:convertDateTime pattern="#{bindings.TDSVVO1.hints.ApprovalDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.TDSVVO1.hints.UnitCode.label}" id="c4">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.TDSVVO1.hints.UnitCode.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.DocType.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.TDSVVO1.hints.DocType.label}" id="c5">
+        <af:outputText value="#{row.DocType}" shortDesc="#{bindings.TDSVVO1.hints.DocType.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.DocDate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.TDSVVO1.hints.DocDate.label}" id="c7">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.TDSVVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DocDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.TDSVVO1.hints.DocDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DocDate}" shortDesc="#{bindings.TDSVVO1.hints.DocDate.tooltip}" id="ot7">
+          <af:convertDateTime pattern="#{bindings.TDSVVO1.hints.DocDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.PartyCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.TDSVVO1.hints.PartyCode.label}" id="c8">
+        <af:outputText value="#{row.PartyCode}" shortDesc="#{bindings.TDSVVO1.hints.PartyCode.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.TdsCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.TDSVVO1.hints.TdsCode.label}" id="c13">
+        <af:outputText value="#{row.TdsCode}" shortDesc="#{bindings.TDSVVO1.hints.TdsCode.tooltip}" id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TDSVVO1.hints.EntryDate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.TDSVVO1.hints.EntryDate.label}" id="c15">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.TDSVVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EntryDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.TDSVVO1.hints.EntryDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.EntryDate}" shortDesc="#{bindings.TDSVVO1.hints.EntryDate.tooltip}" id="ot15">
+          <af:convertDateTime pattern="#{bindings.TDSVVO1.hints.EntryDate.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

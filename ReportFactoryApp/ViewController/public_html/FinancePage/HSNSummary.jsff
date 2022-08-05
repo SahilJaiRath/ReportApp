@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="HSN Summery" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="Width:172.0px;" labelStyle="Width:100px">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id1" contentStyle="Width:150.0px;" labelStyle="Width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2" contentStyle="Width:150.0px;" labelStyle="Width:100px">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button id="b1" text="Execute" actionListener="#{HSNSummaryBean.onClickButton}"
+                     disabled="#{!bindings.callHSNSummary.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="HSN Summary.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.HSNSummaryVO1.collectionModel}" var="row" rows="#{bindings.HSNSummaryVO1.rangeSize}"
+              emptyText="#{bindings.HSNSummaryVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.HSNSummaryVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.HSNSummaryVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.HSNSummaryVO1.rangeSize}"
+              filterModel="#{bindings.HSNSummaryVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.HSNSummaryVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.HSNSummaryVO1.hints.UnitCode.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.HsnNo.name}" filterable="true" sortable="true"
+                 headerText="HSN Number" id="c2">
+        <af:outputText value="#{row.HsnNo}" shortDesc="#{bindings.HSNSummaryVO1.hints.HsnNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.HsnDesc.name}" filterable="true" sortable="true"
+                 headerText="HSN Description" id="c3">
+        <af:outputText value="#{row.HsnDesc}" shortDesc="#{bindings.HSNSummaryVO1.hints.HsnDesc.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c4">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.HSNSummaryVO1.hints.Uom.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="QTY" id="c5">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.HSNSummaryVO1.hints.Qty.tooltip}" id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.HSNSummaryVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.Igst.name}" filterable="true" sortable="true"
+                 headerText="IGST" id="c6">
+        <af:outputText value="#{row.Igst}" shortDesc="#{bindings.HSNSummaryVO1.hints.Igst.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.HSNSummaryVO1.hints.Igst.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.Cgst.name}" filterable="true" sortable="true"
+                 headerText="CGST" id="c7">
+        <af:outputText value="#{row.Cgst}" shortDesc="#{bindings.HSNSummaryVO1.hints.Cgst.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.HSNSummaryVO1.hints.Cgst.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.Sgst.name}" filterable="true" sortable="true"
+                 headerText="SGST" id="c8">
+        <af:outputText value="#{row.Sgst}" shortDesc="#{bindings.HSNSummaryVO1.hints.Sgst.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.HSNSummaryVO1.hints.Sgst.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.Amount.name}" filterable="true" sortable="true"
+                 headerText="Amount" id="c9">
+        <af:outputText value="#{row.Amount}" shortDesc="#{bindings.HSNSummaryVO1.hints.Amount.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.HSNSummaryVO1.hints.Amount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.TotVal.name}" filterable="true" sortable="true"
+                 headerText="Total Value" id="c10">
+        <af:outputText value="#{row.TotVal}" shortDesc="#{bindings.HSNSummaryVO1.hints.TotVal.tooltip}" id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.HSNSummaryVO1.hints.TotVal.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.HSNSummaryVO1.hints.CessAmt.name}" filterable="true" sortable="true"
+                 headerText="Cess Amount" id="c11">
+        <af:outputText value="#{row.CessAmt}" shortDesc="#{bindings.HSNSummaryVO1.hints.CessAmt.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.HSNSummaryVO1.hints.CessAmt.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

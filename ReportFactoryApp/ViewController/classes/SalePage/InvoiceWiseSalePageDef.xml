@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="InvoiceWiseSalePageDef"
+                Package="SalePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="InvoiceWiseSaleVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="InvoiceWiseSaleVO1Iterator"/>
+    <searchRegion Binds="InvoiceWiseSaleVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="InvoiceWiseSaleVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="InvoiceWiseSaleVO1Iterator" id="InvoiceWiseSaleVO1">
+      <nodeDefinition DefName="model.sale.views.InvoiceWiseSaleVO" Name="InvoiceWiseSaleVO10">
+        <AttrNames>
+          <Item Value="Identifier"/>
+          <Item Value="Dates"/>
+          <Item Value="PoHeadAckNumber"/>
+          <Item Value="ConsigneeCode"/>
+          <Item Value="ConsigneeName"/>
+          <Item Value="ConsigneeAdd"/>
+          <Item Value="ReceivingParty"/>
+          <Item Value="ReceivingAddr"/>
+          <Item Value="VehicleNo"/>
+          <Item Value="Transpoter"/>
+          <Item Value="GrossAmount"/>
+          <Item Value="NetAmount"/>
+          <Item Value="ProdCode"/>
+          <Item Value="ItemName"/>
+          <Item Value="ShipMode"/>
+          <Item Value="Distination"/>
+          <Item Value="CustCode"/>
+          <Item Value="UnitCode"/>
+          <Item Value="CurrName"/>
+          <Item Value="DiscountAmount"/>
+          <Item Value="Quantity"/>
+          <Item Value="Uom"/>
+          <Item Value="CustMrpPrice"/>
+          <Item Value="BatchNo"/>
+          <Item Value="MfgDt"/>
+          <Item Value="ExpDt"/>
+          <Item Value="Price"/>
+          <Item Value="Amount"/>
+          <Item Value="Discount"/>
+          <Item Value="HsnNo"/>
+          <Item Value="IgstRate"/>
+          <Item Value="IgstAmt"/>
+          <Item Value="CgstRate"/>
+          <Item Value="CgstAmt"/>
+          <Item Value="SgstRate"/>
+          <Item Value="SgstAmt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_InvoiceWiseSale_ItemName"
+                  id="InvoiceWiseSale_ItemName"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callInvoiceWiseSale" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callInvoiceWiseSale" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ItemName" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubLedger_UnitCode" id="SubLedger_UnitCode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

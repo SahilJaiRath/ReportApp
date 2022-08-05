@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Pending Challan for Receive" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:183.0px;"
+                              labelStyle = "width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id5" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px"  >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id4" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2"
+                     actionListener="#{PendingChallanforReceiveBean.onClickButton}"
+                     disabled="#{!bindings.callPendingChallanforReceive.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Pending Challan for Receive.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PendingChallanforReceiveVO1.collectionModel}" var="row"
+              rows="#{bindings.PendingChallanforReceiveVO1.rangeSize}"
+              emptyText="#{bindings.PendingChallanforReceiveVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.PendingChallanforReceiveVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PendingChallanforReceiveVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.PendingChallanforReceiveVO1.rangeSize}"
+              filterModel="#{bindings.PendingChallanforReceiveVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PendingChallanforReceiveVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.ChallanNo.name}" filterable="true"
+                 sortable="true" headerText="Challan No" id="c1">
+        <af:outputText value="#{row.ChallanNo}"
+                       shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.ChallanNo.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.DocDate.name}" filterable="true"
+                 sortable="true" headerText="Doc Date" id="c10">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingChallanforReceiveVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DocDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.PendingChallanforReceiveVO1.hints.DocDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DocDate}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.DocDate.tooltip}"
+                       id="ot10">
+          <af:convertDateTime pattern="#{bindings.PendingChallanforReceiveVO1.hints.DocDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.ItemCd.name}" filterable="true"
+                 sortable="true" headerText="Item Code" id="c2">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.ItemCd.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.Descript.name}" filterable="true"
+                 sortable="true" headerText="Description" id="c3">
+        <af:outputText value="#{row.Descript}"
+                       shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.Descript.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="Batch No" id="c7">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.BatchNo.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingChallanforReceiveVO1.hints.Qty.label}" id="c4">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.Qty.tooltip}"
+                       id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingChallanforReceiveVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.Rate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PendingChallanforReceiveVO1.hints.Rate.label}" id="c11">
+        <af:outputText value="#{row.Rate}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.Rate.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingChallanforReceiveVO1.hints.Rate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.Mrp.name}" filterable="true" sortable="true"
+                 headerText="MRP" id="c6">
+        <af:outputText value="#{row.Mrp}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.Mrp.tooltip}"
+                       id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingChallanforReceiveVO1.hints.Mrp.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c5">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.Uom.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.HsnNo.name}" filterable="true"
+                 sortable="true" headerText="Hsn No" id="c9">
+        <af:outputText value="#{row.HsnNo}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.HsnNo.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.Amt.name}" filterable="true" sortable="true"
+                 headerText="Amount" id="c8">
+        <af:outputText value="#{row.Amt}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.Amt.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingChallanforReceiveVO1.hints.Amt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.FgLoc.name}" filterable="true"
+                 sortable="true" headerText="Fg Loc" id="c14">
+        <af:outputText value="#{row.FgLoc}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.FgLoc.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.Cld.name}" filterable="true" sortable="true"
+                 headerText="CLD" id="c16">
+        <af:outputText value="#{row.Cld}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.Cld.tooltip}"
+                       id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingChallanforReceiveVO1.hints.Cld.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.MfgDt.name}" filterable="true"
+                 sortable="true" headerText="Mfg Date" id="c12">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingChallanforReceiveVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.MfgDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.PendingChallanforReceiveVO1.hints.MfgDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.MfgDt}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.MfgDt.tooltip}"
+                       id="ot12">
+          <af:convertDateTime pattern="#{bindings.PendingChallanforReceiveVO1.hints.MfgDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.ExpDt.name}" filterable="true"
+                 sortable="true" headerText="Exp Date" id="c13">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingChallanforReceiveVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ExpDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.PendingChallanforReceiveVO1.hints.ExpDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ExpDt}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.ExpDt.tooltip}"
+                       id="ot13">
+          <af:convertDateTime pattern="#{bindings.PendingChallanforReceiveVO1.hints.ExpDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingChallanforReceiveVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c15">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.PendingChallanforReceiveVO1.hints.UnitCd.tooltip}"
+                       id="ot15"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

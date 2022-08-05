@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Incoming Inspection Register" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="Width:178.0px;"  labelStyle="Width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id5" contentStyle="Width:183.0px;"  labelStyle="Width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id6" contentStyle="Width:180.0px;"  labelStyle="Width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1"
+                     actionListener="#{IncomingInspectionRegisterBean.onClickButton}"
+                     disabled="#{!bindings.callIncomingInspectionRegister.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Incoming Inspection Register.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.IncomingInspectionRegisterVVO1.collectionModel}" var="row"
+              rows="#{bindings.IncomingInspectionRegisterVVO1.rangeSize}"
+              emptyText="#{bindings.IncomingInspectionRegisterVVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.IncomingInspectionRegisterVVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.IncomingInspectionRegisterVVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.IncomingInspectionRegisterVVO1.rangeSize}"
+              filterModel="#{bindings.IncomingInspectionRegisterVVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.IncomingInspectionRegisterVVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.IirNo.name}" filterable="true"
+                 sortable="true" headerText="Incoming Inspection Register Number" id="c2">
+        <af:outputText value="#{row.IirNo}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.IirNo.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.IirDt.name}" filterable="true"
+                 sortable="true" headerText="Incoming Inspection Register Date" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.IncomingInspectionRegisterVVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.IirDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.IirDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.IirDt}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.IirDt.tooltip}"
+                       id="ot3">
+          <af:convertDateTime pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.IirDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.MrnNo.name}" filterable="true"
+                 sortable="true" headerText="MRN No" id="c6">
+        <af:outputText value="#{row.MrnNo}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.MrnNo.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.MrnDt.name}" filterable="true"
+                 sortable="true" headerText="MRN Date" id="c7">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.IncomingInspectionRegisterVVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.MrnDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.MrnDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.MrnDt}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.MrnDt.tooltip}"
+                       id="ot7">
+          <af:convertDateTime pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.MrnDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.VendrCd.name}" filterable="true"
+                 sortable="true" headerText="Vendor Code" id="c4">
+        <af:outputText value="#{row.VendrCd}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.VendrCd.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.Name.name}" filterable="true"
+                 sortable="true" headerText="Vendor Name" id="c5">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.Name.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcCd.name}" filterable="true"
+                 sortable="true" headerText="Product Code" id="c24">
+        <af:outputText value="#{row.ProcCd}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcCd.tooltip}"
+                       id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ItemType.name}" filterable="true"
+                 sortable="true" headerText="Item Type" id="c8">
+        <af:outputText value="#{row.ItemType}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ItemType.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ClearDt.name}" filterable="true"
+                 sortable="true" headerText="Clear Date" id="c12">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.IncomingInspectionRegisterVVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ClearDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.ClearDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ClearDt}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ClearDt.tooltip}" id="ot12">
+          <af:convertDateTime pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.ClearDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.LotSize.name}" filterable="true"
+                 sortable="true" headerText="LOT Size" id="c13">
+        <af:outputText value="#{row.LotSize}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.LotSize.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.LotSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.AcceptedQty.name}" filterable="true"
+                 sortable="true" headerText="Accepted Qty" id="c30">
+        <af:outputText value="#{row.AcceptedQty}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.AcceptedQty.tooltip}" id="ot30">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.AcceptedQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.RejectQty.name}" filterable="true"
+                 sortable="true" headerText="Reject Qty" id="c31">
+        <af:outputText value="#{row.RejectQty}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.RejectQty.tooltip}" id="ot31">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.RejectQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.Rating.name}" filterable="true"
+                 sortable="true" headerText="Rating" id="c18">
+        <af:outputText value="#{row.Rating}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.Rating.tooltip}"
+                       id="ot18">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.Rating.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.DeviaNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.DeviaNo.label}" id="c19">
+        <af:outputText value="#{row.DeviaNo}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.DeviaNo.tooltip}" id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.DeviaDt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.DeviaDt.label}" id="c20">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.IncomingInspectionRegisterVVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DeviaDt.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.DeviaDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DeviaDt}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.DeviaDt.tooltip}" id="ot20">
+          <af:convertDateTime pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.DeviaDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.NonConf.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.NonConf.label}" id="c21">
+        <af:outputText value="#{row.NonConf}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.NonConf.tooltip}" id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcSeq.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcSeq.label}" id="c22">
+        <af:outputText value="#{row.ProcSeq}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcSeq.tooltip}" id="ot22">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcSeq.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcSeqRevno.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcSeqRevno.label}"
+                 id="c23">
+        <af:outputText value="#{row.ProcSeqRevno}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcSeqRevno.tooltip}" id="ot23">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcSeqRevno.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcessName.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcessName.label}"
+                 id="c25">
+        <af:outputText value="#{row.ProcessName}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ProcessName.tooltip}" id="ot25"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.Remk.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.Remk.label}" id="c26">
+        <af:outputText value="#{row.Remk}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.Remk.tooltip}"
+                       id="ot26"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.InspBy.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.InspBy.label}" id="c27">
+        <af:outputText value="#{row.InspBy}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.InspBy.tooltip}"
+                       id="ot27"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.DevReqQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.DevReqQty.label}" id="c28">
+        <af:outputText value="#{row.DevReqQty}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.DevReqQty.tooltip}" id="ot28">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.DevReqQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ReofferQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.ReofferQty.label}"
+                 id="c29">
+        <af:outputText value="#{row.ReofferQty}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ReofferQty.tooltip}" id="ot29">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.ReofferQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.SampSize.name}" filterable="true"
+                 sortable="true" headerText="Samp Size" id="c14">
+        <af:outputText value="#{row.SampSize}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.SampSize.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.SampSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.PpmYn.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.PpmYn.label}" id="c32">
+        <af:outputText value="#{row.PpmYn}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.PpmYn.tooltip}"
+                       id="ot32"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.Revno2.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.Revno2.label}" id="c11">
+        <af:outputText value="#{row.Revno2}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.Revno2.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.Revno2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.QprNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.QprNo.label}" id="c33">
+        <af:outputText value="#{row.QprNo}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.QprNo.tooltip}"
+                       id="ot33"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.TotRej.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.TotRej.label}" id="c17">
+        <af:outputText value="#{row.TotRej}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.TotRej.tooltip}"
+                       id="ot17">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncomingInspectionRegisterVVO1.hints.TotRej.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.ItemDesc.label}" id="c10">
+        <af:outputText value="#{row.ItemDesc}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ItemDesc.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.QcdNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.QcdNo.label}" id="c34">
+        <af:outputText value="#{row.QcdNo}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.QcdNo.tooltip}"
+                       id="ot34"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ManufactrName.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.ManufactrName.label}"
+                 id="c35">
+        <af:outputText value="#{row.ManufactrName}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ManufactrName.tooltip}" id="ot35"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ApprovedBy.name}" filterable="true"
+                 sortable="true" headerText="Approved By"
+                 id="c36">
+        <af:outputText value="#{row.ApprovedBy}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ApprovedBy.tooltip}" id="ot36"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ApprovedByName.name}" filterable="true"
+                 sortable="true" headerText="Approved By Name"
+                 id="c37">
+        <af:outputText value="#{row.ApprovedByName}"
+                       shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ApprovedByName.tooltip}" id="ot37"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.PRmCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.PRmCd.label}" id="c9">
+        <af:outputText value="#{row.PRmCd}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.PRmCd.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.A.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.A.label}" id="c15">
+        <af:outputText value="#{row.A}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.A.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.M.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.M.label}" id="c16">
+        <af:outputText value="#{row.M}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.M.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncomingInspectionRegisterVVO1.hints.ArNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncomingInspectionRegisterVVO1.hints.ArNo.label}" id="c38">
+        <af:outputText value="#{row.ArNo}" shortDesc="#{bindings.IncomingInspectionRegisterVVO1.hints.ArNo.tooltip}"
+                       id="ot38"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="BOM Tree" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:inputComboboxListOfValues id="bOMTree_BOM_Prd_cdId"
+                                        popupTitle="Search and Select: #{bindings.BOMTree_BOM_Prd_cd.hints.label}"
+                                        value="#{bindings.BOMTree_BOM_Prd_cd.inputValue}"
+                                        label="BOM Product"
+                                        model="#{bindings.BOMTree_BOM_Prd_cd.listOfValuesModel}"
+                                        required="#{bindings.BOMTree_BOM_Prd_cd.hints.mandatory}"
+                                        columns="#{bindings.BOMTree_BOM_Prd_cd.hints.displayWidth}"
+                                        shortDesc="#{bindings.BOMTree_BOM_Prd_cd.hints.tooltip}" contentStyle="Width:120.0px;"
+                                        labelStyle="Width:100px">
+            <f:validator binding="#{bindings.BOMTree_BOM_Prd_cd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:inputText value="#{bindings.RequiredBatch.inputValue}" label="Required Batch"
+                        required="#{bindings.RequiredBatch.hints.mandatory}"
+                        columns="#{bindings.RequiredBatch.hints.displayWidth}"
+                        maximumLength="#{bindings.RequiredBatch.hints.precision}"
+                        shortDesc="#{bindings.RequiredBatch.hints.tooltip}" id="it1">
+            <f:validator binding="#{bindings.RequiredBatch.validator}"/>
+          </af:inputText>
+        </af:gridCell>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="50%" id="gc3">
+          <af:inputText value="#{bindings.BOMTree_Batchqty1.inputValue}"
+                        label="BOM Batch Qty"
+                        required="#{bindings.BOMTree_Batchqty1.hints.mandatory}"
+                        columns="#{bindings.BOMTree_Batchqty1.hints.displayWidth}"
+                        maximumLength="#{bindings.BOMTree_Batchqty1.hints.precision}"
+                        shortDesc="#{bindings.BOMTree_Batchqty1.hints.tooltip}" id="it2" contentStyle="Width:200px;"
+                                        labelStyle="Width:100px" disabled="true">
+            <f:validator binding="#{bindings.BOMTree_Batchqty1.validator}"/>
+          </af:inputText>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc4">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callBOMTree.enabled}" actionListener="#{BOMTreeBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export to Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="BOM Tree.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BOMTreeVO1.collectionModel}" var="row" rows="#{bindings.BOMTreeVO1.rangeSize}"
+              emptyText="#{bindings.BOMTreeVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.BOMTreeVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BOMTreeVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.BOMTreeVO1.rangeSize}" filterModel="#{bindings.BOMTreeVO1Query.queryDescriptor}"
+              filterVisible="false" queryListener="#{bindings.BOMTreeVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.BomProduct.name}" filterable="true" sortable="true"
+                 headerText="BOM Product" id="c1">
+        <af:outputText value="#{row.BomProduct}" shortDesc="#{bindings.BOMTreeVO1.hints.BomProduct.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.ItemName.name}" filterable="true" sortable="true"
+                 headerText="Item Name" id="c2">
+        <af:outputText value="#{row.ItemName}" shortDesc="#{bindings.BOMTreeVO1.hints.ItemName.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.BatchSize.name}" filterable="true" sortable="true"
+                 headerText="Batch Size" id="c3">
+        <af:outputText value="#{row.BatchSize}" shortDesc="#{bindings.BOMTreeVO1.hints.BatchSize.tooltip}" id="ot3">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMTreeVO1.hints.BatchSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.Partcode.name}" filterable="true" sortable="true"
+                 headerText="Part Code" id="c4">
+        <af:outputText value="#{row.Partcode}" shortDesc="#{bindings.BOMTreeVO1.hints.Partcode.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.PartName.name}" filterable="true" sortable="true"
+                 headerText="Part Name" id="c5">
+        <af:outputText value="#{row.PartName}" shortDesc="#{bindings.BOMTreeVO1.hints.PartName.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c7">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.BOMTreeVO1.hints.Uom.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.AltUom.name}" filterable="true" sortable="true"
+                 headerText="Alt UOM" id="c8">
+        <af:outputText value="#{row.AltUom}" shortDesc="#{bindings.BOMTreeVO1.hints.AltUom.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.NoOff.name}" filterable="true" sortable="true"
+                 headerText="No Off" id="c6">
+        <af:outputText value="#{row.NoOff}" shortDesc="#{bindings.BOMTreeVO1.hints.NoOff.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMTreeVO1.hints.NoOff.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.PartTyp.name}" filterable="true" sortable="true"
+                 headerText="Part Type" id="c9">
+        <af:outputText value="#{row.PartTyp}" shortDesc="#{bindings.BOMTreeVO1.hints.PartTyp.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.ProcurmentTyp.name}" filterable="true" sortable="true"
+                 headerText="Procurment Typ" id="c10">
+        <af:outputText value="#{row.ProcurmentTyp}" shortDesc="#{bindings.BOMTreeVO1.hints.ProcurmentTyp.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.ConversionFactor.name}" filterable="true" sortable="true"
+                 headerText="Conversion Factor" id="c11">
+        <af:outputText value="#{row.ConversionFactor}" shortDesc="#{bindings.BOMTreeVO1.hints.ConversionFactor.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMTreeVO1.hints.ConversionFactor.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.ReqNoOff.name}" filterable="true" sortable="true"
+                 headerText="Req No off" id="c12">
+        <af:outputText value="#{row.ReqNoOff}" shortDesc="#{bindings.BOMTreeVO1.hints.ReqNoOff.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMTreeVO1.hints.ReqNoOff.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.ReqMaterialPerCld.name}" filterable="true" sortable="true"
+                 headerText="Req Material per CLD" id="c13">
+        <af:outputText value="#{row.ReqMaterialPerCld}"
+                       shortDesc="#{bindings.BOMTreeVO1.hints.ReqMaterialPerCld.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMTreeVO1.hints.ReqMaterialPerCld.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMTreeVO1.hints.Version.name}" filterable="true" sortable="true"
+                 headerText="Version" id="c14">
+        <af:outputText value="#{row.Version}" shortDesc="#{bindings.BOMTreeVO1.hints.Version.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMTreeVO1.hints.Version.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

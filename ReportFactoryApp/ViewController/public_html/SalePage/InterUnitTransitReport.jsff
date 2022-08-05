@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Inter- Unit Transit Report" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Sending Unit"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="interUnitTransit_UnitCodeId"
+                                        popupTitle="Search and Select: #{bindings.InterUnitTransit_UnitCode.hints.label}"
+                                        value="#{bindings.InterUnitTransit_UnitCode.inputValue}"
+                                        label="Receiving  Unit"
+                                        model="#{bindings.InterUnitTransit_UnitCode.listOfValuesModel}"
+                                        required="#{bindings.InterUnitTransit_UnitCode.hints.mandatory}"
+                                        columns="#{bindings.InterUnitTransit_UnitCode.hints.displayWidth}"
+                                        shortDesc="#{bindings.InterUnitTransit_UnitCode.hints.tooltip}">
+            <f:validator binding="#{bindings.InterUnitTransit_UnitCode.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b2" actionListener="#{InterUnitTransitBean.onClickButton}"
+                     disabled="#{!bindings.callInterUnitTransitReport.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.InterUnitTransitReportVO1.collectionModel}" var="row"
+              rows="#{bindings.InterUnitTransitReportVO1.rangeSize}"
+              emptyText="#{bindings.InterUnitTransitReportVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.InterUnitTransitReportVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.InterUnitTransitReportVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.InterUnitTransitReportVO1.rangeSize}"
+              filterModel="#{bindings.InterUnitTransitReportVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.InterUnitTransitReportVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.InvHeadType.name}" filterable="true"
+                 sortable="true" headerText="Inv Head Type" id="c1">
+        <af:outputText value="#{row.InvHeadType}"
+                       shortDesc="#{bindings.InterUnitTransitReportVO1.hints.InvHeadType.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.InvUnit.name}" filterable="true"
+                 sortable="true" headerText="Inv Unit" id="c2">
+        <af:outputText value="#{row.InvUnit}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.InvUnit.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.BillUnit.name}" filterable="true"
+                 sortable="true" headerText="Bill Unit" id="c4">
+        <af:outputText value="#{row.BillUnit}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.BillUnit.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.Identifier.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.InterUnitTransitReportVO1.hints.Identifier.label}" id="c6">
+        <af:outputText value="#{row.Identifier}"
+                       shortDesc="#{bindings.InterUnitTransitReportVO1.hints.Identifier.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.Dates.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InterUnitTransitReportVO1.hints.Dates.label}" id="c7">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.InterUnitTransitReportVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Dates.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.InterUnitTransitReportVO1.hints.Dates.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.Dates}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.Dates.tooltip}"
+                       id="ot7">
+          <af:convertDateTime pattern="#{bindings.InterUnitTransitReportVO1.hints.Dates.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.PartyName.name}" filterable="true"
+                 sortable="true" headerText="Party Name" id="c8">
+        <af:outputText value="#{row.PartyName}"
+                       shortDesc="#{bindings.InterUnitTransitReportVO1.hints.PartyName.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.ItemGroup.name}" filterable="true"
+                 sortable="true" headerText="Item Group" id="c10">
+        <af:outputText value="#{row.ItemGroup}"
+                       shortDesc="#{bindings.InterUnitTransitReportVO1.hints.ItemGroup.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.SubGrpDesc.name}" filterable="true"
+                 sortable="true" headerText="Sub Group Desc" id="c12">
+        <af:outputText value="#{row.SubGrpDesc}"
+                       shortDesc="#{bindings.InterUnitTransitReportVO1.hints.SubGrpDesc.tooltip}" id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.ItemCd.name}" filterable="true"
+                 sortable="true" headerText="Item Code" id="c13">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.ItemCd.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="Item Desc" id="c14">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.ItemDesc.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.ItemUom.name}" filterable="true"
+                 sortable="true" headerText="Item UOM" id="c15">
+        <af:outputText value="#{row.ItemUom}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.ItemUom.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="Batch No" id="c16">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.BatchNo.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.Quantity.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.InterUnitTransitReportVO1.hints.Quantity.label}" id="c17">
+        <af:outputText value="#{row.Quantity}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.Quantity.tooltip}"
+                       id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InterUnitTransitReportVO1.hints.Quantity.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.ChallanQty.name}" filterable="true"
+                 sortable="true" headerText="Challan Qty" id="c18">
+        <af:outputText value="#{row.ChallanQty}"
+                       shortDesc="#{bindings.InterUnitTransitReportVO1.hints.ChallanQty.tooltip}" id="ot18">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.InterUnitTransitReportVO1.hints.ChallanQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.GateEno.name}" filterable="true"
+                 sortable="true" headerText="Gate Eno" id="c19">
+        <af:outputText value="#{row.GateEno}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.GateEno.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.GateEdt.name}" filterable="true"
+                 sortable="true" headerText="Gate Edt" id="c20">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.InterUnitTransitReportVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.GateEdt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.InterUnitTransitReportVO1.hints.GateEdt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.GateEdt}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.GateEdt.tooltip}"
+                       id="ot20">
+          <af:convertDateTime pattern="#{bindings.InterUnitTransitReportVO1.hints.GateEdt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.SrvN.name}" filterable="true" sortable="true"
+                 headerText="SRV No" id="c21">
+        <af:outputText value="#{row.SrvN}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.SrvN.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.SrvAppBy.name}" filterable="true"
+                 sortable="true" headerText="SRV App By" id="c23">
+        <af:outputText value="#{row.SrvAppBy}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.SrvAppBy.tooltip}"
+                       id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.BillVenCode.name}" filterable="true"
+                 sortable="true" headerText="Bill Ven Code" id="c5">
+        <af:outputText value="#{row.BillVenCode}"
+                       shortDesc="#{bindings.InterUnitTransitReportVO1.hints.BillVenCode.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.GroupCode.name}" filterable="true"
+                 sortable="true" headerText="Group Code" id="c9">
+        <af:outputText value="#{row.GroupCode}"
+                       shortDesc="#{bindings.InterUnitTransitReportVO1.hints.GroupCode.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.SubGrpCd.name}" filterable="true"
+                 sortable="true" headerText="Sub Group Code" id="c11">
+        <af:outputText value="#{row.SubGrpCd}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.SubGrpCd.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.SrvDt.name}" filterable="true" sortable="true"
+                 headerText="SRV Date" id="c22">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.InterUnitTransitReportVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.SrvDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.InterUnitTransitReportVO1.hints.SrvDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.SrvDt}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.SrvDt.tooltip}"
+                       id="ot22">
+          <af:convertDateTime pattern="#{bindings.InterUnitTransitReportVO1.hints.SrvDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InterUnitTransitReportVO1.hints.CustCode.name}" filterable="true"
+                 sortable="true" headerText="Customer Code" id="c3">
+        <af:outputText value="#{row.CustCode}" shortDesc="#{bindings.InterUnitTransitReportVO1.hints.CustCode.tooltip}"
+                       id="ot3"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

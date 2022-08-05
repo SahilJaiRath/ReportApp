@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="VendorRejectionPageDef"
+                Package="PurchasePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="VendorRejectionVO1" DataControl="AppModuleDataControl"
+              id="VendorRejectionVO1Iterator" RangeSize="50"/>
+    <searchRegion Binds="VendorRejectionVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VendorRejectionVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="VendorRejectionVO1Iterator" id="VendorRejectionVO1">
+      <nodeDefinition DefName="model.Purchase.views.VendorRejectionVO" Name="VendorRejectionVO10">
+        <AttrNames>
+          <Item Value="UnitCode"/>
+          <Item Value="VendrCd"/>
+          <Item Value="VendorName"/>
+          <Item Value="SrvNumber"/>
+          <Item Value="SrvDate"/>
+          <Item Value="ItemCode"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ProcessCode"/>
+          <Item Value="ProcessName"/>
+          <Item Value="InspectionBy"/>
+          <Item Value="AcceptedQuantity"/>
+          <Item Value="RejectedQuantity"/>
+          <Item Value="SrvQty"/>
+          <Item Value="IirNo"/>
+          <Item Value="IirDt"/>
+          <Item Value="QcdNo"/>
+          <Item Value="ApprovedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callVendorRejection" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callVendorRejection" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

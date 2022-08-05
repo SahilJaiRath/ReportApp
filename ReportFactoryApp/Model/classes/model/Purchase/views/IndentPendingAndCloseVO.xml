@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="IndentPendingAndCloseVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.Purchase.views.IndentPendingAndCloseVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P211_FROM_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P211_TO_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P211_UNIT_CD"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT  A.UNIT_CODE, 
+        A.PUR_HIND_IND_NO INDENT_NO, 
+        TO_CHAR (A.CREATION_DATE, 'DD/MM/YYYY') INDENT_DATE, 
+        A.ITEM_CD, 
+        (SELECT PM.DESCRIPTION 
+         FROM PART_MASTER PM 
+         WHERE PM.PART_CODE = A.ITEM_CD) ITEM_DESCRIPTION, 
+        A.CLOSE_PID AS INDENT_CLOSE_ST, 
+        A.CANCEL_PID INDENT_CANCEL_ST, 
+        (SELECT SHORT_DESC FROM LOCATION WHERE LOCAT_CODE = H.IND_DEPT ) LOCATON_NAME , 
+        A.APPROVED_QTY, 
+        SUM(B.QTY) PO_QTY, 
+        A.APPROVED_QTY - SUM(B.QTY) BALANCE_QTY 
+  FROM  PUR_DINDS A, 
+        PO_DETAIL B, 
+        PUR_HINDS H 
+WHERE  A.PUR_HIND_IND_NO = B.PIOS_POIS_NO 
+   AND  A.ITEM_CD = B.PIOS_ITEM_CD 
+   AND  A.PUR_HIND_IND_NO = H.IND_NO 
+   AND  (B.PO_HEAD_PO_NO, B.PIOS_POIS_NO, B.PIOS_ITEM_CD, B.PO_HEAD_AMD_NO) IN  
+   (SELECT PO_HEAD_PO_NO, PIOS_POIS_NO, PIOS_ITEM_CD, MAX(PO_HEAD_AMD_NO) FROM PO_DETAIL GROUP BY PO_HEAD_PO_NO, PIOS_POIS_NO, PIOS_ITEM_CD) 
+   AND A.UNIT_CODE = :P211_UNIT_CD 
+   --AND A.PUR_HIND_IND_NO = '100012122221' 
+   --AND A.ITEM_CD = '1221000042'   
+   AND  TRUNC(A.CREATION_DATE) BETWEEN :P211_FROM_DATE AND :P211_TO_DATE 
+   GROUP BY A.UNIT_CODE, 
+        A.PUR_HIND_IND_NO , 
+        TO_CHAR (A.CREATION_DATE, 'DD/MM/YYYY'), 
+       A.ITEM_CD, 
+        A.CLOSE_PID , 
+        A.CANCEL_PID, 
+        A.APPROVED_QTY, 
+        H.IND_DEPT 
+  order by A.PUR_HIND_IND_NO, A.item_cd]]></SQLQuery>
+  <ViewAttribute
+    Name="UnitCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CODE"
+    Expression="UNIT_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IndentNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INDENT_NO"
+    Expression="INDENT_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IndentDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INDENT_DATE"
+    Expression="INDENT_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_CD"
+    Expression="ITEM_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemDescription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESCRIPTION"
+    Expression="ITEM_DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IndentCloseSt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INDENT_CLOSE_ST"
+    Expression="INDENT_CLOSE_ST"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IndentCancelSt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INDENT_CANCEL_ST"
+    Expression="INDENT_CANCEL_ST"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LocatonName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LOCATON_NAME"
+    Expression="LOCATON_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApprovedQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="APPROVED_QTY"
+    Expression="APPROVED_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PO_QTY"
+    Expression="PO_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BalanceQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BALANCE_QTY"
+    Expression="BALANCE_QTY"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

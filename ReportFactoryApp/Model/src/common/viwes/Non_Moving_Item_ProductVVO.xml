@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Non_Moving_Item_ProductVVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="common.viwes.Non_Moving_Item_ProductVVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P49_GROUP_CODE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P49_SUB_GROUP"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select  'ALL' as "Part Code"  from dual 
+union 
+select PART_CODE || ' , ' || DESCRIPTION  DESCRIPTION from part_master 
+WHERE SUBSTR(PART_CODE,1,2) LIKE :P49_GROUP_CODE||'%' 
+AND SUBSTR(PART_CODE,1,4) LIKE :P49_SUB_GROUP||'%' 
+order by "Part Code" DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="PartCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="148"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Part Code"'
+    Expression='"Part Code"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="148"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

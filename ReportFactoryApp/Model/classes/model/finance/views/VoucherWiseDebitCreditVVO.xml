@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VoucherWiseDebitCreditVVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.finance.views.VoucherWiseDebitCreditVVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P222_UNIT"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT      FIN_TVOUCH_UNIT_CODE, fin_tvouch_vou_type, FIN_TVOUCH_VOU_NO , SUM(Amount_Cr) Amount_Cr, SUM(Amount_Dr) Amount_Dr , 
+SUM(Amount_Cr) - SUM(Amount_Dr) difference FROM ( 
+SELECT      FIN_TVOUCH_UNIT_CODE, fin_tvouch_vou_type, FIN_TVOUCH_VOU_NO,  
+            (case when DR_CR_FLAG ='C' then SUM(NVL(AMOUNT,0) ) else  0 end) Amount_Cr , 
+            (case when DR_CR_FLAG ='D' then SUM(NVL(AMOUNT,0)) else  0 end ) Amount_Dr 
+FROM        GEN_LED_FIN_TVOUCH 
+WHERE       (FIN_TVOUCH_UNIT_CODE = :P222_UNIT OR 'ALL' = :P222_UNIT) 
+GROUP BY    FIN_TVOUCH_UNIT_CODE, FIN_TVOUCH_VOU_NO, fin_tvouch_vou_type, DR_CR_FLAG 
+    )GROUP BY    FIN_TVOUCH_UNIT_CODE, FIN_TVOUCH_VOU_NO, fin_tvouch_vou_type 
+    
+ORDER BY    2, 3]]></SQLQuery>
+  <ViewAttribute
+    Name="FinTvouchUnitCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FIN_TVOUCH_UNIT_CODE"
+    Expression="FIN_TVOUCH_UNIT_CODE"
+    SQLType="CHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FinTvouchVouType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="FIN_TVOUCH_VOU_TYPE"
+    Expression="FIN_TVOUCH_VOU_TYPE"
+    SQLType="CHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FinTvouchVouNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FIN_TVOUCH_VOU_NO"
+    Expression="FIN_TVOUCH_VOU_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AmountCr"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AMOUNT_CR"
+    Expression="AMOUNT_CR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="AmountDr"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AMOUNT_DR"
+    Expression="AMOUNT_DR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Difference"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DIFFERENCE"
+    Expression="DIFFERENCE"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

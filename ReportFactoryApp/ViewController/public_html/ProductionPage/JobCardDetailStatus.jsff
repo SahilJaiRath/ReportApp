@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Job Card Detail Status " id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:selectOneChoice value="#{bindings.SubLedger_UnitCode.inputValue}"
+                              label="Unit Name"
+                              required="#{bindings.SubLedger_UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.SubLedger_UnitCode.hints.tooltip}" id="soc1" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.SubLedger_UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.SubLedger_UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Execute" id="b1" actionListener="#{JobCardDetailStatusBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Job Card Detail Status report .xls"
+                                             title="Job Card Detail Status report "/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.JobCardDetailStatusVO1.collectionModel}" var="row"
+              rows="#{bindings.JobCardDetailStatusVO1.rangeSize}"
+              emptyText="#{bindings.JobCardDetailStatusVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.JobCardDetailStatusVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.JobCardDetailStatusVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.JobCardDetailStatusVO1.rangeSize}"
+              filterModel="#{bindings.JobCardDetailStatusVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.JobCardDetailStatusVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.JcNo.name}" filterable="true" sortable="true"
+                 headerText="Jc No" id="c2">
+        <af:outputText value="#{row.JcNo}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.JcNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.JcDt.name}" filterable="true" sortable="true"
+                 headerText="Jc Date" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JobCardDetailStatusVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.JcDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.JobCardDetailStatusVO1.hints.JcDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.JcDt}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.JcDt.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.JobCardDetailStatusVO1.hints.JcDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="Batch No" id="c7">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.BatchNo.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ProductCode.name}" filterable="true"
+                 sortable="true" headerText="Product Code" id="c4">
+        <af:outputText value="#{row.ProductCode}"
+                       shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ProductCode.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ProductName.name}" filterable="true"
+                 sortable="true" headerText="Product Name" id="c5">
+        <af:outputText value="#{row.ProductName}"
+                       shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ProductName.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ReqHslipReqSlipNo.name}" filterable="true"
+                 sortable="true" headerText="Req HSlip req Slip No" id="c9">
+        <af:outputText value="#{row.ReqHslipReqSlipNo}"
+                       shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ReqHslipReqSlipNo.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ReqItemCode.name}" filterable="true"
+                 sortable="true" headerText="Req Item Code" id="c10">
+        <af:outputText value="#{row.ReqItemCode}"
+                       shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ReqItemCode.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ReqItemName.name}" filterable="true"
+                 sortable="true" headerText="Req Item Name" id="c11">
+        <af:outputText value="#{row.ReqItemName}"
+                       shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ReqItemName.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ReqQty.name}" filterable="true" sortable="true"
+                 headerText="Req Qty" id="c13">
+        <af:outputText value="#{row.ReqQty}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ReqQty.tooltip}"
+                       id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobCardDetailStatusVO1.hints.ReqQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ReqDate.name}" filterable="true" sortable="true"
+                 headerText="Req Date" id="c12">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JobCardDetailStatusVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ReqDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.JobCardDetailStatusVO1.hints.ReqDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ReqDate}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ReqDate.tooltip}"
+                       id="ot12">
+          <af:convertDateTime pattern="#{bindings.JobCardDetailStatusVO1.hints.ReqDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ReqFromLoc.name}" filterable="true"
+                 sortable="true" headerText="Req From Loc" id="c21">
+        <af:outputText value="#{row.ReqFromLoc}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ReqFromLoc.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ReqStoreLoc.name}" filterable="true"
+                 sortable="true" headerText="Req Store Loc" id="c22">
+        <af:outputText value="#{row.ReqStoreLoc}"
+                       shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ReqStoreLoc.tooltip}" id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.IssSlipNo.name}" filterable="true"
+                 sortable="true" headerText="Iss Slip No" id="c16">
+        <af:outputText value="#{row.IssSlipNo}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.IssSlipNo.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.IssueQty.name}" filterable="true" sortable="true"
+                 headerText="Issue Qty" id="c18">
+        <af:outputText value="#{row.IssueQty}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.IssueQty.tooltip}"
+                       id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobCardDetailStatusVO1.hints.IssueQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.IssSlipDt.name}" filterable="true"
+                 sortable="true" headerText="Issue Slip Date" id="c17">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JobCardDetailStatusVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.IssSlipDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.JobCardDetailStatusVO1.hints.IssSlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.IssSlipDt}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.IssSlipDt.tooltip}"
+                       id="ot17">
+          <af:convertDateTime pattern="#{bindings.JobCardDetailStatusVO1.hints.IssSlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ItemBatch.name}" filterable="true"
+                 sortable="true" headerText="Item Batch" id="c25">
+        <af:outputText value="#{row.ItemBatch}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ItemBatch.tooltip}"
+                       id="ot25"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.IssueFromLoc.name}" filterable="true"
+                 sortable="true" headerText="Issue From Loc" id="c23">
+        <af:outputText value="#{row.IssueFromLoc}"
+                       shortDesc="#{bindings.JobCardDetailStatusVO1.hints.IssueFromLoc.tooltip}" id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.IssueToLoc.name}" filterable="true"
+                 sortable="true" headerText="Issue To Loc" id="c24">
+        <af:outputText value="#{row.IssueToLoc}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.IssueToLoc.tooltip}"
+                       id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.JobcardQty.name}" filterable="true"
+                 sortable="true" headerText="Job Card Qty" id="c6">
+        <af:outputText value="#{row.JobcardQty}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.JobcardQty.tooltip}"
+                       id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobCardDetailStatusVO1.hints.JobcardQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.ConsumedQty.name}" filterable="true"
+                 sortable="true" headerText="Consumed Qty" id="c19">
+        <af:outputText value="#{row.ConsumedQty}"
+                       shortDesc="#{bindings.JobCardDetailStatusVO1.hints.ConsumedQty.tooltip}" id="ot19">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobCardDetailStatusVO1.hints.ConsumedQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.RetNo.name}" filterable="true" sortable="true"
+                 headerText="Ret No" id="c14">
+        <af:outputText value="#{row.RetNo}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.RetNo.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.RetQty.name}" filterable="true" sortable="true"
+                 headerText="Ret Qty" id="c15">
+        <af:outputText value="#{row.RetQty}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.RetQty.tooltip}"
+                       id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobCardDetailStatusVO1.hints.RetQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.BmrNo.name}" filterable="true" sortable="true"
+                 headerText="Bmr No" id="c8">
+        <af:outputText value="#{row.BmrNo}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.BmrNo.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobCardDetailStatusVO1.hints.BalQty.name}" filterable="true" sortable="true"
+                 headerText="Bal Qty" id="c20">
+        <af:outputText value="#{row.BalQty}" shortDesc="#{bindings.JobCardDetailStatusVO1.hints.BalQty.tooltip}"
+                       id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobCardDetailStatusVO1.hints.BalQty.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

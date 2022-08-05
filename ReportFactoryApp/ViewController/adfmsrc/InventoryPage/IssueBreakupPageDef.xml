@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="IssueBreakupPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="IssueBreakupVO1" RangeSize="50" DataControl="AppModuleDataControl" id="IssueBreakupVO1Iterator"/>
+    <searchRegion Binds="IssueBreakupVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="IssueBreakupVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="IssueBreakupVO1Iterator" id="IssueBreakupVO1">
+      <nodeDefinition DefName="model.inventory.views.IssueBreakupVO" Name="IssueBreakupVO10">
+        <AttrNames>
+          <Item Value="ItemCd"/>
+          <Item Value="Description"/>
+          <Item Value="OpQty"/>
+          <Item Value="RecQty"/>
+          <Item Value="IssQty"/>
+          <Item Value="BalQty"/>
+          <Item Value="Loc"/>
+          <Item Value="IssTo"/>
+          <Item Value="LongDesc"/>
+          <Item Value="BreakupOfIssue"/>
+          <Item Value="ItemUom"/>
+          <Item Value="UnApqty"/>
+          <Item Value="Sid"/>
+          <Item Value="UnitCd"/>
+          <Item Value="GroupCode"/>
+          <Item Value="ItemType"/>
+          <Item Value="CostCentre"/>
+          <Item Value="CostCenterName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_LOC" id="LOC"/>
+    <methodAction id="callIssueBreakup" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callIssueBreakup"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_LOC" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.Integer"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Batch Wise Item Stock Summary" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="#{bindings.UnitCode.label}"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Excute" id="b1" actionListener="#{BatchwiseitemStockSummaryBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Batch wise item Stock Summary report.xls"
+                                             title="Batch wise item Stock Summary report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BatchwiseitemStockSummaryVO1.collectionModel}" var="row"
+              rows="#{bindings.BatchwiseitemStockSummaryVO1.rangeSize}"
+              emptyText="#{bindings.BatchwiseitemStockSummaryVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.BatchwiseitemStockSummaryVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BatchwiseitemStockSummaryVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.BatchwiseitemStockSummaryVO1.rangeSize}"
+              filterModel="#{bindings.BatchwiseitemStockSummaryVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.BatchwiseitemStockSummaryVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.UnitCd.label}" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.GroupCode.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.GroupCode.label}" id="c2">
+        <af:outputText value="#{row.GroupCode}"
+                       shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.GroupCode.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.GroupName.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.GroupName.label}" id="c3">
+        <af:outputText value="#{row.GroupName}"
+                       shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.GroupName.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.SubGrpCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.SubGrpCd.label}" id="c4">
+        <af:outputText value="#{row.SubGrpCd}"
+                       shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.SubGrpCd.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.SubGrpName.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.SubGrpName.label}" id="c5">
+        <af:outputText value="#{row.SubGrpName}"
+                       shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.SubGrpName.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.ItemCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.ItemCd.label}" id="c6">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.ItemCd.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.Description.label}" id="c7">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.Description.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.LocCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.LocCd.label}" id="c8">
+        <af:outputText value="#{row.LocCd}" shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.LocCd.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.LotNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.LotNo.label}" id="c9">
+        <af:outputText value="#{row.LotNo}" shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.LotNo.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.ManfDt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.ManfDt.label}" id="c10">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.BatchwiseitemStockSummaryVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ManfDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.BatchwiseitemStockSummaryVO1.hints.ManfDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ManfDt}" shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.ManfDt.tooltip}"
+                       id="ot10">
+          <af:convertDateTime pattern="#{bindings.BatchwiseitemStockSummaryVO1.hints.ManfDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.ExpDt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.ExpDt.label}" id="c11">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.BatchwiseitemStockSummaryVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ExpDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.BatchwiseitemStockSummaryVO1.hints.ExpDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ExpDt}" shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.ExpDt.tooltip}"
+                       id="ot11">
+          <af:convertDateTime pattern="#{bindings.BatchwiseitemStockSummaryVO1.hints.ExpDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.ReTest.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.ReTest.label}" id="c12">
+        <af:outputText value="#{row.ReTest}" shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.ReTest.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BatchwiseitemStockSummaryVO1.hints.ReTest.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.ReceiveQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.ReceiveQty.label}" id="c13">
+        <af:outputText value="#{row.ReceiveQty}"
+                       shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.ReceiveQty.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BatchwiseitemStockSummaryVO1.hints.ReceiveQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.IssueQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.IssueQty.label}" id="c14">
+        <af:outputText value="#{row.IssueQty}"
+                       shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.IssueQty.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BatchwiseitemStockSummaryVO1.hints.IssueQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseitemStockSummaryVO1.hints.BalQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BatchwiseitemStockSummaryVO1.hints.BalQty.label}" id="c15">
+        <af:outputText value="#{row.BalQty}" shortDesc="#{bindings.BatchwiseitemStockSummaryVO1.hints.BalQty.tooltip}"
+                       id="ot15">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BatchwiseitemStockSummaryVO1.hints.BalQty.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

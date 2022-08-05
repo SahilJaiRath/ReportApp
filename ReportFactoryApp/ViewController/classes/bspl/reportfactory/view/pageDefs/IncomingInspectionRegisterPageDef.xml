@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="IncomingInspectionRegisterPageDef" Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="IncomingInspectionRegisterVVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="IncomingInspectionRegisterVVO1Iterator"/>
+    <searchRegion Binds="IncomingInspectionRegisterVVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="IncomingInspectionRegisterVVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="IncomingInspectionRegisterVVO1Iterator" id="IncomingInspectionRegisterVVO1">
+      <nodeDefinition DefName="model.Quality.views.IncomingInspectionRegisterVVO"
+                      Name="IncomingInspectionRegisterVVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="IirNo"/>
+          <Item Value="IirDt"/>
+          <Item Value="VendrCd"/>
+          <Item Value="Name"/>
+          <Item Value="MrnNo"/>
+          <Item Value="MrnDt"/>
+          <Item Value="ItemType"/>
+          <Item Value="PRmCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Revno2"/>
+          <Item Value="ClearDt"/>
+          <Item Value="LotSize"/>
+          <Item Value="SampSize"/>
+          <Item Value="A"/>
+          <Item Value="M"/>
+          <Item Value="TotRej"/>
+          <Item Value="Rating"/>
+          <Item Value="DeviaNo"/>
+          <Item Value="DeviaDt"/>
+          <Item Value="NonConf"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="ProcSeqRevno"/>
+          <Item Value="ProcCd"/>
+          <Item Value="ProcessName"/>
+          <Item Value="Remk"/>
+          <Item Value="InspBy"/>
+          <Item Value="DevReqQty"/>
+          <Item Value="ReofferQty"/>
+          <Item Value="AcceptedQty"/>
+          <Item Value="RejectQty"/>
+          <Item Value="PpmYn"/>
+          <Item Value="QprNo"/>
+          <Item Value="QcdNo"/>
+          <Item Value="ManufactrName"/>
+          <Item Value="ApprovedBy"/>
+          <Item Value="ApprovedByName"/>
+          <Item Value="ArNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callIncomingInspectionRegister" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callIncomingInspectionRegister" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

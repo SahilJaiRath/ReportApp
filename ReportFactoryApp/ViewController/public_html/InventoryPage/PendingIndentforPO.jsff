@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Pending Indent for PO" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:186px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id1" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{PendingIndentForPOBean.onClickButton}"
+                     disabled="#{!bindings.callPendingIndentforPO.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Pending Indent for PO Report.xls" title="Pending Indent for PO"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PendingIndentforPOVO1.collectionModel}" var="row"
+              rows="#{bindings.PendingIndentforPOVO1.rangeSize}"
+              emptyText="#{bindings.PendingIndentforPOVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PendingIndentforPOVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PendingIndentforPOVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PendingIndentforPOVO1.rangeSize}"
+              filterModel="#{bindings.PendingIndentforPOVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PendingIndentforPOVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c9">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.UnitCd.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.SrlNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingIndentforPOVO1.hints.SrlNo.label}" id="c1">
+        <af:outputText value="#{row.SrlNo}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.SrlNo.tooltip}" id="ot1">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingIndentforPOVO1.hints.SrlNo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.IndNo.name}" filterable="true" sortable="true"
+                 headerText="Indent No" id="c2">
+        <af:outputText value="#{row.IndNo}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.IndNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.IndDt.name}" filterable="true" sortable="true"
+                 headerText="Indent Name" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingIndentforPOVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.IndDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.PendingIndentforPOVO1.hints.IndDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.IndDt}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.IndDt.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.PendingIndentforPOVO1.hints.IndDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.IndType.name}" filterable="true" sortable="true"
+                 headerText="Indent Type" id="c13">
+        <af:outputText value="#{row.IndType}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.IndType.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c4">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.ItemCd.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.ItemDesc.name}" filterable="true" sortable="true"
+                 headerText="Item Description" id="c5">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.ItemDesc.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c6">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.Uom.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.ItemGroup.name}" filterable="true" sortable="true"
+                 headerText="Item Group" id="c11">
+        <af:outputText value="#{row.ItemGroup}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.ItemGroup.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.ApprovedQty.name}" filterable="true"
+                 sortable="true" headerText="Approved Qty" id="c7">
+        <af:outputText value="#{row.ApprovedQty}"
+                       shortDesc="#{bindings.PendingIndentforPOVO1.hints.ApprovedQty.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingIndentforPOVO1.hints.ApprovedQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.BalQty.name}" filterable="true" sortable="true"
+                 headerText="Balance Qty" id="c8">
+        <af:outputText value="#{row.BalQty}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.BalQty.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingIndentforPOVO1.hints.BalQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.Location1.name}" filterable="true" sortable="true"
+                 headerText="Location " id="c12">
+        <af:outputText value="#{row.Location1}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.Location1.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.AuthBy.name}" filterable="true" sortable="true"
+                 headerText="Auth By" id="c10">
+        <af:outputText value="#{row.AuthBy}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.AuthBy.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.EmployeeName.name}" filterable="true"
+                 sortable="true" headerText="Employee Name" id="c15">
+        <af:outputText value="#{row.EmployeeName}"
+                       shortDesc="#{bindings.PendingIndentforPOVO1.hints.EmployeeName.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingIndentforPOVO1.hints.AuthDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingIndentforPOVO1.hints.AuthDt.label}" id="c14">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingIndentforPOVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.AuthDt.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.PendingIndentforPOVO1.hints.AuthDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.AuthDt}" shortDesc="#{bindings.PendingIndentforPOVO1.hints.AuthDt.tooltip}"
+                       id="ot14">
+          <af:convertDateTime pattern="#{bindings.PendingIndentforPOVO1.hints.AuthDt.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+  -
+</jsp:root>

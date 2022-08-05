@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Voucher Wise Debit Credit Report" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Execute" id="b1"
+                     disabled="#{!bindings.callVoucherWiseDebitCredit.enabled}"
+                     actionListener="#{VoucherWiseDebitCreditBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Voucher Wise Debit Credit Report.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.VoucherWiseDebitCreditVVO1.collectionModel}" var="row"
+              rows="#{bindings.VoucherWiseDebitCreditVVO1.rangeSize}"
+              emptyText="#{bindings.VoucherWiseDebitCreditVVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.VoucherWiseDebitCreditVVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.VoucherWiseDebitCreditVVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.VoucherWiseDebitCreditVVO1.rangeSize}"
+              filterModel="#{bindings.VoucherWiseDebitCreditVVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.VoucherWiseDebitCreditVVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page" columnStretching="column:c3">
+      <af:column sortProperty="#{bindings.VoucherWiseDebitCreditVVO1.hints.FinTvouchUnitCode.name}" filterable="true"
+                 sortable="true" headerText="Unit Code"
+                 id="c1">
+        <af:outputText value="#{row.FinTvouchUnitCode}"
+                       shortDesc="#{bindings.VoucherWiseDebitCreditVVO1.hints.FinTvouchUnitCode.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherWiseDebitCreditVVO1.hints.FinTvouchVouType.name}" filterable="true"
+                 sortable="true" headerText="Voucher Type"
+                 id="c2">
+        <af:outputText value="#{row.FinTvouchVouType}"
+                       shortDesc="#{bindings.VoucherWiseDebitCreditVVO1.hints.FinTvouchVouType.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherWiseDebitCreditVVO1.hints.FinTvouchVouNo.name}" filterable="true"
+                 sortable="true" headerText="Voucher No" id="c3">
+        <af:outputText value="#{row.FinTvouchVouNo}"
+                       shortDesc="#{bindings.VoucherWiseDebitCreditVVO1.hints.FinTvouchVouNo.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherWiseDebitCreditVVO1.hints.AmountCr.name}" filterable="true"
+                 sortable="true" headerText="Amount Credit" id="c4">
+        <af:outputText value="#{row.AmountCr}" shortDesc="#{bindings.VoucherWiseDebitCreditVVO1.hints.AmountCr.tooltip}"
+                       id="ot4">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.VoucherWiseDebitCreditVVO1.hints.AmountCr.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherWiseDebitCreditVVO1.hints.AmountDr.name}" filterable="true"
+                 sortable="true" headerText="Amount Debit" id="c5">
+        <af:outputText value="#{row.AmountDr}" shortDesc="#{bindings.VoucherWiseDebitCreditVVO1.hints.AmountDr.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.VoucherWiseDebitCreditVVO1.hints.AmountDr.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherWiseDebitCreditVVO1.hints.Difference.name}" filterable="true"
+                 sortable="true" headerText="Diffrence" id="c6">
+        <af:outputText value="#{row.Difference}"
+                       shortDesc="#{bindings.VoucherWiseDebitCreditVVO1.hints.Difference.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.VoucherWiseDebitCreditVVO1.hints.Difference.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

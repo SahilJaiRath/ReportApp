@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="JW Issue against Purchase Order" id="ph1"/>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="JW Issue against Purchase Order.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.JWIssueagainstPurchaseOrderVO1.collectionModel}" var="row"
+              rows="#{bindings.JWIssueagainstPurchaseOrderVO1.rangeSize}"
+              emptyText="#{bindings.JWIssueagainstPurchaseOrderVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.JWIssueagainstPurchaseOrderVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.JWIssueagainstPurchaseOrderVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.JWIssueagainstPurchaseOrderVO1.rangeSize}"
+              filterModel="#{bindings.JWIssueagainstPurchaseOrderVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.JWIssueagainstPurchaseOrderVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoNo.name}" filterable="true"
+                 sortable="true" headerText="PO Number" id="c1">
+        <af:outputText value="#{row.PoNo}" shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoNo.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoDt.name}" filterable="true"
+                 sortable="true" headerText="PO Date" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JWIssueagainstPurchaseOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.PoDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.PoDt}" shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoDt.tooltip}"
+                       id="ot2">
+          <af:convertDateTime pattern="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.ItemCode.name}" filterable="true"
+                 sortable="true" headerText="Item Code" id="c3">
+        <af:outputText value="#{row.ItemCode}"
+                       shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.ItemCode.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.ItemName.name}" filterable="true"
+                 sortable="true" headerText="Item Name" id="c4">
+        <af:outputText value="#{row.ItemName}"
+                       shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.ItemName.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoQty.name}" filterable="true"
+                 sortable="true" headerText="PO Qty" id="c5">
+        <af:outputText value="#{row.PoQty}" shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoQty.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.PoQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueNo.name}" filterable="true"
+                 sortable="true" headerText="Issue Slip No" id="c6">
+        <af:outputText value="#{row.IssueNo}"
+                       shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueNo.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.SlipDt.name}" filterable="true"
+                 sortable="true" headerText="Issue Slip Date" id="c7">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JWIssueagainstPurchaseOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.SlipDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.SlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.SlipDt}" shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.SlipDt.tooltip}"
+                       id="ot7">
+          <af:convertDateTime pattern="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.SlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueItemCode.name}" filterable="true"
+                 sortable="true" headerText="Issue Item Code"
+                 id="c8">
+        <af:outputText value="#{row.IssueItemCode}"
+                       shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueItemCode.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueItemName.name}" filterable="true"
+                 sortable="true" headerText="Issue Item Name"
+                 id="c9">
+        <af:outputText value="#{row.IssueItemName}"
+                       shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueItemName.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueQty.name}" filterable="true"
+                 sortable="true" headerText="Issue Qty" id="c10">
+        <af:outputText value="#{row.IssueQty}"
+                       shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueQty.tooltip}" id="ot10">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.IssueQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.Difference.name}" filterable="true"
+                 sortable="true" headerText="Difference"
+                 id="c11">
+        <af:outputText value="#{row.Difference}"
+                       shortDesc="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.Difference.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JWIssueagainstPurchaseOrderVO1.hints.Difference.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

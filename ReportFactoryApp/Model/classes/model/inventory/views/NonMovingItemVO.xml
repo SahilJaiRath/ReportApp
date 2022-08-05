@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NonMovingItemVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.inventory.views.NonMovingItemVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P49_ASONDT"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P49_UNIT_CD"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P49_GROUP_CODE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P49_SUB_GROUP"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P49_NEW"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P49_DAYS"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT ITEM_TYPE   
+     , ITEM_CD   
+     , ITEM_DESC   
+     , STOCK   
+     , GROUP_CODE   
+     , SUB_GROUP_CODE   
+     , UOM   
+     , LOCATION   
+     , UNIT_CD   
+     , RATE   
+     , STATUS   
+     , LAST_REC_DT   
+     , LAST_ISS_DT   
+     , PROC_CD   
+     , LAST_MRN_NO   
+     , --CURRENT_DATE   
+     DAYS   
+     , (STOCK * RATE) STOCK_VALUE   
+     , VENDOR_CD    
+FROM (   
+      SELECT  ITEM_TYPE   
+            , D.ITEM_CD   
+            , (SELECT GRP    
+               FROM (   
+                     SELECT PROD_GROUP GRP    
+                     FROM PRODUCT    
+                     WHERE CODE = D.ITEM_CD   
+                     UNION ALL    
+                     SELECT GROUP_CODE GRP    
+                     FROM PART_MASTER    
+                     WHERE PART_CODE = D.ITEM_CD   
+                    )   
+              ) GROUP_CODE   
+            , (SELECT GRP    
+               FROM (   
+                     SELECT PROD_SUB_GROUP GRP    
+                     FROM PRODUCT    
+                     WHERE CODE = D.ITEM_CD   
+                     UNION ALL    
+                     SELECT SUB_GRP_CD GRP    
+                     FROM PART_MASTER    
+                     WHERE PART_CODE = D.ITEM_CD   
+                    )   
+              ) SUB_GROUP_CODE   
+            , D.ITEM_DESC   
+            , D.UOM   
+            , V.CLOS_STOCK STOCK   
+            , MAX_REC_RATE_FOR_NON_MOV (D.ITEM_CD,:P49_ASONDT,:P49_UNIT_CD) RATE   
+            , D.STATUS   
+            , D.LAST_REC_DT   
+          --, LAST_ISS_DT   
+            , (SELECT MAX(SLIP_DT) FROM ISS_HSLIP HI, ISS_DSLIP DI   
+               WHERE HI.SLIP_NO=DI.ISS_HSLIP_SLIP_NO   
+               AND DI.ITEM_CD =D.ITEM_CD)LAST_ISS_DT   
+            , D.PROC_CD   
+            , LAST_MRN_NO   
+               
+             ,TRUNC((SYSDATE - NVL(TO_DATE((SELECT MAX(SLIP_DT)    
+                                            FROM ISS_HSLIP HI, ISS_DSLIP DI   
+                                            WHERE HI.SLIP_NO=DI.ISS_HSLIP_SLIP_NO   
+                                            AND DI.ITEM_CD =D.ITEM_CD)),TO_DATE('01-04-21','DD-MM-YY'))),0) DAYS   
+            , VENDOR_CD   
+            , D.UNIT_CD   
+            , V.LOC_CD LOCATION   
+      FROM DEAD_STOCK d   
+      LEFT JOIN CURR_STOCK_VIEW V ON D.ITEM_CD = V.ITEM_CD   
+                                 AND D.UNIT_CD = V.UNIT_CD   
+      WHERE :P49_UNIT_CD IS NOT NULL   
+      AND D.ITEM_TYPE LIKE :P49_GROUP_CODE||'%'    
+      AND SUBSTR(D.ITEM_CD,1,4) LIKE :P49_SUB_GROUP||'%'   
+     )   
+WHERE (ITEM_CD= :P49_NEW OR 'ALL' = :P49_NEW)   
+  and nvl(LAST_ISS_DT,'01-APR-21')<=(select TO_DATE(:P49_ASONDT,'DD-MM-YY') - NVL(:P49_DAYS,0) from dual)]]></SQLQuery>
+  <ViewAttribute
+    Name="ItemType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_TYPE"
+    Expression="ITEM_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_CD"
+    Expression="ITEM_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESC"
+    Expression="ITEM_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Stock"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="STOCK"
+    Expression="STOCK"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="GroupCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GROUP_CODE"
+    Expression="GROUP_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubGroupCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUB_GROUP_CODE"
+    Expression="SUB_GROUP_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Uom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UOM"
+    Expression="UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Location"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LOCATION"
+    Expression="LOCATION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Rate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RATE"
+    Expression="RATE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Status"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS"
+    Expression="STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastRecDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LAST_REC_DT"
+    Expression="LAST_REC_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastIssDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LAST_ISS_DT"
+    Expression="LAST_ISS_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ProcCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROC_CD"
+    Expression="PROC_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastMrnNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LAST_MRN_NO"
+    Expression="LAST_MRN_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Days"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DAYS"
+    Expression="DAYS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="StockValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="STOCK_VALUE"
+    Expression="STOCK_VALUE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="VendorCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VENDOR_CD"
+    Expression="VENDOR_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

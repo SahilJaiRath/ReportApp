@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="Vendor Master " id="ph1"/>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Vendor Master report.xls"
+                                             title="Vendor Master report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.VendorMasterVO1.collectionModel}" var="row" rows="#{bindings.VendorMasterVO1.rangeSize}"
+              emptyText="#{bindings.VendorMasterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.VendorMasterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.VendorMasterVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.VendorMasterVO1.rangeSize}"
+              filterModel="#{bindings.VendorMasterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.VendorMasterVO1Query.processQuery}" varStatus="vs" id="t2" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.VendorCode.name}" filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c2">
+        <af:outputText value="#{row.VendorCode}" shortDesc="#{bindings.VendorMasterVO1.hints.VendorCode.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="Vendor Name" id="c1">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.VendorMasterVO1.hints.Name.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.VendorStatus.name}" filterable="true" sortable="true"
+                 headerText="Vendor status" id="c3">
+        <af:outputText value="#{row.VendorStatus}" shortDesc="#{bindings.VendorMasterVO1.hints.VendorStatus.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.GstRegNo.name}" filterable="true" sortable="true"
+                 headerText="GST Reg No" id="c5">
+        <af:outputText value="#{row.GstRegNo}" shortDesc="#{bindings.VendorMasterVO1.hints.GstRegNo.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.PanNo.name}" filterable="true" sortable="true"
+                 headerText="Pan No" id="c6">
+        <af:outputText value="#{row.PanNo}" shortDesc="#{bindings.VendorMasterVO1.hints.PanNo.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.PartyType.name}" filterable="true" sortable="true"
+                 headerText="Party Type" id="c28">
+        <af:outputText value="#{row.PartyType}" shortDesc="#{bindings.VendorMasterVO1.hints.PartyType.tooltip}"
+                       id="ot28"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c7">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.VendorMasterVO1.hints.UnitCode.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.UnitName.name}" filterable="true" sortable="true"
+                 headerText="Unit Name" id="c8">
+        <af:outputText value="#{row.UnitName}" shortDesc="#{bindings.VendorMasterVO1.hints.UnitName.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.Selectobjects18.name}" filterable="true" sortable="true"
+                 headerText="Address" id="c19">
+        <af:outputText value="#{row.Selectobjects18}"
+                       shortDesc="#{bindings.VendorMasterVO1.hints.Selectobjects18.tooltip}" id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.City.name}" filterable="true" sortable="true"
+                 headerText="City" id="c21">
+        <af:outputText value="#{row.City}" shortDesc="#{bindings.VendorMasterVO1.hints.City.tooltip}" id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.Country.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VendorMasterVO1.hints.Country.label}" id="c24">
+        <af:outputText value="#{row.Country}" shortDesc="#{bindings.VendorMasterVO1.hints.Country.tooltip}" id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.RegistrationFlag.name}" filterable="true"
+                 sortable="true" headerText="Registration Flag" id="c31">
+        <af:outputText value="#{row.RegistrationFlag}"
+                       shortDesc="#{bindings.VendorMasterVO1.hints.RegistrationFlag.tooltip}" id="ot31"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.VenTp.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VendorMasterVO1.hints.VenTp.label}" id="c33">
+        <af:outputText value="#{row.VenTp}" shortDesc="#{bindings.VendorMasterVO1.hints.VenTp.tooltip}" id="ot33"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.RegisterationDate.name}" filterable="true"
+                 sortable="true" headerText="Registration Date" id="c4">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.VendorMasterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.RegisterationDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.VendorMasterVO1.hints.RegisterationDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.RegisterationDate}"
+                       shortDesc="#{bindings.VendorMasterVO1.hints.RegisterationDate.tooltip}" id="ot4">
+          <af:convertDateTime pattern="#{bindings.VendorMasterVO1.hints.RegisterationDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.RegisteredDealer.name}" filterable="true"
+                 sortable="true" headerText="Registered Dealer" id="c9">
+        <af:outputText value="#{row.RegisteredDealer}"
+                       shortDesc="#{bindings.VendorMasterVO1.hints.RegisteredDealer.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.CreatedBy.name}" filterable="true" sortable="true"
+                 headerText="Created By" id="c10">
+        <af:outputText value="#{row.CreatedBy}" shortDesc="#{bindings.VendorMasterVO1.hints.CreatedBy.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.PayTerm.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VendorMasterVO1.hints.PayTerm.label}" id="c11">
+        <af:outputText value="#{row.PayTerm}" shortDesc="#{bindings.VendorMasterVO1.hints.PayTerm.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.VendorFlag.name}" filterable="true" sortable="true"
+                 headerText="Vendor Flag" id="c12">
+        <af:outputText value="#{row.VendorFlag}" shortDesc="#{bindings.VendorMasterVO1.hints.VendorFlag.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.VendorType.name}" filterable="true" sortable="true"
+                 headerText="Vendor Type" id="c13">
+        <af:outputText value="#{row.VendorType}" shortDesc="#{bindings.VendorMasterVO1.hints.VendorType.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.VendorAddressType.name}" filterable="true"
+                 sortable="true" headerText="Vendor Address Type" id="c14">
+        <af:outputText value="#{row.VendorAddressType}"
+                       shortDesc="#{bindings.VendorMasterVO1.hints.VendorAddressType.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.ContactPerson.name}" filterable="true" sortable="true"
+                 headerText="Contact Person" id="c15">
+        <af:outputText value="#{row.ContactPerson}" shortDesc="#{bindings.VendorMasterVO1.hints.ContactPerson.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.Phones.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VendorMasterVO1.hints.Phones.label}" id="c16">
+        <af:outputText value="#{row.Phones}" shortDesc="#{bindings.VendorMasterVO1.hints.Phones.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.Telex.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VendorMasterVO1.hints.Telex.label}" id="c17">
+        <af:outputText value="#{row.Telex}" shortDesc="#{bindings.VendorMasterVO1.hints.Telex.tooltip}" id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.WeekOff.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VendorMasterVO1.hints.WeekOff.label}" id="c18">
+        <af:outputText value="#{row.WeekOff}" shortDesc="#{bindings.VendorMasterVO1.hints.WeekOff.tooltip}" id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.CityCode.name}" filterable="true" sortable="true"
+                 headerText="City Code" id="c20">
+        <af:outputText value="#{row.CityCode}" shortDesc="#{bindings.VendorMasterVO1.hints.CityCode.tooltip}"
+                       id="ot20"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.State.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VendorMasterVO1.hints.State.label}" id="c22">
+        <af:outputText value="#{row.State}" shortDesc="#{bindings.VendorMasterVO1.hints.State.tooltip}" id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.StateGstCode.name}" filterable="true" sortable="true"
+                 headerText="State Gst Code" id="c23">
+        <af:outputText value="#{row.StateGstCode}" shortDesc="#{bindings.VendorMasterVO1.hints.StateGstCode.tooltip}"
+                       id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.PinCode.name}" filterable="true" sortable="true"
+                 headerText="Pin Code" id="c25">
+        <af:outputText value="#{row.PinCode}" shortDesc="#{bindings.VendorMasterVO1.hints.PinCode.tooltip}" id="ot25"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.RegFlag.name}" filterable="true" sortable="true"
+                 headerText="Reg Flag" id="c26">
+        <af:outputText value="#{row.RegFlag}" shortDesc="#{bindings.VendorMasterVO1.hints.RegFlag.tooltip}" id="ot26"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.InterUnit.name}" filterable="true" sortable="true"
+                 headerText="Inter Unit" id="c27">
+        <af:outputText value="#{row.InterUnit}" shortDesc="#{bindings.VendorMasterVO1.hints.InterUnit.tooltip}"
+                       id="ot27"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.QaStatus.name}" filterable="true" sortable="true"
+                 headerText="QA Status" id="c29">
+        <af:outputText value="#{row.QaStatus}" shortDesc="#{bindings.VendorMasterVO1.hints.QaStatus.tooltip}"
+                       id="ot29"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.ObjectVersionNumber.name}" filterable="true"
+                 sortable="true" headerText="Object Version No" id="c30">
+        <af:outputText value="#{row.ObjectVersionNumber}"
+                       shortDesc="#{bindings.VendorMasterVO1.hints.ObjectVersionNumber.tooltip}" id="ot30">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.VendorMasterVO1.hints.ObjectVersionNumber.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.VendorMasterVO1.hints.StaxType.name}" filterable="true" sortable="true"
+                 headerText="Stax Type" id="c32">
+        <af:outputText value="#{row.StaxType}" shortDesc="#{bindings.VendorMasterVO1.hints.StaxType.tooltip}"
+                       id="ot32"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

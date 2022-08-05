@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Unit of Measurement" id="ph1"/>
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Unit Of Measurement.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.UnitOfMeasurementVO1.collectionModel}" var="row"
+              rows="#{bindings.UnitOfMeasurementVO1.rangeSize}"
+              emptyText="#{bindings.UnitOfMeasurementVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.UnitOfMeasurementVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.UnitOfMeasurementVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.UnitOfMeasurementVO1.rangeSize}"
+              filterModel="#{bindings.UnitOfMeasurementVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.UnitOfMeasurementVO1Query.processQuery}" varStatus="vs" id="t1"
+              columnStretching="none" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.UnitOfMeasurementVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.UnitOfMeasurementVO1.hints.Description.label}" id="c2">
+        <af:outputText value="#{row.Description}" shortDesc="#{bindings.UnitOfMeasurementVO1.hints.Description.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.UnitOfMeasurementVO1.hints.MeasureUnit.name}" filterable="true"
+                 sortable="true" headerText="Measure Unit" id="c1">
+        <af:outputText value="#{row.MeasureUnit}" shortDesc="#{bindings.UnitOfMeasurementVO1.hints.MeasureUnit.tooltip}"
+                       id="ot1"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

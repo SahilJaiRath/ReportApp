@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PendingPOforGateEntryPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingPOforGateEntryVO1" DataControl="AppModuleDataControl"
+              id="PendingPOforGateEntryVO1Iterator" RangeSize="50"/>
+    <searchRegion Binds="PendingPOforGateEntryVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PendingPOforGateEntryVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingPOforGateEntryVO1Iterator" id="PendingPOforGateEntryVO1">
+      <nodeDefinition DefName="model.inventory.views.PendingPOforGateEntryVO" Name="PendingPOforGateEntryVO10">
+        <AttrNames>
+          <Item Value="PoNo"/>
+          <Item Value="PiosVenCd"/>
+          <Item Value="VendorName"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemName"/>
+          <Item Value="PoQty"/>
+          <Item Value="GeChallanQty"/>
+          <Item Value="PoDate"/>
+          <Item Value="Unit"/>
+          <Item Value="Uom"/>
+          <Item Value="PendingQty"/>
+          <Item Value="SubGrpCd"/>
+          <Item Value="GroupCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="StockAdjustmentPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="StockAdjustmentVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="StockAdjustmentVO1Iterator"/>
+    <searchRegion Binds="StockAdjustmentVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="StockAdjustmentVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="StockAdjustmentVO1Iterator" id="StockAdjustmentVO1">
+      <nodeDefinition DefName="model.inventory.views.StockAdjustmentVO" Name="StockAdjustmentVO10">
+        <AttrNames>
+          <Item Value="AdjustNo"/>
+          <Item Value="UnitCd"/>
+          <Item Value="TranType"/>
+          <Item Value="ItemCd"/>
+          <Item Value="LotNo"/>
+          <Item Value="ProdDesc"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="ProcCd"/>
+          <Item Value="Qty"/>
+          <Item Value="Remarks"/>
+          <Item Value="Rate"/>
+          <Item Value="Stock"/>
+          <Item Value="BatchNoSad"/>
+          <Item Value="AdjustTypSad"/>
+          <Item Value="ArN0Sad"/>
+          <Item Value="BatchDateSad"/>
+          <Item Value="ArDateSad"/>
+          <Item Value="MoisturePerSad"/>
+          <Item Value="DustPerSad"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="ApproveBy"/>
+          <Item Value="WastePerSad"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_StockAdjustment_PartName"
+                  id="StockAdjustment_PartName"/>
+    <methodAction id="callStockAdjustment" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callStockAdjustment" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_PartName" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

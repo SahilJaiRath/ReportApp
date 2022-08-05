@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Issue Status BMR " id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:188px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id3" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{IssueStatusBMRBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Export" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Issue Status BMR report.xls"
+                                             title="Issue Status BMR report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.IssueStatusBMRVO1.collectionModel}" var="row"
+              rows="#{bindings.IssueStatusBMRVO1.rangeSize}"
+              emptyText="#{bindings.IssueStatusBMRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.IssueStatusBMRVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.IssueStatusBMRVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.IssueStatusBMRVO1.rangeSize}"
+              filterModel="#{bindings.IssueStatusBMRVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.IssueStatusBMRVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page" columnStretching="column:c8">
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.Sr.name}" filterable="true" sortable="true"
+                 headerText="SR" id="c1">
+        <af:outputText value="#{row.Sr}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.Sr.tooltip}" id="ot1">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueStatusBMRVO1.hints.Sr.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.LotNo.name}" filterable="true" sortable="true"
+                 headerText="Lot No" id="c2">
+        <af:outputText value="#{row.LotNo}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.LotNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.LotDate.name}" filterable="true" sortable="true"
+                 headerText="Lot Date" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.IssueStatusBMRVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.LotDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.IssueStatusBMRVO1.hints.LotDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.LotDate}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.LotDate.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.IssueStatusBMRVO1.hints.LotDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.LeafCd.name}" filterable="true" sortable="true"
+                 headerText="BMR Code" id="c4">
+        <af:outputText value="#{row.LeafCd}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.LeafCd.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="Qty" id="c5">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.Qty.tooltip}" id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueStatusBMRVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c6">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.UnitCd.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.Status.name}" filterable="true" sortable="true"
+                 headerText="Status" id="c7">
+        <af:outputText value="#{row.Status}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.Status.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="Batch No" id="c9">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.BatchNo.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.SubGrpDesc.name}" filterable="true" sortable="true"
+                 headerText="Sub Group Description" id="c10">
+        <af:outputText value="#{row.SubGrpDesc}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.SubGrpDesc.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueStatusBMRVO1.hints.BprDesc.name}" filterable="true" sortable="true"
+                 headerText="BPR Description" id="c8">
+        <af:outputText value="#{row.BprDesc}" shortDesc="#{bindings.IssueStatusBMRVO1.hints.BprDesc.tooltip}" id="ot8"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

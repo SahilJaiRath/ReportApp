@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Item Wise Sale" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="25%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;" 
+                              labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc2">
+          <af:selectOneChoice value="#{bindings.ItemWiseSale_InvoiceType.inputValue}"
+                              label="Invoice Type"
+                              required="#{bindings.ItemWiseSale_InvoiceType.hints.mandatory}"
+                              shortDesc="#{bindings.ItemWiseSale_InvoiceType.hints.tooltip}" id="soc2" contentStyle="width:180.0px;" 
+                              labelStyle="width:100px" >
+                               
+            <f:selectItems value="#{bindings.ItemWiseSale_InvoiceType.items}" id="si2"/>
+            <f:validator binding="#{bindings.ItemWiseSale_InvoiceType.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc3">
+          <af:selectOneChoice value="#{bindings.ItemWiseSale_StockType.inputValue}"
+                              label="Stock Type"
+                              required="#{bindings.ItemWiseSale_StockType.hints.mandatory}"
+                              shortDesc="#{bindings.ItemWiseSale_StockType.hints.tooltip}" id="soc3" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px" >
+            <f:selectItems value="#{bindings.ItemWiseSale_StockType.items}" id="si3"/>
+            <f:validator binding="#{bindings.ItemWiseSale_StockType.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc4"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="25%" id="gc5">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2" contentStyle="width:180.0px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc6">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id3" contentStyle="width:180.0px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc7">
+          <af:inputComboboxListOfValues id="itemWiseSale_ProductCodeId"
+                                        popupTitle="Search and Select: #{bindings.ItemWiseSale_ProductCode.hints.label}"
+                                        value="#{bindings.ItemWiseSale_ProductCode.inputValue}"
+                                        label="Product Code"
+                                        model="#{bindings.ItemWiseSale_ProductCode.listOfValuesModel}"
+                                        required="#{bindings.ItemWiseSale_ProductCode.hints.mandatory}"
+                                        columns="#{bindings.ItemWiseSale_ProductCode.hints.displayWidth}"
+                                        shortDesc="#{bindings.ItemWiseSale_ProductCode.hints.tooltip}" contentStyle="width:160.0px;"
+                                        labelStyle="width:100px" >
+            <f:validator binding="#{bindings.ItemWiseSale_ProductCode.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc8">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callItemWiseSale.enabled}"
+                     actionListener="#{ItemWiseSaleBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="button 1" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Item Wise Sale.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ItemWiseSaleVO1.collectionModel}" var="row" rows="#{bindings.ItemWiseSaleVO1.rangeSize}"
+              emptyText="#{bindings.ItemWiseSaleVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.ItemWiseSaleVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ItemWiseSaleVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.ItemWiseSaleVO1.rangeSize}"
+              filterModel="#{bindings.ItemWiseSaleVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.ItemWiseSaleVO1Query.processQuery}" varStatus="vs" id="t1" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Identifier.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Identifier.label}" id="c1">
+        <af:outputText value="#{row.Identifier}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Identifier.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Dates.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Dates.label}" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ItemWiseSaleVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Dates.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.ItemWiseSaleVO1.hints.Dates.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.Dates}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Dates.tooltip}" id="ot2">
+          <af:convertDateTime pattern="#{bindings.ItemWiseSaleVO1.hints.Dates.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.PoHeadAckNumber.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.PoHeadAckNumber.label}" id="c3">
+        <af:outputText value="#{row.PoHeadAckNumber}"
+                       shortDesc="#{bindings.ItemWiseSaleVO1.hints.PoHeadAckNumber.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ConsigneeCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ConsigneeCode.label}" id="c4">
+        <af:outputText value="#{row.ConsigneeCode}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ConsigneeCode.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ConsigneeName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ConsigneeName.label}" id="c5">
+        <af:outputText value="#{row.ConsigneeName}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ConsigneeName.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ConsingeeAdd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ConsingeeAdd.label}" id="c6">
+        <af:outputText value="#{row.ConsingeeAdd}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ConsingeeAdd.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ReceivingParty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ReceivingParty.label}" id="c7">
+        <af:outputText value="#{row.ReceivingParty}"
+                       shortDesc="#{bindings.ItemWiseSaleVO1.hints.ReceivingParty.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ReceivingAddr.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ReceivingAddr.label}" id="c8">
+        <af:outputText value="#{row.ReceivingAddr}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ReceivingAddr.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.VehicleNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.VehicleNo.label}" id="c9">
+        <af:outputText value="#{row.VehicleNo}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.VehicleNo.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Transpoter.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Transpoter.label}" id="c10">
+        <af:outputText value="#{row.Transpoter}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Transpoter.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.GrossAmount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.GrossAmount.label}" id="c11">
+        <af:outputText value="#{row.GrossAmount}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.GrossAmount.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.GrossAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.NetAmount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.NetAmount.label}" id="c12">
+        <af:outputText value="#{row.NetAmount}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.NetAmount.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.NetAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ProdCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ProdCode.label}" id="c13">
+        <af:outputText value="#{row.ProdCode}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ProdCode.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.GroupCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.GroupCode.label}" id="c14">
+        <af:outputText value="#{row.GroupCode}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.GroupCode.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ItemGroup.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ItemGroup.label}" id="c15">
+        <af:outputText value="#{row.ItemGroup}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ItemGroup.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.SubGrpCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.SubGrpCd.label}" id="c16">
+        <af:outputText value="#{row.SubGrpCd}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.SubGrpCd.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.SubGrpDesc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.SubGrpDesc.label}" id="c17">
+        <af:outputText value="#{row.SubGrpDesc}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.SubGrpDesc.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ItemName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ItemName.label}" id="c18">
+        <af:outputText value="#{row.ItemName}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ItemName.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ShipMode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ShipMode.label}" id="c19">
+        <af:outputText value="#{row.ShipMode}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ShipMode.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Distination.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Distination.label}" id="c20">
+        <af:outputText value="#{row.Distination}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Distination.tooltip}"
+                       id="ot20"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.CustCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.CustCode.label}" id="c21">
+        <af:outputText value="#{row.CustCode}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.CustCode.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.UnitCode.label}" id="c22">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.UnitCode.tooltip}"
+                       id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.CurrName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.CurrName.label}" id="c23">
+        <af:outputText value="#{row.CurrName}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.CurrName.tooltip}"
+                       id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.DiscountAmount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.DiscountAmount.label}" id="c24">
+        <af:outputText value="#{row.DiscountAmount}"
+                       shortDesc="#{bindings.ItemWiseSaleVO1.hints.DiscountAmount.tooltip}" id="ot24">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.DiscountAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Quantity.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Quantity.label}" id="c25">
+        <af:outputText value="#{row.Quantity}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Quantity.tooltip}" id="ot25">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.Quantity.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Uom.label}" id="c26">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Uom.tooltip}" id="ot26"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.CustMrpPrice.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.CustMrpPrice.label}" id="c27">
+        <af:outputText value="#{row.CustMrpPrice}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.CustMrpPrice.tooltip}"
+                       id="ot27">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.CustMrpPrice.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.BatchNo.label}" id="c28">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.BatchNo.tooltip}" id="ot28"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.MfgDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.MfgDt.label}" id="c29">
+        <af:outputText value="#{row.MfgDt}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.MfgDt.tooltip}" id="ot29"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.ExpDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.ExpDt.label}" id="c30">
+        <af:outputText value="#{row.ExpDt}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.ExpDt.tooltip}" id="ot30"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Price.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Price.label}" id="c31">
+        <af:outputText value="#{row.Price}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Price.tooltip}" id="ot31">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.Price.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Amount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Amount.label}" id="c32">
+        <af:outputText value="#{row.Amount}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Amount.tooltip}" id="ot32">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.Amount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.Discount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.Discount.label}" id="c33">
+        <af:outputText value="#{row.Discount}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.Discount.tooltip}" id="ot33">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.Discount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.HsnNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.HsnNo.label}" id="c34">
+        <af:outputText value="#{row.HsnNo}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.HsnNo.tooltip}" id="ot34"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.IgstRate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.IgstRate.label}" id="c35">
+        <af:outputText value="#{row.IgstRate}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.IgstRate.tooltip}" id="ot35">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.IgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.IgstAmt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.IgstAmt.label}" id="c36">
+        <af:outputText value="#{row.IgstAmt}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.IgstAmt.tooltip}" id="ot36">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.IgstAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.CgstRate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.CgstRate.label}" id="c37">
+        <af:outputText value="#{row.CgstRate}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.CgstRate.tooltip}" id="ot37">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.CgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.CgstAmt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.CgstAmt.label}" id="c38">
+        <af:outputText value="#{row.CgstAmt}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.CgstAmt.tooltip}" id="ot38">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.CgstAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.SgstRate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.SgstRate.label}" id="c39">
+        <af:outputText value="#{row.SgstRate}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.SgstRate.tooltip}" id="ot39">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.SgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.SgstAmt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.SgstAmt.label}" id="c40">
+        <af:outputText value="#{row.SgstAmt}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.SgstAmt.tooltip}" id="ot40">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseSaleVO1.hints.SgstAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.StockType.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.StockType.label}" id="c41">
+        <af:outputText value="#{row.StockType}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.StockType.tooltip}"
+                       id="ot41"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseSaleVO1.hints.InvHeadType.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ItemWiseSaleVO1.hints.InvHeadType.label}" id="c42">
+        <af:outputText value="#{row.InvHeadType}" shortDesc="#{bindings.ItemWiseSaleVO1.hints.InvHeadType.tooltip}"
+                       id="ot42"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

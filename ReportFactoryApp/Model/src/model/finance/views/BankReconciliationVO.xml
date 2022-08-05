@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BankReconciliationVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.finance.views.BankReconciliationVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P43_FDT"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P43_SDT"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P43_GL"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT A.FIN_TVOUCH_VOU_NO,A.GNRL_LED_GL_CD,A.FIN_TVOUCH_VOU_DATE,NVL(DECODE(A.DR_CR_FLAG,'D',A.AMOUNT),'') "Debit" 
+,NVL(DECODE(A.DR_CR_FLAG,'C',A.AMOUNT),'') "Credit",E.BANK_NAME,B.RECO_NO,B.BANK_AMT 
+,B.BANK_DATE,(SELECT GL_DESC FROM   GEN_LED WHERE UNIT_CODE=A.FIN_TVOUCH_UNIT_CODE AND GL_CD=A.GNRL_LED_GL_CD) "Description", 
+(select name from   sub_led where code=A.sub_code AND unit=A.FIN_TVOUCH_UNIT_CODE) "Sub Ledger Name" 
+FROM   GEN_LED_FIN_TVOUCH A,  BANK_RECO_DETAIL B,  FIN_TVOUCH C,  BANK_RECO_HEAD D,  BANK_MASTER E 
+WHERE A.FIN_TVOUCH_VOU_NO = B.VOUCH_NO(+) 
+AND A.FIN_TVOUCH_VOU_DATE=B.VOUCH_DATE(+) 
+AND B.VOUCH_TYPE(+)=A.FIN_TVOUCH_VOU_TYPE 
+AND A.AMOUNT = B.AMOUNT(+) 
+AND A.DR_CR_FLAG = B.DR_CR_FLAG(+) 
+AND A.FIN_TVOUCH_UNIT_CODE =B.VOUCH_UNIT(+) 
+AND B.VOUCH_TYPE(+)=A.FIN_TVOUCH_VOU_TYPE 
+AND C.VOU_NO=A.FIN_TVOUCH_VOU_NO 
+AND C.VOU_DATE =A.FIN_TVOUCH_VOU_DATE 
+AND C.VOU_TYPE=A.FIN_TVOUCH_VOU_TYPE 
+AND D.RECO_NO(+)= B.RECO_NO 
+AND D.BANK_CODE=E.BANK_CODE(+) 
+AND  A.Fin_Tvouch_Vou_No IN(SELECT A.Fin_Tvouch_Vou_No FROM   GEN_LED_FIN_TVOUCH A,  gen_led B 
+WHERE A.Gnrl_Led_Gl_Cd=B.GL_CD AND A.Fin_Tvouch_Vou_Type IN('B','R')  
+AND B.GL_CD=:P43_GL) AND A.Gnrl_Led_Gl_Cd!=:P43_GL 
+AND A.FIN_TVOUCH_VOU_DATE BETWEEN :P43_FDT AND :P43_SDT 
+ 
+UNION 
+ 
+ 
+SELECT A.FIN_TVOUCH_VOU_NO,A.GNRL_LED_GL_CD,A.FIN_TVOUCH_VOU_DATE,NVL(DECODE(A.DR_CR_FLAG,'D',A.AMOUNT),'') "Debit" 
+,NVL(DECODE(A.DR_CR_FLAG,'C',A.AMOUNT),'') "Credit",E.BANK_NAME,B.RECO_NO,B.BANK_AMT 
+,B.BANK_DATE,(SELECT GL_DESC FROM   GEN_LED WHERE UNIT_CODE=A.FIN_TVOUCH_UNIT_CODE AND GL_CD=A.GNRL_LED_GL_CD) "Description", 
+(select name from   sub_led where code=A.sub_code AND unit=A.FIN_TVOUCH_UNIT_CODE) "Sub Ledger Name" 
+FROM   GEN_LED_FIN_TVOUCH A,  BANK_RECO_DETAIL B,  FIN_TVOUCH C,  BANK_RECO_HEAD D,  BANK_MASTER E 
+WHERE A.FIN_TVOUCH_VOU_NO = B.VOUCH_NO(+) 
+AND A.FIN_TVOUCH_VOU_DATE=B.VOUCH_DATE(+) 
+AND B.VOUCH_TYPE(+)=A.FIN_TVOUCH_VOU_TYPE 
+AND A.AMOUNT = B.AMOUNT(+) 
+AND A.DR_CR_FLAG = B.DR_CR_FLAG(+) 
+AND A.FIN_TVOUCH_UNIT_CODE =B.VOUCH_UNIT(+) 
+AND B.VOUCH_TYPE(+)=A.FIN_TVOUCH_VOU_TYPE 
+AND C.VOU_NO=A.FIN_TVOUCH_VOU_NO 
+AND C.VOU_DATE =A.FIN_TVOUCH_VOU_DATE 
+AND C.VOU_TYPE=A.FIN_TVOUCH_VOU_TYPE 
+AND D.RECO_NO(+)= B.RECO_NO 
+AND D.BANK_CODE=E.BANK_CODE(+) 
+AND  A.Fin_Tvouch_Vou_No IN(SELECT A.Fin_Tvouch_Vou_No FROM   GEN_LED_FIN_TVOUCH A,  gen_led B 
+WHERE A.Gnrl_Led_Gl_Cd=B.GL_CD AND A.Fin_Tvouch_Vou_Type IN('B','R')  
+AND B.GL_CD=:P43_GL) AND A.Gnrl_Led_Gl_Cd=:P43_GL 
+AND B.RECO_NO IS NOT NULL 
+AND A.FIN_TVOUCH_VOU_DATE BETWEEN :P43_FDT AND :P43_SDT 
+ORDER BY 1]]></SQLQuery>
+  <ViewAttribute
+    Name="FinTvouchVouNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FIN_TVOUCH_VOU_NO"
+    Expression="FIN_TVOUCH_VOU_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GnrlLedGlCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GNRL_LED_GL_CD"
+    Expression="GNRL_LED_GL_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FinTvouchVouDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="FIN_TVOUCH_VOU_DATE"
+    Expression="FIN_TVOUCH_VOU_DATE"
+    SQLType="TIMESTAMP">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Debit"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"Debit"'
+    Expression='"Debit"'
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Credit"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"Credit"'
+    Expression='"Credit"'
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BankName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BANK_NAME"
+    Expression="BANK_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RecoNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RECO_NO"
+    Expression="RECO_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BankAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="2"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BANK_AMT"
+    Expression="BANK_AMT"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BankDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="BANK_DATE"
+    Expression="BANK_DATE"
+    SQLType="TIMESTAMP">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Description"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1403"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Description"'
+    Expression='"Description"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1403"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubLedgerName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="112"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Sub Ledger Name"'
+    Expression='"Sub Ledger Name"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="112"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

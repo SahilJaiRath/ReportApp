@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="CreditorOutstandingSummaryPageDef" Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CreditorOutstandingSummaryVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="CreditorOutstandingSummaryVO1Iterator"/>
+    <searchRegion Binds="CreditorOutstandingSummaryVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CreditorOutstandingSummaryVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CreditorOutstandingSummaryVO1Iterator" id="CreditorOutstandingSummaryVO1">
+      <nodeDefinition DefName="model.finance.views.CreditorOutstandingSummaryVO" Name="CreditorOutstandingSummaryVO10">
+        <AttrNames>
+          <Item Value="VenCd"/>
+          <Item Value="Address"/>
+          <Item Value="Name"/>
+          <Item Value="SessionId"/>
+          <Item Value="BalAmt"/>
+          <Item Value="P1"/>
+          <Item Value="P2"/>
+          <Item Value="P3"/>
+          <Item Value="P4"/>
+          <Item Value="P5"/>
+          <Item Value="P6"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_PndingSrvForQcVendorCd"
+                  id="PndingSrvForQcVendorCd"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callCreditorOutstandingSummary" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callCreditorOutstandingSummary" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.Integer"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_Custcode" NDType="java.lang.String"/>
+      <NamedData NDName="LV_p1" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p2" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p3" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p4" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p5" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p6" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

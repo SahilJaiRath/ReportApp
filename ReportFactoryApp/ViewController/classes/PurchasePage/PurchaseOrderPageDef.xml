@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PurchaseOrderPageDef"
+                Package="PurchasePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PurchaseOrderVO1" RangeSize="50" DataControl="AppModuleDataControl" id="PurchaseOrderVO1Iterator"/>
+    <searchRegion Binds="PurchaseOrderVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PurchaseOrderVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PurchaseOrderVO1Iterator" id="PurchaseOrderVO1">
+      <nodeDefinition DefName="model.Purchase.views.PurchaseOrderVO" Name="PurchaseOrderVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="VenCd"/>
+          <Item Value="Name"/>
+          <Item Value="PoNo"/>
+          <Item Value="AmdNo"/>
+          <Item Value="PoDt"/>
+          <Item Value="JoPo"/>
+          <Item Value="ValidFr"/>
+          <Item Value="ValidTo"/>
+          <Item Value="AmdDt"/>
+          <Item Value="AmdWef"/>
+          <Item Value="CurCd"/>
+          <Item Value="SaleTax"/>
+          <Item Value="SalesTaxType"/>
+          <Item Value="RefDocNo"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Uom"/>
+          <Item Value="ProcCd"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="Qty"/>
+          <Item Value="ProsRate"/>
+          <Item Value="MaterialRate"/>
+          <Item Value="IgstPer"/>
+          <Item Value="IgstAmt"/>
+          <Item Value="PoHsnCode"/>
+          <Item Value="CgstPer"/>
+          <Item Value="CgstAmt"/>
+          <Item Value="SgstPer"/>
+          <Item Value="SgstAmt"/>
+          <Item Value="GstCode"/>
+          <Item Value="GoodsValue"/>
+          <Item Value="LocCd"/>
+          <Item Value="PoCloseCancel"/>
+          <Item Value="PoStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callPurchaseOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callPurchaseOrder"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

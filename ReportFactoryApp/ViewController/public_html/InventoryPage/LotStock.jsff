@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Lot Stock " id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.SubLedger_UnitCode.inputValue}"
+                              label="Unit Name"
+                              required="#{bindings.SubLedger_UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.SubLedger_UnitCode.hints.tooltip}" id="soc1" labelStyle="width:100px" contentStyle="width:250px;" >
+            <f:selectItems value="#{bindings.SubLedger_UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.SubLedger_UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:selectOneChoice value="#{bindings.LotStock_ItemType.inputValue}"
+                              label="Item Type"
+                              required="#{bindings.LotStock_ItemType.hints.mandatory}"
+                              shortDesc="#{bindings.LotStock_ItemType.hints.tooltip}" id="soc2" labelStyle="width:100px" contentStyle="width:180px;" >
+            <f:selectItems value="#{bindings.LotStock_ItemType.items}" id="si2"/>
+            <f:validator binding="#{bindings.LotStock_ItemType.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b1" actionListener="#{LotStockBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Lot Stock report.xls"
+                                             title="Lot Stock report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.LotStockVO1.collectionModel}" var="row" rows="#{bindings.LotStockVO1.rangeSize}"
+              emptyText="#{bindings.LotStockVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.LotStockVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.LotStockVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.LotStockVO1.rangeSize}" filterModel="#{bindings.LotStockVO1Query.queryDescriptor}"
+              filterVisible="false" queryListener="#{bindings.LotStockVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.UnitCd.label}" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.LotStockVO1.hints.UnitCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.JcNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.JcNo.label}" id="c2">
+        <af:outputText value="#{row.JcNo}" shortDesc="#{bindings.LotStockVO1.hints.JcNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.JcDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.JcDt.label}" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.LotStockVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.JcDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.LotStockVO1.hints.JcDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.JcDt}" shortDesc="#{bindings.LotStockVO1.hints.JcDt.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.LotStockVO1.hints.JcDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ProductCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ProductCode.label}" id="c4">
+        <af:outputText value="#{row.ProductCode}" shortDesc="#{bindings.LotStockVO1.hints.ProductCode.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ProductName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ProductName.label}" id="c5">
+        <af:outputText value="#{row.ProductName}" shortDesc="#{bindings.LotStockVO1.hints.ProductName.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.JobcardQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.JobcardQty.label}" id="c6">
+        <af:outputText value="#{row.JobcardQty}" shortDesc="#{bindings.LotStockVO1.hints.JobcardQty.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.LotStockVO1.hints.JobcardQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.BatchNo.label}" id="c7">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.LotStockVO1.hints.BatchNo.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.BmrNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.BmrNo.label}" id="c8">
+        <af:outputText value="#{row.BmrNo}" shortDesc="#{bindings.LotStockVO1.hints.BmrNo.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ReqHslipReqSlipNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ReqHslipReqSlipNo.label}" id="c9">
+        <af:outputText value="#{row.ReqHslipReqSlipNo}"
+                       shortDesc="#{bindings.LotStockVO1.hints.ReqHslipReqSlipNo.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ReqItemCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ReqItemCode.label}" id="c10">
+        <af:outputText value="#{row.ReqItemCode}" shortDesc="#{bindings.LotStockVO1.hints.ReqItemCode.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ReqItemName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ReqItemName.label}" id="c11">
+        <af:outputText value="#{row.ReqItemName}" shortDesc="#{bindings.LotStockVO1.hints.ReqItemName.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ReqDate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ReqDate.label}" id="c12">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.LotStockVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ReqDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.LotStockVO1.hints.ReqDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ReqDate}" shortDesc="#{bindings.LotStockVO1.hints.ReqDate.tooltip}" id="ot12">
+          <af:convertDateTime pattern="#{bindings.LotStockVO1.hints.ReqDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ReqQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ReqQty.label}" id="c13">
+        <af:outputText value="#{row.ReqQty}" shortDesc="#{bindings.LotStockVO1.hints.ReqQty.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.LotStockVO1.hints.ReqQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.RetNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.RetNo.label}" id="c14">
+        <af:outputText value="#{row.RetNo}" shortDesc="#{bindings.LotStockVO1.hints.RetNo.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.RetQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.RetQty.label}" id="c15">
+        <af:outputText value="#{row.RetQty}" shortDesc="#{bindings.LotStockVO1.hints.RetQty.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.LotStockVO1.hints.RetQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.IssSlipNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.IssSlipNo.label}" id="c16">
+        <af:outputText value="#{row.IssSlipNo}" shortDesc="#{bindings.LotStockVO1.hints.IssSlipNo.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.IssSlipDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.IssSlipDt.label}" id="c17">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.LotStockVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.IssSlipDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.LotStockVO1.hints.IssSlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.IssSlipDt}" shortDesc="#{bindings.LotStockVO1.hints.IssSlipDt.tooltip}" id="ot17">
+          <af:convertDateTime pattern="#{bindings.LotStockVO1.hints.IssSlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.IssueQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.IssueQty.label}" id="c18">
+        <af:outputText value="#{row.IssueQty}" shortDesc="#{bindings.LotStockVO1.hints.IssueQty.tooltip}" id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.LotStockVO1.hints.IssueQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ConsumedQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ConsumedQty.label}" id="c19">
+        <af:outputText value="#{row.ConsumedQty}" shortDesc="#{bindings.LotStockVO1.hints.ConsumedQty.tooltip}"
+                       id="ot19">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.LotStockVO1.hints.ConsumedQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.BalQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.BalQty.label}" id="c20">
+        <af:outputText value="#{row.BalQty}" shortDesc="#{bindings.LotStockVO1.hints.BalQty.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.LotStockVO1.hints.BalQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ReqFromLoc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ReqFromLoc.label}" id="c21">
+        <af:outputText value="#{row.ReqFromLoc}" shortDesc="#{bindings.LotStockVO1.hints.ReqFromLoc.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ReqStoreLoc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ReqStoreLoc.label}" id="c22">
+        <af:outputText value="#{row.ReqStoreLoc}" shortDesc="#{bindings.LotStockVO1.hints.ReqStoreLoc.tooltip}"
+                       id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.IssueFromLoc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.IssueFromLoc.label}" id="c23">
+        <af:outputText value="#{row.IssueFromLoc}" shortDesc="#{bindings.LotStockVO1.hints.IssueFromLoc.tooltip}"
+                       id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.IssueToLoc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.IssueToLoc.label}" id="c24">
+        <af:outputText value="#{row.IssueToLoc}" shortDesc="#{bindings.LotStockVO1.hints.IssueToLoc.tooltip}"
+                       id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LotStockVO1.hints.ItemBatch.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.LotStockVO1.hints.ItemBatch.label}" id="c25">
+        <af:outputText value="#{row.ItemBatch}" shortDesc="#{bindings.LotStockVO1.hints.ItemBatch.tooltip}" id="ot25"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

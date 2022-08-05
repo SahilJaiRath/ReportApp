@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="PendingMRNforPurchaseInvoicePageDef" Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingMRNforPurchaseInvoiceVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PendingMRNforPurchaseInvoiceVO1Iterator"/>
+    <searchRegion Binds="PendingMRNforPurchaseInvoiceVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PendingMRNforPurchaseInvoiceVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingMRNforPurchaseInvoiceVO1Iterator" id="PendingMRNforPurchaseInvoiceVO1">
+      <nodeDefinition DefName="model.inventory.views.PendingMRNforPurchaseInvoiceVO"
+                      Name="PendingMRNforPurchaseInvoiceVO10">
+        <AttrNames>
+          <Item Value="SrvNo"/>
+          <Item Value="SrvDt"/>
+          <Item Value="VenCd"/>
+          <Item Value="Name"/>
+          <Item Value="GtEheadGateEno"/>
+          <Item Value="ChallanNo"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="InvNo"/>
+          <Item Value="InvDt"/>
+          <Item Value="BillNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callPendingMRNforPurchaseInvoice" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPendingMRNforPurchaseInvoice" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="BOMVSActualComsumptionPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BOMVSActualComsumptionVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="BOMVSActualComsumptionVO1Iterator"/>
+    <searchRegion Binds="BOMVSActualComsumptionVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BOMVSActualComsumptionVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BOMVSActualComsumptionVO1Iterator" id="BOMVSActualComsumptionVO1">
+      <nodeDefinition DefName="model.production.views.BOMVSActualComsumptionVO" Name="BOMVSActualComsumptionVO10">
+        <AttrNames>
+          <Item Value="Jobcard"/>
+          <Item Value="ItemCd"/>
+          <Item Value="Description"/>
+          <Item Value="BatchNo"/>
+          <Item Value="ConsumeCode"/>
+          <Item Value="Name1"/>
+          <Item Value="Uom"/>
+          <Item Value="BomQty"/>
+          <Item Value="JcQty"/>
+          <Item Value="IssQty"/>
+          <Item Value="ConsumedQty"/>
+          <Item Value="Balance"/>
+          <Item Value="UnitCd"/>
+          <Item Value="JobcardQty"/>
+          <Item Value="ProducedQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction id="callBOMVSActualComsumption" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callBOMVSActualComsumption" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

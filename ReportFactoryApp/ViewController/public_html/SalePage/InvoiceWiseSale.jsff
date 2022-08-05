@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text=" Invoice Wise Sale Report" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.SubLedger_UnitCode.inputValue}"
+                              label="Unit Name"
+                              required="#{bindings.SubLedger_UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.SubLedger_UnitCode.hints.tooltip}" id="soc1" contentStyle="width:186px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.SubLedger_UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.SubLedger_UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="invoiceWiseSale_ItemNameId"
+                                        popupTitle="Search and Select: #{bindings.InvoiceWiseSale_ItemName.hints.label}"
+                                        value="#{bindings.InvoiceWiseSale_ItemName.inputValue}"
+                                        label="Item Name"
+                                        model="#{bindings.InvoiceWiseSale_ItemName.listOfValuesModel}"
+                                        required="#{bindings.InvoiceWiseSale_ItemName.hints.mandatory}"
+                                        columns="#{bindings.InvoiceWiseSale_ItemName.hints.displayWidth}"
+                                        shortDesc="#{bindings.InvoiceWiseSale_ItemName.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.InvoiceWiseSale_ItemName.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id3" contentStyle="width:194px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{InvoiceWiseSaleBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Invoice Wise Sale Report.xls"
+                                             title="Invoice Wise Sale Report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.InvoiceWiseSaleVO1.collectionModel}" var="row"
+              rows="#{bindings.InvoiceWiseSaleVO1.rangeSize}"
+              emptyText="#{bindings.InvoiceWiseSaleVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.InvoiceWiseSaleVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.InvoiceWiseSaleVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.InvoiceWiseSaleVO1.rangeSize}"
+              filterModel="#{bindings.InvoiceWiseSaleVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.InvoiceWiseSaleVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Identifier.name}" filterable="true" sortable="true"
+                 headerText="Invoice No" id="c1" width="100">
+        <af:outputText value="#{row.Identifier}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Identifier.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Dates.name}" filterable="true" sortable="true"
+                 headerText="Invoice Date" id="c2" width="101">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.InvoiceWiseSaleVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Dates.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.InvoiceWiseSaleVO1.hints.Dates.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.Dates}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Dates.tooltip}" id="ot2">
+          <af:convertDateTime pattern="#{bindings.InvoiceWiseSaleVO1.hints.Dates.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.PoHeadAckNumber.name}" filterable="true"
+                 sortable="true" headerText="PO Head Ack No" id="c3"
+                 width="99">
+        <af:outputText value="#{row.PoHeadAckNumber}"
+                       shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.PoHeadAckNumber.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ConsigneeCode.name}" filterable="true"
+                 sortable="true" headerText="Consignee Code" id="c4"
+                 width="100">
+        <af:outputText value="#{row.ConsigneeCode}"
+                       shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ConsigneeCode.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ConsigneeName.name}" filterable="true"
+                 sortable="true" headerText="Consignee Name" id="c5"
+                 width="100">
+        <af:outputText value="#{row.ConsigneeName}"
+                       shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ConsigneeName.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ConsigneeAdd.name}" filterable="true" sortable="true"
+                 headerText="Consignee Address" id="c6" width="100">
+        <af:outputText value="#{row.ConsigneeAdd}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ConsigneeAdd.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ReceivingParty.name}" filterable="true"
+                 sortable="true" headerText="Receiving Party" id="c7"
+                 width="100">
+        <af:outputText value="#{row.ReceivingParty}"
+                       shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ReceivingParty.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ReceivingAddr.name}" filterable="true"
+                 sortable="true" headerText="Receiving Address" id="c8"
+                 width="100">
+        <af:outputText value="#{row.ReceivingAddr}"
+                       shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ReceivingAddr.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.VehicleNo.name}" filterable="true" sortable="true"
+                 headerText="Vehicle No" id="c9" width="100">
+        <af:outputText value="#{row.VehicleNo}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.VehicleNo.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Transpoter.name}" filterable="true" sortable="true"
+                 headerText="Transpoter" id="c10" width="100">
+        <af:outputText value="#{row.Transpoter}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Transpoter.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.GrossAmount.name}" filterable="true" sortable="true"
+                 headerText="Gross Amount" id="c11" width="100">
+        <af:outputText value="#{row.GrossAmount}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.GrossAmount.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.GrossAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.NetAmount.name}" filterable="true" sortable="true"
+                 headerText="Net Amount " id="c12" width="100">
+        <af:outputText value="#{row.NetAmount}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.NetAmount.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.NetAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ProdCode.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c13" width="100">
+        <af:outputText value="#{row.ProdCode}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ProdCode.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ItemName.name}" filterable="true" sortable="true"
+                 headerText="Item Name" id="c14">
+        <af:outputText value="#{row.ItemName}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ItemName.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ShipMode.name}" filterable="true" sortable="true"
+                 headerText="Ship Mode" id="c15">
+        <af:outputText value="#{row.ShipMode}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ShipMode.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Distination.name}" filterable="true" sortable="true"
+                 headerText="Destination" id="c16">
+        <af:outputText value="#{row.Distination}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Distination.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.CustCode.name}" filterable="true" sortable="true"
+                 headerText="Cust Code" id="c17">
+        <af:outputText value="#{row.CustCode}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.CustCode.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c18">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.UnitCode.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.CurrName.name}" filterable="true" sortable="true"
+                 headerText="Current Name" id="c19">
+        <af:outputText value="#{row.CurrName}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.CurrName.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.DiscountAmount.name}" filterable="true"
+                 sortable="true" headerText="Discount Amount " id="c20">
+        <af:outputText value="#{row.DiscountAmount}"
+                       shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.DiscountAmount.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.DiscountAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Quantity.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InvoiceWiseSaleVO1.hints.Quantity.label}" id="c21">
+        <af:outputText value="#{row.Quantity}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Quantity.tooltip}"
+                       id="ot21">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.Quantity.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InvoiceWiseSaleVO1.hints.Uom.label}" id="c22">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Uom.tooltip}" id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.CustMrpPrice.name}" filterable="true" sortable="true"
+                 headerText="Cust Mrp Price" id="c23">
+        <af:outputText value="#{row.CustMrpPrice}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.CustMrpPrice.tooltip}"
+                       id="ot23">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.CustMrpPrice.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="Batch No" id="c24">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.BatchNo.tooltip}"
+                       id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.MfgDt.name}" filterable="true" sortable="true"
+                 headerText="Mfg Date" id="c25">
+        <af:outputText value="#{row.MfgDt}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.MfgDt.tooltip}" id="ot25"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.ExpDt.name}" filterable="true" sortable="true"
+                 headerText="Exp Date" id="c26">
+        <af:outputText value="#{row.ExpDt}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.ExpDt.tooltip}" id="ot26"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Price.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InvoiceWiseSaleVO1.hints.Price.label}" id="c27">
+        <af:outputText value="#{row.Price}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Price.tooltip}" id="ot27">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.Price.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Amount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InvoiceWiseSaleVO1.hints.Amount.label}" id="c28">
+        <af:outputText value="#{row.Amount}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Amount.tooltip}" id="ot28">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.Amount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.Discount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InvoiceWiseSaleVO1.hints.Discount.label}" id="c29">
+        <af:outputText value="#{row.Discount}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.Discount.tooltip}"
+                       id="ot29">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.Discount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.HsnNo.name}" filterable="true" sortable="true"
+                 headerText="Hsn No" id="c30">
+        <af:outputText value="#{row.HsnNo}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.HsnNo.tooltip}" id="ot30"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.IgstRate.name}" filterable="true" sortable="true"
+                 headerText="IGST Rate" id="c31">
+        <af:outputText value="#{row.IgstRate}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.IgstRate.tooltip}"
+                       id="ot31">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.IgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.IgstAmt.name}" filterable="true" sortable="true"
+                 headerText="IGST Amount" id="c32">
+        <af:outputText value="#{row.IgstAmt}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.IgstAmt.tooltip}"
+                       id="ot32">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.IgstAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.CgstRate.name}" filterable="true" sortable="true"
+                 headerText="CGST Rate" id="c33">
+        <af:outputText value="#{row.CgstRate}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.CgstRate.tooltip}"
+                       id="ot33">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.CgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.CgstAmt.name}" filterable="true" sortable="true"
+                 headerText="CGST Amount" id="c34">
+        <af:outputText value="#{row.CgstAmt}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.CgstAmt.tooltip}"
+                       id="ot34">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.CgstAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.SgstRate.name}" filterable="true" sortable="true"
+                 headerText="SGST Rate" id="c35">
+        <af:outputText value="#{row.SgstRate}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.SgstRate.tooltip}"
+                       id="ot35">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.SgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InvoiceWiseSaleVO1.hints.SgstAmt.name}" filterable="true" sortable="true"
+                 headerText="SGST Amount" id="c36">
+        <af:outputText value="#{row.SgstAmt}" shortDesc="#{bindings.InvoiceWiseSaleVO1.hints.SgstAmt.tooltip}"
+                       id="ot36">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InvoiceWiseSaleVO1.hints.SgstAmt.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

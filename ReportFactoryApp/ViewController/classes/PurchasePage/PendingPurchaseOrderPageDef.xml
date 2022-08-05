@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PendingPurchaseOrderPageDef"
+                Package="PurchasePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingPurchaseOrderVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PendingPurchaseOrderVO1Iterator"/>
+    <searchRegion Binds="PendingPurchaseOrderVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PendingPurchaseOrderVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingPurchaseOrderVO1Iterator" id="PendingPurchaseOrderVO1">
+      <nodeDefinition DefName="model.Purchase.views.PendingPurchaseOrderVO" Name="PendingPurchaseOrderVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="PoHeadPoNo"/>
+          <Item Value="Item"/>
+          <Item Value="Qty"/>
+          <Item Value="PendQty"/>
+          <Item Value="DeliveryDate"/>
+          <Item Value="Rate"/>
+          <Item Value="Close1"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="PoNo"/>
+          <Item Value="AmdNo"/>
+          <Item Value="PoDt"/>
+          <Item Value="VenCd"/>
+          <Item Value="Name"/>
+          <Item Value="ValidTo"/>
+          <Item Value="Location1"/>
+          <Item Value="GroupCode"/>
+          <Item Value="Uom"/>
+          <Item Value="AppFlg"/>
+          <Item Value="ApproveFlg"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_Pending_Purchase_Order_ValidTill"
+          id="Pending_Purchase_Order_ValidTill" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_Pending_Purchase_Order_AppStatus"
+          id="Pending_Purchase_Order_AppStatus" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_GroupCd" id="GroupCd"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callPendingPurchaseOrder" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPendingPurchaseOrder" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_ITEMGROUP" NDType="java.lang.String"/>
+      <NamedData NDName="LV_APPSTATUS" NDType="java.lang.String"/>
+      <NamedData NDName="LV_VALIDTILL" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

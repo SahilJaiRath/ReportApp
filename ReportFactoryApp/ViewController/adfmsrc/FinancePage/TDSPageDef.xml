@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="TDSPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="TDSVVO1" RangeSize="50" DataControl="AppModuleDataControl" id="TDSVVO1Iterator"/>
+    <searchRegion Binds="TDSVVO1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="TDSVVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="TDSVVO1Iterator" id="TDSVVO1">
+      <nodeDefinition DefName="model.finance.views.TDSVVO" Name="TDSVVO10">
+        <AttrNames>
+          <Item Value="SerialNo"/>
+          <Item Value="DeducCode"/>
+          <Item Value="PanNo"/>
+          <Item Value="UnitCode"/>
+          <Item Value="DocType"/>
+          <Item Value="DocNo"/>
+          <Item Value="DocDate"/>
+          <Item Value="PartyCode"/>
+          <Item Value="PartyName"/>
+          <Item Value="PartyAddress"/>
+          <Item Value="DocAmt"/>
+          <Item Value="TdsRate"/>
+          <Item Value="TdsCode"/>
+          <Item Value="TdsAmt"/>
+          <Item Value="EntryDate"/>
+          <Item Value="Section1"/>
+          <Item Value="Surcharge"/>
+          <Item Value="Ecess"/>
+          <Item Value="TotalTax"/>
+          <Item Value="DateOfDeduction"/>
+          <Item Value="Narration"/>
+          <Item Value="VouNo"/>
+          <Item Value="GlCode"/>
+          <Item Value="ApprovalDate"/>
+          <Item Value="DeductionDescription"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callTDSReport" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callTDSReport"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.Integer"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

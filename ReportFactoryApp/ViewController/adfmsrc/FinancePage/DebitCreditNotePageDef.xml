@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="DebitCreditNotePageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DebitCreditNoteVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="DebitCreditNoteVO1Iterator"/>
+    <searchRegion Binds="DebitCreditNoteVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="DebitCreditNoteVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DebitCreditNoteVO1Iterator" id="DebitCreditNoteVO1">
+      <nodeDefinition DefName="model.finance.views.DebitCreditNoteVO" Name="DebitCreditNoteVO10">
+        <AttrNames>
+          <Item Value="DrCrNoteDnCnNo"/>
+          <Item Value="Dt"/>
+          <Item Value="FinTvouchUnitCode"/>
+          <Item Value="Typ"/>
+          <Item Value="PartyName"/>
+          <Item Value="VendorBillNo"/>
+          <Item Value="VendorBillDate"/>
+          <Item Value="Remarks"/>
+          <Item Value="Igst"/>
+          <Item Value="Cgst"/>
+          <Item Value="Sgst"/>
+          <Item Value="RoundOff"/>
+          <Item Value="Amt"/>
+          <Item Value="TotalAmt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callDebitCreditNote" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callDebitCreditNote" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_TYPE" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_Debit_Credit_note_Type"
+          id="Debit_Credit_note_Type" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

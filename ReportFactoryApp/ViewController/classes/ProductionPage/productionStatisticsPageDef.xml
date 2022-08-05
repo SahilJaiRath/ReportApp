@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="productionStatisticsPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="ProductionStatisticsVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="ProductionStatisticsVO1Iterator"/>
+    <searchRegion Binds="ProductionStatisticsVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ProductionStatisticsVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callProductionStatistics" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callProductionStatistics" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+    <tree IterBinding="ProductionStatisticsVO1Iterator" id="ProductionStatisticsVO1">
+      <nodeDefinition DefName="model.production.views.ProductionStatisticsVO" Name="ProductionStatisticsVO10">
+        <AttrNames>
+          <Item Value="AssProdnSlip"/>
+          <Item Value="AssProdnSlipDt"/>
+          <Item Value="ProductCode"/>
+          <Item Value="ProdnQty"/>
+          <Item Value="AcceptQty"/>
+          <Item Value="RejectQty"/>
+          <Item Value="CustType"/>
+          <Item Value="LotNo"/>
+          <Item Value="PdqaQty"/>
+          <Item Value="UnitCd"/>
+          <Item Value="LocCd"/>
+          <Item Value="MfgDt"/>
+          <Item Value="ExpDt"/>
+          <Item Value="BatchNo"/>
+          <Item Value="ProdnHrs"/>
+          <Item Value="NoOfMan"/>
+          <Item Value="ManualProdLoss"/>
+          <Item Value="JobCardQty"/>
+          <Item Value="ItemName"/>
+          <Item Value="Cld"/>
+          <Item Value="MachineSerialNo"/>
+          <Item Value="Machine"/>
+          <Item Value="JobCardNo"/>
+          <Item Value="Shift"/>
+          <Item Value="Mrp"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="NoOfPacking"/>
+          <Item Value="BatchYear"/>
+          <Item Value="ProdWt"/>
+          <Item Value="PackSize"/>
+          <Item Value="Category"/>
+          <Item Value="ProdSubGroup"/>
+          <Item Value="FinishWeight"/>
+          <Item Value="GrossWeight"/>
+          <Item Value="Iner"/>
+          <Item Value="PlMarginPer"/>
+          <Item Value="CldPerPcs"/>
+          <Item Value="ProductType"/>
+          <Item Value="SaleRatePerPcs"/>
+          <Item Value="TotalAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

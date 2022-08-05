@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Process Inspection Report" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle= "width: 180.0px;" 
+                              labelStyle= "Width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="procsInspction_ProcessId"
+                                        popupTitle="Search and Select: #{bindings.ProcsInspction_Process.hints.label}"
+                                        value="#{bindings.ProcsInspction_Process.inputValue}"
+                                        label="Process Name"
+                                        model="#{bindings.ProcsInspction_Process.listOfValuesModel}"
+                                        required="#{bindings.ProcsInspction_Process.hints.mandatory}"
+                                        columns="#{bindings.ProcsInspction_Process.hints.displayWidth}"
+                                        shortDesc="#{bindings.ProcsInspction_Process.hints.tooltip}" contentStyle= "width: 165.0px;" 
+                              labelStyle= "Width:100px"  >
+            <f:validator binding="#{bindings.ProcsInspction_Process.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:inputComboboxListOfValues id="procsInspction_ProdCDId"
+                                        popupTitle="Search and Select: #{bindings.ProcsInspction_ProdCD.hints.label}"
+                                        value="#{bindings.ProcsInspction_ProdCD.inputValue}"
+                                        label="Product Name"
+                                        model="#{bindings.ProcsInspction_ProdCD.listOfValuesModel}"
+                                        required="#{bindings.ProcsInspction_ProdCD.hints.mandatory}"
+                                        columns="#{bindings.ProcsInspction_ProdCD.hints.displayWidth}"
+                                        shortDesc="#{bindings.ProcsInspction_ProdCD.hints.tooltip}" contentStyle= "width: 165.0px;" 
+                              labelStyle= "Width:100px"   >
+            <f:validator binding="#{bindings.ProcsInspction_ProdCD.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id4" contentStyle= "width: 174.0px;" 
+                              labelStyle= "Width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id5" contentStyle= "width: 180.0px;" 
+                              labelStyle= "Width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:spacer width="35" height="10" id="s1"/>
+          <af:button text="Execute" id="b2" actionListener="#{ProcessInspectionBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Process Inspection Report.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ProcessInspectionReportVO11.collectionModel}" var="row"
+              rows="#{bindings.ProcessInspectionReportVO11.rangeSize}"
+              emptyText="#{bindings.ProcessInspectionReportVO11.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.ProcessInspectionReportVO11.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ProcessInspectionReportVO11.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.ProcessInspectionReportVO11.rangeSize}"
+              filterModel="#{bindings.ProcessInspectionReportVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.ProcessInspectionReportVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.UnitCd.name}" filterable="false"
+                 sortable="true" headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.ProcessInspectionReportVO11.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.PdarNo.name}" filterable="true"
+                 sortable="true" headerText="Pdar No" id="c2">
+        <af:outputText value="#{row.PdarNo}" shortDesc="#{bindings.ProcessInspectionReportVO11.hints.PdarNo.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.PdarDate.name}" filterable="true"
+                 sortable="true" headerText="Pdar Date" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ProcessInspectionReportVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.PdarDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.ProcessInspectionReportVO11.hints.PdarDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.PdarDate}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.PdarDate.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.ProcessInspectionReportVO11.hints.PdarDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.ProdCode.name}" filterable="true"
+                 sortable="true" headerText="Prod Cd" id="c4">
+        <af:outputText value="#{row.ProdCode}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.ProdCode.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.ProdName.name}" filterable="true"
+                 sortable="true" headerText="Prod Name" id="c5">
+        <af:outputText value="#{row.ProdName}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.ProdName.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.ProdSlipNo.name}" filterable="true"
+                 sortable="true" headerText="Prod Slip No" id="c6">
+        <af:outputText value="#{row.ProdSlipNo}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.ProdSlipNo.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.ProdnSlipDt.name}" filterable="true"
+                 sortable="true" headerText="Prodn Slip Dt" id="c7">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ProcessInspectionReportVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ProdnSlipDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.ProcessInspectionReportVO11.hints.ProdnSlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ProdnSlipDt}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.ProdnSlipDt.tooltip}" id="ot7">
+          <af:convertDateTime pattern="#{bindings.ProcessInspectionReportVO11.hints.ProdnSlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.JobCardNo.name}" filterable="true"
+                 sortable="true" headerText="Job Card No" id="c8">
+        <af:outputText value="#{row.JobCardNo}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.JobCardNo.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="Batch No" id="c9">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.ProcessInspectionReportVO11.hints.BatchNo.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.MfgDt.name}" filterable="true"
+                 sortable="true" headerText="Mfg Date" id="c10">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ProcessInspectionReportVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.MfgDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.ProcessInspectionReportVO11.hints.MfgDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.MfgDt}" shortDesc="#{bindings.ProcessInspectionReportVO11.hints.MfgDt.tooltip}"
+                       id="ot10">
+          <af:convertDateTime pattern="#{bindings.ProcessInspectionReportVO11.hints.MfgDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.ProdnQty.name}" filterable="true"
+                 sortable="true" headerText="Prodn Qty" id="c11">
+        <af:outputText value="#{row.ProdnQty}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.ProdnQty.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProcessInspectionReportVO11.hints.ProdnQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.AcceptQty.name}" filterable="true"
+                 sortable="true" headerText="Accept Qty" id="c12">
+        <af:outputText value="#{row.AcceptQty}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.AcceptQty.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProcessInspectionReportVO11.hints.AcceptQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.RejQty.name}" filterable="true"
+                 sortable="true" headerText="Reject Qty" id="c13">
+        <af:outputText value="#{row.RejQty}" shortDesc="#{bindings.ProcessInspectionReportVO11.hints.RejQty.tooltip}"
+                       id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ProcessInspectionReportVO11.hints.RejQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.Status.name}" filterable="true"
+                 sortable="true" headerText="Status" id="c14">
+        <af:outputText value="#{row.Status}" shortDesc="#{bindings.ProcessInspectionReportVO11.hints.Status.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.Process.name}" filterable="true"
+                 sortable="true" headerText="Process" id="c15">
+        <af:outputText value="#{row.Process}" shortDesc="#{bindings.ProcessInspectionReportVO11.hints.Process.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.ProcessName.name}" filterable="true"
+                 sortable="true" headerText="Process Name" id="c16">
+        <af:outputText value="#{row.ProcessName}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.ProcessName.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.NextProcCode.name}" filterable="true"
+                 sortable="true" headerText="Next Proc Code" id="c17">
+        <af:outputText value="#{row.NextProcCode}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.NextProcCode.tooltip}" id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProcessInspectionReportVO11.hints.NextProcName.name}" filterable="true"
+                 sortable="true" headerText="Next Proc Name" id="c18">
+        <af:outputText value="#{row.NextProcName}"
+                       shortDesc="#{bindings.ProcessInspectionReportVO11.hints.NextProcName.tooltip}" id="ot18"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

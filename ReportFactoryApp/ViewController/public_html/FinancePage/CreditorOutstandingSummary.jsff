@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Creditor Outstanding Summary report" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="25%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc2">
+          <af:inputComboboxListOfValues id="pndingSrvForQcVendorCdId"
+                                        popupTitle="Search and Select: #{bindings.PndingSrvForQcVendorCd.hints.label}"
+                                        value="#{bindings.PndingSrvForQcVendorCd.inputValue}"
+                                        label="Vendor Code"
+                                        model="#{bindings.PndingSrvForQcVendorCd.listOfValuesModel}"
+                                        required="#{bindings.PndingSrvForQcVendorCd.hints.mandatory}"
+                                        columns="#{bindings.PndingSrvForQcVendorCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.PndingSrvForQcVendorCd.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.PndingSrvForQcVendorCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc3">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="Para Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id1" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc11"/>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:panelGridLayout id="pgl2">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="10%" id="gc4">
+          <af:inputText label="P1" id="it1" value="0" contentStyle="width:50px;" labelStyle="width:100px"
+                        binding="#{CreditorOutstandingSummaryBean.p1}"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="15%" id="gc5">
+          <af:inputText label="P2" id="it2" value="30" contentStyle="width:50px;" labelStyle="width:55px"
+                        binding="#{CreditorOutstandingSummaryBean.p2}"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="08%" id="gc6">
+          <af:inputText label="P3" id="it3" value="60" contentStyle="width:50px;" labelStyle="width:20px"
+                        binding="#{CreditorOutstandingSummaryBean.p3}"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="10%" id="gc7">
+          <af:inputText label="P4" id="it4" value="90" contentStyle="width:50px;" labelStyle="width:25px"
+                        binding="#{CreditorOutstandingSummaryBean.p4}"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="10%" id="gc8">
+          <af:inputText label="P5" id="it5" value="120" contentStyle="width:50px;" labelStyle="width:56px"
+                        binding="#{CreditorOutstandingSummaryBean.p5}"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="14%" id="gc9">
+          <af:inputText label="P6" id="it6" value="150" contentStyle="width:50px;" labelStyle="width:16px"
+                        binding="#{CreditorOutstandingSummaryBean.p6}"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="14%" marginEnd="5px" id="gc10">
+          <af:button text="Execute" id="b1" actionListener="#{CreditorOutstandingSummaryBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel " id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Creditor Outstanding Summary report .xls"
+                                             title="Creditor Outstanding Summary report "/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.CreditorOutstandingSummaryVO1.collectionModel}" var="row"
+              rows="#{bindings.CreditorOutstandingSummaryVO1.rangeSize}"
+              emptyText="#{bindings.CreditorOutstandingSummaryVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.CreditorOutstandingSummaryVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.CreditorOutstandingSummaryVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.CreditorOutstandingSummaryVO1.rangeSize}"
+              filterModel="#{bindings.CreditorOutstandingSummaryVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.CreditorOutstandingSummaryVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page" columnStretching="column:c2">
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.VenCd.name}" filterable="true"
+                 sortable="true" headerText="Vendor Code" id="c1">
+        <af:outputText value="#{row.VenCd}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.VenCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.Name.name}" filterable="true"
+                 sortable="true" headerText="Name" id="c3">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.Name.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.Address.name}" filterable="true"
+                 sortable="true" headerText="Address" id="c2">
+        <af:outputText value="#{row.Address}"
+                       shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.Address.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.BalAmt.name}" filterable="true"
+                 sortable="true" headerText="Balance Amount" id="c5">
+        <af:outputText value="#{row.BalAmt}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.BalAmt.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.CreditorOutstandingSummaryVO1.hints.BalAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.P1.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.CreditorOutstandingSummaryVO1.hints.P1.label}" id="c6">
+        <af:outputText value="#{row.P1}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.P1.tooltip}"
+                       id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.CreditorOutstandingSummaryVO1.hints.P1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.P2.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.CreditorOutstandingSummaryVO1.hints.P2.label}" id="c7">
+        <af:outputText value="#{row.P2}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.P2.tooltip}"
+                       id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.CreditorOutstandingSummaryVO1.hints.P2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.P3.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.CreditorOutstandingSummaryVO1.hints.P3.label}" id="c8">
+        <af:outputText value="#{row.P3}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.P3.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.CreditorOutstandingSummaryVO1.hints.P3.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.P4.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.CreditorOutstandingSummaryVO1.hints.P4.label}" id="c9">
+        <af:outputText value="#{row.P4}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.P4.tooltip}"
+                       id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.CreditorOutstandingSummaryVO1.hints.P4.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.P5.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.CreditorOutstandingSummaryVO1.hints.P5.label}" id="c10">
+        <af:outputText value="#{row.P5}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.P5.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.CreditorOutstandingSummaryVO1.hints.P5.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.P6.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.CreditorOutstandingSummaryVO1.hints.P6.label}" id="c11">
+        <af:outputText value="#{row.P6}" shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.P6.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.CreditorOutstandingSummaryVO1.hints.P6.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.CreditorOutstandingSummaryVO1.hints.SessionId.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.CreditorOutstandingSummaryVO1.hints.SessionId.label}" id="c4">
+        <af:outputText value="#{row.SessionId}"
+                       shortDesc="#{bindings.CreditorOutstandingSummaryVO1.hints.SessionId.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.CreditorOutstandingSummaryVO1.hints.SessionId.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

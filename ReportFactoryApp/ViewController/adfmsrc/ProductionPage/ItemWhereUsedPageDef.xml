@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="ItemWhereUsedPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ItemWhereUsedVO1" RangeSize="50" DataControl="AppModuleDataControl" id="ItemWhereUsedVO1Iterator"/>
+    <searchRegion Binds="ItemWhereUsedVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ItemWhereUsedVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ItemWhereUsedVO1Iterator" id="ItemWhereUsedVO1">
+      <nodeDefinition DefName="model.production.views.ItemWhereUsedVO" Name="ItemWhereUsedVO10">
+        <AttrNames>
+          <Item Value="PartCode"/>
+          <Item Value="PartName"/>
+          <Item Value="PartUom"/>
+          <Item Value="PartQty"/>
+          <Item Value="ProdCode"/>
+          <Item Value="ProdName"/>
+          <Item Value="ProdUom"/>
+          <Item Value="ProdQty"/>
+          <Item Value="AltPartCd"/>
+          <Item Value="AltProdName"/>
+          <Item Value="AltUom"/>
+          <Item Value="AltPartQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_PartNameFilter" id="PartNameFilter"/>
+    <methodAction id="callItemWhereused" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callItemWhereused"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_PartNameFilter" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

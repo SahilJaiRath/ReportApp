@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="EmployeeMasterPageDef"
+                Package="HRPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="EmployeeMasterVO1" DataControl="AppModuleDataControl"
+              id="EmployeeMasterVO1Iterator" RangeSize="50"/>
+    <searchRegion Binds="EmployeeMasterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="EmployeeMasterVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="EmployeeMasterVO1Iterator" id="EmployeeMasterVO1">
+      <nodeDefinition DefName="model.HR.viwes.EmployeeMasterVO" Name="EmployeeMasterVO10">
+        <AttrNames>
+          <Item Value="EmpNumber"/>
+          <Item Value="EmployeeName"/>
+          <Item Value="FatherName"/>
+          <Item Value="Gender"/>
+          <Item Value="DateOfBirth"/>
+          <Item Value="JoinDate"/>
+          <Item Value="NationCode"/>
+          <Item Value="Nationality"/>
+          <Item Value="MaritalStatus"/>
+          <Item Value="AddPresent"/>
+          <Item Value="PresentMob"/>
+          <Item Value="AddPermanent"/>
+          <Item Value="PermanentMob"/>
+          <Item Value="ConfirmDate"/>
+          <Item Value="CardNo"/>
+          <Item Value="UanNo"/>
+          <Item Value="DeptName"/>
+          <Item Value="DesigDesc"/>
+          <Item Value="CategoryDesc"/>
+          <Item Value="LvlDesc"/>
+          <Item Value="LocationDesc"/>
+          <Item Value="Unit"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PurchaseRegisterPageDef"
+                Package="PurchasePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PurchaseRegisterVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="PurchaseRegisterVO1Iterator"/>
+    <searchRegion Binds="PurchaseRegisterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PurchaseRegisterVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PurchaseRegisterVO1Iterator" id="PurchaseRegisterVO1">
+      <nodeDefinition DefName="model.Purchase.views.PurchaseRegisterVO" Name="PurchaseRegisterVO10">
+        <AttrNames>
+          <Item Value="BillType"/>
+          <Item Value="VouNo"/>
+          <Item Value="VouDate"/>
+          <Item Value="TdsAmount"/>
+          <Item Value="IgstAmt"/>
+          <Item Value="SgstAmt"/>
+          <Item Value="CgstAmt"/>
+          <Item Value="VenName"/>
+          <Item Value="VenBillNo"/>
+          <Item Value="RegistrationFlag"/>
+          <Item Value="VenBillDate"/>
+          <Item Value="BillAmt"/>
+          <Item Value="Rcm"/>
+          <Item Value="VouType"/>
+          <Item Value="Gstno"/>
+          <Item Value="VenCd"/>
+          <Item Value="TypeOfPro"/>
+          <Item Value="GlName"/>
+          <Item Value="NatureOfPur"/>
+          <Item Value="TypeOfVen"/>
+          <Item Value="HsnNo"/>
+          <Item Value="GstRate"/>
+          <Item Value="TotInvVal"/>
+          <Item Value="GstExm"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemName"/>
+          <Item Value="BasicBillAmt"/>
+          <Item Value="IgstRate"/>
+          <Item Value="CgstRate"/>
+          <Item Value="SgstRate"/>
+          <Item Value="BasicDn"/>
+          <Item Value="IgstDn"/>
+          <Item Value="SgstDn"/>
+          <Item Value="CgstDn"/>
+          <Item Value="TotDn"/>
+          <Item Value="NetTaxa"/>
+          <Item Value="NetIgst"/>
+          <Item Value="NetSgst"/>
+          <Item Value="NetCgst"/>
+          <Item Value="NetTot"/>
+          <Item Value="EwayBillNo"/>
+          <Item Value="Pos"/>
+          <Item Value="StCode"/>
+          <Item Value="PoDt"/>
+          <Item Value="ChalanQty"/>
+          <Item Value="ReceQty"/>
+          <Item Value="AccQty"/>
+          <Item Value="Reason"/>
+          <Item Value="PoNo"/>
+          <Item Value="Uom"/>
+          <Item Value="PoRate"/>
+          <Item Value="BillRate"/>
+          <Item Value="RcmInvNo"/>
+          <Item Value="RcmInvDt"/>
+          <Item Value="GstCode"/>
+          <Item Value="UnitCode"/>
+          <Item Value="Address"/>
+          <Item Value="City"/>
+          <Item Value="State"/>
+          <Item Value="VendorFlag"/>
+          <Item Value="Sess"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_PndingSrvForQcVendorCd"
+                  id="PndingSrvForQcVendorCd"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_NatureOfPurchase" id="NatureOfPurchase"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_InterUnit" id="InterUnit" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callPurchaseRegister" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPurchaseRegister" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_VendorCode" NDType="java.lang.String"/>
+      <NamedData NDName="LV_InterUnit" NDType="java.lang.String"/>
+      <NamedData NDName="LV_NatureOfPurchase" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

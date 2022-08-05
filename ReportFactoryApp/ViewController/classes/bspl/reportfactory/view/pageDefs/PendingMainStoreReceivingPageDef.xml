@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="PendingMainStoreReceivingPageDef" Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingMainStoreReceivingVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PendingMainStoreReceivingVO1Iterator"/>
+    <searchRegion Binds="PendingMainStoreReceivingVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PendingMainStoreReceivingVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingMainStoreReceivingVO1Iterator" id="PendingMainStoreReceivingVO1">
+      <nodeDefinition DefName="model.inventory.views.PendingMainStoreReceivingVO" Name="PendingMainStoreReceivingVO10">
+        <AttrNames>
+          <Item Value="RetHslipRetSlipNo"/>
+          <Item Value="RetSlipDt"/>
+          <Item Value="ItemCd"/>
+          <Item Value="Description"/>
+          <Item Value="Qty"/>
+          <Item Value="Batch"/>
+          <Item Value="ArNo"/>
+          <Item Value="IssSlipDocNo"/>
+          <Item Value="Recived"/>
+          <Item Value="Unit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction id="callPendingMainStoreReceiving" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPendingMainStoreReceiving" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

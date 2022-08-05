@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PartMasterReportPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PartMasterReportVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PartMasterReportVO1Iterator"/>
+    <searchRegion Binds="PartMasterReportVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PartMasterReportVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PartMasterReportVO1Iterator" id="PartMasterReportVO1">
+      <nodeDefinition DefName="model.inventory.views.PartMasterReportVO" Name="PartMasterReportVO10">
+        <AttrNames>
+          <Item Value="PartCode"/>
+          <Item Value="Description"/>
+          <Item Value="MeasurementUnit"/>
+          <Item Value="Specification"/>
+          <Item Value="Rate"/>
+          <Item Value="HsnNo"/>
+          <Item Value="GstCode"/>
+          <Item Value="GroupCode"/>
+          <Item Value="SubGrpCd"/>
+          <Item Value="TolerancePer"/>
+          <Item Value="ProductionStockType"/>
+          <Item Value="SaleRequired"/>
+          <Item Value="GrpName"/>
+          <Item Value="SubGrpName"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="QualityRequired"/>
+          <Item Value="BatchType"/>
+          <Item Value="BatchPlant"/>
+          <Item Value="SampQty"/>
+          <Item Value="ReTest"/>
+          <Item Value="SapCode"/>
+          <Item Value="SapNumber"/>
+          <Item Value="ArReq"/>
+          <Item Value="StdLoss"/>
+          <Item Value="InspType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

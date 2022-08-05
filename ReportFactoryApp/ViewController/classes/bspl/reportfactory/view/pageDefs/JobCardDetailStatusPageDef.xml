@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="JobCardDetailStatusPageDef"
+                Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="JobCardDetailStatusVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="JobCardDetailStatusVO1Iterator"/>
+    <searchRegion Binds="JobCardDetailStatusVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="JobCardDetailStatusVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="JobCardDetailStatusVO1Iterator" id="JobCardDetailStatusVO1">
+      <nodeDefinition DefName="model.production.views.JobCardDetailStatusVO" Name="JobCardDetailStatusVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="JcNo"/>
+          <Item Value="JcDt"/>
+          <Item Value="ProductCode"/>
+          <Item Value="ProductName"/>
+          <Item Value="JobcardQty"/>
+          <Item Value="BatchNo"/>
+          <Item Value="BmrNo"/>
+          <Item Value="ReqHslipReqSlipNo"/>
+          <Item Value="ReqItemCode"/>
+          <Item Value="ReqItemName"/>
+          <Item Value="ReqDate"/>
+          <Item Value="ReqQty"/>
+          <Item Value="RetNo"/>
+          <Item Value="RetQty"/>
+          <Item Value="IssSlipNo"/>
+          <Item Value="IssSlipDt"/>
+          <Item Value="IssueQty"/>
+          <Item Value="ConsumedQty"/>
+          <Item Value="BalQty"/>
+          <Item Value="ReqFromLoc"/>
+          <Item Value="ReqStoreLoc"/>
+          <Item Value="IssueFromLoc"/>
+          <Item Value="IssueToLoc"/>
+          <Item Value="ItemBatch"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubLedger_UnitCode" id="SubLedger_UnitCode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="callJobCardDetailStatus" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callJobCardDetailStatus" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UnitCode" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

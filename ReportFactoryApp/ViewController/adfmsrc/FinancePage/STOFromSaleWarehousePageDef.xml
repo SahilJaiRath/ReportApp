@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="STOFromSaleWarehousePageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="STOfromSalesWarehouseVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="STOfromSalesWarehouseVO1Iterator"/>
+    <searchRegion Binds="STOfromSalesWarehouseVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="STOfromSalesWarehouseVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="STOfromSalesWarehouseVO1Iterator" id="STOfromSalesWarehouseVO1">
+      <nodeDefinition DefName="model.sale.views.STOfromSalesWarehouseVO" Name="STOfromSalesWarehouseVO10">
+        <AttrNames>
+          <Item Value="Code"/>
+          <Item Value="Name1"/>
+          <Item Value="Batch1"/>
+          <Item Value="Qty"/>
+          <Item Value="IcNo"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="SaleFrom"/>
+          <Item Value="SaleTo"/>
+          <Item Value="SaleToName"/>
+          <Item Value="Reciving"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_WarehouseName" id="WarehouseName"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="callSTOfromSalesWarehouse" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callSTOfromSalesWarehouse" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_WAREHOUSENAME" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

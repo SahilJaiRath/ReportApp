@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PendingToD28PageDef"
+                Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingToD28VO1" RangeSize="50" DataControl="AppModuleDataControl" id="PendingToD28VO1Iterator"/>
+    <searchRegion Binds="PendingToD28VO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PendingToD28VO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingToD28VO1Iterator" id="PendingToD28VO1">
+      <nodeDefinition DefName="model.sale.views.PendingToD28VO" Name="PendingToD28VO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="ChallanNo"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="ToLoc"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ItemGroup"/>
+          <Item Value="SubGrpDesc"/>
+          <Item Value="BatchNo"/>
+          <Item Value="ExpDt"/>
+          <Item Value="MfgDt"/>
+          <Item Value="Qty"/>
+          <Item Value="Mrp"/>
+          <Item Value="Amount"/>
+          <Item Value="AltUom"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_Challan_No" id="Challan_No"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_PendingToD28_ItemCode"
+                  id="PendingToD28_ItemCode"/>
+    <methodAction id="callPendingToD28" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callPendingToD28"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ChallanNo" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ItemCode" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

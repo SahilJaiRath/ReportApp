@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="BMRandBPRBatchStatusPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BMRandBPRBatchStatuVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="BMRandBPRBatchStatuVO1Iterator"/>
+    <searchRegion Binds="BMRandBPRBatchStatuVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BMRandBPRBatchStatuVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BMRandBPRBatchStatuVO1Iterator" id="BMRandBPRBatchStatuVO1">
+      <nodeDefinition DefName="model.production.views.BMRandBPRBatchStatuVO" Name="BMRandBPRBatchStatuVO10">
+        <AttrNames>
+          <Item Value="LotNo"/>
+          <Item Value="LeafCd"/>
+          <Item Value="Description"/>
+          <Item Value="BatchNo"/>
+          <Item Value="AcceptQty"/>
+          <Item Value="JcNo"/>
+          <Item Value="Batch1"/>
+          <Item Value="BprProducedQty"/>
+          <Item Value="BprQty"/>
+          <Item Value="Balance"/>
+          <Item Value="UnitCd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction id="callBMRandBPRBatchStatus" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callBMRandBPRBatchStatus" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

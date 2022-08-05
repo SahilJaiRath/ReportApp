@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PlantMasterPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PlantMasterVO1" RangeSize="50" DataControl="AppModuleDataControl" id="PlantMasterVO1Iterator"/>
+    <searchRegion Binds="PlantMasterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PlantMasterVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PlantMasterVO1Iterator" id="PlantMasterVO1">
+      <nodeDefinition DefName="model.inventory.views.PlantMasterVO" Name="PlantMasterVO10">
+        <AttrNames>
+          <Item Value="Code"/>
+          <Item Value="Name"/>
+          <Item Value="ShortName"/>
+          <Item Value="PanNo"/>
+          <Item Value="GstRegNo"/>
+          <Item Value="Cin"/>
+          <Item Value="UnitCurr"/>
+          <Item Value="Address"/>
+          <Item Value="Email"/>
+          <Item Value="Website"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

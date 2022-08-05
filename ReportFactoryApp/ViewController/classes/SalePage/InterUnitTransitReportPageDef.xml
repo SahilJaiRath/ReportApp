@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="InterUnitTransitReportPageDef"
+                Package="SalePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="InterUnitTransitReportVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="InterUnitTransitReportVO1Iterator"/>
+    <searchRegion Binds="InterUnitTransitReportVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="InterUnitTransitReportVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="InterUnitTransitReportVO1Iterator" id="InterUnitTransitReportVO1">
+      <nodeDefinition DefName="model.sale.views.InterUnitTransitReportVO" Name="InterUnitTransitReportVO10">
+        <AttrNames>
+          <Item Value="InvHeadType"/>
+          <Item Value="InvUnit"/>
+          <Item Value="CustCode"/>
+          <Item Value="BillUnit"/>
+          <Item Value="BillVenCode"/>
+          <Item Value="Identifier"/>
+          <Item Value="Dates"/>
+          <Item Value="PartyName"/>
+          <Item Value="GroupCode"/>
+          <Item Value="ItemGroup"/>
+          <Item Value="SubGrpCd"/>
+          <Item Value="SubGrpDesc"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ItemUom"/>
+          <Item Value="BatchNo"/>
+          <Item Value="Quantity"/>
+          <Item Value="ChallanQty"/>
+          <Item Value="GateEno"/>
+          <Item Value="GateEdt"/>
+          <Item Value="SrvN"/>
+          <Item Value="SrvDt"/>
+          <Item Value="SrvAppBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction id="callInterUnitTransitReport" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callInterUnitTransitReport" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_INVUNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_BILLUNIT" NDType="java.lang.String"/>
+    </methodAction>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_InterUnitTransit_UnitCode"
+                  id="InterUnitTransit_UnitCode"/>
+  </bindings>
+</pageDefinition>

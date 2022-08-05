@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="RequisitionSlipRegisterPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="RequisitionSlipRegisterVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="RequisitionSlipRegisterVO1Iterator"/>
+    <searchRegion Binds="RequisitionSlipRegisterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="RequisitionSlipRegisterVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="RequisitionSlipRegisterVO1Iterator" id="RequisitionSlipRegisterVO1">
+      <nodeDefinition DefName="model.inventory.views.RequisitionSlipRegisterVO" Name="RequisitionSlipRegisterVO10">
+        <AttrNames>
+          <Item Value="TypeRe"/>
+          <Item Value="ReqHslipReqSlipNo"/>
+          <Item Value="ItemCd"/>
+          <Item Value="Description"/>
+          <Item Value="DocNo"/>
+          <Item Value="ReqFrom"/>
+          <Item Value="Lname"/>
+          <Item Value="StoreLoc"/>
+          <Item Value="Dece"/>
+          <Item Value="ReqQty"/>
+          <Item Value="IssSlipNo"/>
+          <Item Value="IssSlipDt"/>
+          <Item Value="ReqUom"/>
+          <Item Value="IssQty"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="UnitCd"/>
+          <Item Value="AuthBy"/>
+          <Item Value="RqTp"/>
+          <Item Value="ReqProcCd"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubLedger_UnitCode" id="SubLedger_UnitCode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_RequisitionSlipRegister_ReqTypeFilter"
+          id="RequisitionSlipRegister_ReqTypeFilter" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="callRequisitionSlipRegister" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callRequisitionSlipRegister" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="ReqTypeFilter" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

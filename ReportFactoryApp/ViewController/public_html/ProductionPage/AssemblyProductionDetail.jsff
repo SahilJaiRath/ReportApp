@@ -1,0 +1,321 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Assembly Production Detail" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="Width:170.0px;"
+                              labelStyle="Width:100px">
+                            
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="assembly_prd_dtl_prdcdId"
+                                        popupTitle="Search and Select: #{bindings.Assembly_prd_dtl_prdcd.hints.label}"
+                                        value="#{bindings.Assembly_prd_dtl_prdcd.inputValue}"
+                                        label="Product Code"
+                                        model="#{bindings.Assembly_prd_dtl_prdcd.listOfValuesModel}"
+                                        required="#{bindings.Assembly_prd_dtl_prdcd.hints.mandatory}"
+                                        columns="#{bindings.Assembly_prd_dtl_prdcd.hints.displayWidth}"
+                                        shortDesc="#{bindings.Assembly_prd_dtl_prdcd.hints.tooltip}" contentStyle="Width:150.0px;"
+                              labelStyle="Width:100px">>
+            <f:validator binding="#{bindings.Assembly_prd_dtl_prdcd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id4" contentStyle="Width:150.0px;"
+                              labelStyle="Width:100px">   
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id5"  contentStyle="Width:150.0px;"
+                              labelStyle="Width:100px">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callAssemblyProductionDetail.enabled}"
+                     actionListener="#{AssemblyProductionDetainBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Assembly Production Detail.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.AssemblyProductionDetailVO1.collectionModel}" var="row"
+              rows="#{bindings.AssemblyProductionDetailVO1.rangeSize}"
+              emptyText="#{bindings.AssemblyProductionDetailVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.AssemblyProductionDetailVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.AssemblyProductionDetailVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.AssemblyProductionDetailVO1.rangeSize}"
+              filterModel="#{bindings.AssemblyProductionDetailVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.AssemblyProductionDetailVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.AssProdnSlip.name}" filterable="true"
+                 sortable="true" headerText="Ass Production Slip" id="c2">
+        <af:outputText value="#{row.AssProdnSlip}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.AssProdnSlip.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.AssProdnSlipDt.name}" filterable="true"
+                 sortable="true" headerText="Ass Prodn Slip Dt"
+                 id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.AssemblyProductionDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.AssProdnSlipDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.AssProdnSlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.AssProdnSlipDt}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.AssProdnSlipDt.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.AssProdnSlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.ProductCode.name}" filterable="true"
+                 sortable="true" headerText="Product Code" id="c4">
+        <af:outputText value="#{row.ProductCode}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.ProductCode.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="Item Desc" id="c5">
+        <af:outputText value="#{row.ItemDesc}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.ItemDesc.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.ProdnQty.name}" filterable="true"
+                 sortable="true" headerText="Production Qty" id="c6">
+        <af:outputText value="#{row.ProdnQty}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.ProdnQty.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.AssemblyProductionDetailVO1.hints.ProdnQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.ApprovedBy.name}" filterable="true"
+                 sortable="true" headerText="Approved By" id="c7">
+        <af:outputText value="#{row.ApprovedBy}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.ApprovedBy.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.AcceptQty.name}" filterable="true"
+                 sortable="true" headerText="Accept Qty" id="c8">
+        <af:outputText value="#{row.AcceptQty}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.AcceptQty.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.AssemblyProductionDetailVO1.hints.AcceptQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.RejectQty.name}" filterable="true"
+                 sortable="true" headerText="Reject Qty" id="c9">
+        <af:outputText value="#{row.RejectQty}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.RejectQty.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.AssemblyProductionDetailVO1.hints.RejectQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.LineNo.name}" filterable="true"
+                 sortable="true" headerText="Line No" id="c10">
+        <af:outputText value="#{row.LineNo}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.LineNo.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.JobCardNo.name}" filterable="true"
+                 sortable="true" headerText="Job Card No" id="c11">
+        <af:outputText value="#{row.JobCardNo}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.JobCardNo.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.JobCardQty.name}" filterable="true"
+                 sortable="true" headerText="Job Card Qty" id="c12">
+        <af:outputText value="#{row.JobCardQty}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.JobCardQty.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.AssemblyProductionDetailVO1.hints.JobCardQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.LotNo.name}" filterable="true"
+                 sortable="true" headerText="Lot No" id="c13">
+        <af:outputText value="#{row.LotNo}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.LotNo.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.ExtraQty.name}" filterable="true"
+                 sortable="true" headerText="Extra Qty" id="c14">
+        <af:outputText value="#{row.ExtraQty}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.ExtraQty.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.AssemblyProductionDetailVO1.hints.ExtraQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.Shift.name}" filterable="true"
+                 sortable="true" headerText="Shift" id="c15">
+        <af:outputText value="#{row.Shift}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.Shift.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.ManPower.name}" filterable="true"
+                 sortable="true" headerText="Man Power" id="c16">
+        <af:outputText value="#{row.ManPower}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.ManPower.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.AssemblyProductionDetailVO1.hints.ManPower.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.Hours.name}" filterable="true"
+                 sortable="true" headerText="Hours" id="c17">
+        <af:outputText value="#{row.Hours}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.Hours.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="Batch No" id="c18">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.BatchNo.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.MfgDt.name}" filterable="true"
+                 sortable="true" headerText="MFG Date" id="c19">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.AssemblyProductionDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.MfgDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.MfgDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.MfgDt}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.MfgDt.tooltip}"
+                       id="ot19">
+          <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.MfgDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.ExpDt.name}" filterable="true"
+                 sortable="true" headerText="Exp Date" id="c20">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.AssemblyProductionDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ExpDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.ExpDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ExpDt}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.ExpDt.tooltip}"
+                       id="ot20">
+          <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.ExpDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.Mrp.name}" filterable="true" sortable="true"
+                 headerText="MRP" id="c21">
+        <af:outputText value="#{row.Mrp}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.Mrp.tooltip}"
+                       id="ot21">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.AssemblyProductionDetailVO1.hints.Mrp.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.PackSize.name}" filterable="true"
+                 sortable="true" headerText="Pack Size" id="c22">
+        <af:outputText value="#{row.PackSize}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.PackSize.tooltip}" id="ot22">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.AssemblyProductionDetailVO1.hints.PackSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.BatchYear.name}" filterable="true"
+                 sortable="true" headerText="Batch Size" id="c23">
+        <af:outputText value="#{row.BatchYear}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.BatchYear.tooltip}" id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.ProductCategry.name}" filterable="true"
+                 sortable="true" headerText="Product Categry"
+                 id="c24">
+        <af:outputText value="#{row.ProductCategry}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.ProductCategry.tooltip}" id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.AssyBatch.name}" filterable="true"
+                 sortable="true" headerText="Assy Batch" id="c25">
+        <af:outputText value="#{row.AssyBatch}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.AssyBatch.tooltip}" id="ot25"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.AssyItem.name}" filterable="true"
+                 sortable="true" headerText="Assy Item" id="c26">
+        <af:outputText value="#{row.AssyItem}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.AssyItem.tooltip}" id="ot26"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.AssyItemName.name}" filterable="true"
+                 sortable="true" headerText="Assy Item Name" id="c27">
+        <af:outputText value="#{row.AssyItemName}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.AssyItemName.tooltip}" id="ot27"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.BmrCardDate.name}" filterable="true"
+                 sortable="true" headerText="BMR Card Date" id="c28">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.AssemblyProductionDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BmrCardDate.value}"
+                        id="id6">
+            <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.BmrCardDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.BmrCardDate}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.BmrCardDate.tooltip}" id="ot28">
+          <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.BmrCardDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.BmrProducedQty.name}" filterable="true"
+                 sortable="true" headerText="BMR Produced Qty"
+                 id="c29">
+        <af:outputText value="#{row.BmrProducedQty}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.BmrProducedQty.tooltip}" id="ot29">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.AssemblyProductionDetailVO1.hints.BmrProducedQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.BmrDate.name}" filterable="true"
+                 sortable="true" headerText="BMR Date" id="c30">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.AssemblyProductionDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BmrDate.value}"
+                        id="id7">
+            <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.BmrDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.BmrDate}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.BmrDate.tooltip}"
+                       id="ot30">
+          <af:convertDateTime pattern="#{bindings.AssemblyProductionDetailVO1.hints.BmrDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.BmrCardNo.name}" filterable="true"
+                 sortable="true" headerText="BMR Card No" id="c31">
+        <af:outputText value="#{row.BmrCardNo}"
+                       shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.BmrCardNo.tooltip}" id="ot31"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.Weight.name}" filterable="true"
+                 sortable="true" headerText="Weight" id="c32">
+        <af:outputText value="#{row.Weight}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.Weight.tooltip}"
+                       id="ot32"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.AssemblyProductionDetailVO1.hints.KgLtr.name}" filterable="true"
+                 sortable="true" headerText="Kg Ltr" id="c33">
+        <af:outputText value="#{row.KgLtr}" shortDesc="#{bindings.AssemblyProductionDetailVO1.hints.KgLtr.tooltip}"
+                       id="ot33">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.AssemblyProductionDetailVO1.hints.KgLtr.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

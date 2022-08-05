@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BatchWiseBPRConsumption_BatchNoVVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="common.viwes.BatchWiseBPRConsumption_BatchNoVVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P273_PRODUCT"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT ITEM, Batch_No FROM ( 
+ 
+SELECT 'ALL' ITEM, 'ALL' Batch_No , 1  FROM DUAL 
+ 
+UNION ALL 
+ 
+  
+ 
+Select JH.Batch_No||','|| jh.Item_cd||'-'|| Item_desc ITEM, JH.Batch_No Batch_No, 2 
+ 
+   From JC_HEAD JH 
+ 
+   JOIN VW_ALL_ITEM_MAS IM 
+ 
+     ON JH.ITEM_CD = IM.ITEM_CD 
+ 
+   AND JH.UNIT_CD = IM.UNIT_CD 
+ 
+    Where Jh.Unit_cd =Im.Unit_cd 
+ 
+      And jh.Item_cd = Im.Item_cd 
+ 
+      And Jh.Item_Cd = Decode(Nvl(:P273_PRODUCT, 'ALL'), 'ALL', Jh.Item_Cd, :P273_PRODUCT) 
+ 
+      ORDER BY 3 
+ 
+      )]]></SQLQuery>
+  <ViewAttribute
+    Name="Item"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM"
+    Expression="ITEM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="165"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BatchNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="18"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_NO"
+    Expression="BATCH_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="45"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

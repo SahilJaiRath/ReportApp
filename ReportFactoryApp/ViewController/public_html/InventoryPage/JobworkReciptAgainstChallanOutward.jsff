@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Jobwork Recipt Against Challan (Outward)" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id6" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px"   >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id5" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px"  >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callJobworkReciptAgainstChallanOutward.enabled}"
+                     actionListener="#{JobworkReciptAgainstChallanOutwardBean.OnClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To  Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Jobwork Recipt Against Challan (Outward).xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.JobworkReciptAgainstChallanOutwardVO1.collectionModel}" var="row"
+              rows="#{bindings.JobworkReciptAgainstChallanOutwardVO1.rangeSize}"
+              emptyText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.JobworkReciptAgainstChallanOutwardVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.JobworkReciptAgainstChallanOutwardVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.JobworkReciptAgainstChallanOutwardVO1.rangeSize}"
+              filterModel="#{bindings.JobworkReciptAgainstChallanOutwardVO1Query.queryDescriptor}"
+              queryListener="#{bindings.JobworkReciptAgainstChallanOutwardVO1Query.processQuery}" varStatus="vs"
+              id="t1" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanNo.label}"
+                 id="c1">
+        <af:outputText value="#{row.ChallanNo}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanNo.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GateEno.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GateEno.label}"
+                 id="c2">
+        <af:outputText value="#{row.GateEno}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GateEno.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.InvNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.InvNo.label}"
+                 id="c3">
+        <af:outputText value="#{row.InvNo}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.InvNo.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.InvDt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.InvDt.label}"
+                 id="c4">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JobworkReciptAgainstChallanOutwardVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.InvDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.InvDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.InvDt}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.InvDt.tooltip}" id="ot4">
+          <af:convertDateTime pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.InvDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GateEdt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GateEdt.label}"
+                 id="c5">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JobworkReciptAgainstChallanOutwardVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.GateEdt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GateEdt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.GateEdt}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GateEdt.tooltip}" id="ot5">
+          <af:convertDateTime pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GateEdt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ItemCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ItemCd.label}"
+                 id="c6">
+        <af:outputText value="#{row.ItemCd}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ItemCd.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.Description.name}"
+                 filterable="true" sortable="true"
+                 headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.Description.label}" id="c7">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.Description.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SrvNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SrvNo.label}"
+                 id="c8">
+        <af:outputText value="#{row.SrvNo}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SrvNo.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SrvDt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SrvDt.label}"
+                 id="c9">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JobworkReciptAgainstChallanOutwardVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.SrvDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SrvDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.SrvDt}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SrvDt.tooltip}" id="ot9">
+          <af:convertDateTime pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SrvDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanQty.name}"
+                 filterable="true" sortable="true"
+                 headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanQty.label}" id="c10">
+        <af:outputText value="#{row.ChallanQty}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanQty.tooltip}" id="ot10">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ConvertedQty.name}"
+                 filterable="true" sortable="true"
+                 headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ConvertedQty.label}" id="c11">
+        <af:outputText value="#{row.ConvertedQty}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ConvertedQty.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ConvertedQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ProcessLoss.name}"
+                 filterable="true" sortable="true"
+                 headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ProcessLoss.label}" id="c12">
+        <af:outputText value="#{row.ProcessLoss}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ProcessLoss.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ProcessLoss.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ReceiptQty.name}"
+                 filterable="true" sortable="true"
+                 headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ReceiptQty.label}" id="c13">
+        <af:outputText value="#{row.ReceiptQty}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ReceiptQty.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ReceiptQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.MaterialRate.name}"
+                 filterable="true" sortable="true"
+                 headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.MaterialRate.label}" id="c14">
+        <af:outputText value="#{row.MaterialRate}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.MaterialRate.tooltip}"
+                       id="ot14">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.MaterialRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.BasicAmt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.BasicAmt.label}"
+                 id="c15">
+        <af:outputText value="#{row.BasicAmt}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.BasicAmt.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.BasicAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.CgstRate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.CgstRate.label}"
+                 id="c16">
+        <af:outputText value="#{row.CgstRate}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.CgstRate.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.CgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SgstRate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SgstRate.label}"
+                 id="c17">
+        <af:outputText value="#{row.SgstRate}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SgstRate.tooltip}" id="ot17">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.CgstAmt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.CgstAmt.label}"
+                 id="c18">
+        <af:outputText value="#{row.CgstAmt}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.CgstAmt.tooltip}" id="ot18">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.CgstAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SgstAmt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SgstAmt.label}"
+                 id="c19">
+        <af:outputText value="#{row.SgstAmt}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SgstAmt.tooltip}" id="ot19">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.SgstAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GrandCost.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GrandCost.label}"
+                 id="c20">
+        <af:outputText value="#{row.GrandCost}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GrandCost.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.GrandCost.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.UnitCd.label}"
+                 id="c21">
+        <af:outputText value="#{row.UnitCd}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.UnitCd.tooltip}" id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanDt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanDt.label}"
+                 id="c22">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JobworkReciptAgainstChallanOutwardVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ChallanDt.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ChallanDt}"
+                       shortDesc="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanDt.tooltip}" id="ot22">
+          <af:convertDateTime pattern="#{bindings.JobworkReciptAgainstChallanOutwardVO1.hints.ChallanDt.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

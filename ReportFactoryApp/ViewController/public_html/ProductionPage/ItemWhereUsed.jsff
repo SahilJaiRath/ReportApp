@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Item Where Used" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:inputComboboxListOfValues id="partNameFilterId"
+                                        popupTitle="Search and Select: #{bindings.PartNameFilter.hints.label}"
+                                        value="#{bindings.PartNameFilter.inputValue}"
+                                        label="Part Name"
+                                        model="#{bindings.PartNameFilter.listOfValuesModel}"
+                                        required="#{bindings.PartNameFilter.hints.mandatory}"
+                                        columns="#{bindings.PartNameFilter.hints.displayWidth}"
+                                        shortDesc="#{bindings.PartNameFilter.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.PartNameFilter.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Excute" id="b1" actionListener="#{ItemWhereusedBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Item Where used report.xls"
+                                             title="Item Where used report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ItemWhereUsedVO1.collectionModel}" var="row"
+              rows="#{bindings.ItemWhereUsedVO1.rangeSize}"
+              emptyText="#{bindings.ItemWhereUsedVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.ItemWhereUsedVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ItemWhereUsedVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.ItemWhereUsedVO1.rangeSize}"
+              filterModel="#{bindings.ItemWhereUsedVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.ItemWhereUsedVO1Query.processQuery}" varStatus="vs" id="t2" scrollPolicy="page"
+              columnStretching="column:c2">
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.ProdCode.name}" filterable="true" sortable="true"
+                 headerText="Product Code" id="c5">
+        <af:outputText value="#{row.ProdCode}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.ProdCode.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.ProdName.name}" filterable="true" sortable="true"
+                 headerText="Product Name" id="c6">
+        <af:outputText value="#{row.ProdName}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.ProdName.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.ProdUom.name}" filterable="true" sortable="true"
+                 headerText="Product UOM" id="c7">
+        <af:outputText value="#{row.ProdUom}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.ProdUom.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.ProdQty.name}" filterable="true" sortable="true"
+                 headerText="Product Qty" id="c8">
+        <af:outputText value="#{row.ProdQty}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.ProdQty.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWhereUsedVO1.hints.ProdQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.PartCode.name}" filterable="true" sortable="true"
+                 headerText="Code" id="c1">
+        <af:outputText value="#{row.PartCode}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.PartCode.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.PartName.name}" filterable="true" sortable="true"
+                 headerText="Name" id="c2">
+        <af:outputText value="#{row.PartName}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.PartName.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.PartUom.name}" filterable="true" sortable="true"
+                 headerText="Part UOM" id="c3">
+        <af:outputText value="#{row.PartUom}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.PartUom.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.PartQty.name}" filterable="true" sortable="true"
+                 headerText="Part Qty" id="c4">
+        <af:outputText value="#{row.PartQty}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.PartQty.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWhereUsedVO1.hints.PartQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.AltPartCd.name}" filterable="true" sortable="true"
+                 headerText="Alt Part Code" id="c9">
+        <af:outputText value="#{row.AltPartCd}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.AltPartCd.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.AltProdName.name}" filterable="true" sortable="true"
+                 headerText="Alt Part Name" id="c10">
+        <af:outputText value="#{row.AltProdName}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.AltProdName.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.AltUom.name}" filterable="true" sortable="true"
+                 headerText="Alt Part UOM" id="c11">
+        <af:outputText value="#{row.AltUom}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.AltUom.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWhereUsedVO1.hints.AltPartQty.name}" filterable="true" sortable="true"
+                 headerText="Alt Part Qty" id="c12">
+        <af:outputText value="#{row.AltPartQty}" shortDesc="#{bindings.ItemWhereUsedVO1.hints.AltPartQty.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWhereUsedVO1.hints.AltPartQty.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

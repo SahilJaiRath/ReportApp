@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="BMR and BPR Batch Status" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" labelStyle="width:100.0px;" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Execute" id="b2" actionListener="#{BMRandBPRBatchStatusBean.onClickButton}"
+                     disabled="#{!bindings.callBMRandBPRBatchStatus.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export to Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="BMR and BPR Batch Status.cls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BMRandBPRBatchStatuVO1.collectionModel}" var="row"
+              rows="#{bindings.BMRandBPRBatchStatuVO1.rangeSize}"
+              emptyText="#{bindings.BMRandBPRBatchStatuVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.BMRandBPRBatchStatuVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BMRandBPRBatchStatuVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.BMRandBPRBatchStatuVO1.rangeSize}"
+              filterModel="#{bindings.BMRandBPRBatchStatuVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.BMRandBPRBatchStatuVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c11">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.UnitCd.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.LotNo.name}" filterable="true" sortable="true"
+                 headerText="BMR Job Card" id="c1">
+        <af:outputText value="#{row.LotNo}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.LotNo.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.LeafCd.name}" filterable="true" sortable="true"
+                 headerText="Code" id="c2">
+        <af:outputText value="#{row.LeafCd}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.LeafCd.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="Name" id="c3">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.Description.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="BMR Batch" id="c4">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.BatchNo.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.AcceptQty.name}" filterable="true"
+                 sortable="true" headerText="BMR Production  Qty" id="c5">
+        <af:outputText value="#{row.AcceptQty}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.AcceptQty.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRandBPRBatchStatuVO1.hints.AcceptQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.JcNo.name}" filterable="true" sortable="true"
+                 headerText="BPR Jobcard" id="c6">
+        <af:outputText value="#{row.JcNo}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.JcNo.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.Batch1.name}" filterable="true" sortable="true"
+                 headerText="BPR Batch" id="c7">
+        <af:outputText value="#{row.Batch1}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.Batch1.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.BprQty.name}" filterable="true" sortable="true"
+                 headerText="BPR SFG Issued Qty" id="c9">
+        <af:outputText value="#{row.BprQty}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.BprQty.tooltip}"
+                       id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRandBPRBatchStatuVO1.hints.BprQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.Balance.name}" filterable="true" sortable="true"
+                 headerText="Balane Stock" id="c10">
+        <af:outputText value="#{row.Balance}" shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.Balance.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRandBPRBatchStatuVO1.hints.Balance.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRandBPRBatchStatuVO1.hints.BprProducedQty.name}" filterable="true"
+                 sortable="true" headerText="BPR Production Qty" id="c8">
+        <af:outputText value="#{row.BprProducedQty}"
+                       shortDesc="#{bindings.BMRandBPRBatchStatuVO1.hints.BprProducedQty.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BMRandBPRBatchStatuVO1.hints.BprProducedQty.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

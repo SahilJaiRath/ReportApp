@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="IssueVsInvoicePageDef"
+                Package="SalePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="IssueVsInvoiceVO1" DataControl="AppModuleDataControl"
+              id="IssueVsInvoiceVO1Iterator" RangeSize="50"/>
+    <searchRegion Binds="IssueVsInvoiceVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="IssueVsInvoiceVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="IssueVsInvoiceVO1Iterator" id="IssueVsInvoiceVO1">
+      <nodeDefinition DefName="model.sale.views.IssueVsInvoiceVO" Name="IssueVsInvoiceVO10">
+        <AttrNames>
+          <Item Value="IssueSlipNo"/>
+          <Item Value="IssueSlipDate"/>
+          <Item Value="Item"/>
+          <Item Value="InvoiceNo"/>
+          <Item Value="IssSlipQty"/>
+          <Item Value="InvcQty"/>
+          <Item Value="PendQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

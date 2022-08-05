@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelHeader text="Location Master" id="ph1"/>
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Location Master.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.LocationMasterVO1.collectionModel}" var="row"
+              rows="#{bindings.LocationMasterVO1.rangeSize}"
+              emptyText="#{bindings.LocationMasterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.LocationMasterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.LocationMasterVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.LocationMasterVO1.rangeSize}"
+              filterModel="#{bindings.LocationMasterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.LocationMasterVO1Query.processQuery}" varStatus="vs" id="t1"
+              columnStretching="column:c4" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.LocationMasterVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.LocationMasterVO1.hints.UnitCode.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LocationMasterVO1.hints.LocatCode.name}" filterable="true" sortable="true"
+                 headerText="Locat Code" id="c2">
+        <af:outputText value="#{row.LocatCode}" shortDesc="#{bindings.LocationMasterVO1.hints.LocatCode.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LocationMasterVO1.hints.ShortDesc.name}" filterable="true" sortable="true"
+                 headerText="Short Desc" id="c3">
+        <af:outputText value="#{row.ShortDesc}" shortDesc="#{bindings.LocationMasterVO1.hints.ShortDesc.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LocationMasterVO1.hints.LongDesc.name}" filterable="true" sortable="true"
+                 headerText="Long Desc" id="c4">
+        <af:outputText value="#{row.LongDesc}" shortDesc="#{bindings.LocationMasterVO1.hints.LongDesc.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LocationMasterVO1.hints.DeptCd.name}" filterable="true" sortable="true"
+                 headerText="Dept Code" id="c5">
+        <af:outputText value="#{row.DeptCd}" shortDesc="#{bindings.LocationMasterVO1.hints.DeptCd.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.LocationMasterVO1.hints.LocationType.name}" filterable="true" sortable="true"
+                 headerText="Location Type" id="c6">
+        <af:outputText value="#{row.LocationType}" shortDesc="#{bindings.LocationMasterVO1.hints.LocationType.tooltip}"
+                       id="ot6"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

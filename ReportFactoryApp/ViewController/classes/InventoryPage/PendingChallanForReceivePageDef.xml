@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="PendingChallanForReceivePageDef" Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingChallanforReceiveVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PendingChallanforReceiveVO1Iterator"/>
+    <searchRegion Binds="PendingChallanforReceiveVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PendingChallanforReceiveVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingChallanforReceiveVO1Iterator" id="PendingChallanforReceiveVO1">
+      <nodeDefinition DefName="model.inventory.views.PendingChallanforReceiveVO" Name="PendingChallanforReceiveVO10">
+        <AttrNames>
+          <Item Value="ChallanNo"/>
+          <Item Value="ItemCd"/>
+          <Item Value="Descript"/>
+          <Item Value="Qty"/>
+          <Item Value="Uom"/>
+          <Item Value="Mrp"/>
+          <Item Value="BatchNo"/>
+          <Item Value="Amt"/>
+          <Item Value="HsnNo"/>
+          <Item Value="DocDate"/>
+          <Item Value="Rate"/>
+          <Item Value="MfgDt"/>
+          <Item Value="ExpDt"/>
+          <Item Value="FgLoc"/>
+          <Item Value="UnitCd"/>
+          <Item Value="Cld"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callPendingChallanforReceive" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPendingChallanforReceive" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

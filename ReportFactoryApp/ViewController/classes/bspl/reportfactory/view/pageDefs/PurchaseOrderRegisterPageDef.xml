@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PurchaseOrderRegisterPageDef"
+                Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PurchaseOrderRegisterVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PurchaseOrderRegisterVO1Iterator"/>
+    <searchRegion Binds="PurchaseOrderRegisterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PurchaseOrderRegisterVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PurchaseOrderRegisterVO1Iterator" id="PurchaseOrderRegisterVO1">
+      <nodeDefinition DefName="model.inventory.views.PurchaseOrderRegisterVO" Name="PurchaseOrderRegisterVO10">
+        <AttrNames>
+          <Item Value="PoNo"/>
+          <Item Value="PoDt"/>
+          <Item Value="PoType"/>
+          <Item Value="AmdNo"/>
+          <Item Value="AmdDt"/>
+          <Item Value="PartyName"/>
+          <Item Value="ValidFr"/>
+          <Item Value="ValidTo"/>
+          <Item Value="ItemCd"/>
+          <Item Value="HsnNo"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Uom"/>
+          <Item Value="Qty"/>
+          <Item Value="MaterialRate"/>
+          <Item Value="Amount"/>
+          <Item Value="PiosPoisNo"/>
+          <Item Value="MrnNo"/>
+          <Item Value="MrnDt"/>
+          <Item Value="ChallanQty"/>
+          <Item Value="ReceiptQty"/>
+          <Item Value="AcceptQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction id="callPurchaseOrderRegister" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPurchaseOrderRegister" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

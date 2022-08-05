@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="ConsolidatePurchaseDetailforPANBasedPageDef" Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ConsolidatePurchaseDetailforTDSPANBasedVVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="ConsolidatePurchaseDetailforTDSPANBasedVVO1Iterator"/>
+    <searchRegion Binds="ConsolidatePurchaseDetailforTDSPANBasedVVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ConsolidatePurchaseDetailforTDSPANBasedVVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ConsolidatePurchaseDetailforTDSPANBasedVVO1Iterator"
+          id="ConsolidatePurchaseDetailforTDSPANBasedVVO1">
+      <nodeDefinition DefName="model.finance.views.ConsolidatePurchaseDetailforTDSPANBasedVVO"
+                      Name="ConsolidatePurchaseDetailforTDSPANBasedVVO10">
+        <AttrNames>
+          <Item Value="VendorCode"/>
+          <Item Value="VendorName"/>
+          <Item Value="PanNo"/>
+          <Item Value="GstinNo"/>
+          <Item Value="StateCode"/>
+          <Item Value="VendorAddress"/>
+          <Item Value="PurchaseAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callConsolidatePurchaseDetailforTDSPANBased" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callConsolidatePurchaseDetailforTDSPANBased" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

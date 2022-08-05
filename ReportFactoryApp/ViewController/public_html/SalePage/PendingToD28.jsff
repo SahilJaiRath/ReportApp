@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Pending to D28 " id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:200px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputComboboxListOfValues id="challan_NoId"
+                                        popupTitle="Search and Select: #{bindings.Challan_No.hints.label}"
+                                        value="#{bindings.Challan_No.inputValue}"
+                                        label="Challan No "
+                                        model="#{bindings.Challan_No.listOfValuesModel}"
+                                        required="#{bindings.Challan_No.hints.mandatory}"
+                                        columns="#{bindings.Challan_No.hints.displayWidth}"
+                                        shortDesc="#{bindings.Challan_No.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.Challan_No.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputComboboxListOfValues id="pendingToD28_ItemCodeId"
+                                        popupTitle="Search and Select: #{bindings.PendingToD28_ItemCode.hints.label}"
+                                        value="#{bindings.PendingToD28_ItemCode.inputValue}"
+                                        label="Item Code"
+                                        model="#{bindings.PendingToD28_ItemCode.listOfValuesModel}"
+                                        required="#{bindings.PendingToD28_ItemCode.hints.mandatory}"
+                                        columns="#{bindings.PendingToD28_ItemCode.hints.displayWidth}"
+                                        shortDesc="#{bindings.PendingToD28_ItemCode.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.PendingToD28_ItemCode.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{PendingToD28Bean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Pending To D28.xls"
+                                             title="Pending To D28"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PendingToD28VO1.collectionModel}" var="row" rows="#{bindings.PendingToD28VO1.rangeSize}"
+              emptyText="#{bindings.PendingToD28VO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PendingToD28VO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PendingToD28VO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PendingToD28VO1.rangeSize}"
+              filterModel="#{bindings.PendingToD28VO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PendingToD28VO1Query.processQuery}" varStatus="vs" id="t2" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.UnitCd.label}" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.PendingToD28VO1.hints.UnitCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.ChallanNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.ChallanNo.label}" id="c2">
+        <af:outputText value="#{row.ChallanNo}" shortDesc="#{bindings.PendingToD28VO1.hints.ChallanNo.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.ChallanDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.ChallanDt.label}" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingToD28VO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ChallanDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.PendingToD28VO1.hints.ChallanDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ChallanDt}" shortDesc="#{bindings.PendingToD28VO1.hints.ChallanDt.tooltip}"
+                       id="ot3">
+          <af:convertDateTime pattern="#{bindings.PendingToD28VO1.hints.ChallanDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.ToLoc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.ToLoc.label}" id="c4">
+        <af:outputText value="#{row.ToLoc}" shortDesc="#{bindings.PendingToD28VO1.hints.ToLoc.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.ItemCd.label}" id="c5">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.PendingToD28VO1.hints.ItemCd.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.ItemDesc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.ItemDesc.label}" id="c6">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.PendingToD28VO1.hints.ItemDesc.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.ItemGroup.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.ItemGroup.label}" id="c7">
+        <af:outputText value="#{row.ItemGroup}" shortDesc="#{bindings.PendingToD28VO1.hints.ItemGroup.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.SubGrpDesc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.SubGrpDesc.label}" id="c8">
+        <af:outputText value="#{row.SubGrpDesc}" shortDesc="#{bindings.PendingToD28VO1.hints.SubGrpDesc.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.BatchNo.label}" id="c9">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.PendingToD28VO1.hints.BatchNo.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.ExpDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.ExpDt.label}" id="c10">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingToD28VO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ExpDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.PendingToD28VO1.hints.ExpDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ExpDt}" shortDesc="#{bindings.PendingToD28VO1.hints.ExpDt.tooltip}" id="ot10">
+          <af:convertDateTime pattern="#{bindings.PendingToD28VO1.hints.ExpDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.MfgDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.MfgDt.label}" id="c11">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingToD28VO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.MfgDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.PendingToD28VO1.hints.MfgDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.MfgDt}" shortDesc="#{bindings.PendingToD28VO1.hints.MfgDt.tooltip}" id="ot11">
+          <af:convertDateTime pattern="#{bindings.PendingToD28VO1.hints.MfgDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.Qty.label}" id="c12">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.PendingToD28VO1.hints.Qty.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingToD28VO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.Mrp.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.Mrp.label}" id="c13">
+        <af:outputText value="#{row.Mrp}" shortDesc="#{bindings.PendingToD28VO1.hints.Mrp.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingToD28VO1.hints.Mrp.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.Amount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.Amount.label}" id="c14">
+        <af:outputText value="#{row.Amount}" shortDesc="#{bindings.PendingToD28VO1.hints.Amount.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingToD28VO1.hints.Amount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingToD28VO1.hints.AltUom.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingToD28VO1.hints.AltUom.label}" id="c15">
+        <af:outputText value="#{row.AltUom}" shortDesc="#{bindings.PendingToD28VO1.hints.AltUom.tooltip}" id="ot15"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

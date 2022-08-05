@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PendingSrvForQcPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingSRVForQcVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PendingSRVForQcVO1Iterator"/>
+    <searchRegion Binds="PendingSRVForQcVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PendingSRVForQcVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingSRVForQcVO1Iterator" id="PendingSRVForQcVO1">
+      <nodeDefinition DefName="model.inventory.views.PendingSRVForQcVO" Name="PendingSRVForQcVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="SrvNo"/>
+          <Item Value="SrvDt"/>
+          <Item Value="VenCd"/>
+          <Item Value="Name"/>
+          <Item Value="InvNo"/>
+          <Item Value="InvDt"/>
+          <Item Value="ChallanNo"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ReceiptQty"/>
+          <Item Value="ReceiptUom"/>
+          <Item Value="PendDays"/>
+          <Item Value="GroupCode"/>
+          <Item Value="SubGroupCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_PndingSrvForQcVendorCd"
+                  id="PndingSrvForQcVendorCd"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_GroupCd" id="GroupCd"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubGroupCd" id="SubGroupCd"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callPendingSRVForQc" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPendingSRVForQc" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_GroupCD" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SubGroupCd" NDType="java.lang.String"/>
+      <NamedData NDName="LV_VendorCd" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

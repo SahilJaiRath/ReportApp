@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Return Slip Report" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:186px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id4" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id3" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{ReturnSlipReportBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Return Slip report.xls"
+                                             title="Return Slip report "/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ReturnSlipVO1.collectionModel}" var="row" rows="#{bindings.ReturnSlipVO1.rangeSize}"
+              emptyText="#{bindings.ReturnSlipVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.ReturnSlipVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ReturnSlipVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.ReturnSlipVO1.rangeSize}"
+              filterModel="#{bindings.ReturnSlipVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.ReturnSlipVO1Query.processQuery}" varStatus="vs" id="t2" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.ReturnSlipVO1.hints.UnitCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.RetSlipNo.name}" filterable="true" sortable="true"
+                 headerText="Return Slip No" id="c2">
+        <af:outputText value="#{row.RetSlipNo}" shortDesc="#{bindings.ReturnSlipVO1.hints.RetSlipNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.RetSlipDt.name}" filterable="true" sortable="true"
+                 headerText="Return Slip Date" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ReturnSlipVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.RetSlipDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.ReturnSlipVO1.hints.RetSlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.RetSlipDt}" shortDesc="#{bindings.ReturnSlipVO1.hints.RetSlipDt.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.ReturnSlipVO1.hints.RetSlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.DocumentType.name}" filterable="true" sortable="true"
+                 headerText="Document Type" id="c4">
+        <af:outputText value="#{row.DocumentType}" shortDesc="#{bindings.ReturnSlipVO1.hints.DocumentType.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c5">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.ReturnSlipVO1.hints.ItemCd.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.ItemDesc.name}" filterable="true" sortable="true"
+                 headerText="Item Description" id="c6">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.ReturnSlipVO1.hints.ItemDesc.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="Batch No" id="c21">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.ReturnSlipVO1.hints.BatchNo.tooltip}" id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.ArNo.name}" filterable="true" sortable="true"
+                 headerText="AR No" id="c22">
+        <af:outputText value="#{row.ArNo}" shortDesc="#{bindings.ReturnSlipVO1.hints.ArNo.tooltip}" id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.ArDate.name}" filterable="true" sortable="true"
+                 headerText="AR Date" id="c23">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ReturnSlipVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ArDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.ReturnSlipVO1.hints.ArDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ArDate}" shortDesc="#{bindings.ReturnSlipVO1.hints.ArDate.tooltip}" id="ot23">
+          <af:convertDateTime pattern="#{bindings.ReturnSlipVO1.hints.ArDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.Process.name}" filterable="true" sortable="true"
+                 headerText="Process" id="c7">
+        <af:outputText value="#{row.Process}" shortDesc="#{bindings.ReturnSlipVO1.hints.Process.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c8">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.ReturnSlipVO1.hints.Uom.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.SendBack.name}" filterable="true" sortable="true"
+                 headerText="Send Back Quantity" id="c9">
+        <af:outputText value="#{row.SendBack}" shortDesc="#{bindings.ReturnSlipVO1.hints.SendBack.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ReturnSlipVO1.hints.SendBack.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.ShortDesc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ReturnSlipVO1.hints.ShortDesc.label}" id="c10">
+        <af:outputText value="#{row.ShortDesc}" shortDesc="#{bindings.ReturnSlipVO1.hints.ShortDesc.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.RetQty.name}" filterable="true" sortable="true"
+                 headerText="Return Qty" id="c11">
+        <af:outputText value="#{row.RetQty}" shortDesc="#{bindings.ReturnSlipVO1.hints.RetQty.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ReturnSlipVO1.hints.RetQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.VendorCode.name}" filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c12">
+        <af:outputText value="#{row.VendorCode}" shortDesc="#{bindings.ReturnSlipVO1.hints.VendorCode.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.QtyVen.name}" filterable="true" sortable="true"
+                 headerText="Vendor Qty" id="c13">
+        <af:outputText value="#{row.QtyVen}" shortDesc="#{bindings.ReturnSlipVO1.hints.QtyVen.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ReturnSlipVO1.hints.QtyVen.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.DeptCd.name}" filterable="true" sortable="true"
+                 headerText="Department Code" id="c14">
+        <af:outputText value="#{row.DeptCd}" shortDesc="#{bindings.ReturnSlipVO1.hints.DeptCd.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.QtyDept.name}" filterable="true" sortable="true"
+                 headerText="Department Qty" id="c15">
+        <af:outputText value="#{row.QtyDept}" shortDesc="#{bindings.ReturnSlipVO1.hints.QtyDept.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ReturnSlipVO1.hints.QtyDept.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.MsQty.name}" filterable="true" sortable="true"
+                 headerText="Main Store Quantity" id="c16">
+        <af:outputText value="#{row.MsQty}" shortDesc="#{bindings.ReturnSlipVO1.hints.MsQty.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ReturnSlipVO1.hints.MsQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.Remarks.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ReturnSlipVO1.hints.Remarks.label}" id="c17">
+        <af:outputText value="#{row.Remarks}" shortDesc="#{bindings.ReturnSlipVO1.hints.Remarks.tooltip}" id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.PreparedBy.name}" filterable="true" sortable="true"
+                 headerText="Prepared By" id="c18">
+        <af:outputText value="#{row.PreparedBy}" shortDesc="#{bindings.ReturnSlipVO1.hints.PreparedBy.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.QcIncharge.name}" filterable="true" sortable="true"
+                 headerText="Quality Check Incharge" id="c19">
+        <af:outputText value="#{row.QcIncharge}" shortDesc="#{bindings.ReturnSlipVO1.hints.QcIncharge.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.AuthorisedBy.name}" filterable="true" sortable="true"
+                 headerText="Authorised By " id="c20">
+        <af:outputText value="#{row.AuthorisedBy}" shortDesc="#{bindings.ReturnSlipVO1.hints.AuthorisedBy.tooltip}"
+                       id="ot20"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.MainStoreRctDate.name}" filterable="true" sortable="true"
+                 headerText="Main Store rct Date" id="c24">
+        <af:outputText value="#{row.MainStoreRctDate}"
+                       shortDesc="#{bindings.ReturnSlipVO1.hints.MainStoreRctDate.tooltip}" id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.JcBatchNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ReturnSlipVO1.hints.JcBatchNo.label}" id="c25">
+        <af:outputText value="#{row.JcBatchNo}" shortDesc="#{bindings.ReturnSlipVO1.hints.JcBatchNo.tooltip}"
+                       id="ot25"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ReturnSlipVO1.hints.JcNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ReturnSlipVO1.hints.JcNo.label}" id="c26">
+        <af:outputText value="#{row.JcNo}" shortDesc="#{bindings.ReturnSlipVO1.hints.JcNo.tooltip}" id="ot26"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

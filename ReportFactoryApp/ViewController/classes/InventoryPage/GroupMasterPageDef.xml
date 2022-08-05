@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="GroupMasterPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="GroupMasterVO1" RangeSize="25" DataControl="AppModuleDataControl" id="GroupMasterVO1Iterator"/>
+    <searchRegion Binds="GroupMasterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="GroupMasterVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="GroupMasterVO1Iterator" id="GroupMasterVO1">
+      <nodeDefinition DefName="model.inventory.views.GroupMasterVO" Name="GroupMasterVO10">
+        <AttrNames>
+          <Item Value="GroupCd"/>
+          <Item Value="GroupDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

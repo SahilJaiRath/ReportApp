@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SaleOrderPageDef"
+                Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SaleOrderVO1" RangeSize="50" DataControl="AppModuleDataControl" id="SaleOrderVO1Iterator"/>
+    <searchRegion Binds="SaleOrderVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SaleOrderVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SaleOrderVO1Iterator" id="SaleOrderVO1">
+      <nodeDefinition DefName="model.sale.views.SaleOrderVO" Name="SaleOrderVO10">
+        <AttrNames>
+          <Item Value="Ac"/>
+          <Item Value="Am"/>
+          <Item Value="Ad"/>
+          <Item Value="Cp"/>
+          <Item Value="Cd"/>
+          <Item Value="Amn"/>
+          <Item Value="D"/>
+          <Item Value="Sm"/>
+          <Item Value="Vu"/>
+          <Item Value="Cc"/>
+          <Item Value="St"/>
+          <Item Value="Co"/>
+          <Item Value="Cpc"/>
+          <Item Value="N"/>
+          <Item Value="Ccc"/>
+          <Item Value="Ct"/>
+          <Item Value="Stc"/>
+          <Item Value="Stt"/>
+          <Item Value="Tr"/>
+          <Item Value="Uc"/>
+          <Item Value="Pot"/>
+          <Item Value="Mty"/>
+          <Item Value="Pde"/>
+          <Item Value="Di"/>
+          <Item Value="Pe"/>
+          <Item Value="Qn"/>
+          <Item Value="HsnNo"/>
+          <Item Value="GstCode"/>
+          <Item Value="ShipCustCd"/>
+          <Item Value="Sgst"/>
+          <Item Value="Cgst"/>
+          <Item Value="Igst"/>
+          <Item Value="SgstRate"/>
+          <Item Value="CgstRate"/>
+          <Item Value="IgstRate"/>
+          <Item Value="Uom"/>
+          <Item Value="ConsigneeName"/>
+          <Item Value="SaleNoteNo"/>
+          <Item Value="ItemDescription"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callSaleOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callSaleOrder"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

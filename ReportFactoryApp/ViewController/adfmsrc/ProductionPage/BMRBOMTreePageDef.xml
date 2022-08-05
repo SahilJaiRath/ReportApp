@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="BMRBOMTreePageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="BMRBOMTreeVO1" RangeSize="50" DataControl="AppModuleDataControl" id="BMRBOMTreeVO1Iterator"/>
+    <searchRegion Binds="BMRBOMTreeVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BMRBOMTreeVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_BMR_BT_BOMITEM" id="BMR_BT_BOMITEM"/>
+    <methodAction id="callBMRBOMTree" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callBMRBOMTree"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_BMR_BT_BOMITEM" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="BMRBOMTreeVO1Iterator" id="BMRBOMTreeVO1">
+      <nodeDefinition DefName="model.production.views.BMRBOMTreeVO" Name="BMRBOMTreeVO10">
+        <AttrNames>
+          <Item Value="PartCode"/>
+          <Item Value="PartName"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemName"/>
+          <Item Value="ItemUom"/>
+          <Item Value="AltUom"/>
+          <Item Value="ConversionFactor"/>
+          <Item Value="BatchSize"/>
+          <Item Value="UnitCd"/>
+          <Item Value="PartProcLineId"/>
+          <Item Value="NoOff"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="ProcCd"/>
+          <Item Value="Lvl"/>
+          <Item Value="AltItemCd"/>
+          <Item Value="AltItemQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Stock Adjustment" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="stockAdjustment_PartNameId"
+                                        popupTitle="Search and Select: #{bindings.StockAdjustment_PartName.hints.label}"
+                                        value="#{bindings.StockAdjustment_PartName.inputValue}"
+                                        label="Item Name"
+                                        model="#{bindings.StockAdjustment_PartName.listOfValuesModel}"
+                                        required="#{bindings.StockAdjustment_PartName.hints.mandatory}"
+                                        columns="#{bindings.StockAdjustment_PartName.hints.displayWidth}"
+                                        shortDesc="#{bindings.StockAdjustment_PartName.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.StockAdjustment_PartName.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b2" actionListener="#{StockAdjustmentBean.onClickButton}"
+                     disabled="#{!bindings.callStockAdjustment.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Stock Adjustment Report.xls"
+                                             title="Stock Adjustment Report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.StockAdjustmentVO1.collectionModel}" var="row"
+              rows="#{bindings.StockAdjustmentVO1.rangeSize}"
+              emptyText="#{bindings.StockAdjustmentVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.StockAdjustmentVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.StockAdjustmentVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.StockAdjustmentVO1.rangeSize}"
+              filterModel="#{bindings.StockAdjustmentVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.StockAdjustmentVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.AdjustNo.name}" filterable="true" sortable="true"
+                 headerText="Adjust No" id="c1">
+        <af:outputText value="#{row.AdjustNo}" shortDesc="#{bindings.StockAdjustmentVO1.hints.AdjustNo.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c2">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.StockAdjustmentVO1.hints.UnitCd.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.TranType.name}" filterable="true" sortable="true"
+                 headerText="Tran Type" id="c3">
+        <af:outputText value="#{row.TranType}" shortDesc="#{bindings.StockAdjustmentVO1.hints.TranType.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c4">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.StockAdjustmentVO1.hints.ItemCd.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.ProdDesc.name}" filterable="true" sortable="true"
+                 headerText="Item Description" id="c6">
+        <af:outputText value="#{row.ProdDesc}" shortDesc="#{bindings.StockAdjustmentVO1.hints.ProdDesc.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.ProcCd.name}" filterable="true" sortable="true"
+                 headerText="Process Code" id="c8">
+        <af:outputText value="#{row.ProcCd}" shortDesc="#{bindings.StockAdjustmentVO1.hints.ProcCd.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.ProcSeq.name}" filterable="true" sortable="true"
+                 headerText="Process Sequence" id="c7">
+        <af:outputText value="#{row.ProcSeq}" shortDesc="#{bindings.StockAdjustmentVO1.hints.ProcSeq.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.StockAdjustmentVO1.hints.ProcSeq.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.Stock.name}" filterable="true" sortable="true"
+                 headerText="Available Stock" id="c12">
+        <af:outputText value="#{row.Stock}" shortDesc="#{bindings.StockAdjustmentVO1.hints.Stock.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.StockAdjustmentVO1.hints.Stock.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.LotNo.name}" filterable="true" sortable="true"
+                 headerText="Lot No" id="c5">
+        <af:outputText value="#{row.LotNo}" shortDesc="#{bindings.StockAdjustmentVO1.hints.LotNo.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="Qty" id="c9">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.StockAdjustmentVO1.hints.Qty.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.StockAdjustmentVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.Remarks.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.Remarks.label}" id="c10">
+        <af:outputText value="#{row.Remarks}" shortDesc="#{bindings.StockAdjustmentVO1.hints.Remarks.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.Rate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.Rate.label}" id="c11">
+        <af:outputText value="#{row.Rate}" shortDesc="#{bindings.StockAdjustmentVO1.hints.Rate.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.StockAdjustmentVO1.hints.Rate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.CreatedBy.name}" filterable="true" sortable="true"
+                 headerText="Created By" id="c20">
+        <af:outputText value="#{row.CreatedBy}" shortDesc="#{bindings.StockAdjustmentVO1.hints.CreatedBy.tooltip}"
+                       id="ot20"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.ApproveBy.name}" filterable="true" sortable="true"
+                 headerText="Approved By" id="c21">
+        <af:outputText value="#{row.ApproveBy}" shortDesc="#{bindings.StockAdjustmentVO1.hints.ApproveBy.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.BatchNoSad.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.BatchNoSad.label}" id="c13">
+        <af:outputText value="#{row.BatchNoSad}" shortDesc="#{bindings.StockAdjustmentVO1.hints.BatchNoSad.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.AdjustTypSad.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.AdjustTypSad.label}" id="c14">
+        <af:outputText value="#{row.AdjustTypSad}" shortDesc="#{bindings.StockAdjustmentVO1.hints.AdjustTypSad.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.ArN0Sad.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.ArN0Sad.label}" id="c15">
+        <af:outputText value="#{row.ArN0Sad}" shortDesc="#{bindings.StockAdjustmentVO1.hints.ArN0Sad.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.BatchDateSad.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.BatchDateSad.label}" id="c16">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.StockAdjustmentVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDateSad.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.StockAdjustmentVO1.hints.BatchDateSad.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.BatchDateSad}" shortDesc="#{bindings.StockAdjustmentVO1.hints.BatchDateSad.tooltip}"
+                       id="ot16">
+          <af:convertDateTime pattern="#{bindings.StockAdjustmentVO1.hints.BatchDateSad.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.ArDateSad.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.ArDateSad.label}" id="c17">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.StockAdjustmentVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ArDateSad.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.StockAdjustmentVO1.hints.ArDateSad.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ArDateSad}" shortDesc="#{bindings.StockAdjustmentVO1.hints.ArDateSad.tooltip}"
+                       id="ot17">
+          <af:convertDateTime pattern="#{bindings.StockAdjustmentVO1.hints.ArDateSad.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.MoisturePerSad.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.StockAdjustmentVO1.hints.MoisturePerSad.label}" id="c18">
+        <af:outputText value="#{row.MoisturePerSad}"
+                       shortDesc="#{bindings.StockAdjustmentVO1.hints.MoisturePerSad.tooltip}" id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.StockAdjustmentVO1.hints.MoisturePerSad.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.DustPerSad.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.DustPerSad.label}" id="c19">
+        <af:outputText value="#{row.DustPerSad}" shortDesc="#{bindings.StockAdjustmentVO1.hints.DustPerSad.tooltip}"
+                       id="ot19">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.StockAdjustmentVO1.hints.DustPerSad.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.StockAdjustmentVO1.hints.WastePerSad.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.StockAdjustmentVO1.hints.WastePerSad.label}" id="c22">
+        <af:outputText value="#{row.WastePerSad}" shortDesc="#{bindings.StockAdjustmentVO1.hints.WastePerSad.tooltip}"
+                       id="ot22">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.StockAdjustmentVO1.hints.WastePerSad.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

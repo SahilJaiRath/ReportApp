@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="BatchWiseBPRConsumptionPageDef"
+                Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchWiseBPRConsumptionVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="BatchWiseBPRConsumptionVO1Iterator"/>
+    <searchRegion Binds="BatchWiseBPRConsumptionVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchWiseBPRConsumptionVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BatchWiseBPRConsumptionVO1Iterator" id="BatchWiseBPRConsumptionVO1">
+      <nodeDefinition DefName="model.production.views.BatchWiseBPRConsumptionVO" Name="BatchWiseBPRConsumptionVO10">
+        <AttrNames>
+          <Item Value="JcNo"/>
+          <Item Value="JcDt"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="UnitCd"/>
+          <Item Value="BprBatch"/>
+          <Item Value="BmrBatch"/>
+          <Item Value="JobcardQty"/>
+          <Item Value="PartCode"/>
+          <Item Value="PartName"/>
+          <Item Value="Uom"/>
+          <Item Value="ReqQty"/>
+          <Item Value="RecpQty"/>
+          <Item Value="Consumed"/>
+          <Item Value="BalQtyWip"/>
+          <Item Value="ReturnQty"/>
+          <Item Value="DiffrentQty"/>
+          <Item Value="BookedQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_BatchWiseBPRConsumption_ProductName"
+                  id="BatchWiseBPRConsumption_ProductName"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_BatchWiseBPRConsumption_BatchNo"
+                  id="BatchWiseBPRConsumption_BatchNo"/>
+    <methodAction id="callBatchWiseBPRConsumption" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callBatchWiseBPRConsumption" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ProductName" NDType="java.lang.String"/>
+      <NamedData NDName="LV_BatchNo" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

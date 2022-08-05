@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="RM Vendor Wise Analysis" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="Width:170.0px;"
+                              labelStyle= "Width:100px">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2" contentStyle="Width:150.0px;"
+                              labelStyle= "Width:100px">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id3" contentStyle="Width:150.0px;"
+                              labelStyle= "Width:100px">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2" actionListener="#{RMVendorWiseAnalysisBean.onClickButton}"
+                     disabled="#{!bindings.callRMVendorWiseAnalysis.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="RM Vendor Wise Analysis.xls"
+                                             title="RM Vendor Wise Analysis Report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.RMVendorWiseAnalysisVO1.collectionModel}" var="row"
+              rows="#{bindings.RMVendorWiseAnalysisVO1.rangeSize}"
+              emptyText="#{bindings.RMVendorWiseAnalysisVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.RMVendorWiseAnalysisVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.RMVendorWiseAnalysisVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.RMVendorWiseAnalysisVO1.rangeSize}"
+              filterModel="#{bindings.RMVendorWiseAnalysisVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.RMVendorWiseAnalysisVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.QcDt.name}" filterable="true" sortable="true"
+                 headerText="QC Date" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.RMVendorWiseAnalysisVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.QcDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.RMVendorWiseAnalysisVO1.hints.QcDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.QcDt}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.QcDt.tooltip}" id="ot2">
+          <af:convertDateTime pattern="#{bindings.RMVendorWiseAnalysisVO1.hints.QcDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.VendCd.name}" filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c3">
+        <af:outputText value="#{row.VendCd}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.VendCd.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.VendName.name}" filterable="true"
+                 sortable="true" headerText="Vendor Name" id="c4">
+        <af:outputText value="#{row.VendName}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.VendName.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.ItemCode.name}" filterable="true"
+                 sortable="true" headerText="Item Code" id="c5">
+        <af:outputText value="#{row.ItemCode}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.ItemCode.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="Item Description" id="c6">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.ItemDesc.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.ChekSq.name}" filterable="true" sortable="true"
+                 headerText="Chek Sq" id="c7">
+        <af:outputText value="#{row.ChekSq}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.ChekSq.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.Particulers.name}" filterable="true"
+                 sortable="true" headerText="Particuler" id="c8">
+        <af:outputText value="#{row.Particulers}"
+                       shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.Particulers.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.RMVendorWiseAnalysisVO1.hints.Description.label}" id="c9">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.Description.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.Quantity.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.RMVendorWiseAnalysisVO1.hints.Quantity.label}" id="c10">
+        <af:outputText value="#{row.Quantity}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.Quantity.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.RMVendorWiseAnalysisVO1.hints.Quantity.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.Accept.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.RMVendorWiseAnalysisVO1.hints.Accept.label}" id="c11">
+        <af:outputText value="#{row.Accept}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.Accept.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.RMVendorWiseAnalysisVO1.hints.Accept.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.Reject.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.RMVendorWiseAnalysisVO1.hints.Reject.label}" id="c12">
+        <af:outputText value="#{row.Reject}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.Reject.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.RMVendorWiseAnalysisVO1.hints.Reject.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.Observation.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.RMVendorWiseAnalysisVO1.hints.Observation.label}" id="c13">
+        <af:outputText value="#{row.Observation}"
+                       shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.Observation.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.RMVendorWiseAnalysisVO1.hints.Observation.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.Status.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.RMVendorWiseAnalysisVO1.hints.Status.label}" id="c14">
+        <af:outputText value="#{row.Status}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.Status.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="Batch no" id="c15">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.BatchNo.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.QcType.name}" filterable="true" sortable="true"
+                 headerText="Qc Type" id="c16">
+        <af:outputText value="#{row.QcType}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.QcType.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.QcdNo.name}" filterable="true" sortable="true"
+                 headerText="QCD No" id="c17">
+        <af:outputText value="#{row.QcdNo}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.QcdNo.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.VehType.name}" filterable="true" sortable="true"
+                 headerText="Veh Type" id="c18">
+        <af:outputText value="#{row.VehType}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.VehType.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.VehicleNo.name}" filterable="true"
+                 sortable="true" headerText="Vehicle No" id="c19">
+        <af:outputText value="#{row.VehicleNo}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.VehicleNo.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.ChallanNo.name}" filterable="true"
+                 sortable="true" headerText="Challan No" id="c20">
+        <af:outputText value="#{row.ChallanNo}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.ChallanNo.tooltip}"
+                       id="ot20"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.InvoiceNo.name}" filterable="true"
+                 sortable="true" headerText="Invoice No" id="c21">
+        <af:outputText value="#{row.InvoiceNo}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.InvoiceNo.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.InspBy.name}" filterable="true" sortable="true"
+                 headerText="Insp By" id="c22">
+        <af:outputText value="#{row.InspBy}" shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.InspBy.tooltip}"
+                       id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RMVendorWiseAnalysisVO1.hints.ApprovedBy.name}" filterable="true"
+                 sortable="true" headerText="Approvd By" id="c23">
+        <af:outputText value="#{row.ApprovedBy}"
+                       shortDesc="#{bindings.RMVendorWiseAnalysisVO1.hints.ApprovedBy.tooltip}" id="ot23"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

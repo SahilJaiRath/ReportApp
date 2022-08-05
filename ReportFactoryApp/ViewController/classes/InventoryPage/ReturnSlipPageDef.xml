@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="ReturnSlipPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ReturnSlipVO1" RangeSize="50" DataControl="AppModuleDataControl" id="ReturnSlipVO1Iterator"/>
+    <searchRegion Binds="ReturnSlipVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ReturnSlipVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ReturnSlipVO1Iterator" id="ReturnSlipVO1">
+      <nodeDefinition DefName="model.inventory.views.ReturnSlipVO" Name="ReturnSlipVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="RetSlipNo"/>
+          <Item Value="RetSlipDt"/>
+          <Item Value="DocumentType"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Process"/>
+          <Item Value="Uom"/>
+          <Item Value="SendBack"/>
+          <Item Value="ShortDesc"/>
+          <Item Value="RetQty"/>
+          <Item Value="VendorCode"/>
+          <Item Value="QtyVen"/>
+          <Item Value="DeptCd"/>
+          <Item Value="QtyDept"/>
+          <Item Value="MsQty"/>
+          <Item Value="Remarks"/>
+          <Item Value="PreparedBy"/>
+          <Item Value="QcIncharge"/>
+          <Item Value="AuthorisedBy"/>
+          <Item Value="BatchNo"/>
+          <Item Value="ArNo"/>
+          <Item Value="ArDate"/>
+          <Item Value="MainStoreRctDate"/>
+          <Item Value="JcBatchNo"/>
+          <Item Value="JcNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callReturnSlip" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callReturnSlip"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="BMR BOM Tree report" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="bMR_BT_BOMITEMId"
+                                        popupTitle="Search and Select: #{bindings.BMR_BT_BOMITEM.hints.label}"
+                                        value="#{bindings.BMR_BT_BOMITEM.inputValue}"
+                                        label="BOM Item"
+                                        model="#{bindings.BMR_BT_BOMITEM.listOfValuesModel}"
+                                        required="#{bindings.BMR_BT_BOMITEM.hints.mandatory}"
+                                        columns="#{bindings.BMR_BT_BOMITEM.hints.displayWidth}"
+                                        shortDesc="#{bindings.BMR_BT_BOMITEM.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.BMR_BT_BOMITEM.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b1" actionListener="#{BMRBOMTreeBean.onClickButton}"
+                     disabled="#{!bindings.callBMRBOMTree.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="BMR BOM Tree Report.xls"
+                                             title="BMR BOM Tree "/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BMRBOMTreeVO1.collectionModel}" var="row" rows="#{bindings.BMRBOMTreeVO1.rangeSize}"
+              emptyText="#{bindings.BMRBOMTreeVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.BMRBOMTreeVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BMRBOMTreeVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.BMRBOMTreeVO1.rangeSize}"
+              filterModel="#{bindings.BMRBOMTreeVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.BMRBOMTreeVO1Query.processQuery}" varStatus="vs" id="t2" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.PartCode.name}" filterable="true" sortable="true"
+                 headerText="Part Code" id="c1">
+        <af:outputText value="#{row.PartCode}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.PartCode.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.PartName.name}" filterable="true" sortable="true"
+                 headerText="Part Name" id="c2">
+        <af:outputText value="#{row.PartName}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.PartName.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.BatchSize.name}" filterable="true" sortable="true"
+                 headerText="Batch Size" id="c8">
+        <af:outputText value="#{row.BatchSize}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.BatchSize.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRBOMTreeVO1.hints.BatchSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.Lvl.name}" filterable="true" sortable="true"
+                 headerText="Level" id="c14">
+        <af:outputText value="#{row.Lvl}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.Lvl.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRBOMTreeVO1.hints.Lvl.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c3">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.ItemCd.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.ItemName.name}" filterable="true" sortable="true"
+                 headerText="Item Name" id="c4">
+        <af:outputText value="#{row.ItemName}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.ItemName.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.ItemUom.name}" filterable="true" sortable="true"
+                 headerText="Item UOM" id="c5">
+        <af:outputText value="#{row.ItemUom}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.ItemUom.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.AltUom.name}" filterable="true" sortable="true"
+                 headerText="Alt UOM" id="c6">
+        <af:outputText value="#{row.AltUom}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.AltUom.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.ConversionFactor.name}" filterable="true" sortable="true"
+                 headerText="Conversion Factor" id="c7">
+        <af:outputText value="#{row.ConversionFactor}"
+                       shortDesc="#{bindings.BMRBOMTreeVO1.hints.ConversionFactor.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRBOMTreeVO1.hints.ConversionFactor.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c9">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.UnitCd.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.PartProcLineId.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.BMRBOMTreeVO1.hints.PartProcLineId.label}" id="c10">
+        <af:outputText value="#{row.PartProcLineId}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.PartProcLineId.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRBOMTreeVO1.hints.PartProcLineId.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.NoOff.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.BMRBOMTreeVO1.hints.NoOff.label}" id="c11">
+        <af:outputText value="#{row.NoOff}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.NoOff.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRBOMTreeVO1.hints.NoOff.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.ProcSeq.name}" filterable="true" sortable="true"
+                 headerText="Proc Seq" id="c12">
+        <af:outputText value="#{row.ProcSeq}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.ProcSeq.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BMRBOMTreeVO1.hints.ProcSeq.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.ProcCd.name}" filterable="true" sortable="true"
+                 headerText="Proc Code" id="c13">
+        <af:outputText value="#{row.ProcCd}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.ProcCd.tooltip}" id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.AltItemCd.name}" filterable="true" sortable="true"
+                 headerText="Alt Item Cd" id="c15">
+        <af:outputText value="#{row.AltItemCd}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.AltItemCd.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BMRBOMTreeVO1.hints.AltItemQty.name}" filterable="true" sortable="true"
+                 headerText="Alt Item Qty" id="c16">
+        <af:outputText value="#{row.AltItemQty}" shortDesc="#{bindings.BMRBOMTreeVO1.hints.AltItemQty.tooltip}"
+                       id="ot16"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

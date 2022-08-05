@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="JWIssueagainstPurchaseOrderReportPageDef" Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="JWIssueagainstPurchaseOrderVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="JWIssueagainstPurchaseOrderVO1Iterator"/>
+    <searchRegion Binds="JWIssueagainstPurchaseOrderVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="JWIssueagainstPurchaseOrderVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="JWIssueagainstPurchaseOrderVO1Iterator" id="JWIssueagainstPurchaseOrderVO1">
+      <nodeDefinition DefName="model.inventory.views.JWIssueagainstPurchaseOrderVO"
+                      Name="JWIssueagainstPurchaseOrderVO10">
+        <AttrNames>
+          <Item Value="PoNo"/>
+          <Item Value="PoDt"/>
+          <Item Value="ItemCode"/>
+          <Item Value="ItemName"/>
+          <Item Value="PoQty"/>
+          <Item Value="IssueNo"/>
+          <Item Value="SlipDt"/>
+          <Item Value="IssueItemCode"/>
+          <Item Value="IssueItemName"/>
+          <Item Value="IssueQty"/>
+          <Item Value="Difference"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

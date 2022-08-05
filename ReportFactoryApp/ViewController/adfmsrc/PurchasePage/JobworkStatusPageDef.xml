@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="JobworkStatusPageDef"
+                Package="PurchasePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="JobworkRegisterVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="JobworkRegisterVO1Iterator"/>
+    <searchRegion Binds="JobworkRegisterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="JobworkRegisterVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callJobworkRegister" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callJobworkRegister" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_PO" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="JobworkRegisterVO1Iterator" id="JobworkRegisterVO1">
+      <nodeDefinition DefName="model.Purchase.views.JobworkRegisterVO" Name="JobworkRegisterVO10">
+        <AttrNames>
+          <Item Value="PoHeadPoNo"/>
+          <Item Value="PiosVenCd"/>
+          <Item Value="UnitCd"/>
+          <Item Value="PoDt"/>
+          <Item Value="VenName"/>
+          <Item Value="JwQty"/>
+          <Item Value="PiosItemCd"/>
+          <Item Value="RmName"/>
+          <Item Value="ItemType"/>
+          <Item Value="Uom"/>
+          <Item Value="PoRate"/>
+          <Item Value="IssSlipNo"/>
+          <Item Value="CcgpHeadChallanNo"/>
+          <Item Value="BillDate"/>
+          <Item Value="ItemCd"/>
+          <Item Value="SdName"/>
+          <Item Value="SendQty"/>
+          <Item Value="GateEno"/>
+          <Item Value="SrvNo"/>
+          <Item Value="MrnQty"/>
+          <Item Value="MrnDate"/>
+          <Item Value="RmConQty"/>
+          <Item Value="BalQty"/>
+          <Item Value="Bal"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_Jobworkregister_JWNO"
+                  id="Jobworkregister_JWNO"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Product Shortage and Batch Report" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="productShortageandBatch_ProductNameId"
+                                        popupTitle="Search and Select: #{bindings.ProductShortageandBatch_ProductName.hints.label}"
+                                        value="#{bindings.ProductShortageandBatch_ProductName.inputValue}"
+                                        label="Product Code"
+                                        model="#{bindings.ProductShortageandBatch_ProductName.listOfValuesModel}"
+                                        required="#{bindings.ProductShortageandBatch_ProductName.hints.mandatory}"
+                                        columns="#{bindings.ProductShortageandBatch_ProductName.hints.displayWidth}"
+                                        shortDesc="#{bindings.ProductShortageandBatch_ProductName.hints.tooltip}" contentStyle="width:180.0px;" labelStyle="width:100px"  >
+            <f:validator binding="#{bindings.ProductShortageandBatch_ProductName.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputText value="#{bindings.LV_p1.inputValue}" label="Required Qty"
+                        required="#{bindings.LV_p1.hints.mandatory}" columns="#{bindings.LV_p1.hints.displayWidth}"
+                        maximumLength="#{bindings.LV_p1.hints.precision}" shortDesc="#{bindings.LV_p1.hints.tooltip}"
+                        id="it1" contentStyle="width:180.0px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.LV_p1.validator}"/>
+          </af:inputText>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:spacer width="30" height="10" id="s3"/>
+          <af:button text="Execute" id="b2"
+                     actionListener="#{ProductShortageandBatchBean.onClickButton}"
+                     disabled="#{!bindings.callProductShortageandBatch.enabled}"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6"/>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Product Shortage And Batch report.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ProductShortageandBatchReportVO1.collectionModel}" var="row"
+              rows="#{bindings.ProductShortageandBatchReportVO1.rangeSize}"
+              emptyText="#{bindings.ProductShortageandBatchReportVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.ProductShortageandBatchReportVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ProductShortageandBatchReportVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.ProductShortageandBatchReportVO1.rangeSize}"
+              filterModel="#{bindings.ProductShortageandBatchReportVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.ProductShortageandBatchReportVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.ProdCodeFor.name}" filterable="true"
+                 sortable="true" headerText="Product Code For"
+                 id="c3">
+        <af:outputText value="#{row.ProdCodeFor}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.ProdCodeFor.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.ProdName.name}" filterable="true"
+                 sortable="true" headerText="Product Name" id="c5">
+        <af:outputText value="#{row.ProdName}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.ProdName.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.ItemCd.name}" filterable="true"
+                 sortable="true" headerText="Item Code" id="c6">
+        <af:outputText value="#{row.ItemCd}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.ItemCd.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.ItemCd.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.ItemName.name}" filterable="true"
+                 sortable="true" headerText="Item Name" id="c7">
+        <af:outputText value="#{row.ItemName}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.ItemName.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.GroupName.name}" filterable="true"
+                 sortable="true" headerText="Group Name"
+                 id="c9">
+        <af:outputText value="#{row.GroupName}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.GroupName.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.ReqBatchQty.name}" filterable="true"
+                 sortable="true" headerText="Req Batch Qty"
+                 id="c10">
+        <af:outputText value="#{row.ReqBatchQty}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.ReqBatchQty.tooltip}" id="ot10">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.ReqBatchQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfRmBatch.name}" filterable="true"
+                 sortable="true" headerText="No Of RM Batch"
+                 id="c11">
+        <af:outputText value="#{row.NoOfRmBatch}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfRmBatch.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfRmBatch.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfPmBatch.name}" filterable="true"
+                 sortable="true" headerText="No Of PM Batch"
+                 id="c12">
+        <af:outputText value="#{row.NoOfPmBatch}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfPmBatch.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfPmBatch.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfFinalBatch.name}" filterable="true"
+                 sortable="true" headerText="No Of Final Batch"
+                 id="c14">
+        <af:outputText value="#{row.NoOfFinalBatch}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfFinalBatch.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfFinalBatch.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.LastIssBatch.name}" filterable="true"
+                 sortable="true" headerText="Last Iss Batch"
+                 id="c15">
+        <af:outputText value="#{row.LastIssBatch}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.LastIssBatch.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.RequiredQty.name}" filterable="true"
+                 sortable="true" headerText="Required Batch"
+                 id="c16">
+        <af:outputText value="#{row.RequiredQty}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.RequiredQty.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.RequiredQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.StockQty.name}" filterable="true"
+                 sortable="true" headerText="Stock Qty"
+                 id="c17">
+        <af:outputText value="#{row.StockQty}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.StockQty.tooltip}" id="ot17">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.StockQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.ShortQty.name}" filterable="true"
+                 sortable="true" headerText="Short Qty"
+                 id="c18">
+        <af:outputText value="#{row.ShortQty}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.ShortQty.tooltip}" id="ot18">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.ShortQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfSfBatch.name}" filterable="true"
+                 sortable="true" headerText="No Of SF Batch"
+                 id="c13">
+        <af:outputText value="#{row.NoOfSfBatch}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfSfBatch.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.NoOfSfBatch.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductShortageandBatchReportVO1.hints.UnitCd.label}" id="c2">
+        <af:outputText value="#{row.UnitCd}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.UnitCd.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.ProdCode.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductShortageandBatchReportVO1.hints.ProdCode.label}" id="c4">
+        <af:outputText value="#{row.ProdCode}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.ProdCode.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.ItemGroupCode.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductShortageandBatchReportVO1.hints.ItemGroupCode.label}"
+                 id="c8">
+        <af:outputText value="#{row.ItemGroupCode}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.ItemGroupCode.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.SessionId.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductShortageandBatchReportVO1.hints.SessionId.label}"
+                 id="c19">
+        <af:outputText value="#{row.SessionId}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.SessionId.tooltip}" id="ot19">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.SessionId.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.SrNmo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductShortageandBatchReportVO1.hints.SrNmo.label}" id="c1">
+        <af:outputText value="#{row.SrNmo}" shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.SrNmo.tooltip}"
+                       id="ot1">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ProductShortageandBatchReportVO1.hints.SrNmo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductShortageandBatchReportVO1.hints.UserId.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductShortageandBatchReportVO1.hints.UserId.label}" id="c20">
+        <af:outputText value="#{row.UserId}"
+                       shortDesc="#{bindings.ProductShortageandBatchReportVO1.hints.UserId.tooltip}" id="ot20"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

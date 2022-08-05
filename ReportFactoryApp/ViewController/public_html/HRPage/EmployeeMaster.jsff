@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="Employee Master" id="ph1"/>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.EmployeeMasterVO1.collectionModel}" var="row"
+              rows="#{bindings.EmployeeMasterVO1.rangeSize}"
+              emptyText="#{bindings.EmployeeMasterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.EmployeeMasterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.EmployeeMasterVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.EmployeeMasterVO1.rangeSize}"
+              filterModel="#{bindings.EmployeeMasterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.EmployeeMasterVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.EmpNumber.name}" filterable="true" sortable="true"
+                 headerText="EMP Number" id="c1">
+        <af:outputText value="#{row.EmpNumber}" shortDesc="#{bindings.EmployeeMasterVO1.hints.EmpNumber.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.EmployeeName.name}" filterable="true" sortable="true"
+                 headerText="Employee Name" id="c2">
+        <af:outputText value="#{row.EmployeeName}" shortDesc="#{bindings.EmployeeMasterVO1.hints.EmployeeName.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.FatherName.name}" filterable="true" sortable="true"
+                 headerText="Father Name" id="c3">
+        <af:outputText value="#{row.FatherName}" shortDesc="#{bindings.EmployeeMasterVO1.hints.FatherName.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.Gender.name}" filterable="true" sortable="true"
+                 headerText="Gender" id="c4">
+        <af:outputText value="#{row.Gender}" shortDesc="#{bindings.EmployeeMasterVO1.hints.Gender.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.DateOfBirth.name}" filterable="true" sortable="true"
+                 headerText="Date Of Birth" id="c5">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.EmployeeMasterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DateOfBirth.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.EmployeeMasterVO1.hints.DateOfBirth.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DateOfBirth}" shortDesc="#{bindings.EmployeeMasterVO1.hints.DateOfBirth.tooltip}"
+                       id="ot5">
+          <af:convertDateTime pattern="#{bindings.EmployeeMasterVO1.hints.DateOfBirth.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.JoinDate.name}" filterable="true" sortable="true"
+                 headerText="Join Date" id="c6">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.EmployeeMasterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.JoinDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.EmployeeMasterVO1.hints.JoinDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.JoinDate}" shortDesc="#{bindings.EmployeeMasterVO1.hints.JoinDate.tooltip}"
+                       id="ot6">
+          <af:convertDateTime pattern="#{bindings.EmployeeMasterVO1.hints.JoinDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.NationCode.name}" filterable="true" sortable="true"
+                 headerText="Nation Code" id="c7">
+        <af:outputText value="#{row.NationCode}" shortDesc="#{bindings.EmployeeMasterVO1.hints.NationCode.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.Nationality.name}" filterable="true" sortable="true"
+                 headerText="Nationality" id="c8">
+        <af:outputText value="#{row.Nationality}" shortDesc="#{bindings.EmployeeMasterVO1.hints.Nationality.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.PresentMob.name}" filterable="true" sortable="true"
+                 headerText="Present Mob" id="c11">
+        <af:outputText value="#{row.PresentMob}" shortDesc="#{bindings.EmployeeMasterVO1.hints.PresentMob.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.AddPresent.name}" filterable="true" sortable="true"
+                 headerText="Add Permanent" id="c10">
+        <af:outputText value="#{row.AddPresent}" shortDesc="#{bindings.EmployeeMasterVO1.hints.AddPresent.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.AddPermanent.name}" filterable="true" sortable="true"
+                 headerText="Add Permanent" id="c12">
+        <af:outputText value="#{row.AddPermanent}" shortDesc="#{bindings.EmployeeMasterVO1.hints.AddPermanent.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.PermanentMob.name}" filterable="true" sortable="true"
+                 headerText="Permanent Mobile" id="c13">
+        <af:outputText value="#{row.PermanentMob}" shortDesc="#{bindings.EmployeeMasterVO1.hints.PermanentMob.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.ConfirmDate.name}" filterable="true" sortable="true"
+                 headerText="Confirm Date" id="c14">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.EmployeeMasterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ConfirmDate.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.EmployeeMasterVO1.hints.ConfirmDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ConfirmDate}" shortDesc="#{bindings.EmployeeMasterVO1.hints.ConfirmDate.tooltip}"
+                       id="ot14">
+          <af:convertDateTime pattern="#{bindings.EmployeeMasterVO1.hints.ConfirmDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.CardNo.name}" filterable="true" sortable="true"
+                 headerText="Card No" id="c15">
+        <af:outputText value="#{row.CardNo}" shortDesc="#{bindings.EmployeeMasterVO1.hints.CardNo.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.UanNo.name}" filterable="true" sortable="true"
+                 headerText="UAN No" id="c16">
+        <af:outputText value="#{row.UanNo}" shortDesc="#{bindings.EmployeeMasterVO1.hints.UanNo.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.DeptName.name}" filterable="true" sortable="true"
+                 headerText="Department Name" id="c17">
+        <af:outputText value="#{row.DeptName}" shortDesc="#{bindings.EmployeeMasterVO1.hints.DeptName.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.DesigDesc.name}" filterable="true" sortable="true"
+                 headerText="Desig Desc" id="c18">
+        <af:outputText value="#{row.DesigDesc}" shortDesc="#{bindings.EmployeeMasterVO1.hints.DesigDesc.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.CategoryDesc.name}" filterable="true" sortable="true"
+                 headerText="Ctaegory Desc" id="c19">
+        <af:outputText value="#{row.CategoryDesc}" shortDesc="#{bindings.EmployeeMasterVO1.hints.CategoryDesc.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.MaritalStatus.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.EmployeeMasterVO1.hints.MaritalStatus.label}" id="c9">
+        <af:outputText value="#{row.MaritalStatus}"
+                       shortDesc="#{bindings.EmployeeMasterVO1.hints.MaritalStatus.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.LvlDesc.name}" filterable="true" sortable="true"
+                 headerText="Lvl Description" id="c20">
+        <af:outputText value="#{row.LvlDesc}" shortDesc="#{bindings.EmployeeMasterVO1.hints.LvlDesc.tooltip}"
+                       id="ot20"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.LocationDesc.name}" filterable="true" sortable="true"
+                 headerText="Locatrion Descri-ptionnnnn" id="c21">
+        <af:outputText value="#{row.LocationDesc}" shortDesc="#{bindings.EmployeeMasterVO1.hints.LocationDesc.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.Unit.name}" filterable="true" sortable="true"
+                 headerText="Unit" id="c22">
+        <af:outputText value="#{row.Unit}" shortDesc="#{bindings.EmployeeMasterVO1.hints.Unit.tooltip}" id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.EmployeeMasterVO1.hints.Status.name}" filterable="true" sortable="true"
+                 headerText="Status" id="c23">
+        <af:outputText value="#{row.Status}" shortDesc="#{bindings.EmployeeMasterVO1.hints.Status.tooltip}" id="ot23"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

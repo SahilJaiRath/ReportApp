@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SRVRejectionRegisterPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="SRVRejectionRegisterVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="SRVRejectionRegisterVO1Iterator"/>
+    <searchRegion Binds="SRVRejectionRegisterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SRVRejectionRegisterVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <tree IterBinding="SRVRejectionRegisterVO1Iterator" id="SRVRejectionRegisterVO1">
+      <nodeDefinition DefName="model.inventory.views.SRVRejectionRegisterVO" Name="SRVRejectionRegisterVO10">
+        <AttrNames>
+          <Item Value="MrnNo"/>
+          <Item Value="MrnDt"/>
+          <Item Value="VendorCd"/>
+          <Item Value="VendorName"/>
+          <Item Value="ChallanNo"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Uom"/>
+          <Item Value="RejectQty"/>
+          <Item Value="PoNo"/>
+          <Item Value="PoDt"/>
+          <Item Value="Remarks"/>
+          <Item Value="UnitCd"/>
+          <Item Value="Reoff"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SRVRejectionRegister_RepType"
+          id="SRVRejectionRegister_RepType" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callSRVRejectionRegister" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callSRVRejectionRegister" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_TYPE" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

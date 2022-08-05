@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="QualityInProcessPageDef"
+                Package="QualityPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="QualityInProcessVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="QualityInProcessVO1Iterator"/>
+    <searchRegion Binds="QualityInProcessVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="QualityInProcessVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="QualityInProcessVO1Iterator" id="QualityInProcessVO1">
+      <nodeDefinition DefName="model.Quality.views.QualityInProcessRegisterVO" Name="QualityInProcessVO10">
+        <AttrNames>
+          <Item Value="InspNo"/>
+          <Item Value="InspDt"/>
+          <Item Value="ProdSlipNo"/>
+          <Item Value="ProdnSlipDt"/>
+          <Item Value="LotNo"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemName"/>
+          <Item Value="BatchNo"/>
+          <Item Value="ProcCd"/>
+          <Item Value="ShortDescrip"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="ProdnQty"/>
+          <Item Value="AcceptQty"/>
+          <Item Value="RejQty"/>
+          <Item Value="UnitCd"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="EmpName"/>
+          <Item Value="ArNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_QualityInProcess_ITEMFILTER"
+                  id="QualityInProcess_ITEMFILTER"/>
+    <methodAction id="callQualityInProcess" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callQualityInProcess" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_Item_Name" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

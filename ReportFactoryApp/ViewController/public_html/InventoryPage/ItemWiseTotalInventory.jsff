@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Item Wise Total Inventory" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.SubLedger_UnitCode.inputValue}"
+                              label="Unit Name"
+                              required="#{bindings.SubLedger_UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.SubLedger_UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px">
+            <f:selectItems value="#{bindings.SubLedger_UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.SubLedger_UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="itemWiseTotalInventory_ProductCdId"
+                                        popupTitle="Search and Select: #{bindings.ItemWiseTotalInventory_ProductCd.hints.label}"
+                                        value="#{bindings.ItemWiseTotalInventory_ProductCd.inputValue}"
+                                        label="Product Name"
+                                        model="#{bindings.ItemWiseTotalInventory_ProductCd.listOfValuesModel}"
+                                        required="#{bindings.ItemWiseTotalInventory_ProductCd.hints.mandatory}"
+                                        columns="#{bindings.ItemWiseTotalInventory_ProductCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.ItemWiseTotalInventory_ProductCd.hints.tooltip}" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px" >
+            <f:validator binding="#{bindings.ItemWiseTotalInventory_ProductCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b1"
+                     actionListener="#{ItemWiseTotalInventoryBean.onClickButton}"
+                     disabled="#{!bindings.callItemWiseTotalInventory.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Item Wise Total Inventory.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ItemWiseTotalInventoryVO1.collectionModel}" var="row"
+              rows="#{bindings.ItemWiseTotalInventoryVO1.rangeSize}"
+              emptyText="#{bindings.ItemWiseTotalInventoryVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.ItemWiseTotalInventoryVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ItemWiseTotalInventoryVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.ItemWiseTotalInventoryVO1.rangeSize}"
+              filterModel="#{bindings.ItemWiseTotalInventoryVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.ItemWiseTotalInventoryVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page" columnStretching="column:c3">
+      <af:column sortProperty="#{bindings.ItemWiseTotalInventoryVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.ItemWiseTotalInventoryVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseTotalInventoryVO1.hints.ItemCd.name}" filterable="true"
+                 sortable="true" headerText="Item Code" id="c2">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.ItemWiseTotalInventoryVO1.hints.ItemCd.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseTotalInventoryVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="Item Description" id="c3">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.ItemWiseTotalInventoryVO1.hints.ItemDesc.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseTotalInventoryVO1.hints.IndPend.name}" filterable="true"
+                 sortable="true" headerText="Ind Pend" id="c4">
+        <af:outputText value="#{row.IndPend}" shortDesc="#{bindings.ItemWiseTotalInventoryVO1.hints.IndPend.tooltip}"
+                       id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseTotalInventoryVO1.hints.IndPend.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseTotalInventoryVO1.hints.PoPend.name}" filterable="true"
+                 sortable="true" headerText="PO Pend" id="c5">
+        <af:outputText value="#{row.PoPend}" shortDesc="#{bindings.ItemWiseTotalInventoryVO1.hints.PoPend.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ItemWiseTotalInventoryVO1.hints.PoPend.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ItemWiseTotalInventoryVO1.hints.ClosStock.name}" filterable="true"
+                 sortable="true" headerText="Clos Stock" id="c6">
+        <af:outputText value="#{row.ClosStock}"
+                       shortDesc="#{bindings.ItemWiseTotalInventoryVO1.hints.ClosStock.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ItemWiseTotalInventoryVO1.hints.ClosStock.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

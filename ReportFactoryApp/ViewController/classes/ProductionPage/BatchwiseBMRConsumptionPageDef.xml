@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="BatchwiseBMRConsumptionPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchwiseBMRConsumptionVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="BatchwiseBMRConsumptionVO1Iterator"/>
+    <searchRegion Binds="BatchwiseBMRConsumptionVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchwiseBMRConsumptionVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BatchwiseBMRConsumptionVO1Iterator" id="BatchwiseBMRConsumptionVO1">
+      <nodeDefinition DefName="model.production.views.BatchwiseBMRConsumptionVO" Name="BatchwiseBMRConsumptionVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="JobCardNo"/>
+          <Item Value="JobCardDate"/>
+          <Item Value="PartCode"/>
+          <Item Value="PartDesc"/>
+          <Item Value="BatchSize"/>
+          <Item Value="BatchNo"/>
+          <Item Value="ItemCode"/>
+          <Item Value="ItemName"/>
+          <Item Value="ItemUom"/>
+          <Item Value="ProcCode"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="ReqQty"/>
+          <Item Value="OverallRecpQty"/>
+          <Item Value="RecpFromStore"/>
+          <Item Value="RecpFromStoreAdd"/>
+          <Item Value="Consume"/>
+          <Item Value="RmBal"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_BatchwiseBMRConsumption_BatchNo"
+                  id="BatchwiseBMRConsumption_BatchNo"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_BatchwiseBMRConsumption_partCode"
+                  id="BatchwiseBMRConsumption_partCode"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callBatchwiseBMRConsumption" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callBatchwiseBMRConsumption" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_PARTNAME" NDType="java.lang.String"/>
+      <NamedData NDName="LV_BATCHNO" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

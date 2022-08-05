@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DebitCreditNoteVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.finance.views.DebitCreditNoteVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P33_UNIT"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P33_FDT"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P33_TDT"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P33_TYPE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT  DR_CR_NOTE_DN_CN_NO, DT,FIN_TVOUCH_UNIT_CODE, Typ,  Party_Name, Vendor_Bill_No, Vendor_Bill_Date,Remarks, 
+SUM(NVL(IGST,0)) IGST, SUM(NVL(CGST,0)) CGST, SUM(NVL(SGST,0)) SGST, SUM(ROUND_OFF) ROUND_OFF, 
+SUM(AMOUNT) AMT ,SUM(NVL(IGST,0)) + SUM(NVL(CGST,0)) + SUM(NVL(SGST,0)) + SUM(ROUND_OFF) + 
+SUM(AMOUNT) TOTAL_AMT FROM ( SELECT FIN_TVOUCH_UNIT_CODE, Typ,  DR_CR_NOTE_DN_CN_NO, DT, Party_Name, Vendor_Bill_No, Vendor_Bill_Date, Remarks,  
+CASE WHEN REASON LIKE '%IGST%' THEN AMOUNT ELSE 0 END IGST, 
+CASE WHEN REASON LIKE '%CGST%' THEN AMOUNT ELSE 0 END CGST, 
+CASE WHEN REASON LIKE '%SGST%' THEN AMOUNT ELSE 0 END SGST, 
+CASE WHEN UPPER(TRIM(REASON)) NOT IN  ('IGST','CGST','SGST','ROUND OFF')  THEN AMOUNT ELSE 0 END AMOUNT , 
+CASE WHEN UPPER(REASON) LIKE '%ROUND OFF%' THEN AMOUNT ELSE 0 END ROUND_OFF 
+FROM ( SELECT B.FIN_TVOUCH_UNIT_CODE,A.BILL_BILL_TYPE Typ,A.DR_CR_NOTE_DN_CN_NO,A.DR_CR_NOTE_DN_CN_DT DT, 
+(SELECT name FROM SUB_LED WHERE CODE=B.SUB_CODE AND UNIT=B.Dn_Cn_Unit) Party_Name,B.BILL_NO_FOR_CREDIT Vendor_Bill_No, 
+B.BILL_DATE_FOR_CREDIT Vendor_Bill_Date,B.NARRATION Remarks, 
+(SELECT REASON FROM Discrepency_Reason_Masts WHERE Reason_Code=A.Dremast_Reason_Code ) Reason, 
+A.AMOUNT FROM DR_CR_DETAIL A,DR_CR_NOTE B WHERE A.DR_CR_NOTE_DN_CN_NO=B.DN_CN_NO 
+AND A.Dr_Cr_Note_Dn_Cn_Dt=B.Dn_Cn_Dt AND A.Dr_Cr_Note_Dn_Cn_Unit=B.Dn_Cn_Unit 
+AND (A.Dr_Cr_Note_Dn_Cn_Unit=:P33_UNIT OR 'ALL'=:P33_UNIT) 
+AND A.DR_CR_NOTE_DN_CN_DT BETWEEN :P33_FDT AND :P33_TDT 
+AND ( SUBSTR(A.DR_CR_NOTE_DN_CN_NO,4,2) =  :P33_TYPE OR 'ALL' = :P33_TYPE ) 
+AND B.AUTH_BY IS NOT NULL)) 
+GROUP BY DR_CR_NOTE_DN_CN_NO, DT,FIN_TVOUCH_UNIT_CODE, Typ,  Party_Name, Vendor_Bill_No, Vendor_Bill_Date,Remarks]]></SQLQuery>
+  <ViewAttribute
+    Name="DrCrNoteDnCnNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DR_CR_NOTE_DN_CN_NO"
+    Expression="DR_CR_NOTE_DN_CN_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Dt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="DT"
+    Expression="DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="FinTvouchUnitCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="FIN_TVOUCH_UNIT_CODE"
+    Expression="FIN_TVOUCH_UNIT_CODE"
+    SQLType="CHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Typ"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TYP"
+    Expression="TYP"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="112"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="112"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorBillNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VENDOR_BILL_NO"
+    Expression="VENDOR_BILL_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorBillDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VENDOR_BILL_DATE"
+    Expression="VENDOR_BILL_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="Remarks"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REMARKS"
+    Expression="REMARKS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Igst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="IGST"
+    Expression="IGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Cgst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CGST"
+    Expression="CGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Sgst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SGST"
+    Expression="SGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="RoundOff"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ROUND_OFF"
+    Expression="ROUND_OFF"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Amt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AMT"
+    Expression="AMT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotalAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_AMT"
+    Expression="TOTAL_AMT"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelHeader text="Group Master" id="ph1"/>
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Group Master.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.GroupMasterVO1.collectionModel}" var="row" rows="#{bindings.GroupMasterVO1.rangeSize}"
+              emptyText="#{bindings.GroupMasterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.GroupMasterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.GroupMasterVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.GroupMasterVO1.rangeSize}"
+              filterModel="#{bindings.GroupMasterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.GroupMasterVO1Query.processQuery}" varStatus="vs" id="t1"
+              columnStretching="column:c2" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.GroupMasterVO1.hints.GroupCd.name}" filterable="true" sortable="true"
+                 headerText="Group Code" id="c1">
+        <af:outputText value="#{row.GroupCd}" shortDesc="#{bindings.GroupMasterVO1.hints.GroupCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.GroupMasterVO1.hints.GroupDesc.name}" filterable="true" sortable="true"
+                 headerText="Group Description" id="c2">
+        <af:outputText value="#{row.GroupDesc}" shortDesc="#{bindings.GroupMasterVO1.hints.GroupDesc.tooltip}"
+                       id="ot2"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

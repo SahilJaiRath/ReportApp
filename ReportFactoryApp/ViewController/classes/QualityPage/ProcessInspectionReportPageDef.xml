@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="ProcessInspectionReportPageDef"
+                Package="QualityPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ProcessInspectionReportVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="ProcessInspectionReportVO1Iterator"/>
+    <searchRegion Binds="ProcessInspectionReportVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ProcessInspectionReportVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ProcessInspectionReportVO1Iterator" id="ProcessInspectionReportVO1">
+      <nodeDefinition DefName="model.Quality.views.ProcessInspectionReportVO" Name="ProcessInspectionReportVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="PdarNo"/>
+          <Item Value="PdarDate"/>
+          <Item Value="ProdCode"/>
+          <Item Value="ProdName"/>
+          <Item Value="ProdSlipNo"/>
+          <Item Value="ProdnSlipDt"/>
+          <Item Value="JobCardNo"/>
+          <Item Value="BatchNo"/>
+          <Item Value="MfgDt"/>
+          <Item Value="ProdnQty"/>
+          <Item Value="AcceptQty"/>
+          <Item Value="RejQty"/>
+          <Item Value="Status"/>
+          <Item Value="Process"/>
+          <Item Value="ProcessName"/>
+          <Item Value="NextProcCode"/>
+          <Item Value="NextProcName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_ProcsInspction_ProdCD"
+                  id="ProcsInspction_ProdCD"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_ProcsInspction_Process"
+                  id="ProcsInspction_Process"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callProcessInspectionReport" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callProcessInspectionReport" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_PRODCD" NDType="java.lang.String"/>
+      <NamedData NDName="LV_PROCESS" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="ProcessInspectionReportVO1Iterator" id="ProcessInspectionReportVO11">
+      <nodeDefinition DefName="model.Quality.views.ProcessInspectionReportVO" Name="ProcessInspectionReportVO110">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="PdarNo"/>
+          <Item Value="PdarDate"/>
+          <Item Value="ProdCode"/>
+          <Item Value="ProdName"/>
+          <Item Value="ProdSlipNo"/>
+          <Item Value="ProdnSlipDt"/>
+          <Item Value="JobCardNo"/>
+          <Item Value="BatchNo"/>
+          <Item Value="MfgDt"/>
+          <Item Value="ProdnQty"/>
+          <Item Value="AcceptQty"/>
+          <Item Value="RejQty"/>
+          <Item Value="Status"/>
+          <Item Value="Process"/>
+          <Item Value="ProcessName"/>
+          <Item Value="NextProcCode"/>
+          <Item Value="NextProcName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

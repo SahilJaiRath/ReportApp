@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Bank Reconciliation" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id3" contentStyle="Width:140px;" labelStyle="Width:100px">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id4">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="50%" id="gc3">
+          <af:inputComboboxListOfValues id="bankReconcilation_GLId"
+                                        popupTitle="Search and Select: #{bindings.BankReconcilation_GL.hints.label}"
+                                        value="#{bindings.BankReconcilation_GL.inputValue}"
+                                        label="General Ledger Code"
+                                        model="#{bindings.BankReconcilation_GL.listOfValuesModel}"
+                                        required="#{bindings.BankReconcilation_GL.hints.mandatory}"
+                                        columns="#{bindings.BankReconcilation_GL.hints.displayWidth}"
+                                        shortDesc="#{bindings.BankReconcilation_GL.hints.tooltip}" contentStyle="Width:150px;" labelStyle="Width:80px">
+            <f:validator binding="#{bindings.BankReconcilation_GL.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc4">
+          <af:button text="Execute" id="b2" actionListener="#{BankReconciliationBean.onClickButton}"
+                     disabled="#{!bindings.callBankRecociliation.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Bank Reconciliation.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BankReconciliationVO1.collectionModel}" var="row"
+              rows="#{bindings.BankReconciliationVO1.rangeSize}" 
+              emptyText="#{bindings.BankReconciliationVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.BankReconciliationVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BankReconciliationVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.BankReconciliationVO1.rangeSize}" 
+              filterModel="#{bindings.BankReconciliationVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.BankReconciliationVO1Query.processQuery}" varStatus="vs" id="t1"
+              columnStretching="column:c1" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.FinTvouchVouNo.name}" filterable="true"
+                 sortable="true" headerText="Voucher Number" id="c1">
+        <af:outputText value="#{row.FinTvouchVouNo}"
+                       shortDesc="#{bindings.BankReconciliationVO1.hints.FinTvouchVouNo.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.GnrlLedGlCd.name}" filterable="true"
+                 sortable="true" headerText="General Ledger Code" id="c2">
+        <af:outputText value="#{row.GnrlLedGlCd}"
+                       shortDesc="#{bindings.BankReconciliationVO1.hints.GnrlLedGlCd.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.FinTvouchVouDate.name}" filterable="true"
+                 sortable="true" headerText="Voucher Date" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.BankReconciliationVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.FinTvouchVouDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.BankReconciliationVO1.hints.FinTvouchVouDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.FinTvouchVouDate}"
+                       shortDesc="#{bindings.BankReconciliationVO1.hints.FinTvouchVouDate.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.BankReconciliationVO1.hints.FinTvouchVouDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.Debit.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.BankReconciliationVO1.hints.Debit.label}" id="c4">
+        <af:outputText value="#{row.Debit}" shortDesc="#{bindings.BankReconciliationVO1.hints.Debit.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BankReconciliationVO1.hints.Debit.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.Credit.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.BankReconciliationVO1.hints.Credit.label}" id="c5">
+        <af:outputText value="#{row.Credit}" shortDesc="#{bindings.BankReconciliationVO1.hints.Credit.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BankReconciliationVO1.hints.Credit.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.BankName.name}" filterable="true" sortable="true"
+                 headerText="Bank Name" id="c6">
+        <af:outputText value="#{row.BankName}" shortDesc="#{bindings.BankReconciliationVO1.hints.BankName.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.RecoNo.name}" filterable="true" sortable="true"
+                 headerText="Reconciliation Number" id="c7">
+        <af:outputText value="#{row.RecoNo}" shortDesc="#{bindings.BankReconciliationVO1.hints.RecoNo.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.BankAmt.name}" filterable="true" sortable="true"
+                 headerText="Bank Amount" id="c8">
+        <af:outputText value="#{row.BankAmt}" shortDesc="#{bindings.BankReconciliationVO1.hints.BankAmt.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BankReconciliationVO1.hints.BankAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.BankDate.name}" filterable="true" sortable="true"
+                 headerText="Bank Date" id="c9">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.BankReconciliationVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BankDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.BankReconciliationVO1.hints.BankDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.BankDate}" shortDesc="#{bindings.BankReconciliationVO1.hints.BankDate.tooltip}"
+                       id="ot9">
+          <af:convertDateTime pattern="#{bindings.BankReconciliationVO1.hints.BankDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BankReconciliationVO1.hints.Description.label}" id="c10">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.BankReconciliationVO1.hints.Description.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BankReconciliationVO1.hints.SubLedgerName.name}" filterable="true"
+                 sortable="true" headerText="Sub Ledger Name" id="c11">
+        <af:outputText value="#{row.SubLedgerName}"
+                       shortDesc="#{bindings.BankReconciliationVO1.hints.SubLedgerName.tooltip}" id="ot11"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

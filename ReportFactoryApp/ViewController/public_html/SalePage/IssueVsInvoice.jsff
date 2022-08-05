@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="Issue Vs Invoice " id="ph1">
+    <f:facet name="context"/>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Issue Vs Invoice.xls"
+                                             title="Issue Vs Invoice "/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.IssueVsInvoiceVO1.collectionModel}" var="row"
+              rows="#{bindings.IssueVsInvoiceVO1.rangeSize}"
+              emptyText="#{bindings.IssueVsInvoiceVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.IssueVsInvoiceVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.IssueVsInvoiceVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.IssueVsInvoiceVO1.rangeSize}"
+              filterModel="#{bindings.IssueVsInvoiceVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.IssueVsInvoiceVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page" columnStretching="column:c7">
+      <af:column sortProperty="#{bindings.IssueVsInvoiceVO1.hints.IssueSlipNo.name}" filterable="true" sortable="true"
+                 headerText="Issue Slip No" id="c1">
+        <af:outputText value="#{row.IssueSlipNo}" shortDesc="#{bindings.IssueVsInvoiceVO1.hints.IssueSlipNo.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueVsInvoiceVO1.hints.IssueSlipDate.name}" filterable="true" sortable="true"
+                 headerText="Issue Slip Date" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.IssueVsInvoiceVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.IssueSlipDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.IssueVsInvoiceVO1.hints.IssueSlipDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.IssueSlipDate}"
+                       shortDesc="#{bindings.IssueVsInvoiceVO1.hints.IssueSlipDate.tooltip}" id="ot2">
+          <af:convertDateTime pattern="#{bindings.IssueVsInvoiceVO1.hints.IssueSlipDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueVsInvoiceVO1.hints.Item.name}" filterable="true" sortable="true"
+                 headerText="Item" id="c3">
+        <af:outputText value="#{row.Item}" shortDesc="#{bindings.IssueVsInvoiceVO1.hints.Item.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueVsInvoiceVO1.hints.InvoiceNo.name}" filterable="true" sortable="true"
+                 headerText="Invoice No " id="c4">
+        <af:outputText value="#{row.InvoiceNo}" shortDesc="#{bindings.IssueVsInvoiceVO1.hints.InvoiceNo.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueVsInvoiceVO1.hints.IssSlipQty.name}" filterable="true" sortable="true"
+                 headerText="Issue Slip Qty" id="c5">
+        <af:outputText value="#{row.IssSlipQty}" shortDesc="#{bindings.IssueVsInvoiceVO1.hints.IssSlipQty.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueVsInvoiceVO1.hints.IssSlipQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueVsInvoiceVO1.hints.InvcQty.name}" filterable="true" sortable="true"
+                 headerText="Invoice Qty" id="c6">
+        <af:outputText value="#{row.InvcQty}" shortDesc="#{bindings.IssueVsInvoiceVO1.hints.InvcQty.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueVsInvoiceVO1.hints.InvcQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueVsInvoiceVO1.hints.PendQty.name}" filterable="true" sortable="true"
+                 headerText="Pending Qty" id="c7">
+        <af:outputText value="#{row.PendQty}" shortDesc="#{bindings.IssueVsInvoiceVO1.hints.PendQty.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueVsInvoiceVO1.hints.PendQty.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

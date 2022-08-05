@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="FG Yield/Production" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="itemWiseSale_ProductCodeId"
+                                        popupTitle="Search and Select: #{bindings.ItemWiseSale_ProductCode.hints.label}"
+                                        value="#{bindings.ItemWiseSale_ProductCode.inputValue}"
+                                        label="Product Code"
+                                        model="#{bindings.ItemWiseSale_ProductCode.listOfValuesModel}"
+                                        required="#{bindings.ItemWiseSale_ProductCode.hints.mandatory}"
+                                        columns="#{bindings.ItemWiseSale_ProductCode.hints.displayWidth}"
+                                        shortDesc="#{bindings.ItemWiseSale_ProductCode.hints.tooltip}">
+            <f:validator binding="#{bindings.ItemWiseSale_ProductCode.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b1" actionListener="#{FGYieldProductionBean.onClickButton}"
+                     disabled="#{!bindings.callFGYieldProduction.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="FG Yield/Production.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.FGYieldProductionVO1.collectionModel}" var="row"
+              rows="#{bindings.FGYieldProductionVO1.rangeSize}"
+              emptyText="#{bindings.FGYieldProductionVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.FGYieldProductionVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.FGYieldProductionVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.FGYieldProductionVO1.rangeSize}"
+              filterModel="#{bindings.FGYieldProductionVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.FGYieldProductionVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.JobCardNo.name}" filterable="true" sortable="true"
+                 headerText="JC No" id="c1">
+        <af:outputText value="#{row.JobCardNo}" shortDesc="#{bindings.FGYieldProductionVO1.hints.JobCardNo.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.AssProdnSlipDt.name}" filterable="true"
+                 sortable="true" headerText="JC Date" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.FGYieldProductionVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.AssProdnSlipDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.FGYieldProductionVO1.hints.AssProdnSlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.AssProdnSlipDt}"
+                       shortDesc="#{bindings.FGYieldProductionVO1.hints.AssProdnSlipDt.tooltip}" id="ot2">
+          <af:convertDateTime pattern="#{bindings.FGYieldProductionVO1.hints.AssProdnSlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c3">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.FGYieldProductionVO1.hints.UnitCd.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.ProductCode.name}" filterable="true"
+                 sortable="true" headerText="Product Code" id="c4">
+        <af:outputText value="#{row.ProductCode}" shortDesc="#{bindings.FGYieldProductionVO1.hints.ProductCode.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.ProdDesc.name}" filterable="true" sortable="true"
+                 headerText="Product Description" id="c6">
+        <af:outputText value="#{row.ProdDesc}" shortDesc="#{bindings.FGYieldProductionVO1.hints.ProdDesc.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.LotNo.name}" filterable="true" sortable="true"
+                 headerText="LOT No" id="c7">
+        <af:outputText value="#{row.LotNo}" shortDesc="#{bindings.FGYieldProductionVO1.hints.LotNo.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.BatchYear.name}" filterable="true" sortable="true"
+                 headerText="Batch Year" id="c8">
+        <af:outputText value="#{row.BatchYear}" shortDesc="#{bindings.FGYieldProductionVO1.hints.BatchYear.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c9">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.FGYieldProductionVO1.hints.ItemCd.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.ItemDesc.name}" filterable="true" sortable="true"
+                 headerText="Item Description" id="c10">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.FGYieldProductionVO1.hints.ItemDesc.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.Uom1.name}" filterable="true" sortable="true"
+                 headerText="UOM1" id="c11">
+        <af:outputText value="#{row.Uom1}" shortDesc="#{bindings.FGYieldProductionVO1.hints.Uom1.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.ReqQty.name}" filterable="true" sortable="true"
+                 headerText="Req Qty" id="c12">
+        <af:outputText value="#{row.ReqQty}" shortDesc="#{bindings.FGYieldProductionVO1.hints.ReqQty.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGYieldProductionVO1.hints.ReqQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.BomStand.name}" filterable="true" sortable="true"
+                 headerText="BOM Stand" id="c14">
+        <af:outputText value="#{row.BomStand}" shortDesc="#{bindings.FGYieldProductionVO1.hints.BomStand.tooltip}"
+                       id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGYieldProductionVO1.hints.BomStand.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.ProdnQty.name}" filterable="true" sortable="true"
+                 headerText="Prodn Qty" id="c15">
+        <af:outputText value="#{row.ProdnQty}" shortDesc="#{bindings.FGYieldProductionVO1.hints.ProdnQty.tooltip}"
+                       id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGYieldProductionVO1.hints.ProdnQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.JobCardQty.name}" filterable="true" sortable="true"
+                 headerText="Job Card Qty" id="c16">
+        <af:outputText value="#{row.JobCardQty}" shortDesc="#{bindings.FGYieldProductionVO1.hints.JobCardQty.tooltip}"
+                       id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGYieldProductionVO1.hints.JobCardQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.ReturnQty.name}" filterable="true" sortable="true"
+                 headerText="Return Qty" id="c17">
+        <af:outputText value="#{row.ReturnQty}" shortDesc="#{bindings.FGYieldProductionVO1.hints.ReturnQty.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.WastagePer.name}" filterable="true" sortable="true"
+                 headerText="Wastage per" id="c18">
+        <af:outputText value="#{row.WastagePer}" shortDesc="#{bindings.FGYieldProductionVO1.hints.WastagePer.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.AssProdnSlip.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.FGYieldProductionVO1.hints.AssProdnSlip.label}" id="c5">
+        <af:outputText value="#{row.AssProdnSlip}"
+                       shortDesc="#{bindings.FGYieldProductionVO1.hints.AssProdnSlip.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.LocCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.FGYieldProductionVO1.hints.LocCd.label}" id="c13">
+        <af:outputText value="#{row.LocCd}" shortDesc="#{bindings.FGYieldProductionVO1.hints.LocCd.tooltip}" id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGYieldProductionVO1.hints.YieldPer.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.FGYieldProductionVO1.hints.YieldPer.label}" id="c19">
+        <af:outputText value="#{row.YieldPer}" shortDesc="#{bindings.FGYieldProductionVO1.hints.YieldPer.tooltip}"
+                       id="ot19">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGYieldProductionVO1.hints.YieldPer.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

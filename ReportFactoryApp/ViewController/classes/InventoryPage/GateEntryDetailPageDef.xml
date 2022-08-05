@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="GateEntryDetailPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="GateEntryDetailVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="GateEntryDetailVO1Iterator"/>
+    <searchRegion Binds="GateEntryDetailVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="GateEntryDetailVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callGateEntryDetail" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callGateEntryDetail" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+    <tree IterBinding="GateEntryDetailVO1Iterator" id="GateEntryDetailVO1">
+      <nodeDefinition DefName="model.inventory.views.GateEntryDetailVO" Name="GateEntryDetailVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="VenCd"/>
+          <Item Value="VenName"/>
+          <Item Value="GateEno"/>
+          <Item Value="GateEdt"/>
+          <Item Value="ChallanType"/>
+          <Item Value="DocumentType"/>
+          <Item Value="ReceivedAgainst"/>
+          <Item Value="DocType"/>
+          <Item Value="ChallanNo"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="PoDt"/>
+          <Item Value="BillNo"/>
+          <Item Value="BillDt"/>
+          <Item Value="PoNo"/>
+          <Item Value="AmdNo"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ChallanQty"/>
+          <Item Value="ChallanUom"/>
+          <Item Value="ProcCd"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="EwayBillNo"/>
+          <Item Value="EwayBillDate"/>
+          <Item Value="EwayBillValue"/>
+          <Item Value="BoeNo"/>
+          <Item Value="BoeDt"/>
+          <Item Value="VehicleNo"/>
+          <Item Value="ManfCode"/>
+          <Item Value="ManfName"/>
+          <Item Value="FrmDestination"/>
+          <Item Value="CashAmount"/>
+          <Item Value="PoDetHsn"/>
+          <Item Value="VenHsnCode"/>
+          <Item Value="DeptCd"/>
+          <Item Value="DeptName"/>
+          <Item Value="EmpCd"/>
+          <Item Value="EmpName"/>
+          <Item Value="PreparedBy"/>
+          <Item Value="PreparedByName"/>
+          <Item Value="ApprovedBy"/>
+          <Item Value="ApprovedByName"/>
+          <Item Value="GrNo"/>
+          <Item Value="GrDt"/>
+          <Item Value="TransporterCode"/>
+          <Item Value="TransporterName"/>
+          <Item Value="CreditFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelHeader text="Product Master" id="ph1"/>
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Product Master.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ProductMasterVO1.collectionModel}" var="row"
+              rows="#{bindings.ProductMasterVO1.rangeSize}"
+              emptyText="#{bindings.ProductMasterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.ProductMasterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ProductMasterVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.ProductMasterVO1.rangeSize}"
+              filterModel="#{bindings.ProductMasterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.ProductMasterVO1Query.processQuery}" varStatus="vs" id="t1" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c12">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.ProductMasterVO1.hints.UnitCode.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.Code.name}" filterable="true" sortable="true"
+                 headerText="Code" id="c1">
+        <af:outputText value="#{row.Code}" shortDesc="#{bindings.ProductMasterVO1.hints.Code.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.Description.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.Description.label}" id="c2">
+        <af:outputText value="#{row.Description}" shortDesc="#{bindings.ProductMasterVO1.hints.Description.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.UnitOfMeasurement.name}" filterable="true"
+                 sortable="true" headerText="UOM" id="c3">
+        <af:outputText value="#{row.UnitOfMeasurement}"
+                       shortDesc="#{bindings.ProductMasterVO1.hints.UnitOfMeasurement.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.ProdGroup.name}" filterable="true" sortable="true"
+                 headerText="Product Group" id="c4">
+        <af:outputText value="#{row.ProdGroup}" shortDesc="#{bindings.ProductMasterVO1.hints.ProdGroup.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.ProdSubGroup.name}" filterable="true" sortable="true"
+                 headerText="Product Sub Group" id="c5">
+        <af:outputText value="#{row.ProdSubGroup}" shortDesc="#{bindings.ProductMasterVO1.hints.ProdSubGroup.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.Specification.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.Specification.label}" id="c6">
+        <af:outputText value="#{row.Specification}" shortDesc="#{bindings.ProductMasterVO1.hints.Specification.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.MarketType.name}" filterable="true" sortable="true"
+                 headerText="Market Type" id="c7">
+        <af:outputText value="#{row.MarketType}" shortDesc="#{bindings.ProductMasterVO1.hints.MarketType.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.ModelNo.name}" filterable="true" sortable="true"
+                 headerText="Model No" id="c8">
+        <af:outputText value="#{row.ModelNo}" shortDesc="#{bindings.ProductMasterVO1.hints.ModelNo.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.CreatedBy.name}" filterable="true" sortable="true"
+                 headerText="Created by" id="c9">
+        <af:outputText value="#{row.CreatedBy}" shortDesc="#{bindings.ProductMasterVO1.hints.CreatedBy.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.HsnNo.name}" filterable="true" sortable="true"
+                 headerText="HSN No" id="c10">
+        <af:outputText value="#{row.HsnNo}" shortDesc="#{bindings.ProductMasterVO1.hints.HsnNo.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.Status.name}" filterable="true" sortable="true"
+                 headerText="Status" id="c13">
+        <af:outputText value="#{row.Status}" shortDesc="#{bindings.ProductMasterVO1.hints.Status.tooltip}" id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.LastUpdatedBy.name}" filterable="true" sortable="true"
+                 headerText="Last Updated By" id="c15">
+        <af:outputText value="#{row.LastUpdatedBy}" shortDesc="#{bindings.ProductMasterVO1.hints.LastUpdatedBy.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.ProductTyp.name}" filterable="true" sortable="true"
+                 headerText="Product Type" id="c17">
+        <af:outputText value="#{row.ProductTyp}" shortDesc="#{bindings.ProductMasterVO1.hints.ProductTyp.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.RefferalCode.name}" filterable="true" sortable="true"
+                 headerText="Referral Code" id="c18">
+        <af:outputText value="#{row.RefferalCode}" shortDesc="#{bindings.ProductMasterVO1.hints.RefferalCode.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.Gst.name}" filterable="true" sortable="true"
+                 headerText="GST" id="c19">
+        <af:outputText value="#{row.Gst}" shortDesc="#{bindings.ProductMasterVO1.hints.Gst.tooltip}" id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.Selectobjects13.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductMasterVO1.hints.Selectobjects13.label}" id="c14">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ProductMasterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Selectobjects13.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.ProductMasterVO1.hints.Selectobjects13.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.Selectobjects13}"
+                       shortDesc="#{bindings.ProductMasterVO1.hints.Selectobjects13.tooltip}" id="ot14">
+          <af:convertDateTime pattern="#{bindings.ProductMasterVO1.hints.Selectobjects13.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.Selectobjects15.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductMasterVO1.hints.Selectobjects15.label}" id="c16">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ProductMasterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Selectobjects15.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.ProductMasterVO1.hints.Selectobjects15.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.Selectobjects15}"
+                       shortDesc="#{bindings.ProductMasterVO1.hints.Selectobjects15.tooltip}" id="ot16">
+          <af:convertDateTime pattern="#{bindings.ProductMasterVO1.hints.Selectobjects15.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.PdGsw.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.PdGsw.label}" id="c20">
+        <af:outputText value="#{row.PdGsw}" shortDesc="#{bindings.ProductMasterVO1.hints.PdGsw.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ProductMasterVO1.hints.PdGsw.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.PdNtw.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.PdNtw.label}" id="c21">
+        <af:outputText value="#{row.PdNtw}" shortDesc="#{bindings.ProductMasterVO1.hints.PdNtw.tooltip}" id="ot21">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ProductMasterVO1.hints.PdNtw.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.BatchType.name}" filterable="true" sortable="true"
+                 headerText="Batch Type" id="c22">
+        <af:outputText value="#{row.BatchType}" shortDesc="#{bindings.ProductMasterVO1.hints.BatchType.tooltip}"
+                       id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.BatchPlant.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.BatchPlant.label}" id="c23">
+        <af:outputText value="#{row.BatchPlant}" shortDesc="#{bindings.ProductMasterVO1.hints.BatchPlant.tooltip}"
+                       id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.SampQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.SampQty.label}" id="c24">
+        <af:outputText value="#{row.SampQty}" shortDesc="#{bindings.ProductMasterVO1.hints.SampQty.tooltip}" id="ot24">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ProductMasterVO1.hints.SampQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.ReTest.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.ReTest.label}" id="c25">
+        <af:outputText value="#{row.ReTest}" shortDesc="#{bindings.ProductMasterVO1.hints.ReTest.tooltip}" id="ot25">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ProductMasterVO1.hints.ReTest.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.InspType.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.InspType.label}" id="c26">
+        <af:outputText value="#{row.InspType}" shortDesc="#{bindings.ProductMasterVO1.hints.InspType.tooltip}"
+                       id="ot26"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.Mrp.name}" filterable="true" sortable="true"
+                 headerText="MRP" id="c27">
+        <af:outputText value="#{row.Mrp}" shortDesc="#{bindings.ProductMasterVO1.hints.Mrp.tooltip}" id="ot27">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ProductMasterVO1.hints.Mrp.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.ArReq.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.ArReq.label}" id="c28">
+        <af:outputText value="#{row.ArReq}" shortDesc="#{bindings.ProductMasterVO1.hints.ArReq.tooltip}" id="ot28"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.ExciseChapterNumber.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ProductMasterVO1.hints.ExciseChapterNumber.label}" id="c11">
+        <af:outputText value="#{row.ExciseChapterNumber}"
+                       shortDesc="#{bindings.ProductMasterVO1.hints.ExciseChapterNumber.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.PdSec.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.PdSec.label}" id="c29">
+        <af:outputText value="#{row.PdSec}" shortDesc="#{bindings.ProductMasterVO1.hints.PdSec.tooltip}" id="ot29"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.ProdJobFlag.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.ProdJobFlag.label}" id="c30">
+        <af:outputText value="#{row.ProdJobFlag}" shortDesc="#{bindings.ProductMasterVO1.hints.ProdJobFlag.tooltip}"
+                       id="ot30"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.PackUom.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.PackUom.label}" id="c31">
+        <af:outputText value="#{row.PackUom}" shortDesc="#{bindings.ProductMasterVO1.hints.PackUom.tooltip}" id="ot31"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.PackSize.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.PackSize.label}" id="c32">
+        <af:outputText value="#{row.PackSize}" shortDesc="#{bindings.ProductMasterVO1.hints.PackSize.tooltip}"
+                       id="ot32">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ProductMasterVO1.hints.PackSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.PackConversion.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.PackConversion.label}" id="c33">
+        <af:outputText value="#{row.PackConversion}"
+                       shortDesc="#{bindings.ProductMasterVO1.hints.PackConversion.tooltip}" id="ot33">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ProductMasterVO1.hints.PackConversion.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ProductMasterVO1.hints.SapNumber.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ProductMasterVO1.hints.SapNumber.label}" id="c34">
+        <af:outputText value="#{row.SapNumber}" shortDesc="#{bindings.ProductMasterVO1.hints.SapNumber.tooltip}"
+                       id="ot34"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

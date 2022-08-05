@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="PART MASTER" id="ph1"/>
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Part Master.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PartMasterReportVO1.collectionModel}" var="row"
+              rows="#{bindings.PartMasterReportVO1.rangeSize}"
+              emptyText="#{bindings.PartMasterReportVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PartMasterReportVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PartMasterReportVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PartMasterReportVO1.rangeSize}"
+              filterModel="#{bindings.PartMasterReportVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PartMasterReportVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.PartCode.name}" filterable="true" sortable="true"
+                 headerText="Part Code" id="c1">
+        <af:outputText value="#{row.PartCode}" shortDesc="#{bindings.PartMasterReportVO1.hints.PartCode.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.Description.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PartMasterReportVO1.hints.Description.label}" id="c2">
+        <af:outputText value="#{row.Description}" shortDesc="#{bindings.PartMasterReportVO1.hints.Description.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.MeasurementUnit.name}" filterable="true"
+                 sortable="true" headerText="Measurement Unit" id="c3">
+        <af:outputText value="#{row.MeasurementUnit}"
+                       shortDesc="#{bindings.PartMasterReportVO1.hints.MeasurementUnit.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.Specification.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PartMasterReportVO1.hints.Specification.label}" id="c4">
+        <af:outputText value="#{row.Specification}"
+                       shortDesc="#{bindings.PartMasterReportVO1.hints.Specification.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.Rate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PartMasterReportVO1.hints.Rate.label}" id="c5">
+        <af:outputText value="#{row.Rate}" shortDesc="#{bindings.PartMasterReportVO1.hints.Rate.tooltip}" id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PartMasterReportVO1.hints.Rate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.HsnNo.name}" filterable="true" sortable="true"
+                 headerText="HSN No" id="c6">
+        <af:outputText value="#{row.HsnNo}" shortDesc="#{bindings.PartMasterReportVO1.hints.HsnNo.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.GstCode.name}" filterable="true" sortable="true"
+                 headerText="GST Code" id="c7">
+        <af:outputText value="#{row.GstCode}" shortDesc="#{bindings.PartMasterReportVO1.hints.GstCode.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.GroupCode.name}" filterable="true" sortable="true"
+                 headerText="Group Code" id="c8">
+        <af:outputText value="#{row.GroupCode}" shortDesc="#{bindings.PartMasterReportVO1.hints.GroupCode.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.SubGrpCd.name}" filterable="true" sortable="true"
+                 headerText="Sub Group Code" id="c9">
+        <af:outputText value="#{row.SubGrpCd}" shortDesc="#{bindings.PartMasterReportVO1.hints.SubGrpCd.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.TolerancePer.name}" filterable="true"
+                 sortable="true" headerText="Tolerance Per" id="c10">
+        <af:outputText value="#{row.TolerancePer}"
+                       shortDesc="#{bindings.PartMasterReportVO1.hints.TolerancePer.tooltip}" id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PartMasterReportVO1.hints.TolerancePer.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.ProductionStockType.name}" filterable="true"
+                 sortable="true" headerText="Production Stock Type" id="c11">
+        <af:outputText value="#{row.ProductionStockType}"
+                       shortDesc="#{bindings.PartMasterReportVO1.hints.ProductionStockType.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.SaleRequired.name}" filterable="true"
+                 sortable="true" headerText="Sale Required" id="c12">
+        <af:outputText value="#{row.SaleRequired}"
+                       shortDesc="#{bindings.PartMasterReportVO1.hints.SaleRequired.tooltip}" id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.GrpName.name}" filterable="true" sortable="true"
+                 headerText="GRP Name" id="c13">
+        <af:outputText value="#{row.GrpName}" shortDesc="#{bindings.PartMasterReportVO1.hints.GrpName.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.SubGrpName.name}" filterable="true" sortable="true"
+                 headerText="Sub Group Name" id="c14">
+        <af:outputText value="#{row.SubGrpName}" shortDesc="#{bindings.PartMasterReportVO1.hints.SubGrpName.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.LastUpdatedBy.name}" filterable="true"
+                 sortable="true" headerText="Last Updated By" id="c15">
+        <af:outputText value="#{row.LastUpdatedBy}"
+                       shortDesc="#{bindings.PartMasterReportVO1.hints.LastUpdatedBy.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.QualityRequired.name}" filterable="true"
+                 sortable="true" headerText="Quality Required" id="c16">
+        <af:outputText value="#{row.QualityRequired}"
+                       shortDesc="#{bindings.PartMasterReportVO1.hints.QualityRequired.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.BatchType.name}" filterable="true" sortable="true"
+                 headerText="Batch Type" id="c17">
+        <af:outputText value="#{row.BatchType}" shortDesc="#{bindings.PartMasterReportVO1.hints.BatchType.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.BatchPlant.name}" filterable="true" sortable="true"
+                 headerText="Batch Plant" id="c18">
+        <af:outputText value="#{row.BatchPlant}" shortDesc="#{bindings.PartMasterReportVO1.hints.BatchPlant.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.SampQty.name}" filterable="true" sortable="true" id="c19"
+                 headerText="Samp Qty">
+        <af:outputText value="#{row.SampQty}" shortDesc="#{bindings.PartMasterReportVO1.hints.SampQty.tooltip}"
+                       id="ot19">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PartMasterReportVO1.hints.SampQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.ReTest.name}" filterable="true" sortable="true"
+                 headerText="Re Test" id="c20">
+        <af:outputText value="#{row.ReTest}" shortDesc="#{bindings.PartMasterReportVO1.hints.ReTest.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PartMasterReportVO1.hints.ReTest.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.SapCode.name}" filterable="true" sortable="true"
+                 headerText="Sap Code" id="c21">
+        <af:outputText value="#{row.SapCode}" shortDesc="#{bindings.PartMasterReportVO1.hints.SapCode.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.SapNumber.name}" filterable="true" sortable="true"
+                 headerText="Sap Number" id="c22">
+        <af:outputText value="#{row.SapNumber}" shortDesc="#{bindings.PartMasterReportVO1.hints.SapNumber.tooltip}"
+                       id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.ArReq.name}" filterable="true" sortable="true"
+                 headerText="AR Req" id="c23">
+        <af:outputText value="#{row.ArReq}" shortDesc="#{bindings.PartMasterReportVO1.hints.ArReq.tooltip}" id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.StdLoss.name}" filterable="true" sortable="true"
+                 headerText="STD Loss" id="c24">
+        <af:outputText value="#{row.StdLoss}" shortDesc="#{bindings.PartMasterReportVO1.hints.StdLoss.tooltip}"
+                       id="ot24">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PartMasterReportVO1.hints.StdLoss.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartMasterReportVO1.hints.InspType.name}" filterable="true" sortable="true"
+                 headerText="INSP Type" id="c25">
+        <af:outputText value="#{row.InspType}" shortDesc="#{bindings.PartMasterReportVO1.hints.InspType.tooltip}"
+                       id="ot25"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

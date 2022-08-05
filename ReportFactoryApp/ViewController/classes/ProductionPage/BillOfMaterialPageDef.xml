@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="BillOfMaterialPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BillOfMaterialVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="BillOfMaterialVO1Iterator"/>
+    <searchRegion Binds="BillOfMaterialVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BillOfMaterialVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BillOfMaterialVO1Iterator" id="BillOfMaterialVO1">
+      <nodeDefinition DefName="model.production.views.BillOfMaterialVO" Name="BillOfMaterialVO10">
+        <AttrNames>
+          <Item Value="ProductCode"/>
+          <Item Value="ProdName"/>
+          <Item Value="PartCode"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="NoOff"/>
+          <Item Value="Uom"/>
+          <Item Value="BatchQty"/>
+          <Item Value="PUom"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callBillOfMaterial" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callBillOfMaterial" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_BOM_PRODUCT" NDType="java.lang.String"/>
+    </methodAction>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_BOM_Product_CD" id="BOM_Product_CD"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ReturnSlipVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.inventory.views.ReturnSlipVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P56_UNIT"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P56_NEW"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P56_NEW_1"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <SQLQuery><![CDATA[SELECT distinct  B.UNIT_CD,B.RET_SLIP_NO,B.RET_SLIP_DT, 
+DECODE(A.DOC_TYPE,'LM','REJ FROM MAIN STORE','IS','AGAINST ISSUE SLIP','JA','JOBCARD ASSY.','JP','JOBCARD PROCESS','FG','FG REJECTION' 
+,'OT','OTHERS','SR','JW SRV REJ. MATL.')Document_Type,  
+A.ITEM_CD,D.ITEM_DESC , 
+decode(A.PROC_CD,'.','As Finished') PROCESS,D.REC_UOM UOM,A.SEND_BACK ,E.SHORT_DESC , 
+A.RET_QTY,A.SCRAP_VEN Vendor_Code,A.QTY_VEN,E.DEPT_CD,A.QTY_DEPT, 
+A.MS_QTY MS_Qty,A.REMARKS Remarks, 
+C.ENAME Prepared_By, 
+C.ENAME QC_Incharge, 
+C.ENAME Authorised_By , 
+RD.BATCH_NO,RD.AR_NO,RD.AR_DATE,to_char (A.CREATION_DATE,'dd-mm-yy') main_store_rct_date 
+,JH.BATCH_NO JC_BATCH_NO,JH.JC_NO 
+FROM RET_DSLIPS A,RET_HSLIPS B,EMP_VIEW C,ITEM_STOCK D, 
+LOCATION E,PROCESS F ,ret_dslip_batch RD,iss_dslip ISD,req_dslip RSD, JC_HEAD JH 
+WHERE A.RET_HSLIP_RET_SLIP_NO=B.RET_SLIP_NO AND 
+D.ITEM_CD=A.ITEM_CD AND 
+B.CHECK_BY=C.ENO(+) AND 
+B.RET_FROM=E.LOCAT_CODE AND   
+F.PROC_CODE(+)=A.PROC_CD and (RD.ISS_SLIP_DOC_NO= A.DOC_NO AND RD.ITEM_CD=A.ITEM_CD ) 
+AND (ISD.ISS_HSLIP_SLIP_NO (+)=A.DOC_NO AND ISD.ITEM_CD(+)=A.ITEM_CD) 
+AND ISD.DOC_NO=RSD.REQ_HSLIP_REQ_SLIP_NO(+) AND RSD.ITEM_CD(+)=ISD.ITEM_CD 
+AND JH.JC_NO(+)=RSD.DOC_NO 
+AND B.RET_SLIP_DT between :P56_NEW_1 AND :P56_NEW AND B.UNIT_CD=:P56_UNIT 
+order by B.RET_SLIP_NO]]></SQLQuery>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="CHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RetSlipNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RET_SLIP_NO"
+    Expression="RET_SLIP_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RetSlipDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="RET_SLIP_DT"
+    Expression="RET_SLIP_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="DocumentType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="19"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DOCUMENT_TYPE"
+    Expression="DOCUMENT_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="19"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_CD"
+    Expression="ITEM_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESC"
+    Expression="ITEM_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Process"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="11"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROCESS"
+    Expression="PROCESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Uom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UOM"
+    Expression="UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SendBack"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SEND_BACK"
+    Expression="SEND_BACK"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ShortDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHORT_DESC"
+    Expression="SHORT_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RetQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RET_QTY"
+    Expression="RET_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="VendorCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VENDOR_CODE"
+    Expression="VENDOR_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="QtyVen"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="QTY_VEN"
+    Expression="QTY_VEN"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DeptCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEPT_CD"
+    Expression="DEPT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="QtyDept"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="QTY_DEPT"
+    Expression="QTY_DEPT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="MsQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="MS_QTY"
+    Expression="MS_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Remarks"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REMARKS"
+    Expression="REMARKS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PreparedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="61"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PREPARED_BY"
+    Expression="PREPARED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="61"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="QcIncharge"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="61"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="QC_INCHARGE"
+    Expression="QC_INCHARGE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="61"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AuthorisedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="61"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AUTHORISED_BY"
+    Expression="AUTHORISED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="61"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BatchNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_NO"
+    Expression="BATCH_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ArNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AR_NO"
+    Expression="AR_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ArDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="AR_DATE"
+    Expression="AR_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="MainStoreRctDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MAIN_STORE_RCT_DATE"
+    Expression="MAIN_STORE_RCT_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JcBatchNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="18"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JC_BATCH_NO"
+    Expression="JC_BATCH_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JcNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JC_NO"
+    Expression="JC_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

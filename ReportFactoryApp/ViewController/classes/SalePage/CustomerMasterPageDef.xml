@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="CustomerMasterPageDef"
+                Package="SalePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CustomerMasterVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="CustomerMasterVO1Iterator"/>
+    <searchRegion Binds="CustomerMasterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="CustomerMasterVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CustomerMasterVO1Iterator" id="CustomerMasterVO1">
+      <nodeDefinition DefName="model.sale.views.CustomerMasterVO" Name="CustomerMasterVO10">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="VendorCode"/>
+          <Item Value="VendorStatus"/>
+          <Item Value="RegisterationDate"/>
+          <Item Value="GstRegNo"/>
+          <Item Value="PanNo"/>
+          <Item Value="UnitCode"/>
+          <Item Value="UnitName"/>
+          <Item Value="RegisteredDealer"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="PayTerm"/>
+          <Item Value="VendorFlag"/>
+          <Item Value="VendorType"/>
+          <Item Value="VendorAddressType"/>
+          <Item Value="ContactPerson"/>
+          <Item Value="Phones"/>
+          <Item Value="Telex"/>
+          <Item Value="WeekOff"/>
+          <Item Value="Address"/>
+          <Item Value="CityCode"/>
+          <Item Value="City"/>
+          <Item Value="State"/>
+          <Item Value="StateGstCode"/>
+          <Item Value="Country"/>
+          <Item Value="PinCode"/>
+          <Item Value="RegFlag"/>
+          <Item Value="InterUnit"/>
+          <Item Value="PartyType"/>
+          <Item Value="QaStatus"/>
+          <Item Value="ObjectVersionNumber"/>
+          <Item Value="RegistrationFlag"/>
+          <Item Value="StaxType"/>
+          <Item Value="VenTp"/>
+          <Item Value="ChannelType"/>
+          <Item Value="SapNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Pending FG for Receiving in Store " id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:selectOneChoice value="#{bindings.SubLedger_UnitCode.inputValue}"
+                              label="Unit Name"
+                              required="#{bindings.SubLedger_UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.SubLedger_UnitCode.hints.tooltip}" id="soc1">
+            <f:selectItems value="#{bindings.SubLedger_UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.SubLedger_UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Execute" id="b1" actionListener="#{PendingFGforReceivingInStoreBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel " id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Pending FG for Receiving in Store.xls"
+                                             title="Pending FG for Receiving in Store "/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PendingFGforReceivingInStoreVO1.collectionModel}" var="row"
+              rows="#{bindings.PendingFGforReceivingInStoreVO1.rangeSize}"
+              emptyText="#{bindings.PendingFGforReceivingInStoreVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.PendingFGforReceivingInStoreVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PendingFGforReceivingInStoreVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.PendingFGforReceivingInStoreVO1.rangeSize}"
+              filterModel="#{bindings.PendingFGforReceivingInStoreVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PendingFGforReceivingInStoreVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page" columnStretching="column:c10">
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.UnitCode.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c6">
+        <af:outputText value="#{row.UnitCode}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.UnitCode.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.ProdnSlip.name}" filterable="true"
+                 sortable="true" headerText="Production Slip" id="c2">
+        <af:outputText value="#{row.ProdnSlip}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.ProdnSlip.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.ProdnSlipDt.name}" filterable="true"
+                 sortable="true" headerText="Production Slip Date"
+                 id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingFGforReceivingInStoreVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ProdnSlipDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.PendingFGforReceivingInStoreVO1.hints.ProdnSlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ProdnSlipDt}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.ProdnSlipDt.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.PendingFGforReceivingInStoreVO1.hints.ProdnSlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.PdqaNo.name}" filterable="true"
+                 sortable="true" headerText="PDQA No" id="c5">
+        <af:outputText value="#{row.PdqaNo}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.PdqaNo.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.ProductCode.name}" filterable="true"
+                 sortable="true" headerText="Product Code"
+                 id="c1">
+        <af:outputText value="#{row.ProductCode}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.ProductCode.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="Batch No" id="c8">
+        <af:outputText value="#{row.BatchNo}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.BatchNo.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.MfgDate.name}" filterable="true"
+                 sortable="true" headerText="MFG Date" id="c9">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingFGforReceivingInStoreVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.MfgDate.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.PendingFGforReceivingInStoreVO1.hints.MfgDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.MfgDate}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.MfgDate.tooltip}" id="ot9">
+          <af:convertDateTime pattern="#{bindings.PendingFGforReceivingInStoreVO1.hints.MfgDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.ExpDate.name}" filterable="true"
+                 sortable="true" headerText="Exp Date" id="c7">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingFGforReceivingInStoreVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ExpDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.PendingFGforReceivingInStoreVO1.hints.ExpDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ExpDate}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.ExpDate.tooltip}" id="ot7">
+          <af:convertDateTime pattern="#{bindings.PendingFGforReceivingInStoreVO1.hints.ExpDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.AcceptQty.name}" filterable="true"
+                 sortable="true" headerText="Qty" id="c4">
+        <af:outputText value="#{row.AcceptQty}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.AcceptQty.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.PendingFGforReceivingInStoreVO1.hints.AcceptQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingFGforReceivingInStoreVO1.hints.ItemName.name}" filterable="true"
+                 sortable="true" headerText="Product Name" id="c10">
+        <af:outputText value="#{row.ItemName}"
+                       shortDesc="#{bindings.PendingFGforReceivingInStoreVO1.hints.ItemName.tooltip}" id="ot10"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

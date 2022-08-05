@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="DailyStockStatementPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DailyStockStatementVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="DailyStockStatementVO1Iterator"/>
+    <searchRegion Binds="DailyStockStatementVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="DailyStockStatementVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DailyStockStatementVO1Iterator" id="DailyStockStatementVO1">
+      <nodeDefinition DefName="model.inventory.views.DailyStockStatementVO" Name="DailyStockStatementVO10">
+        <AttrNames>
+          <Item Value="ItemCd"/>
+          <Item Value="Grup"/>
+          <Item Value="Subgroup"/>
+          <Item Value="Description"/>
+          <Item Value="Uom"/>
+          <Item Value="DayOpening"/>
+          <Item Value="MonthOpening"/>
+          <Item Value="DayReceipt"/>
+          <Item Value="ToDateReceipt"/>
+          <Item Value="DayIssue"/>
+          <Item Value="ToDateIssue"/>
+          <Item Value="ClosingStock"/>
+          <Item Value="UnApproveQtyInQc"/>
+          <Item Value="UnitCd"/>
+          <Item Value="Loc"/>
+          <Item Value="WkHo"/>
+          <Item Value="Sid"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callDailyStockStatementproc" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callDailyStockStatementproc" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.String"/>
+      <NamedData NDName="LV_LocationFilter" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+    </methodAction>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_DailyStockStatement_LocationFilter"
+                  id="DailyStockStatement_LocationFilter"/>
+  </bindings>
+</pageDefinition>

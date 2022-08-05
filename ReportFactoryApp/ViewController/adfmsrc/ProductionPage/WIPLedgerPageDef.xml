@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="WIPLedgerPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="WIPLedgerVO1" RangeSize="50" DataControl="AppModuleDataControl" id="WIPLedgerVO1Iterator"/>
+    <searchRegion Binds="WIPLedgerVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="WIPLedgerVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="WIPLedgerVO1Iterator" id="WIPLedgerVO1">
+      <nodeDefinition DefName="model.production.views.WIPLedgerVO" Name="WIPLedgerVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ProcCd"/>
+          <Item Value="LocCd"/>
+          <Item Value="LocName"/>
+          <Item Value="DocNo"/>
+          <Item Value="EntryNo"/>
+          <Item Value="EntryDt"/>
+          <Item Value="DocType"/>
+          <Item Value="RecQty"/>
+          <Item Value="IssQty"/>
+          <Item Value="Uom"/>
+          <Item Value="Remarks"/>
+          <Item Value="FromProc"/>
+          <Item Value="FromProcName"/>
+          <Item Value="ToProcDetail"/>
+          <Item Value="BatchNo"/>
+          <Item Value="ArNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_WIPLgr_PrcssFilter"
+                  id="WIPLgr_PrcssFilter"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_WIPLgr_ItemFilter"
+                  id="WIPLgr_ItemFilter"/>
+    <methodAction id="callWIPLedgerreport" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callWIPLedgerreport" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_LocWip" NDType="java.lang.String"/>
+      <NamedData NDName="LV_WIPLgr_PrcssFilter" NDType="java.lang.String"/>
+      <NamedData NDName="LV_WIPLgr_ItemFilter" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.Integer"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_LocWip" id="LocWip"/>
+  </bindings>
+</pageDefinition>

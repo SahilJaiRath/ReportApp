@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="IncominginspectionCheckPageDef"
+                Package="QualityPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="IncominginspectionCheckVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="IncominginspectionCheckVO1Iterator"/>
+    <searchRegion Binds="IncominginspectionCheckVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="IncominginspectionCheckVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="IncominginspectionCheckVO1Iterator" id="IncominginspectionCheckVO1">
+      <nodeDefinition DefName="model.Quality.views.IncominginspectionCheckVO" Name="IncominginspectionCheckVO10">
+        <AttrNames>
+          <Item Value="ItemCode"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="CheckMethod"/>
+          <Item Value="ChkptSeqNo"/>
+          <Item Value="ChkptDesc"/>
+          <Item Value="BaseLimit"/>
+          <Item Value="UpperLimit"/>
+          <Item Value="LowerLimit"/>
+          <Item Value="UomOfLimits"/>
+          <Item Value="InsStage"/>
+          <Item Value="InspItem"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="IncominginspectionCheckVO1Iterator" id="IncominginspectionCheckVO11">
+      <nodeDefinition DefName="model.Quality.views.IncominginspectionCheckVO" Name="IncominginspectionCheckVO110">
+        <AttrNames>
+          <Item Value="ItemCode"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="CheckMethod"/>
+          <Item Value="ChkptSeqNo"/>
+          <Item Value="ChkptDesc"/>
+          <Item Value="BaseLimit"/>
+          <Item Value="UpperLimit"/>
+          <Item Value="LowerLimit"/>
+          <Item Value="UomOfLimits"/>
+          <Item Value="InsStage"/>
+          <Item Value="InspItem"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

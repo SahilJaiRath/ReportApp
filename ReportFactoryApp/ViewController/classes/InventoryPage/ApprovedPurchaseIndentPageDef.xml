@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="ApprovedPurchaseIndentPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ApprovedPurchaseIndentVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="ApprovedPurchaseIndentVO1Iterator"/>
+    <searchRegion Binds="ApprovedPurchaseIndentVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ApprovedPurchaseIndentVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ApprovedPurchaseIndentVO1Iterator" id="ApprovedPurchaseIndentVO1">
+      <nodeDefinition DefName="model.inventory.views.ApprovedPurchaseIndentVO" Name="ApprovedPurchaseIndentVO10">
+        <AttrNames>
+          <Item Value="SrlNo"/>
+          <Item Value="IndNo"/>
+          <Item Value="IndDt"/>
+          <Item Value="AuthDt"/>
+          <Item Value="IndDept"/>
+          <Item Value="DeptName"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Uom"/>
+          <Item Value="Qty"/>
+          <Item Value="ReqByDate"/>
+          <Item Value="UnitCd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction id="callApprovedPurchaseIndent" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callApprovedPurchaseIndent" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

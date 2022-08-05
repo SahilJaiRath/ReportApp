@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="CreditorOutstandingPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CreditorOutstandingVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="CreditorOutstandingVO1Iterator"/>
+    <searchRegion Binds="CreditorOutstandingVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="CreditorOutstandingVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CreditorOutstandingVO1Iterator" id="CreditorOutstandingVO1">
+      <nodeDefinition DefName="model.finance.views.CreditorOutstandingVO" Name="CreditorOutstandingVO10">
+        <AttrNames>
+          <Item Value="VenCd"/>
+          <Item Value="VenBillNo"/>
+          <Item Value="VenBillDate"/>
+          <Item Value="Name"/>
+          <Item Value="Address"/>
+          <Item Value="SessionId"/>
+          <Item Value="UnitCode"/>
+          <Item Value="RefNo"/>
+          <Item Value="RefDate"/>
+          <Item Value="DocAmt"/>
+          <Item Value="AdvanceDebitNote"/>
+          <Item Value="BalAmt"/>
+          <Item Value="DueDate"/>
+          <Item Value="LoanType"/>
+          <Item Value="P1"/>
+          <Item Value="P2"/>
+          <Item Value="P3"/>
+          <Item Value="P4"/>
+          <Item Value="P5"/>
+          <Item Value="P6"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callCreditorOutstanding" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callCreditorOutstanding" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.Integer"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_Custcode" NDType="java.lang.String"/>
+      <NamedData NDName="LV_p1" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p2" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p3" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p4" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p5" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p6" NDType="java.lang.Integer"/>
+    </methodAction>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_PndingSrvForQcVendorCd"
+                  id="PndingSrvForQcVendorCd"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

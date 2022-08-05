@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ConsolidatePurchaseDetailforTDSPANBasedVVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.finance.views.ConsolidatePurchaseDetailforTDSPANBasedVVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P261_FROM_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P261_TO_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <SQLQuery><![CDATA[select   
+        vendor_code AS "VENDOR CODE", 
+        vendor_name as "VENDOR NAME", 
+        pan_no AS "PAN_NO", 
+        gstin_no AS "GSTIN NO", 
+        state_code AS "STATE CODE", 
+        vendor_address AS "VENDOR ADDRESS", 
+        SUM(TAXABLE_VALUE_AFTER_DISCOUNT) AS "PURCHASE AMOUNT" 
+FROM  
+( 
+Select 
+    B.FIN_TBENT_UNIT_CODE AS "UNIT_CODE", 
+    L.VEN_CD AS "VENDOR_CODE", 
+    VM.NAME AS "VENDOR_NAME", 
+    VM.PAN_NO AS "PAN_NO", 
+    VM.GST_REG_NO AS "GSTIN_NO", 
+    SE.STATE_GST_CODE ||'-'|| VRA.STATE AS "STATE_CODE", 
+    VRA.ADDRESS1 ||' '||VRA.ADDRESS2 ||' '||VRA.ADDRESS3 AS "VENDOR_ADDRESS", 
+    NVL(B.QUANTITY * B.RATE,0) - (NVL(B.QUANTITY,0) * NVL(B.RATE,0)) * (NVL(B.DISCOUNT_PER,0) / 100) AS "TAXABLE_VALUE_AFTER_DISCOUNT" 
+ 
+from Bill_detail B 
+LEFT JOIN BILL L ON B.FIN_TBENT_BILL_NO = L.BILL_NO AND B.FIN_TBENT_BILL_TYPE = L.BILL_TYPE AND B.FIN_TBENT_UNIT_CODE = L.UNIT_CODE 
+LEFT JOIN VENDOR_MASTER VM ON L.VEN_CD = VM.VENDOR_CODE 
+LEFT JOIN VENDOR_REGD_ADDRESS VRA ON L.VEN_CD = VRA.VENDOR_CODE 
+LEFT JOIN STATE SE ON VRA.STATE = SE.NAME 
+WHERE L.VOU_DATE BETWEEN :P261_FROM_DATE AND :P261_TO_DATE 
+AND B.FIN_TBENT_BILL_TYPE <> 'V' 
+) 
+GROUP BY VENDOR_CODE, VENDOR_NAME, PAN_NO, GSTIN_NO, STATE_CODE, VENDOR_ADDRESS]]></SQLQuery>
+  <ViewAttribute
+    Name="VendorCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"VENDOR CODE"'
+    Expression='"VENDOR CODE"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"VENDOR NAME"'
+    Expression='"VENDOR NAME"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PanNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PAN_NO"
+    Expression="PAN_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GstinNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"GSTIN NO"'
+    Expression='"GSTIN NO"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StateCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="53"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"STATE CODE"'
+    Expression='"STATE CODE"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="53"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorAddress"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="312"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"VENDOR ADDRESS"'
+    Expression='"VENDOR ADDRESS"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="312"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PurchaseAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"PURCHASE AMOUNT"'
+    Expression='"PURCHASE AMOUNT"'
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="VoucherWiseDebitCreditPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VoucherWiseDebitCreditVVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="VoucherWiseDebitCreditVVO1Iterator"/>
+    <searchRegion Binds="VoucherWiseDebitCreditVVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VoucherWiseDebitCreditVVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VoucherWiseDebitCreditVVO1Iterator" id="VoucherWiseDebitCreditVVO1">
+      <nodeDefinition DefName="model.finance.views.VoucherWiseDebitCreditVVO" Name="VoucherWiseDebitCreditVVO10">
+        <AttrNames>
+          <Item Value="FinTvouchUnitCode"/>
+          <Item Value="FinTvouchVouType"/>
+          <Item Value="FinTvouchVouNo"/>
+          <Item Value="AmountCr"/>
+          <Item Value="AmountDr"/>
+          <Item Value="Difference"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction id="callVoucherWiseDebitCredit" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callVoucherWiseDebitCredit" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

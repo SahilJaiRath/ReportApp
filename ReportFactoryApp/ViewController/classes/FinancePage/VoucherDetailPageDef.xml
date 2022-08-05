@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="VoucherDetailPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VoucherDetailVO1" RangeSize="50" DataControl="AppModuleDataControl" id="VoucherDetailVO1Iterator"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <searchRegion Binds="VoucherDetailVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VoucherDetailVO12Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VoucherDetailVO1Iterator" id="VoucherDetailVO1">
+      <nodeDefinition DefName="model.finance.views.VoucherDetailVO" Name="VoucherDetailVO10">
+        <AttrNames>
+          <Item Value="FinTvouchUnitCode"/>
+          <Item Value="VoucherType"/>
+          <Item Value="VouSeries"/>
+          <Item Value="FinTvouchVouDate"/>
+          <Item Value="FinTvouchVouNo"/>
+          <Item Value="Description"/>
+          <Item Value="SubLedgerName"/>
+          <Item Value="Narration"/>
+          <Item Value="Debit"/>
+          <Item Value="Credit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="VoucherDetailVO1Iterator" id="VoucherDetailVO11">
+      <nodeDefinition DefName="model.finance.views.VoucherDetailVO" Name="VoucherDetailVO110">
+        <AttrNames>
+          <Item Value="FinTvouchUnitCode"/>
+          <Item Value="VoucherType"/>
+          <Item Value="VouSeries"/>
+          <Item Value="FinTvouchVouDate"/>
+          <Item Value="FinTvouchVouNo"/>
+          <Item Value="Description"/>
+          <Item Value="SubLedgerName"/>
+          <Item Value="Narration"/>
+          <Item Value="Debit"/>
+          <Item Value="Credit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callVoucherDetail" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callVoucherDetail"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+    <tree IterBinding="VoucherDetailVO1Iterator" id="VoucherDetailVO12">
+      <nodeDefinition DefName="model.finance.views.VoucherDetailVO" Name="VoucherDetailVO120">
+        <AttrNames>
+          <Item Value="FinTvouchUnitCode"/>
+          <Item Value="VoucherType"/>
+          <Item Value="VouSeries"/>
+          <Item Value="FinTvouchVouDate"/>
+          <Item Value="FinTvouchVouNo"/>
+          <Item Value="Description"/>
+          <Item Value="SubLedgerName"/>
+          <Item Value="Narration"/>
+          <Item Value="Debit"/>
+          <Item Value="Credit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

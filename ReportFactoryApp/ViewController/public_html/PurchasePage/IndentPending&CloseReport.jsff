@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Indent Pending &amp; Close Report" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2" contentStyle="width:174px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{IndentPendingAndCloseBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Indent Pending &amp; Close Report.xls"
+                                             title="Indent Pending &amp; Close Report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.IndentPendingAndCloseVO1.collectionModel}" var="row"
+              rows="#{bindings.IndentPendingAndCloseVO1.rangeSize}"
+              emptyText="#{bindings.IndentPendingAndCloseVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.IndentPendingAndCloseVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.IndentPendingAndCloseVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.IndentPendingAndCloseVO1.rangeSize}"
+              filterModel="#{bindings.IndentPendingAndCloseVO1Query.queryDescriptor}" filterVisible="flase"
+              queryListener="#{bindings.IndentPendingAndCloseVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page" columnStretching="column:c5" partialTriggers="::t2">
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.UnitCode.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.UnitCode.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.LocatonName.name}" filterable="true"
+                 sortable="true" headerText="Location Name" id="c8">
+        <af:outputText value="#{row.LocatonName}"
+                       shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.LocatonName.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.IndentNo.name}" filterable="true"
+                 sortable="true" headerText="Indent No" id="c2">
+        <af:outputText value="#{row.IndentNo}" shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.IndentNo.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.IndentDate.name}" filterable="true"
+                 sortable="true" headerText="Indent Date" id="c3">
+        <af:outputText value="#{row.IndentDate}"
+                       shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.IndentDate.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c4">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.ItemCd.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.ItemDescription.name}" filterable="true"
+                 sortable="true" headerText="Item Description" id="c5">
+        <af:outputText value="#{row.ItemDescription}"
+                       shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.ItemDescription.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.ApprovedQty.name}" filterable="true"
+                 sortable="true" headerText="Approved Qty" id="c9">
+        <af:outputText value="#{row.ApprovedQty}"
+                       shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.ApprovedQty.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IndentPendingAndCloseVO1.hints.ApprovedQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.PoQty.name}" filterable="true" sortable="true"
+                 headerText="PO Qty" id="c10">
+        <af:outputText value="#{row.PoQty}" shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.PoQty.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IndentPendingAndCloseVO1.hints.PoQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.BalanceQty.name}" filterable="true"
+                 sortable="true" headerText="Balance Qty" id="c11">
+        <af:outputText value="#{row.BalanceQty}"
+                       shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.BalanceQty.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IndentPendingAndCloseVO1.hints.BalanceQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.IndentCloseSt.name}" filterable="true"
+                 sortable="true" headerText="Indent Close St" id="c6">
+        <af:outputText value="#{row.IndentCloseSt}"
+                       shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.IndentCloseSt.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IndentPendingAndCloseVO1.hints.IndentCancelSt.name}" filterable="true"
+                 sortable="true" headerText="Indent Cancel St" id="c7">
+        <af:outputText value="#{row.IndentCancelSt}"
+                       shortDesc="#{bindings.IndentPendingAndCloseVO1.hints.IndentCancelSt.tooltip}" id="ot7"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

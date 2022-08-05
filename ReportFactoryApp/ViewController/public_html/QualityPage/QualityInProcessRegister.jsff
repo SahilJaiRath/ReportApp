@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Quality In Process Register" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="qualityInProcess_ITEMFILTERId"
+                                        popupTitle="Search and Select: #{bindings.QualityInProcess_ITEMFILTER.hints.label}"
+                                        value="#{bindings.QualityInProcess_ITEMFILTER.inputValue}"
+                                        label="Item Name"
+                                        model="#{bindings.QualityInProcess_ITEMFILTER.listOfValuesModel}"
+                                        required="#{bindings.QualityInProcess_ITEMFILTER.hints.mandatory}"
+                                        columns="#{bindings.QualityInProcess_ITEMFILTER.hints.displayWidth}"
+                                        shortDesc="#{bindings.QualityInProcess_ITEMFILTER.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.QualityInProcess_ITEMFILTER.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b1" actionListener="#{QualityInProcessBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Quality In Process Register.xls"
+                                             title="Quality In Process Register"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.QualityInProcessVO1.collectionModel}" var="row"
+              rows="#{bindings.QualityInProcessVO1.rangeSize}"
+              emptyText="#{bindings.QualityInProcessVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.QualityInProcessVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.QualityInProcessVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.QualityInProcessVO1.rangeSize}"
+              filterModel="#{bindings.QualityInProcessVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.QualityInProcessVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.InspNo.name}" filterable="true" sortable="true"
+                 headerText="QC No" id="c1">
+        <af:outputText value="#{row.InspNo}" shortDesc="#{bindings.QualityInProcessVO1.hints.InspNo.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.InspDt.name}" filterable="true" sortable="true"
+                 headerText="QC Date" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.QualityInProcessVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.InspDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.QualityInProcessVO1.hints.InspDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.InspDt}" shortDesc="#{bindings.QualityInProcessVO1.hints.InspDt.tooltip}" id="ot2">
+          <af:convertDateTime pattern="#{bindings.QualityInProcessVO1.hints.InspDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ProdSlipNo.name}" filterable="true" sortable="true"
+                 headerText="Production No" id="c3">
+        <af:outputText value="#{row.ProdSlipNo}" shortDesc="#{bindings.QualityInProcessVO1.hints.ProdSlipNo.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ProdnSlipDt.name}" filterable="true" sortable="true"
+                 headerText="Production Date" id="c4">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.QualityInProcessVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ProdnSlipDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.QualityInProcessVO1.hints.ProdnSlipDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ProdnSlipDt}" shortDesc="#{bindings.QualityInProcessVO1.hints.ProdnSlipDt.tooltip}"
+                       id="ot4">
+          <af:convertDateTime pattern="#{bindings.QualityInProcessVO1.hints.ProdnSlipDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.LotNo.name}" filterable="true" sortable="true"
+                 headerText="Job Card No" id="c5">
+        <af:outputText value="#{row.LotNo}" shortDesc="#{bindings.QualityInProcessVO1.hints.LotNo.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c6">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.QualityInProcessVO1.hints.ItemCd.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ItemName.name}" filterable="true" sortable="true"
+                 headerText="Item Name" id="c7">
+        <af:outputText value="#{row.ItemName}" shortDesc="#{bindings.QualityInProcessVO1.hints.ItemName.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="Batch" id="c8">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.QualityInProcessVO1.hints.BatchNo.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ProcCd.name}" filterable="true" sortable="true"
+                 headerText="Process Code" id="c9">
+        <af:outputText value="#{row.ProcCd}" shortDesc="#{bindings.QualityInProcessVO1.hints.ProcCd.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ShortDescrip.name}" filterable="true"
+                 sortable="true" headerText="Process Name" id="c10">
+        <af:outputText value="#{row.ShortDescrip}"
+                       shortDesc="#{bindings.QualityInProcessVO1.hints.ShortDescrip.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ProcSeq.name}" filterable="true" sortable="true"
+                 headerText="Process Seq" id="c11">
+        <af:outputText value="#{row.ProcSeq}" shortDesc="#{bindings.QualityInProcessVO1.hints.ProcSeq.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.QualityInProcessVO1.hints.ProcSeq.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ProdnQty.name}" filterable="true" sortable="true"
+                 headerText="Production Qty" id="c12">
+        <af:outputText value="#{row.ProdnQty}" shortDesc="#{bindings.QualityInProcessVO1.hints.ProdnQty.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.QualityInProcessVO1.hints.ProdnQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.AcceptQty.name}" filterable="true" sortable="true"
+                 headerText="Accept Qty" id="c13">
+        <af:outputText value="#{row.AcceptQty}" shortDesc="#{bindings.QualityInProcessVO1.hints.AcceptQty.tooltip}"
+                       id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.QualityInProcessVO1.hints.AcceptQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.RejQty.name}" filterable="true" sortable="true"
+                 headerText="Reject Qty" id="c14">
+        <af:outputText value="#{row.RejQty}" shortDesc="#{bindings.QualityInProcessVO1.hints.RejQty.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.QualityInProcessVO1.hints.RejQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit" id="c15">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.QualityInProcessVO1.hints.UnitCd.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.CreatedBy.name}" filterable="true" sortable="true"
+                 headerText="EMP Id" id="c16">
+        <af:outputText value="#{row.CreatedBy}" shortDesc="#{bindings.QualityInProcessVO1.hints.CreatedBy.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.EmpName.name}" filterable="true" sortable="true"
+                 headerText="EMP Name" id="c17">
+        <af:outputText value="#{row.EmpName}" shortDesc="#{bindings.QualityInProcessVO1.hints.EmpName.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.QualityInProcessVO1.hints.ArNo.name}" filterable="true" sortable="true"
+                 headerText="AR No" id="c18">
+        <af:outputText value="#{row.ArNo}" shortDesc="#{bindings.QualityInProcessVO1.hints.ArNo.tooltip}" id="ot18"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

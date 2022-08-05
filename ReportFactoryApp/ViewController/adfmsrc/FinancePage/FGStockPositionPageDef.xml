@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="FGStockPositionPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="FGStockPositionVO1" DataControl="AppModuleDataControl"
+              id="FGStockPositionVO1Iterator" RangeSize="50"/>
+    <searchRegion Binds="FGStockPositionVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="FGStockPositionVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="FGStockPositionVO1Iterator" id="FGStockPositionVO1">
+      <nodeDefinition DefName="model.finance.views.FGStockPositionVO" Name="FGStockPositionVO10">
+        <AttrNames>
+          <Item Value="ProductTyp"/>
+          <Item Value="ProdType"/>
+          <Item Value="ProductCode"/>
+          <Item Value="ProductName"/>
+          <Item Value="Uom"/>
+          <Item Value="BatchSize"/>
+          <Item Value="PackAt"/>
+          <Item Value="Mrp"/>
+          <Item Value="MinLevel"/>
+          <Item Value="MaxLevel"/>
+          <Item Value="Qu1Quantity"/>
+          <Item Value="Qu2Quantity"/>
+          <Item Value="Qu3Quantity"/>
+          <Item Value="Qu4Quantity"/>
+          <Item Value="TransitQtyU1"/>
+          <Item Value="TransitQtyU2"/>
+          <Item Value="ClosStockU1"/>
+          <Item Value="ClosStockU2"/>
+          <Item Value="CurrStockD28U1"/>
+          <Item Value="CurrStockD28U2"/>
+          <Item Value="WipQtyU1"/>
+          <Item Value="WipQtyU2"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

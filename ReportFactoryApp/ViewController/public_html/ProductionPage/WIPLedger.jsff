@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="WIP Ledger report" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:190px;" labelStyle="width:100px"
+                              autoSubmit="true">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="locWipId" popupTitle="Search and Select: #{bindings.LocWip.hints.label}"
+                                        value="#{bindings.LocWip.inputValue}" label="Location"
+                                        model="#{bindings.LocWip.listOfValuesModel}"
+                                        required="#{bindings.LocWip.hints.mandatory}"
+                                        columns="#{bindings.LocWip.hints.displayWidth}"
+                                        shortDesc="#{bindings.LocWip.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.LocWip.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputComboboxListOfValues id="wIPLgr_PrcssFilterId"
+                                        popupTitle="Search and Select: #{bindings.WIPLgr_PrcssFilter.hints.label}"
+                                        value="#{bindings.WIPLgr_PrcssFilter.inputValue}"
+                                        label="Process"
+                                        model="#{bindings.WIPLgr_PrcssFilter.listOfValuesModel}"
+                                        required="#{bindings.WIPLgr_PrcssFilter.hints.mandatory}"
+                                        columns="#{bindings.WIPLgr_PrcssFilter.hints.displayWidth}"
+                                        shortDesc="#{bindings.WIPLgr_PrcssFilter.hints.tooltip}" contentStyle="width:170px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.WIPLgr_PrcssFilter.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputComboboxListOfValues id="wIPLgr_ItemFilterId"
+                                        popupTitle="Search and Select: #{bindings.WIPLgr_ItemFilter.hints.label}"
+                                        value="#{bindings.WIPLgr_ItemFilter.inputValue}"
+                                        label="Item"
+                                        model="#{bindings.WIPLgr_ItemFilter.listOfValuesModel}"
+                                        required="#{bindings.WIPLgr_ItemFilter.hints.mandatory}"
+                                        columns="#{bindings.WIPLgr_ItemFilter.hints.displayWidth}"
+                                        shortDesc="#{bindings.WIPLgr_ItemFilter.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.WIPLgr_ItemFilter.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+        <af:gridCell marginStart="5px" width="34%" id="gc7">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc8">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id3" contentStyle="width:192px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc9">
+          <af:button text="Execute" id="b1" actionListener="#{WIPLedgerBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="WIP Ledger report.xls"
+                                             title="WIP Ledger report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.WIPLedgerVO1.collectionModel}" var="row" rows="#{bindings.WIPLedgerVO1.rangeSize}"
+              emptyText="#{bindings.WIPLedgerVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.WIPLedgerVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.WIPLedgerVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.WIPLedgerVO1.rangeSize}" filterModel="#{bindings.WIPLedgerVO1Query.queryDescriptor}"
+              filterVisible="false" queryListener="#{bindings.WIPLedgerVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.UnitCd.label}" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.WIPLedgerVO1.hints.UnitCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.ItemCd.label}" id="c2">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.WIPLedgerVO1.hints.ItemCd.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.ItemDesc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.ItemDesc.label}" id="c3">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.WIPLedgerVO1.hints.ItemDesc.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.ProcCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.ProcCd.label}" id="c4">
+        <af:outputText value="#{row.ProcCd}" shortDesc="#{bindings.WIPLedgerVO1.hints.ProcCd.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.LocCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.LocCd.label}" id="c5">
+        <af:outputText value="#{row.LocCd}" shortDesc="#{bindings.WIPLedgerVO1.hints.LocCd.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.LocName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.LocName.label}" id="c6">
+        <af:outputText value="#{row.LocName}" shortDesc="#{bindings.WIPLedgerVO1.hints.LocName.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.DocNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.DocNo.label}" id="c7">
+        <af:outputText value="#{row.DocNo}" shortDesc="#{bindings.WIPLedgerVO1.hints.DocNo.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.EntryNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.EntryNo.label}" id="c8">
+        <af:outputText value="#{row.EntryNo}" shortDesc="#{bindings.WIPLedgerVO1.hints.EntryNo.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.EntryDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.EntryDt.label}" id="c9">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.WIPLedgerVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EntryDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.WIPLedgerVO1.hints.EntryDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.EntryDt}" shortDesc="#{bindings.WIPLedgerVO1.hints.EntryDt.tooltip}" id="ot9">
+          <af:convertDateTime pattern="#{bindings.WIPLedgerVO1.hints.EntryDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.DocType.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.DocType.label}" id="c10">
+        <af:outputText value="#{row.DocType}" shortDesc="#{bindings.WIPLedgerVO1.hints.DocType.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.RecQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.RecQty.label}" id="c11">
+        <af:outputText value="#{row.RecQty}" shortDesc="#{bindings.WIPLedgerVO1.hints.RecQty.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.WIPLedgerVO1.hints.RecQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.IssQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.IssQty.label}" id="c12">
+        <af:outputText value="#{row.IssQty}" shortDesc="#{bindings.WIPLedgerVO1.hints.IssQty.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.WIPLedgerVO1.hints.IssQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.Uom.label}" id="c13">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.WIPLedgerVO1.hints.Uom.tooltip}" id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.Remarks.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.Remarks.label}" id="c14">
+        <af:outputText value="#{row.Remarks}" shortDesc="#{bindings.WIPLedgerVO1.hints.Remarks.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.FromProc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.FromProc.label}" id="c15">
+        <af:outputText value="#{row.FromProc}" shortDesc="#{bindings.WIPLedgerVO1.hints.FromProc.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.FromProcName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.FromProcName.label}" id="c16">
+        <af:outputText value="#{row.FromProcName}" shortDesc="#{bindings.WIPLedgerVO1.hints.FromProcName.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.ToProcDetail.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.ToProcDetail.label}" id="c17">
+        <af:outputText value="#{row.ToProcDetail}" shortDesc="#{bindings.WIPLedgerVO1.hints.ToProcDetail.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.BatchNo.label}" id="c18">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.WIPLedgerVO1.hints.BatchNo.tooltip}" id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.WIPLedgerVO1.hints.ArNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.WIPLedgerVO1.hints.ArNo.label}" id="c19">
+        <af:outputText value="#{row.ArNo}" shortDesc="#{bindings.WIPLedgerVO1.hints.ArNo.tooltip}" id="ot19"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

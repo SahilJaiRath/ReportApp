@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="UnitOfMeasurementPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="UnitOfMeasurementVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="UnitOfMeasurementVO1Iterator"/>
+    <searchRegion Binds="UnitOfMeasurementVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="UnitOfMeasurementVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="UnitOfMeasurementVO1Iterator" id="UnitOfMeasurementVO1">
+      <nodeDefinition DefName="model.inventory.views.UnitOfMeasurementVO" Name="UnitOfMeasurementVO10">
+        <AttrNames>
+          <Item Value="MeasureUnit"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="NonMovingItemPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="NonMovingItemVO1" RangeSize="50" DataControl="AppModuleDataControl" id="NonMovingItemVO1Iterator"/>
+    <searchRegion Binds="NonMovingItemVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="NonMovingItemVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="NonMovingItemVO1Iterator" id="NonMovingItemVO1">
+      <nodeDefinition DefName="model.inventory.views.NonMovingItemVO" Name="NonMovingItemVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ItemType"/>
+          <Item Value="Location"/>
+          <Item Value="Uom"/>
+          <Item Value="Rate"/>
+          <Item Value="Stock"/>
+          <Item Value="StockValue"/>
+          <Item Value="LastIssDt"/>
+          <Item Value="Days"/>
+          <Item Value="GroupCode"/>
+          <Item Value="SubGroupCode"/>
+          <Item Value="Status"/>
+          <Item Value="LastRecDt"/>
+          <Item Value="ProcCd"/>
+          <Item Value="LastMrnNo"/>
+          <Item Value="VendorCd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_Non_Moving_Item_prd"
+                  id="Non_Moving_Item_prd"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubGroupCd" id="SubGroupCd"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_GroupCd" id="GroupCd"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callNonMovingItem" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callNonMovingItem"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ASONDT" NDType="java.util.Date"/>
+      <NamedData NDName="LV_DAYS" NDType="java.lang.String"/>
+      <NamedData NDName="LV_GROUPCODE" NDType="java.lang.String"/>
+      <NamedData NDName="LV_NEW" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SUBGROUP" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="Non_Moving_Item_Day">
+      <AttrNames>
+        <Item Value="Non_Moving_Item_Day"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

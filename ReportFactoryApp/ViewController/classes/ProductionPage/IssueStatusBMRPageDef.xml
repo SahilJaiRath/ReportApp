@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="IssueStatusBMRPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="IssueStatusBMRVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="IssueStatusBMRVO1Iterator"/>
+    <searchRegion Binds="IssueStatusBMRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="IssueStatusBMRVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="IssueStatusBMRVO1Iterator" id="IssueStatusBMRVO1">
+      <nodeDefinition DefName="model.production.views.IssueStatusBMRVO" Name="IssueStatusBMRVO10">
+        <AttrNames>
+          <Item Value="Sr"/>
+          <Item Value="LotNo"/>
+          <Item Value="LotDate"/>
+          <Item Value="LeafCd"/>
+          <Item Value="Qty"/>
+          <Item Value="UnitCd"/>
+          <Item Value="Status"/>
+          <Item Value="BprDesc"/>
+          <Item Value="BatchNo"/>
+          <Item Value="SubGrpDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callIssueStatusBMR" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callIssueStatusBMR" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

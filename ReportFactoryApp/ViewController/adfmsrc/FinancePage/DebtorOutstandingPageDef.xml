@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="DebtorOutstandingPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DebtorOutstandingVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="DebtorOutstandingVO1Iterator"/>
+    <searchRegion Binds="DebtorOutstandingVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="DebtorOutstandingVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DebtorOutstandingVO1Iterator" id="DebtorOutstandingVO1">
+      <nodeDefinition DefName="model.finance.views.DebtorOutstandingVO" Name="DebtorOutstandingVO10">
+        <AttrNames>
+          <Item Value="VenCd"/>
+          <Item Value="Name"/>
+          <Item Value="Address"/>
+          <Item Value="UnitCode"/>
+          <Item Value="RefNo"/>
+          <Item Value="RefDate"/>
+          <Item Value="SessionId"/>
+          <Item Value="BillAmt"/>
+          <Item Value="AdvanceCreditNote"/>
+          <Item Value="BalAmt"/>
+          <Item Value="DueDate"/>
+          <Item Value="LoanType"/>
+          <Item Value="P1"/>
+          <Item Value="P2"/>
+          <Item Value="P3"/>
+          <Item Value="P4"/>
+          <Item Value="P5"/>
+          <Item Value="P6"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_CollectionCust" id="CollectionCust"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p1">
+      <AttrNames>
+        <Item Value="LV_p1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p2">
+      <AttrNames>
+        <Item Value="LV_p2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p3">
+      <AttrNames>
+        <Item Value="LV_p3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p4">
+      <AttrNames>
+        <Item Value="LV_p4"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p5">
+      <AttrNames>
+        <Item Value="LV_p5"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p6">
+      <AttrNames>
+        <Item Value="LV_p6"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callDebtorOutstanding" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callDebtorOutstanding" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.Integer"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_CUSTOMER" NDType="java.lang.String"/>
+      <NamedData NDName="LV_p1" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p2" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p3" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p4" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p5" NDType="java.lang.Integer"/>
+      <NamedData NDName="LV_p6" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

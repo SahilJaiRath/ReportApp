@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Daily Stock Statement " id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:186px;" labelStyle="width:100px"
+                              autoSubmit="true">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="dailyStockStatement_LocationFilterId"
+                                        popupTitle="Search and Select: #{bindings.DailyStockStatement_LocationFilter.hints.label}"
+                                        value="#{bindings.DailyStockStatement_LocationFilter.inputValue}"
+                                        label="Location"
+                                        model="#{bindings.DailyStockStatement_LocationFilter.listOfValuesModel}"
+                                        required="#{bindings.DailyStockStatement_LocationFilter.hints.mandatory}"
+                                        columns="#{bindings.DailyStockStatement_LocationFilter.hints.displayWidth}"
+                                        shortDesc="#{bindings.DailyStockStatement_LocationFilter.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.DailyStockStatement_LocationFilter.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="As On Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{DailyStockStatementBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" > 
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Daily Stock Statement report.xls"
+                                             title="Daily Stock Statement report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.DailyStockStatementVO1.collectionModel}" var="row"
+              rows="#{bindings.DailyStockStatementVO1.rangeSize}"
+              emptyText="#{bindings.DailyStockStatementVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.DailyStockStatementVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.DailyStockStatementVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.DailyStockStatementVO1.rangeSize}"
+              filterModel="#{bindings.DailyStockStatementVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.DailyStockStatementVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c14">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.DailyStockStatementVO1.hints.UnitCd.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c1">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.DailyStockStatementVO1.hints.ItemCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.Loc.name}" filterable="true" sortable="true"
+                 headerText="Location" id="c15">
+        <af:outputText value="#{row.Loc}" shortDesc="#{bindings.DailyStockStatementVO1.hints.Loc.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.DailyStockStatementVO1.hints.Description.label}" id="c4">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.DailyStockStatementVO1.hints.Description.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="Uom" id="c5">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.DailyStockStatementVO1.hints.Uom.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.WkHo.name}" filterable="true" sortable="true"
+                 headerText="Wk ho" id="c16">
+        <af:outputText value="#{row.WkHo}" shortDesc="#{bindings.DailyStockStatementVO1.hints.WkHo.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.Grup.name}" filterable="true" sortable="true"
+                 headerText="Grup" id="c2">
+        <af:outputText value="#{row.Grup}" shortDesc="#{bindings.DailyStockStatementVO1.hints.Grup.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.Subgroup.name}" filterable="true" sortable="true"
+                 headerText="SubGroup" id="c3">
+        <af:outputText value="#{row.Subgroup}" shortDesc="#{bindings.DailyStockStatementVO1.hints.Subgroup.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.ClosingStock.name}" filterable="true"
+                 sortable="true" headerText="Closing Stock" id="c12">
+        <af:outputText value="#{row.ClosingStock}"
+                       shortDesc="#{bindings.DailyStockStatementVO1.hints.ClosingStock.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.DailyStockStatementVO1.hints.ClosingStock.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.DayOpening.name}" filterable="true"
+                 sortable="true" headerText="Day Opening" id="c6">
+        <af:outputText value="#{row.DayOpening}" shortDesc="#{bindings.DailyStockStatementVO1.hints.DayOpening.tooltip}"
+                       id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DailyStockStatementVO1.hints.DayOpening.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.MonthOpening.name}" filterable="true"
+                 sortable="true" headerText="Month Opening" id="c7">
+        <af:outputText value="#{row.MonthOpening}"
+                       shortDesc="#{bindings.DailyStockStatementVO1.hints.MonthOpening.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.DailyStockStatementVO1.hints.MonthOpening.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.DayReceipt.name}" filterable="true"
+                 sortable="true" headerText="Day Receipt" id="c8">
+        <af:outputText value="#{row.DayReceipt}" shortDesc="#{bindings.DailyStockStatementVO1.hints.DayReceipt.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DailyStockStatementVO1.hints.DayReceipt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.ToDateReceipt.name}" filterable="true"
+                 sortable="true" headerText="To Day Receipt" id="c9">
+        <af:outputText value="#{row.ToDateReceipt}"
+                       shortDesc="#{bindings.DailyStockStatementVO1.hints.ToDateReceipt.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.DailyStockStatementVO1.hints.ToDateReceipt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.DayIssue.name}" filterable="true" sortable="true"
+                 headerText="Day Issue" id="c10">
+        <af:outputText value="#{row.DayIssue}" shortDesc="#{bindings.DailyStockStatementVO1.hints.DayIssue.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DailyStockStatementVO1.hints.DayIssue.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.ToDateIssue.name}" filterable="true"
+                 sortable="true" headerText="To Date Issue" id="c11">
+        <af:outputText value="#{row.ToDateIssue}"
+                       shortDesc="#{bindings.DailyStockStatementVO1.hints.ToDateIssue.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DailyStockStatementVO1.hints.ToDateIssue.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.UnApproveQtyInQc.name}" filterable="true"
+                 sortable="true" headerText="Un Approve Qty In QC" id="c13">
+        <af:outputText value="#{row.UnApproveQtyInQc}"
+                       shortDesc="#{bindings.DailyStockStatementVO1.hints.UnApproveQtyInQc.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.DailyStockStatementVO1.hints.UnApproveQtyInQc.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DailyStockStatementVO1.hints.Sid.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DailyStockStatementVO1.hints.Sid.label}" id="c17">
+        <af:outputText value="#{row.Sid}" shortDesc="#{bindings.DailyStockStatementVO1.hints.Sid.tooltip}" id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DailyStockStatementVO1.hints.Sid.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

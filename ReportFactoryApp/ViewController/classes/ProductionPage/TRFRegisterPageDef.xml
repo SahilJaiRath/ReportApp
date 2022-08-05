@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="TRFRegisterPageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="TRFRegisterVO1" RangeSize="50" DataControl="AppModuleDataControl" id="TRFRegisterVO1Iterator"/>
+    <searchRegion Binds="TRFRegisterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="TRFRegisterVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="TRFRegisterVO1Iterator" id="TRFRegisterVO1">
+      <nodeDefinition DefName="model.production.views.TRFRegisterVO" Name="TRFRegisterVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="SampleNo"/>
+          <Item Value="SampleType"/>
+          <Item Value="InspectType"/>
+          <Item Value="SampleDate"/>
+          <Item Value="SampleProduct"/>
+          <Item Value="ItemName"/>
+          <Item Value="SampleQty"/>
+          <Item Value="SampleUom"/>
+          <Item Value="SampleLocation"/>
+          <Item Value="JcNo"/>
+          <Item Value="BatchNo"/>
+          <Item Value="BatchSize"/>
+          <Item Value="Remark"/>
+          <Item Value="QcStatus"/>
+          <Item Value="NoOfSampleCollect"/>
+          <Item Value="SampleCollectDate"/>
+          <Item Value="SampleBy"/>
+          <Item Value="ApprovedBy"/>
+          <Item Value="SampleId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="ProcessCd"/>
+          <Item Value="ProcessDesc"/>
+          <Item Value="ProcessSeq"/>
+          <Item Value="Type"/>
+          <Item Value="CollectionBy"/>
+          <Item Value="SampleQtyUom"/>
+          <Item Value="SampleByName"/>
+          <Item Value="LocationName"/>
+          <Item Value="ApprovedByName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_TRFRegister_ProductFilter"
+                  id="TRFRegister_ProductFilter"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubLedger_UnitCode" id="SubLedger_UnitCode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="callTRFRegister" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callTRFRegister"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ProductFilter" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

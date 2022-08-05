@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="FG Stock " id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id3" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{FGStockBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.FGStockVO1.collectionModel}" var="row" rows="#{bindings.FGStockVO1.rangeSize}"
+              emptyText="#{bindings.FGStockVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.FGStockVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.FGStockVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.FGStockVO1.rangeSize}" filterModel="#{bindings.FGStockVO1Query.queryDescriptor}"
+              filterVisible="false" queryListener="#{bindings.FGStockVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page" columnStretching="column:c8">
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.ProdCode.name}" filterable="true" sortable="true"
+                 headerText="Prod Code" id="c1">
+        <af:outputText value="#{row.ProdCode}" shortDesc="#{bindings.FGStockVO1.hints.ProdCode.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.FGStockVO1.hints.Name.label}" id="c8">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.FGStockVO1.hints.Name.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.LocCode.name}" filterable="true" sortable="true"
+                 headerText="Location Code" id="c10">
+        <af:outputText value="#{row.LocCode}" shortDesc="#{bindings.FGStockVO1.hints.LocCode.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.Op.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.FGStockVO1.hints.Op.label}" id="c4">
+        <af:outputText value="#{row.Op}" shortDesc="#{bindings.FGStockVO1.hints.Op.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockVO1.hints.Op.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.Prod.name}" filterable="true" sortable="true"
+                 headerText="Production" id="c5">
+        <af:outputText value="#{row.Prod}" shortDesc="#{bindings.FGStockVO1.hints.Prod.tooltip}" id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockVO1.hints.Prod.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.Sale.name}" filterable="true" sortable="true"
+                 headerText="Sale" id="c6">
+        <af:outputText value="#{row.Sale}" shortDesc="#{bindings.FGStockVO1.hints.Sale.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockVO1.hints.Sale.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.Clos.name}" filterable="true" sortable="true"
+                 headerText="Closing" id="c7">
+        <af:outputText value="#{row.Clos}" shortDesc="#{bindings.FGStockVO1.hints.Clos.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockVO1.hints.Clos.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.EntryDate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.FGStockVO1.hints.EntryDate.label}" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.FGStockVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EntryDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.FGStockVO1.hints.EntryDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.EntryDate}" shortDesc="#{bindings.FGStockVO1.hints.EntryDate.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.FGStockVO1.hints.EntryDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.FGStockVO1.hints.UnitCd.label}" id="c9">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.FGStockVO1.hints.UnitCd.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockVO1.hints.Sessionid.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.FGStockVO1.hints.Sessionid.label}" id="c2">
+        <af:outputText value="#{row.Sessionid}" shortDesc="#{bindings.FGStockVO1.hints.Sessionid.tooltip}" id="ot2">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockVO1.hints.Sessionid.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

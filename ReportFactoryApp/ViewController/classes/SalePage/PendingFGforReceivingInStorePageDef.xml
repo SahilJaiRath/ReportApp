@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="PendingFGforReceivingInStorePageDef" Package="SalePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingFGforReceivingInStoreVO1" DataControl="AppModuleDataControl"
+              id="PendingFGforReceivingInStoreVO1Iterator" RangeSize="50"/>
+    <searchRegion Binds="PendingFGforReceivingInStoreVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PendingFGforReceivingInStoreVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingFGforReceivingInStoreVO1Iterator" id="PendingFGforReceivingInStoreVO1">
+      <nodeDefinition DefName="model.sale.views.PendingFGforReceivingInStoreVO" Name="PendingFGforReceivingInStoreVO10">
+        <AttrNames>
+          <Item Value="ProductCode"/>
+          <Item Value="ProdnSlip"/>
+          <Item Value="ProdnSlipDt"/>
+          <Item Value="AcceptQty"/>
+          <Item Value="PdqaNo"/>
+          <Item Value="UnitCode"/>
+          <Item Value="ExpDate"/>
+          <Item Value="BatchNo"/>
+          <Item Value="MfgDate"/>
+          <Item Value="ItemName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callPendingFGforReceivingInStore" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPendingFGforReceivingInStore" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubLedger_UnitCode" id="SubLedger_UnitCode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

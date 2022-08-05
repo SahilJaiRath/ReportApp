@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="pendingFGForQCPageDef"
+                Package="QualityPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingFGforQCVVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="PendingFGforQCVVO1Iterator"/>
+    <searchRegion Binds="PendingFGforQCVVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PendingFGforQCVVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingFGforQCVVO1Iterator" id="PendingFGforQCVVO1">
+      <nodeDefinition DefName="model.Quality.views.PendingFGforQCVVO" Name="PendingFGforQCVVO10">
+        <AttrNames>
+          <Item Value="ProductCode"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ProdnSlip"/>
+          <Item Value="ProdnQty"/>
+          <Item Value="JobCardNo"/>
+          <Item Value="BatchNo"/>
+          <Item Value="ApprovedBy"/>
+          <Item Value="CustCode"/>
+          <Item Value="UnitCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

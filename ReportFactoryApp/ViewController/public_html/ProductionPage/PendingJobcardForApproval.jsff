@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Pending Jobcard for Approval" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.SubLedger_UnitCode.inputValue}"
+                              label="Unit Name"
+                              required="#{bindings.SubLedger_UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.SubLedger_UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px" >
+            <f:selectItems value="#{bindings.SubLedger_UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.SubLedger_UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:selectOneChoice value="#{bindings.PendingJobcardForApproval_Approved.inputValue}"
+                              label="Jobcard Status"
+                              required="#{bindings.PendingJobcardForApproval_Approved.hints.mandatory}"
+                              shortDesc="#{bindings.PendingJobcardForApproval_Approved.hints.tooltip}" id="soc2" contentStyle="width:180.0px;"
+                              labelStyle = "width:100px" >
+            <f:selectItems value="#{bindings.PendingJobcardForApproval_Approved.items}" id="si2"/>
+            <f:validator binding="#{bindings.PendingJobcardForApproval_Approved.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callPendingJobcardforApproval.enabled}"
+                     actionListener="#{PendingJobcardForApprovalBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Pending Jobcard For Approval.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.pendingJobcardForApprovalVO1.collectionModel}" var="row"
+              rows="#{bindings.pendingJobcardForApprovalVO1.rangeSize}"
+              emptyText="#{bindings.pendingJobcardForApprovalVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.pendingJobcardForApprovalVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.pendingJobcardForApprovalVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.pendingJobcardForApprovalVO1.rangeSize}"
+              filterModel="#{bindings.pendingJobcardForApprovalVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.pendingJobcardForApprovalVO1Query.processQuery}" varStatus="vs" id="t1"
+              columnStretching="column:c4" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.Unit.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.pendingJobcardForApprovalVO1.hints.Unit.label}" id="c8">
+        <af:outputText value="#{row.Unit}" shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.Unit.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.Jobcard.name}" filterable="true"
+                 sortable="true" headerText="Job Card" id="c1">
+        <af:outputText value="#{row.Jobcard}" shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.Jobcard.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.Date1.name}" filterable="true"
+                 sortable="true" headerText="Jobcard Date" id="c2">
+        <af:outputText value="#{row.Date1}" shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.Date1.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.Code.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.pendingJobcardForApprovalVO1.hints.Code.label}" id="c3">
+        <af:outputText value="#{row.Code}" shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.Code.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="Name" id="c4">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.Description.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="Batch No" id="c5">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.BatchNo.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.Qty1.name}" filterable="true"
+                 sortable="true" headerText="Qty" id="c6">
+        <af:outputText value="#{row.Qty1}" shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.Qty1.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.App.name}" filterable="true"
+                 sortable="true" headerText="Status" id="c7">
+        <af:outputText value="#{row.App}" shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.App.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.pendingJobcardForApprovalVO1.hints.IsClose.name}" filterable="true"
+                 sortable="true" headerText="Is Close" id="c9">
+        <af:outputText value="#{row.IsClose}" shortDesc="#{bindings.pendingJobcardForApprovalVO1.hints.IsClose.tooltip}"
+                       id="ot9"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

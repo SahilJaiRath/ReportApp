@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Sub Ledger " id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.SubLedger_UnitCode.inputValue}"
+                              label="Unit Name"
+                              required="#{bindings.SubLedger_UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.SubLedger_UnitCode.hints.tooltip}" id="soc1" contentStyle="width:186px;" labelStyle="width:100px"
+                              autoSubmit="true">
+            <f:selectItems value="#{bindings.SubLedger_UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.SubLedger_UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="subLedgerNameFilterId"
+                                        popupTitle="Search and Select: #{bindings.SubLedgerNameFilter.hints.label}"
+                                        value="#{bindings.SubLedgerNameFilter.inputValue}"
+                                        label="Sub Ledger Name"
+                                        model="#{bindings.SubLedgerNameFilter.listOfValuesModel}"
+                                        required="#{bindings.SubLedgerNameFilter.hints.mandatory}"
+                                        columns="#{bindings.SubLedgerNameFilter.hints.displayWidth}"
+                                        shortDesc="#{bindings.SubLedgerNameFilter.hints.tooltip}" contentStyle="width:168px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.SubLedgerNameFilter.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id3" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{SubLedgerBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Sub Ledger Report.xls"
+                                             title="Sub Ledger Report."/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.SubLedgerVO1.collectionModel}" var="row" rows="#{bindings.SubLedgerVO1.rangeSize}"
+              emptyText="#{bindings.SubLedgerVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.SubLedgerVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.SubLedgerVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.SubLedgerVO1.rangeSize}" filterModel="#{bindings.SubLedgerVO1Query.queryDescriptor}"
+              filterVisible="false" queryListener="#{bindings.SubLedgerVO1Query.processQuery}" varStatus="vs" id="t2"
+              columnStretching="column:c6">
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.Unit.name}" filterable="true" sortable="true"
+                 headerText="Unit" id="c2">
+        <af:outputText value="#{row.Unit}" shortDesc="#{bindings.SubLedgerVO1.hints.Unit.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.VouDate.name}" filterable="true" sortable="true"
+                 headerText="Voucher Date" id="c5">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.SubLedgerVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.VouDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.SubLedgerVO1.hints.VouDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.VouDate}" shortDesc="#{bindings.SubLedgerVO1.hints.VouDate.tooltip}" id="ot5">
+          <af:convertDateTime pattern="#{bindings.SubLedgerVO1.hints.VouDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.VouNo.name}" filterable="true" sortable="true"
+                 headerText="Voucher No" id="c4">
+        <af:outputText value="#{row.VouNo}" shortDesc="#{bindings.SubLedgerVO1.hints.VouNo.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.InvoiceNo.name}" filterable="true" sortable="true"
+                 headerText="Invoice No" id="c11">
+        <af:outputText value="#{row.InvoiceNo}" shortDesc="#{bindings.SubLedgerVO1.hints.InvoiceNo.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.InvoiceDt.name}" filterable="true" sortable="true"
+                 headerText="Invoice Date" id="c12">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.SubLedgerVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.InvoiceDt.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.SubLedgerVO1.hints.InvoiceDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.InvoiceDt}" shortDesc="#{bindings.SubLedgerVO1.hints.InvoiceDt.tooltip}" id="ot12">
+          <af:convertDateTime pattern="#{bindings.SubLedgerVO1.hints.InvoiceDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.Narration.name}" filterable="true" sortable="true"
+                 headerText="Narration" id="c6">
+        <af:outputText value="#{row.Narration}" shortDesc="#{bindings.SubLedgerVO1.hints.Narration.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.Debit.name}" filterable="true" sortable="true"
+                 headerText="Debit " id="c7">
+        <af:outputText value="#{row.Debit}" shortDesc="#{bindings.SubLedgerVO1.hints.Debit.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.Debit.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.Credit.name}" filterable="true" sortable="true"
+                 headerText="Credit" id="c8">
+        <af:outputText value="#{row.Credit}" shortDesc="#{bindings.SubLedgerVO1.hints.Credit.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.Credit.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.Balance.name}" filterable="true" sortable="true"
+                 headerText="Balance" id="c9">
+        <af:outputText value="#{row.Balance}" shortDesc="#{bindings.SubLedgerVO1.hints.Balance.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.Balance.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.SubLedgerCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.SubLedgerVO1.hints.SubLedgerCode.label}" id="c3">
+        <af:outputText value="#{row.SubLedgerCode}" shortDesc="#{bindings.SubLedgerVO1.hints.SubLedgerCode.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.SlNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.SubLedgerVO1.hints.SlNo.label}" id="c1">
+        <af:outputText value="#{row.SlNo}" shortDesc="#{bindings.SubLedgerVO1.hints.SlNo.tooltip}" id="ot1">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.SlNo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.SessionId.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.SubLedgerVO1.hints.SessionId.label}" id="c10">
+        <af:outputText value="#{row.SessionId}" shortDesc="#{bindings.SubLedgerVO1.hints.SessionId.tooltip}" id="ot10"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

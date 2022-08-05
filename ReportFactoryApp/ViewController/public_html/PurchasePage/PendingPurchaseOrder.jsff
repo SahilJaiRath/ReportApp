@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Pending Purchase Order" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="Width:180.0px;"
+                              labelStyle= "Width:180px">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:selectOneChoice value="#{bindings.Pending_Purchase_Order_ValidTill.inputValue}"
+                              label="Valid Till"
+                              required="#{bindings.Pending_Purchase_Order_ValidTill.hints.mandatory}"
+                              shortDesc="#{bindings.Pending_Purchase_Order_ValidTill.hints.tooltip}" id="soc2" contentStyle="Width:180.0px;"
+                              labelStyle= "Width:180px" >
+            <f:selectItems value="#{bindings.Pending_Purchase_Order_ValidTill.items}" id="si2"/>
+            <f:validator binding="#{bindings.Pending_Purchase_Order_ValidTill.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:selectOneChoice value="#{bindings.Pending_Purchase_Order_AppStatus.inputValue}"
+                              label="App Status"
+                              required="#{bindings.Pending_Purchase_Order_AppStatus.hints.mandatory}"
+                              shortDesc="#{bindings.Pending_Purchase_Order_AppStatus.hints.tooltip}" id="soc3" contentStyle="Width:180.0px;"
+                              labelStyle= "Width:180px" >
+            <f:selectItems value="#{bindings.Pending_Purchase_Order_AppStatus.items}" id="si3"/>
+            <f:validator binding="#{bindings.Pending_Purchase_Order_AppStatus.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputComboboxListOfValues id="groupCdId" popupTitle="Search and Select: #{bindings.GroupCd.hints.label}"
+                                        value="#{bindings.GroupCd.inputValue}" label="Group Code"
+                                        model="#{bindings.GroupCd.listOfValuesModel}"
+                                        required="#{bindings.GroupCd.hints.mandatory}"
+                                        columns="#{bindings.GroupCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.GroupCd.hints.tooltip}" contentStyle="Width:176.0px;"
+                              labelStyle= "Width:180px" >
+            <f:validator binding="#{bindings.GroupCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+        <af:gridCell marginStart="5px" width="34%" id="gc7">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id4" contentStyle="Width:183.0px;"
+                              labelStyle= "Width:180px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc8">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="#{bindings.toDate.hints.label}"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id5" contentStyle="Width:180.0px;"
+                              labelStyle= "Width:180px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc9">
+          <af:spacer width="70" height="10" id="s3"/>
+          <af:button text="Execute" id="b2" actionListener="#{PendingPurchaseOrderBean.onClickButton}"
+                     disabled="#{!bindings.callPendingPurchaseOrder.enabled}"  />
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Pending Purchase Order.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PendingPurchaseOrderVO1.collectionModel}" var="row"
+              rows="#{bindings.PendingPurchaseOrderVO1.rangeSize}"
+              emptyText="#{bindings.PendingPurchaseOrderVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PendingPurchaseOrderVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PendingPurchaseOrderVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PendingPurchaseOrderVO1.rangeSize}"
+              filterModel="#{bindings.PendingPurchaseOrderVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PendingPurchaseOrderVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.VenCd.name}" filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c13">
+        <af:outputText value="#{row.VenCd}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.VenCd.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="Vendor Name" id="c14">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.Name.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.PoNo.name}" filterable="true" sortable="true"
+                 headerText="PO Number" id="c10">
+        <af:outputText value="#{row.PoNo}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.PoNo.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.AmdNo.name}" filterable="true" sortable="true"
+                 headerText="AMD No" id="c11">
+        <af:outputText value="#{row.AmdNo}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.AmdNo.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingPurchaseOrderVO1.hints.AmdNo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.PoDt.name}" filterable="true" sortable="true"
+                 headerText="PO Date" id="c12">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingPurchaseOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.PoDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.PendingPurchaseOrderVO1.hints.PoDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.PoDt}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.PoDt.tooltip}" id="ot12">
+          <af:convertDateTime pattern="#{bindings.PendingPurchaseOrderVO1.hints.PoDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.Item.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c3">
+        <af:outputText value="#{row.Item}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.Item.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="Item Description" id="c9">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.ItemDesc.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c18">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.Uom.tooltip}" id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.GroupCode.name}" filterable="true"
+                 sortable="true" headerText="Item Group" id="c17">
+        <af:outputText value="#{row.GroupCode}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.GroupCode.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.Location1.name}" filterable="true"
+                 sortable="true" headerText="Location" id="c16">
+        <af:outputText value="#{row.Location1}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.Location1.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.DeliveryDate.name}" filterable="true"
+                 sortable="true" headerText="Delivery Date" id="c6">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingPurchaseOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DeliveryDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.PendingPurchaseOrderVO1.hints.DeliveryDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DeliveryDate}"
+                       shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.DeliveryDate.tooltip}" id="ot6">
+          <af:convertDateTime pattern="#{bindings.PendingPurchaseOrderVO1.hints.DeliveryDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.Rate.name}" filterable="true" sortable="true"
+                 headerText="Rate" id="c7">
+        <af:outputText value="#{row.Rate}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.Rate.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingPurchaseOrderVO1.hints.Rate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="Qty" id="c4">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.Qty.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingPurchaseOrderVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.PendQty.name}" filterable="true" sortable="true"
+                 headerText="Pending Qty" id="c5">
+        <af:outputText value="#{row.PendQty}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.PendQty.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingPurchaseOrderVO1.hints.PendQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.Close1.name}" filterable="true" sortable="true"
+                 headerText="Chose1" id="c8">
+        <af:outputText value="#{row.Close1}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.Close1.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.PoHeadPoNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PendingPurchaseOrderVO1.hints.PoHeadPoNo.label}" id="c2">
+        <af:outputText value="#{row.PoHeadPoNo}"
+                       shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.PoHeadPoNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.ValidTo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingPurchaseOrderVO1.hints.ValidTo.label}" id="c15">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingPurchaseOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ValidTo.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.PendingPurchaseOrderVO1.hints.ValidTo.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ValidTo}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.ValidTo.tooltip}"
+                       id="ot15">
+          <af:convertDateTime pattern="#{bindings.PendingPurchaseOrderVO1.hints.ValidTo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.AppFlg.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingPurchaseOrderVO1.hints.AppFlg.label}" id="c19">
+        <af:outputText value="#{row.AppFlg}" shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.AppFlg.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingPurchaseOrderVO1.hints.ApproveFlg.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PendingPurchaseOrderVO1.hints.ApproveFlg.label}" id="c20">
+        <af:outputText value="#{row.ApproveFlg}"
+                       shortDesc="#{bindings.PendingPurchaseOrderVO1.hints.ApproveFlg.tooltip}" id="ot20"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="bspl.reportfactory.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/FinancePage/PartyBalance.jsff" usageId="bspl_reportfactory_view_PartyBalancePageDef"/>
+    <page path="/test.jspx" usageId="bspl_reportfactory_view_testPageDef"/>
+    <page path="/FinancePage/GeneralLedger.jsff" usageId="bspl_reportfactory_view_GeneralLedgerPageDef"/>
+    <page path="/FinancePage/SubLedgerTrial.jsff" usageId="bspl_reportfactory_view_SubLedgerPageDef"/>
+    <page path="/ProductionPage/WIPStock.jsff" usageId="bspl_reportfactory_view_WIPStockPageDef"/>
+    <page path="/ProductionPage/PendingFinishGoodsBatchWise.jsff"
+          usageId="bspl_reportfactory_view_PendingFinishGoodsWisePageDef"/>
+    <page path="/SalePage/B2bSaleInvoiceRegistered.jsff"
+          usageId="bspl_reportfactory_view_B2bSaleInvoiceRegisteredPageDef"/>
+    <page path="/InventoryPage/StockLedger.jsff" usageId="bspl_reportfactory_view_StockLedgerPageDef"/>
+    <page path="/FinancePage/B2CSaleInvoiceUnRegistered.jsff"
+          usageId="bspl_reportfactory_view_B2CSaleInvoiceUnRegisteredPageDef"/>
+    <page path="/SalePage/SaleRegisterDetail.jsff" usageId="bspl_reportfactory_view_SaleRegisterDetailPageDef"/>
+    <page path="/InventoryPage/StockStatus.jsff" usageId="bspl_reportfactory_view_StockStatusPageDef"/>
+    <page path="/FinancePage/DebitCreditNoteEntryDetail.jsff"
+          usageId="bspl_reportfactory_view_DebitCreditNoteEntryDetailPageDef"/>
+    <page path="/ProductionPage/ProcessProduction.jsff" usageId="bspl_reportfactory_view_ProcessProductionPageDef"/>
+    <page path="/ProductionPage/AssemblyProductionSummary.jsff"
+          usageId="bspl_reportfactory_view_AssemblyProductionSummaryPageDef"/>
+    <page path="/InventoryPage/GatePassChallan.jsff" usageId="bspl_reportfactory_view_GatePassChallanPageDef"/>
+    <page path="/InventoryPage/PendingGateEntryForSRV.jsff"
+          usageId="bspl_reportfactory_view_PendingGateEntryForSRVPageDef"/>
+    <page path="/SalePage/DispatchAdviceDetai.jsff" usageId="bspl_reportfactory_view_DispatchAdviceDetaiPageDef"/>
+    <page path="/SalePage/FGExpiredStockReport.jsff" usageId="bspl_reportfactory_view_FGExpiredStockReportPageDef"/>
+    <page path="/WEB-INF/SaleTaskFlow/FGExpiredStockReportTF.xml#FGExpiredStockReportTF@getFGdata"
+          usageId="bspl_reportfactory_view_FGExpiredStockReportTF_FGExpiredStockReportTF_getFGdataPageDef"/>
+    <page path="/SalePage/SaleOrderDetail.jsff" usageId="bspl_reportfactory_view_SaleOrderDetailPageDef"/>
+    <page path="/SalePage/FGTransfer.jsff" usageId="bspl_reportfactory_view_FGTransferPageDef"/>
+    <page path="/FinancePage/Collection.jsff" usageId="bspl_reportfactory_view_CollectionPageDef"/>
+    <page path="/FinancePage/BankReconciliation.jsff" usageId="bspl_reportfactory_view_BankReconciliationPageDef"/>
+    <page path="/FinancePage/DebitCreditNote.jsff" usageId="bspl_reportfactory_view_DebitCreditNotePageDef"/>
+    <page path="/FinancePage/TDS.jsff" usageId="bspl_reportfactory_view_TDSPageDef"/>
+    <page path="/FinancePage/HSNSummary.jsff" usageId="bspl_reportfactory_view_HSNSummaryPageDef"/>
+    <page path="/FinancePage/VoucherWiseDebitCredit.jsff"
+          usageId="bspl_reportfactory_view_VoucherWiseDebitCreditPageDef"/>
+    <page path="/FinancePage/ConsolidatePurchaseDetailforPANBased.jsff"
+          usageId="bspl_reportfactory_view_ConsolidatePurchaseDetailforPANBasedPageDef"/>
+    <page path="/FinancePage/SaleRegisterDetailIncDrAndCR.jsff"
+          usageId="bspl_reportfactory_view_SaleRegisterDetailIncDrAndCRPageDef"/>
+    <page path="/ProductionPage/AssemblyJobCardStatus.jsff"
+          usageId="bspl_reportfactory_view_AssemblyJobCardStatusPageDef"/>
+    <page path="/ProductionPage/BillOfMaterial.jsff" usageId="bspl_reportfactory_view_BillOfMaterialPageDef"/>
+    <page path="/ProductionPage/WIPLedger.jsff" usageId="bspl_reportfactory_view_WIPLedgerPageDef"/>
+    <page path="/ProductionPage/BOMTree.jsff" usageId="bspl_reportfactory_view_BOMTreePageDef"/>
+    <page path="/ProductionPage/ItemWhereUsed.jsff" usageId="bspl_reportfactory_view_ItemWhereUsedPageDef"/>
+    <page path="/ProductionPage/AssemblyProductionDetail.jsff"
+          usageId="bspl_reportfactory_view_AssemblyProductionDetailPageDef"/>
+    <page path="/ProductionPage/BMRBOMTree.jsff" usageId="bspl_reportfactory_view_BMRBOMTreePageDef"/>
+    <page path="/FinancePage/PurchaseRegisterIncludingDRandCRNote.jsff"
+          usageId="bspl_reportfactory_view_PurchaseRegisterIncludingDRandCRNotePageDef"/>
+    <page path="/InventoryPage/GateEntryDetail.jsff" usageId="bspl_reportfactory_view_GateEntryDetailPageDef"/>
+    <page path="/InventoryPage/IssueDetail.jsff" usageId="bspl_reportfactory_view_IssueDetailPageDef"/>
+    <page path="/InventoryPage/ReturnSlip.jsff" usageId="bspl_reportfactory_view_ReturnSlipPageDef"/>
+    <page path="/InventoryPage/NonMovingItem.jsff" usageId="bspl_reportfactory_view_NonMovingItemPageDef"/>
+    <page path="/InventoryPage/DepartmentWiseIssueSummaryReport.jsff"
+          usageId="bspl_reportfactory_view_DepartmentWiseIssueSummaryReportPageDef"/>
+    <page path="/InventoryPage/PurchaseIndentRegister.jsff"
+          usageId="bspl_reportfactory_view_PurchaseIndentRegisterPageDef"/>
+    <page path="/InventoryPage/RMVendorWiseAnalysis.jsff"
+          usageId="bspl_reportfactory_view_RMVendorWiseAnalysisPageDef"/>
+    <page path="/InventoryPage/PurchaseOrderRegister.jsff" usageId="bspl_reportfactory_view_PurchaseOrderRegisterPageDef"/>
+    <page path="/InventoryPage/PartMasterReport.jsff" usageId="bspl_reportfactory_view_PartMasterReportPageDef"/>
+    <page path="/InventoryPage/SRVRejectionRegister.jsff"
+          usageId="bspl_reportfactory_view_SRVRejectionRegisterPageDef"/>
+    <page path="/InventoryPage/ProductMaster.jsff" usageId="bspl_reportfactory_view_ProductMasterPageDef"/>
+    <page path="/InventoryPage/VendorMaster.jsff" usageId="bspl_reportfactory_view_VendorMasterPageDef"/>
+    <page path="/InventoryPage/LocationMaster.jsff" usageId="bspl_reportfactory_view_LocationMasterPageDef"/>
+    <page path="/InventoryPage/PlantMaster.jsff" usageId="bspl_reportfactory_view_PlantMasterPageDef"/>
+    <page path="/InventoryPage/GroupMaster.jsff" usageId="bspl_reportfactory_view_GroupMasterPageDef"/>
+    <page path="/InventoryPage/SubGroupMaster.jsff" usageId="bspl_reportfactory_view_SubGroupMasterPageDef"/>
+    <page path="/InventoryPage/StockAdjustment.jsff" usageId="bspl_reportfactory_view_StockAdjustmentPageDef"/>
+    <page path="/InventoryPage/UnitOfMeasurement.jsff" usageId="bspl_reportfactory_view_UnitOfMeasurementPageDef"/>
+    <page path="/InventoryPage/BatchwiseitemStockSummary.jsff"
+          usageId="bspl_reportfactory_view_BatchwiseitemStockSummaryPageDef"/>
+    <page path="/InventoryPage/IssueBreakup.jsff" usageId="bspl_reportfactory_view_IssueBreakupPageDef"/>
+    <page path="/InventoryPage/PendingIndentforPO.jsff" usageId="bspl_reportfactory_view_PendingIndentforPOPageDef"/>
+    <page path="/InventoryPage/PendingSrvForQc.jsff" usageId="bspl_reportfactory_view_PendingSrvForQcPageDef"/>
+    <page path="/PurchasePage/IndentPending&amp;CloseReport.jsff"
+          usageId="bspl_reportfactory_view_IndentPending_CloseReportPageDef"/>
+    <page path="/PurchasePage/JobworkStatus.jsff" usageId="bspl_reportfactory_view_JobworkStatusPageDef"/>
+    <page path="/PurchasePage/VendorRejection.jsff" usageId="bspl_reportfactory_view_VendorRejectionPageDef"/>
+    <page path="/PurchasePage/PurchaseIndent.jsff" usageId="bspl_reportfactory_view_PurchaseIndentPageDef"/>
+    <page path="/PurchasePage/ContractOrder.jsff" usageId="bspl_reportfactory_view_ContractOrderPageDef"/>
+    <page path="/PurchasePage/PurchaseRegister.jsff" usageId="bspl_reportfactory_view_PurchaseRegisterPageDef"/>
+    <page path="/PurchasePage/PurchaseOrder.jsff" usageId="bspl_reportfactory_view_PurchaseOrderPageDef"/>
+    <page path="/PurchasePage/PendingPurchaseOrder.jsff" usageId="bspl_reportfactory_view_PendingPurchaseOrderPageDef"/>
+    <page path="/QualityPage/ProcessInspectionReport.jsff"
+          usageId="bspl_reportfactory_view_ProcessInspectionReportPageDef"/>
+    <page path="/QualityPage/QualityInProcessRegister.jsff" usageId="bspl_reportfactory_view_QualityInProcessPageDef"/>
+    <page path="/QualityPage/ItemDetailsAfterQC.jsff" usageId="bspl_reportfactory_view_ItemDetailsAfterQCPageDef"/>
+    <page path="/QualityPage/PendingBMRForQC.jsff" usageId="bspl_reportfactory_view_PendingBMRForQCPageDef"/>
+    <page path="/QualityPage/pendingFGForQC.jsff" usageId="bspl_reportfactory_view_pendingFGForQCPageDef"/>
+    <page path="/QualityPage/IncomingInspectionRegister.jsff" usageId="bspl_reportfactory_view_IncomingInspectionRegisterPageDef"/>
+    <page path="/HRPage/EmployeeMaster.jsff" usageId="bspl_reportfactory_view_EmployeeMasterPageDef"/>
+    <page path="/FinancePage/DebtorOutstanding.jsff" usageId="bspl_reportfactory_view_DebtorOutstandingPageDef"/>
+    <page path="/FinancePage/CreditorOutstanding.jsff" usageId="bspl_reportfactory_view_CreditorOutstandingPageDef"/>
+    <page path="/FinancePage/CreditorOutstandingSummary.jsff"
+          usageId="bspl_reportfactory_view_CreditorOutstandingSummaryPageDef"/>
+    <page path="/QualityPage/IncominginspectionCheck.jsff"
+          usageId="bspl_reportfactory_view_IncominginspectionCheckPageDef"/>
+    <page path="/FinancePage/DebtorOutstandingSummary.jsff"
+          usageId="bspl_reportfactory_view_DebtorOutstandingSummaryPageDef"/>
+    <page path="/FinancePage/FGStockPosition.jsff" usageId="bspl_reportfactory_view_FGStockPositionPageDef"/>
+    <page path="/FinancePage/SubLedger.jsff" usageId="bspl_reportfactory_view_SubLedgerPageDef1"/>
+    <page path="/FinancePage/JVSalePurchaseContraBook.jsff"
+          usageId="bspl_reportfactory_view_JVSalePurchaseContraBookPageDef"/>
+    <page path="/FinancePage/VoucherDetail.jsff" usageId="bspl_reportfactory_view_VoucherDetailPageDef"/>
+    <page path="/FinancePage/voucherDetail.jsff" usageId="bspl_reportfactory_view_VoucherDetailPageDef"/>
+    <page path="/SalePage/PendingToD28.jsff" usageId="bspl_reportfactory_view_PendingToD28PageDef"/>
+    <page path="/SalePage/PendingDispatchAdviceForInvoice.jsff"
+          usageId="bspl_reportfactory_view_PendingDispatchAdviceForInvoicePageDef"/>
+    <page path="/FinancePage/STOFromSaleWarehouse.jsff" usageId="bspl_reportfactory_view_STOFromSaleWarehousePageDef"/>
+    <page path="/SalePage/DailyInvoiceSale.jsff" usageId="bspl_reportfactory_view_DailyInvoiceSalePageDef"/>
+    <page path="/SalePage/PendingFGforReceivingInStore.jsff"
+          usageId="bspl_reportfactory_view_PendingFGforReceivingInStorePageDef"/>
+    <page path="/SalePage/InvoiceWiseSale.jsff" usageId="bspl_reportfactory_view_InvoiceWiseSalePageDef"/>
+    <page path="/SalePage/InterUnitTransitReport.jsff" usageId="bspl_reportfactory_view_InterUnitTransitReportPageDef"/>
+    <page path="/SalePage/EInoice.jsff" usageId="bspl_reportfactory_view_EInoicePageDef"/>
+    <page path="/SalePage/IssueVsInvoice.jsff" usageId="bspl_reportfactory_view_IssueVsInvoicePageDef"/>
+    <page path="/SalePage/CustomerMaster.jsff" usageId="bspl_reportfactory_view_CustomerMasterPageDef"/>
+    <page path="/SalePage/ItemWiseSale.jsff" usageId="bspl_reportfactory_view_ItemWiseSalePageDef"/>
+    <page path="/ProductionPage/IssueStatusBPR.jsff" usageId="bspl_reportfactory_view_IssueStatusBPRPageDef"/>
+    <page path="/ProductionPage/IssueStatusBMR.jsff" usageId="bspl_reportfactory_view_IssueStatusBMRPageDef"/>
+    <page path="/SalePage/E-WayBillRegister.jsff" usageId="bspl_reportfactory_view_E_WayBillRegisterPageDef"/>
+    <page path="/SalePage/StatementofDispatch.jsff" usageId="bspl_reportfactory_view_StatementofDispatchPageDef"/>
+    <page path="/SalePage/SaleSummary.jsff" usageId="bspl_reportfactory_view_SaleSummaryPageDef"/>
+    <page path="/ProductionPage/productionStatistics.jsff"
+          usageId="bspl_reportfactory_view_productionStatisticsPageDef"/>
+    <page path="/SalePage/SaleOrder.jsff" usageId="bspl_reportfactory_view_SaleOrderPageDef"/>
+    <page path="/ProductionPage/TRFRegister.jsff" usageId="bspl_reportfactory_view_TRFRegisterPageDef"/>
+    <page path="/ProductionPage/BatchwiseBMRConsumption.jsff"
+          usageId="bspl_reportfactory_view_BatchwiseBMRConsumptionPageDef"/>
+    <page path="/ProductionPage/FGYieldProduction.jsff" usageId="bspl_reportfactory_view_FGYieldProductionVOPageDef"/>
+    <page path="/ProductionPage/BatchWiseBPRConsumption.jsff" usageId="bspl_reportfactory_view_BatchWiseBPRConsumptionPageDef"/>
+    <page path="/ProductionPage/BOMVSActualComsumption.jsff"
+          usageId="bspl_reportfactory_view_BOMVSActualComsumptionPageDef"/>
+    <page path="/ProductionPage/PendingJobcardForApproval.jsff"
+          usageId="bspl_reportfactory_view_PendingJobcardForApprovalPageDef"/>
+    <page path="/ProductionPage/BMRandBPRBatchStatus.jsff"
+          usageId="bspl_reportfactory_view_BMRandBPRBatchStatusPageDef"/>
+    <page path="/ProductionPage/JobCardDetailStatus.jsff" usageId="bspl_reportfactory_view_JobCardDetailStatusPageDef"/>
+    <page path="/InventoryPage/LotStock.jsff" usageId="bspl_reportfactory_view_LotStockPageDef"/>
+    <page path="/InventoryPage/ProductShortageandBatchReport.jsff"
+          usageId="bspl_reportfactory_view_ProductShortageandBatchReportPageDef"/>
+    <page path="/InventoryPage/InventoryVsStockFG.jsff" usageId="bspl_reportfactory_view_InventoryVsStockFGPageDef"/>
+    <page path="/InventoryPage/ItemWiseTotalInventory.jsff"
+          usageId="bspl_reportfactory_view_ItemWiseTotalInventoryPageDef"/>
+    <page path="/InventoryPage/RequisitionSlipRegister.jsff"
+          usageId="bspl_reportfactory_view_RequisitionSlipRegisterPageDef"/>
+    <page path="/InventoryPage/JobworkReciptAgainstChallanOutward.jsff"
+          usageId="bspl_reportfactory_view_JobworkReciptAgainstChallanOutwardPageDef"/>
+    <page path="/InventoryPage/JobworkChallanOutward.jsff"
+          usageId="bspl_reportfactory_view_JobworkChallanOutwardPageDef"/>
+    <page path="/InventoryPage/PendingChallanForReceive.jsff"
+          usageId="bspl_reportfactory_view_PendingChallanForReceivePageDef"/>
+    <page path="/InventoryPage/ARNumberAgainstMRNITEM.jsff"
+          usageId="bspl_reportfactory_view_ARNumberAgainstMRNITEMPageDef"/>
+    <page path="/InventoryPage/PendingMainStoreReceiving.jsff" usageId="bspl_reportfactory_view_PendingMainStoreReceivingPageDef"/>
+    <page path="/InventoryPage/PendingPOforGateEntry.jsff"
+          usageId="bspl_reportfactory_view_PendingPOforGateEntryPageDef"/>
+    <page path="/InventoryPage/JWIssueagainstPurchaseOrder.jsff"
+          usageId="bspl_reportfactory_view_JWIssueagainstPurchaseOrderPageDef"/>
+    <page path="/InventoryPage/JWIssueagainstPurchaseOrderReport.jsff"
+          usageId="bspl_reportfactory_view_JWIssueagainstPurchaseOrderReportPageDef"/>
+    <page path="/InventoryPage/GoodsinTransit.jsff" usageId="bspl_reportfactory_view_GoodsinTransitPageDef"/>
+    <page path="/InventoryPage/PendingMRNforPurchaseInvoice.jsff"
+          usageId="bspl_reportfactory_view_PendingMRNforPurchaseInvoicePageDef"/>
+    <page path="/InventoryPage/SRVDetail.jsff" usageId="bspl_reportfactory_view_SRVDetailPageDef"/>
+    <page path="/FinancePage/TrialBalance.jsff" usageId="bspl_reportfactory_view_TrialBalancePageDef"/>
+    <page path="/InventoryPage/FGStock.jsff" usageId="bspl_reportfactory_view_FGStockPageDef"/>
+    <page path="/InventoryPage/DailyStockStatement.jsff" usageId="bspl_reportfactory_view_DailyStockStatementPageDef"/>
+    <page path="/InventoryPage/ApprovedPurchaseIndent.jsff"
+          usageId="bspl_reportfactory_view_ApprovedPurchaseIndentPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="bspl_reportfactory_view_PartyBalancePageDef" path="FinancePage.PartyBalancePageDef"/>
+    <page id="bspl_reportfactory_view_testPageDef" path="bspl.reportfactory.view.pageDefs.testPageDef"/>
+    <page id="bspl_reportfactory_view_GeneralLedgerPageDef" path="FinancePage.GeneralLedgerPageDef"/>
+    <page id="bspl_reportfactory_view_SubLedgerPageDef" path="FinancePage.SubLedgerPageDef"/>
+    <page id="bspl_reportfactory_view_WIPStockPageDef" path="FinancePage.WIPStockPageDef"/>
+    <page id="bspl_reportfactory_view_PendingFinishGoodsWisePageDef"
+          path="ProductionPage.PendingFinishGoodsWisePageDef"/>
+    <page id="bspl_reportfactory_view_B2bSaleInvoiceRegisteredPageDef" path="SalePage.B2bSaleInvoiceRegisteredPageDef"/>
+    <page id="bspl_reportfactory_view_StockLedgerPageDef" path="InventoryPage.StockLedgerPageDef"/>
+    <page id="bspl_reportfactory_view_B2CSaleInvoiceUnRegisteredPageDef"
+          path="FinancePage.B2CSaleInvoiceUnRegisteredPageDef"/>
+    <page id="bspl_reportfactory_view_SaleRegisterDetailPageDef" path="SalePage.SaleRegisterDetailPageDef"/>
+    <page id="bspl_reportfactory_view_StockStatusPageDef" path="InventoryPage.StockStatusPageDef"/>
+    <page id="bspl_reportfactory_view_DebitCreditNoteEntryDetailPageDef"
+          path="FinancePage.DebitCreditNoteEntryDetailPageDef"/>
+    <page id="bspl_reportfactory_view_ProcessProductionPageDef" path="ProductionPage.ProcessProductionPageDef"/>
+    <page id="bspl_reportfactory_view_AssemblyProductionSummaryPageDef"
+          path="ProductionPage.AssemblyProductionSummaryPageDef"/>
+    <page id="bspl_reportfactory_view_GatePassChallanPageDef"
+          path="bspl.reportfactory.view.pageDefs.GatePassChallanPageDef"/>
+    <page id="bspl_reportfactory_view_PendingGateEntryForSRVPageDef"
+          path="InventoryPage.PendingGateEntryForSRVPageDef"/>
+    <page id="bspl_reportfactory_view_DispatchAdviceDetaiPageDef" path="SalePage.DispatchAdviceDetaiPageDef"/>
+    <page id="bspl_reportfactory_view_FGExpiredStockReportPageDef" path="SalePage.FGExpiredStockReportPageDef"/>
+    <page id="bspl_reportfactory_view_FGExpiredStockReportTF_FGExpiredStockReportTF_getFGdataPageDef"
+          path="SaleTaskFlow.FGExpiredStockReportTF_FGExpiredStockReportTF_getFGdataPageDef"/>
+    <page id="bspl_reportfactory_view_SaleOrderDetailPageDef" path="SalePage.SaleOrderDetailPageDef"/>
+    <page id="bspl_reportfactory_view_FGTransferPageDef" path="bspl.reportfactory.view.pageDefs.FGTransferPageDef"/>
+    <page id="bspl_reportfactory_view_CollectionPageDef" path="FinancePage.CollectionPageDef"/>
+    <page id="bspl_reportfactory_view_BankReconciliationPageDef" path="FinancePage.BankReconciliationPageDef"/>
+    <page id="bspl_reportfactory_view_DebitCreditNotePageDef" path="FinancePage.DebitCreditNotePageDef"/>
+    <page id="bspl_reportfactory_view_TDSPageDef" path="FinancePage.TDSPageDef"/>
+    <page id="bspl_reportfactory_view_HSNSummaryPageDef" path="FinancePage.HSNSummaryPageDef"/>
+    <page id="bspl_reportfactory_view_VoucherWiseDebitCreditPageDef" path="FinancePage.VoucherWiseDebitCreditPageDef"/>
+    <page id="bspl_reportfactory_view_ConsolidatePurchaseDetailforPANBasedPageDef"
+          path="FinancePage.ConsolidatePurchaseDetailforPANBasedPageDef"/>
+    <page id="bspl_reportfactory_view_SaleRegisterDetailIncDrAndCRPageDef"
+          path="bspl.reportfactory.view.pageDefs.SaleRegisterDetailIncDrAndCRPageDef"/>
+    <page id="bspl_reportfactory_view_AssemblyJobCardStatusPageDef" path="ProductionPage.AssemblyJobCardStatusPageDef"/>
+    <page id="bspl_reportfactory_view_BillOfMaterialPageDef" path="ProductionPage.BillOfMaterialPageDef"/>
+    <page id="bspl_reportfactory_view_WIPLedgerPageDef" path="ProductionPage.WIPLedgerPageDef"/>
+    <page id="bspl_reportfactory_view_BOMTreePageDef" path="ProductionPage.BOMTreePageDef"/>
+    <page id="bspl_reportfactory_view_ItemWhereUsedPageDef" path="ProductionPage.ItemWhereUsedPageDef"/>
+    <page id="bspl_reportfactory_view_AssemblyProductionDetailPageDef"
+          path="ProductionPage.AssemblyProductionDetailPageDef"/>
+    <page id="bspl_reportfactory_view_BMRBOMTreePageDef" path="ProductionPage.BMRBOMTreePageDef"/>
+    <page id="bspl_reportfactory_view_PurchaseRegisterIncludingDRandCRNotePageDef"
+          path="FinancePage.PurchaseRegisterIncludingDRandCRNotePageDef"/>
+    <page id="bspl_reportfactory_view_GateEntryDetailPageDef" path="InventoryPage.GateEntryDetailPageDef"/>
+    <page id="bspl_reportfactory_view_IssueDetailPageDef" path="InventoryPage.IssueDetailPageDef"/>
+    <page id="bspl_reportfactory_view_ReturnSlipPageDef" path="InventoryPage.ReturnSlipPageDef"/>
+    <page id="bspl_reportfactory_view_NonMovingItemPageDef" path="InventoryPage.NonMovingItemPageDef"/>
+    <page id="bspl_reportfactory_view_DepartmentWiseIssueSummaryReportPageDef"
+          path="InventoryPage.DepartmentWiseIssueSummaryReportPageDef"/>
+    <page id="bspl_reportfactory_view_PurchaseIndentRegisterPageDef"
+          path="InventoryPage.PurchaseIndentRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_RMVendorWiseAnalysisPageDef" path="InventoryPage.RMVendorWiseAnalysisPageDef"/>
+    <page id="bspl_reportfactory_view_PurchaseOrderRegisterPageDef"
+          path="bspl.reportfactory.view.pageDefs.PurchaseOrderRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_PartMasterReportPageDef" path="InventoryPage.PartMasterReportPageDef"/>
+    <page id="bspl_reportfactory_view_SRVRejectionRegisterPageDef" path="InventoryPage.SRVRejectionRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_ProductMasterPageDef" path="InventoryPage.ProductMasterPageDef"/>
+    <page id="bspl_reportfactory_view_VendorMasterPageDef" path="InventoryPage.VendorMasterPageDef"/>
+    <page id="bspl_reportfactory_view_LocationMasterPageDef" path="InventoryPage.LocationMasterPageDef"/>
+    <page id="bspl_reportfactory_view_PlantMasterPageDef" path="InventoryPage.PlantMasterPageDef"/>
+    <page id="bspl_reportfactory_view_GroupMasterPageDef" path="InventoryPage.GroupMasterPageDef"/>
+    <page id="bspl_reportfactory_view_SubGroupMasterPageDef" path="InventoryPage.SubGroupMasterPageDef"/>
+    <page id="bspl_reportfactory_view_StockAdjustmentPageDef" path="InventoryPage.StockAdjustmentPageDef"/>
+    <page id="bspl_reportfactory_view_UnitOfMeasurementPageDef" path="InventoryPage.UnitOfMeasurementPageDef"/>
+    <page id="bspl_reportfactory_view_BatchwiseitemStockSummaryPageDef"
+          path="InventoryPage.BatchwiseitemStockSummaryPageDef"/>
+    <page id="bspl_reportfactory_view_IssueBreakupPageDef" path="InventoryPage.IssueBreakupPageDef"/>
+    <page id="bspl_reportfactory_view_PendingIndentforPOPageDef" path="InventoryPage.PendingIndentforPOPageDef"/>
+    <page id="bspl_reportfactory_view_PendingSrvForQcPageDef" path="InventoryPage.PendingSrvForQcPageDef"/>
+    <page id="bspl_reportfactory_view_IndentPending_CloseReportPageDef"
+          path="bspl.reportfactory.view.pageDefs.IndentPending_CloseReportPageDef"/>
+    <page id="bspl_reportfactory_view_JobworkStatusPageDef" path="PurchasePage.JobworkStatusPageDef"/>
+    <page id="bspl_reportfactory_view_VendorRejectionPageDef" path="PurchasePage.VendorRejectionPageDef"/>
+    <page id="bspl_reportfactory_view_PurchaseIndentPageDef" path="PurchasePage.PurchaseIndentPageDef"/>
+    <page id="bspl_reportfactory_view_ContractOrderPageDef" path="PurchasePage.ContractOrderPageDef"/>
+    <page id="bspl_reportfactory_view_PurchaseRegisterPageDef" path="PurchasePage.PurchaseRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_PurchaseOrderPageDef" path="PurchasePage.PurchaseOrderPageDef"/>
+    <page id="bspl_reportfactory_view_PendingPurchaseOrderPageDef" path="PurchasePage.PendingPurchaseOrderPageDef"/>
+    <page id="bspl_reportfactory_view_ProcessInspectionReportPageDef"
+          path="QualityPage.ProcessInspectionReportPageDef"/>
+    <page id="bspl_reportfactory_view_QualityInProcessPageDef" path="QualityPage.QualityInProcessPageDef"/>
+    <page id="bspl_reportfactory_view_ItemDetailsAfterQCPageDef" path="QualityPage.ItemDetailsAfterQCPageDef"/>
+    <page id="bspl_reportfactory_view_PendingBMRForQCPageDef" path="QualityPage.PendingBMRForQCPageDef"/>
+    <page id="bspl_reportfactory_view_pendingFGForQCPageDef" path="QualityPage.pendingFGForQCPageDef"/>
+    <page id="bspl_reportfactory_view_IncomingInspectionRegisterPageDef"
+          path="bspl.reportfactory.view.pageDefs.IncomingInspectionRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_EmployeeMasterPageDef" path="HRPage.EmployeeMasterPageDef"/>
+    <page id="bspl_reportfactory_view_DebtorOutstandingPageDef" path="FinancePage.DebtorOutstandingPageDef"/>
+    <page id="bspl_reportfactory_view_CreditorOutstandingPageDef" path="FinancePage.CreditorOutstandingPageDef"/>
+    <page id="bspl_reportfactory_view_CreditorOutstandingSummaryPageDef"
+          path="FinancePage.CreditorOutstandingSummaryPageDef"/>
+    <page id="bspl_reportfactory_view_IncominginspectionCheckPageDef"
+          path="QualityPage.IncominginspectionCheckPageDef"/>
+    <page id="bspl_reportfactory_view_DebtorOutstandingSummaryPageDef"
+          path="FinancePage.DebtorOutstandingSummaryPageDef"/>
+    <page id="bspl_reportfactory_view_FGStockPositionPageDef" path="FinancePage.FGStockPositionPageDef"/>
+    <page id="bspl_reportfactory_view_SubLedgerPageDef1" path="FinancePage.SubLedgerPageDef1"/>
+    <page id="bspl_reportfactory_view_JVSalePurchaseContraBookPageDef"
+          path="FinancePage.JVSalePurchaseContraBookPageDef"/>
+    <page id="bspl_reportfactory_view_VoucherDetailPageDef" path="FinancePage.VoucherDetailPageDef"/>
+    <page id="bspl_reportfactory_view_PendingToD28PageDef" path="bspl.reportfactory.view.pageDefs.PendingToD28PageDef"/>
+    <page id="bspl_reportfactory_view_PendingDispatchAdviceForInvoicePageDef"
+          path="SalePage.PendingDispatchAdviceForInvoicePageDef"/>
+    <page id="bspl_reportfactory_view_STOFromSaleWarehousePageDef" path="FinancePage.STOFromSaleWarehousePageDef"/>
+    <page id="bspl_reportfactory_view_DailyInvoiceSalePageDef" path="SalePage.DailyInvoiceSalePageDef"/>
+    <page id="bspl_reportfactory_view_PendingFGforReceivingInStorePageDef"
+          path="SalePage.PendingFGforReceivingInStorePageDef"/>
+    <page id="bspl_reportfactory_view_InvoiceWiseSalePageDef" path="SalePage.InvoiceWiseSalePageDef"/>
+    <page id="bspl_reportfactory_view_InterUnitTransitReportPageDef" path="SalePage.InterUnitTransitReportPageDef"/>
+    <page id="bspl_reportfactory_view_EInoicePageDef" path="SalePage.EInoicePageDef"/>
+    <page id="bspl_reportfactory_view_IssueVsInvoicePageDef" path="SalePage.IssueVsInvoicePageDef"/>
+    <page id="bspl_reportfactory_view_CustomerMasterPageDef" path="SalePage.CustomerMasterPageDef"/>
+    <page id="bspl_reportfactory_view_ItemWiseSalePageDef" path="SalePage.ItemWiseSalePageDef"/>
+    <page id="bspl_reportfactory_view_IssueStatusBPRPageDef" path="ProductionPage.IssueStatusBPRPageDef"/>
+    <page id="bspl_reportfactory_view_IssueStatusBMRPageDef" path="ProductionPage.IssueStatusBMRPageDef"/>
+    <page id="bspl_reportfactory_view_E_WayBillRegisterPageDef" path="SalePage.E_WayBillRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_StatementofDispatchPageDef" path="SalePage.StatementofDispatchPageDef"/>
+    <page id="bspl_reportfactory_view_SaleSummaryPageDef" path="SalePage.SaleSummaryPageDef"/>
+    <page id="bspl_reportfactory_view_productionStatisticsPageDef" path="ProductionPage.productionStatisticsPageDef"/>
+    <page id="bspl_reportfactory_view_SaleOrderPageDef" path="bspl.reportfactory.view.pageDefs.SaleOrderPageDef"/>
+    <page id="bspl_reportfactory_view_TRFRegisterPageDef" path="ProductionPage.TRFRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_BatchwiseBMRConsumptionPageDef"
+          path="ProductionPage.BatchwiseBMRConsumptionPageDef"/>
+    <page id="bspl_reportfactory_view_FGYieldProductionVOPageDef" path="ProductionPage.FGYieldProductionVOPageDef"/>
+    <page id="bspl_reportfactory_view_BatchWiseBPRConsumptionPageDef"
+          path="bspl.reportfactory.view.pageDefs.BatchWiseBPRConsumptionPageDef"/>
+    <page id="bspl_reportfactory_view_BOMVSActualComsumptionPageDef"
+          path="ProductionPage.BOMVSActualComsumptionPageDef"/>
+    <page id="bspl_reportfactory_view_PendingJobcardForApprovalPageDef"
+          path="ProductionPage.PendingJobcardForApprovalPageDef"/>
+    <page id="bspl_reportfactory_view_BMRandBPRBatchStatusPageDef" path="ProductionPage.BMRandBPRBatchStatusPageDef"/>
+    <page id="bspl_reportfactory_view_JobCardDetailStatusPageDef"
+          path="bspl.reportfactory.view.pageDefs.JobCardDetailStatusPageDef"/>
+    <page id="bspl_reportfactory_view_LotStockPageDef" path="InventoryPage.LotStockPageDef"/>
+    <page id="bspl_reportfactory_view_ProductShortageandBatchReportPageDef"
+          path="InventoryPage.ProductShortageandBatchReportPageDef"/>
+    <page id="bspl_reportfactory_view_InventoryVsStockFGPageDef" path="InventoryPage.InventoryVsStockFGPageDef"/>
+    <page id="bspl_reportfactory_view_ItemWiseTotalInventoryPageDef"
+          path="InventoryPage.ItemWiseTotalInventoryPageDef"/>
+    <page id="bspl_reportfactory_view_RequisitionSlipRegisterPageDef"
+          path="InventoryPage.RequisitionSlipRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_JobworkReciptAgainstChallanOutwardPageDef"
+          path="InventoryPage.JobworkReciptAgainstChallanOutwardPageDef"/>
+    <page id="bspl_reportfactory_view_JobworkChallanOutwardPageDef" path="InventoryPage.JobworkChallanOutwardPageDef"/>
+    <page id="bspl_reportfactory_view_PendingChallanForReceivePageDef"
+          path="InventoryPage.PendingChallanForReceivePageDef"/>
+    <page id="bspl_reportfactory_view_ARNumberAgainstMRNITEMPageDef"
+          path="InventoryPage.ARNumberAgainstMRNITEMPageDef"/>
+    <page id="bspl_reportfactory_view_PendingMainStoreReceivingPageDef"
+          path="bspl.reportfactory.view.pageDefs.PendingMainStoreReceivingPageDef"/>
+    <page id="bspl_reportfactory_view_PendingPOforGateEntryPageDef" path="InventoryPage.PendingPOforGateEntryPageDef"/>
+    <page id="bspl_reportfactory_view_JWIssueagainstPurchaseOrderPageDef"
+          path="InventoryPage.JWIssueagainstPurchaseOrderPageDef"/>
+    <page id="bspl_reportfactory_view_JWIssueagainstPurchaseOrderReportPageDef"
+          path="InventoryPage.JWIssueagainstPurchaseOrderReportPageDef"/>
+    <page id="bspl_reportfactory_view_GoodsinTransitPageDef" path="InventoryPage.GoodsinTransitPageDef"/>
+    <page id="bspl_reportfactory_view_PendingMRNforPurchaseInvoicePageDef"
+          path="InventoryPage.PendingMRNforPurchaseInvoicePageDef"/>
+    <page id="bspl_reportfactory_view_SRVDetailPageDef" path="InventoryPage.SRVDetailPageDef"/>
+    <page id="bspl_reportfactory_view_TrialBalancePageDef" path="FinancePage.TrialBalancePageDef"/>
+    <page id="bspl_reportfactory_view_FGStockPageDef" path="InventoryPage.FGStockPageDef"/>
+    <page id="bspl_reportfactory_view_DailyStockStatementPageDef" path="InventoryPage.DailyStockStatementPageDef"/>
+    <page id="bspl_reportfactory_view_ApprovedPurchaseIndentPageDef"
+          path="InventoryPage.ApprovedPurchaseIndentPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="AppModuleDataControl" Package="model.service"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="FG Stock Position " id="ph1"/>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="FG Stock Position report.xls"
+                                             title="FG Stock Position report."/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.FGStockPositionVO1.collectionModel}" var="row"
+              rows="#{bindings.FGStockPositionVO1.rangeSize}"
+              emptyText="#{bindings.FGStockPositionVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.FGStockPositionVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.FGStockPositionVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.FGStockPositionVO1.rangeSize}"
+              filterModel="#{bindings.FGStockPositionVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.FGStockPositionVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.ProductTyp.name}" filterable="true" sortable="true"
+                 headerText="Product Type" id="c1">
+        <af:outputText value="#{row.ProductTyp}" shortDesc="#{bindings.FGStockPositionVO1.hints.ProductTyp.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.ProdType.name}" filterable="true" sortable="true"
+                 headerText="Prod Typ" id="c2">
+        <af:outputText value="#{row.ProdType}" shortDesc="#{bindings.FGStockPositionVO1.hints.ProdType.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.ProductCode.name}" filterable="true" sortable="true"
+                 headerText="Product Code" id="c3">
+        <af:outputText value="#{row.ProductCode}" shortDesc="#{bindings.FGStockPositionVO1.hints.ProductCode.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.ProductName.name}" filterable="true" sortable="true"
+                 headerText="Product Name" id="c4">
+        <af:outputText value="#{row.ProductName}" shortDesc="#{bindings.FGStockPositionVO1.hints.ProductName.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c5">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.FGStockPositionVO1.hints.Uom.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.BatchSize.name}" filterable="true" sortable="true"
+                 headerText="Batch Size" id="c6">
+        <af:outputText value="#{row.BatchSize}" shortDesc="#{bindings.FGStockPositionVO1.hints.BatchSize.tooltip}"
+                       id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.BatchSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.PackAt.name}" filterable="true" sortable="true"
+                 headerText="Pack At" id="c7">
+        <af:outputText value="#{row.PackAt}" shortDesc="#{bindings.FGStockPositionVO1.hints.PackAt.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.Mrp.name}" filterable="true" sortable="true"
+                 headerText="MRP" id="c8">
+        <af:outputText value="#{row.Mrp}" shortDesc="#{bindings.FGStockPositionVO1.hints.Mrp.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.Mrp.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.MinLevel.name}" filterable="true" sortable="true"
+                 headerText="Min Level" id="c9">
+        <af:outputText value="#{row.MinLevel}" shortDesc="#{bindings.FGStockPositionVO1.hints.MinLevel.tooltip}"
+                       id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.MinLevel.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.MaxLevel.name}" filterable="true" sortable="true"
+                 headerText="Max Level" id="c10">
+        <af:outputText value="#{row.MaxLevel}" shortDesc="#{bindings.FGStockPositionVO1.hints.MaxLevel.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.MaxLevel.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.Qu1Quantity.name}" filterable="true" sortable="true"
+                 headerText="Qu1 Quantity" id="c11">
+        <af:outputText value="#{row.Qu1Quantity}" shortDesc="#{bindings.FGStockPositionVO1.hints.Qu1Quantity.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.Qu1Quantity.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.Qu2Quantity.name}" filterable="true" sortable="true"
+                 headerText="Qu2 Quantity" id="c12">
+        <af:outputText value="#{row.Qu2Quantity}" shortDesc="#{bindings.FGStockPositionVO1.hints.Qu2Quantity.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.Qu2Quantity.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.Qu3Quantity.name}" filterable="true" sortable="true"
+                 headerText="Qu3 Quantity" id="c13">
+        <af:outputText value="#{row.Qu3Quantity}" shortDesc="#{bindings.FGStockPositionVO1.hints.Qu3Quantity.tooltip}"
+                       id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.Qu3Quantity.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.Qu4Quantity.name}" filterable="true" sortable="true"
+                 headerText="Qu4 Quantity" id="c14">
+        <af:outputText value="#{row.Qu4Quantity}" shortDesc="#{bindings.FGStockPositionVO1.hints.Qu4Quantity.tooltip}"
+                       id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.Qu4Quantity.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.TransitQtyU1.name}" filterable="true" sortable="true"
+                 headerText="Transit Qty U1" id="c15">
+        <af:outputText value="#{row.TransitQtyU1}" shortDesc="#{bindings.FGStockPositionVO1.hints.TransitQtyU1.tooltip}"
+                       id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.TransitQtyU1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.TransitQtyU2.name}" filterable="true" sortable="true"
+                 headerText="Transit Qty U2" id="c16">
+        <af:outputText value="#{row.TransitQtyU2}" shortDesc="#{bindings.FGStockPositionVO1.hints.TransitQtyU2.tooltip}"
+                       id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.TransitQtyU2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.ClosStockU1.name}" filterable="true" sortable="true"
+                 headerText="Clos Stock U1" id="c17">
+        <af:outputText value="#{row.ClosStockU1}" shortDesc="#{bindings.FGStockPositionVO1.hints.ClosStockU1.tooltip}"
+                       id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.ClosStockU1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.ClosStockU2.name}" filterable="true" sortable="true"
+                 headerText="CLos Stock U2" id="c18">
+        <af:outputText value="#{row.ClosStockU2}" shortDesc="#{bindings.FGStockPositionVO1.hints.ClosStockU2.tooltip}"
+                       id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.ClosStockU2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.CurrStockD28U1.name}" filterable="true"
+                 sortable="true" headerText="Curr Stock D28 U1" id="c19">
+        <af:outputText value="#{row.CurrStockD28U1}"
+                       shortDesc="#{bindings.FGStockPositionVO1.hints.CurrStockD28U1.tooltip}" id="ot19">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.CurrStockD28U1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.CurrStockD28U2.name}" filterable="true"
+                 sortable="true" headerText="Curr Stock D28 U2" id="c20">
+        <af:outputText value="#{row.CurrStockD28U2}"
+                       shortDesc="#{bindings.FGStockPositionVO1.hints.CurrStockD28U2.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.CurrStockD28U2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.WipQtyU1.name}" filterable="true" sortable="true"
+                 headerText="Wip Qty U1" id="c21">
+        <af:outputText value="#{row.WipQtyU1}" shortDesc="#{bindings.FGStockPositionVO1.hints.WipQtyU1.tooltip}"
+                       id="ot21">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.WipQtyU1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.FGStockPositionVO1.hints.WipQtyU2.name}" filterable="true" sortable="true"
+                 headerText="Wip Qty U2" id="c22">
+        <af:outputText value="#{row.WipQtyU2}" shortDesc="#{bindings.FGStockPositionVO1.hints.WipQtyU2.tooltip}"
+                       id="ot22">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.FGStockPositionVO1.hints.WipQtyU2.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

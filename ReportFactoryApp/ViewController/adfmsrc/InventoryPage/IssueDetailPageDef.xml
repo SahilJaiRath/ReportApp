@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="IssueDetailPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="IssueDetailVO1" RangeSize="50" DataControl="AppModuleDataControl" id="IssueDetailVO1Iterator"/>
+    <searchRegion Binds="IssueDetailVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="IssueDetailVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callIssueDetail" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callIssueDetail"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+    <tree IterBinding="IssueDetailVO1Iterator" id="IssueDetailVO1">
+      <nodeDefinition DefName="model.inventory.views.IssueDetailVO" Name="IssueDetailVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="SlipNo"/>
+          <Item Value="SlipDt"/>
+          <Item Value="IssueType"/>
+          <Item Value="IssFrom"/>
+          <Item Value="IssFor"/>
+          <Item Value="IssTo"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Qty"/>
+          <Item Value="DocNo"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="ProcCd"/>
+          <Item Value="Uom"/>
+          <Item Value="Value"/>
+          <Item Value="CostCentre"/>
+          <Item Value="RevenueCapital"/>
+          <Item Value="CostCenterName"/>
+          <Item Value="ItemGroup"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

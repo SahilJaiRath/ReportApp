@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Pending SRV For QC" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="Width:170.0px;" labelStyle="Width:100px">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="pndingSrvForQcVendorCdId"
+                                        popupTitle="Search and Select: #{bindings.PndingSrvForQcVendorCd.hints.label}"
+                                        value="#{bindings.PndingSrvForQcVendorCd.inputValue}"
+                                        label="Vendor Code"
+                                        model="#{bindings.PndingSrvForQcVendorCd.listOfValuesModel}"
+                                        required="#{bindings.PndingSrvForQcVendorCd.hints.mandatory}"
+                                        columns="#{bindings.PndingSrvForQcVendorCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.PndingSrvForQcVendorCd.hints.tooltip}" contentStyle="Width:148.0px;" labelStyle="Width:100px">
+            <f:validator binding="#{bindings.PndingSrvForQcVendorCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputComboboxListOfValues id="groupCdId" popupTitle="Search and Select: #{bindings.GroupCd.hints.label}"
+                                        value="#{bindings.GroupCd.inputValue}" label="Group Code"
+                                        model="#{bindings.GroupCd.listOfValuesModel}"
+                                        required="#{bindings.GroupCd.hints.mandatory}"
+                                        columns="#{bindings.GroupCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.GroupCd.hints.tooltip}" contentStyle="Width:150.0px;" labelStyle="Width:100px">
+            <f:validator binding="#{bindings.GroupCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputComboboxListOfValues id="subGroupCdId"
+                                        popupTitle="Search and Select: #{bindings.SubGroupCd.hints.label}"
+                                        value="#{bindings.SubGroupCd.inputValue}"
+                                        label="Sub Group Code"
+                                        model="#{bindings.SubGroupCd.listOfValuesModel}"
+                                        required="#{bindings.SubGroupCd.hints.mandatory}"
+                                        columns="#{bindings.SubGroupCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.SubGroupCd.hints.tooltip}" contentStyle="Width:148.0px;" labelStyle="Width:100px">
+            <f:validator binding="#{bindings.SubGroupCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+        <af:gridCell marginStart="5px" width="34%" id="gc7">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id4" contentStyle="Width:180.0px;" labelStyle="Width:100px">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc8">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id5"  contentStyle="Width:220.0px;" labelStyle="Width:100px">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc9">
+          <af:button text="Execute" id="b2" disabled="#{!bindings.callPendingSRVForQc.enabled}"
+                     actionListener="#{PendingSrvForQcBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Pending SRV For QC.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PendingSRVForQcVO1.collectionModel}" var="row"
+              rows="#{bindings.PendingSRVForQcVO1.rangeSize}"
+              emptyText="#{bindings.PendingSRVForQcVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PendingSRVForQcVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PendingSRVForQcVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PendingSRVForQcVO1.rangeSize}"
+              filterModel="#{bindings.PendingSRVForQcVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PendingSRVForQcVO1Query.processQuery}" varStatus="filter" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.UnitCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.SrvNo.name}" filterable="true" sortable="true"
+                 headerText="Srv No" id="c2">
+        <af:outputText value="#{row.SrvNo}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.SrvNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.SrvDt.name}" filterable="true" sortable="true" id="c3"
+                 headerText="Srv Date">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingSRVForQcVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.SrvDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.PendingSRVForQcVO1.hints.SrvDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.SrvDt}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.SrvDt.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.PendingSRVForQcVO1.hints.SrvDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.VenCd.name}" filterable="true" sortable="true"
+                 headerText="Ven Code" id="c4">
+        <af:outputText value="#{row.VenCd}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.VenCd.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PendingSRVForQcVO1.hints.Name.label}" id="c5">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.Name.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c10">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.ItemCd.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.ItemDesc.name}" filterable="true" sortable="true"
+                 headerText="Item Desc" id="c11">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.ItemDesc.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.ReceiptQty.name}" filterable="true" sortable="true"
+                 headerText="Receipt Qty" id="c12">
+        <af:outputText value="#{row.ReceiptQty}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.ReceiptQty.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingSRVForQcVO1.hints.ReceiptQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.ReceiptUom.name}" filterable="true" sortable="true"
+                 headerText="Receipt UOM" id="c13">
+        <af:outputText value="#{row.ReceiptUom}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.ReceiptUom.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.PendDays.name}" filterable="true" sortable="true"
+                 headerText="Pend Days" id="c14">
+        <af:outputText value="#{row.PendDays}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.PendDays.tooltip}"
+                       id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingSRVForQcVO1.hints.PendDays.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.InvNo.name}" filterable="true" sortable="true"
+                 headerText="Inv No" id="c6">
+        <af:outputText value="#{row.InvNo}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.InvNo.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.ChallanNo.name}" filterable="true" sortable="true"
+                 headerText="Challan No" id="c8">
+        <af:outputText value="#{row.ChallanNo}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.ChallanNo.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.InvDt.name}" filterable="true" sortable="true"
+                 headerText="Inv Date" id="c7">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingSRVForQcVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.InvDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.PendingSRVForQcVO1.hints.InvDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.InvDt}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.InvDt.tooltip}" id="ot7">
+          <af:convertDateTime pattern="#{bindings.PendingSRVForQcVO1.hints.InvDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.ChallanDt.name}" filterable="true" sortable="true"
+                 headerText="Challan Date" id="c9">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingSRVForQcVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ChallanDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.PendingSRVForQcVO1.hints.ChallanDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ChallanDt}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.ChallanDt.tooltip}"
+                       id="ot9">
+          <af:convertDateTime pattern="#{bindings.PendingSRVForQcVO1.hints.ChallanDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.GroupCode.name}" filterable="true" sortable="true"
+                 headerText="Group Code" id="c15">
+        <af:outputText value="#{row.GroupCode}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.GroupCode.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingSRVForQcVO1.hints.SubGroupCode.name}" filterable="true" sortable="true"
+                 headerText="Sub Group Code" id="c16">
+        <af:outputText value="#{row.SubGroupCode}" shortDesc="#{bindings.PendingSRVForQcVO1.hints.SubGroupCode.tooltip}"
+                       id="ot16"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

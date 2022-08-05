@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="PendingJobcardForApprovalPageDef" Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="pendingJobcardForApprovalVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="pendingJobcardForApprovalVO1Iterator"/>
+    <searchRegion Binds="pendingJobcardForApprovalVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="pendingJobcardForApprovalVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="pendingJobcardForApprovalVO1Iterator" id="pendingJobcardForApprovalVO1">
+      <nodeDefinition DefName="model.production.views.pendingJobcardForApprovalVO" Name="pendingJobcardForApprovalVO10">
+        <AttrNames>
+          <Item Value="Jobcard"/>
+          <Item Value="Date1"/>
+          <Item Value="Code"/>
+          <Item Value="Description"/>
+          <Item Value="BatchNo"/>
+          <Item Value="Qty1"/>
+          <Item Value="App"/>
+          <Item Value="Unit"/>
+          <Item Value="IsClose"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_PendingJobcardForApproval_Approved"
+          id="PendingJobcardForApproval_Approved" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubLedger_UnitCode" id="SubLedger_UnitCode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="callPendingJobcardforApproval" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPendingJobcardforApproval" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_JCSTATUS" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

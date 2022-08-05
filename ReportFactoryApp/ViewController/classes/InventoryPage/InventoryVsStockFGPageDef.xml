@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="InventoryVsStockFGPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="InventoryVsStockFGVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="InventoryVsStockFGVO1Iterator"/>
+    <searchRegion Binds="InventoryVsStockFGVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="InventoryVsStockFGVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="InventoryVsStockFGVO1Iterator" id="InventoryVsStockFGVO1">
+      <nodeDefinition DefName="model.inventory.views.InventoryVsStockFGVO" Name="InventoryVsStockFGVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="ProductCode"/>
+          <Item Value="ClosingStockaD28"/>
+          <Item Value="ClosingStockNotD2860001"/>
+          <Item Value="ClosingStockD2860002"/>
+          <Item Value="ClosingStockNotD2860002"/>
+          <Item Value="BatchSize"/>
+          <Item Value="Mrp"/>
+          <Item Value="Meaning"/>
+          <Item Value="Description"/>
+          <Item Value="FirstQ21"/>
+          <Item Value="SecoundQ21"/>
+          <Item Value="ThirdQ21"/>
+          <Item Value="FourthQ22"/>
+          <Item Value="InTransistA1"/>
+          <Item Value="InTransistA2"/>
+          <Item Value="Wip1"/>
+          <Item Value="Wip2"/>
+          <Item Value="StockPosition"/>
+          <Item Value="SubGroup"/>
+          <Item Value="GroupDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

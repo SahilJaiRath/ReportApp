@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Sale Summary" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1"  contentStyle="width:180.0px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2" contentStyle="width:180.0px;" labelStyle="width:100px"  >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id3" contentStyle="width:180.0px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2" actionListener="#{SaleSummaryBean.onClickButton}"
+                     disabled="#{!bindings.callSaleSummary.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Sale Summary.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.SaleSummaryVO1.collectionModel}" var="row" rows="#{bindings.SaleSummaryVO1.rangeSize}"
+              emptyText="#{bindings.SaleSummaryVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.SaleSummaryVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.SaleSummaryVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.SaleSummaryVO1.rangeSize}"
+              filterModel="#{bindings.SaleSummaryVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.SaleSummaryVO1Query.processQuery}" varStatus="vs" id="t1" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.InvNo.name}" filterable="true" sortable="true"
+                 headerText="Invoice No" id="c1">
+        <af:outputText value="#{row.InvNo}" shortDesc="#{bindings.SaleSummaryVO1.hints.InvNo.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.InvDate.name}" filterable="true" sortable="true"
+                 headerText="Invoice Date" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.SaleSummaryVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.InvDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.SaleSummaryVO1.hints.InvDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.InvDate}" shortDesc="#{bindings.SaleSummaryVO1.hints.InvDate.tooltip}" id="ot2">
+          <af:convertDateTime pattern="#{bindings.SaleSummaryVO1.hints.InvDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.CustCode.name}" filterable="true" sortable="true"
+                 headerText="Cust Code" id="c3">
+        <af:outputText value="#{row.CustCode}" shortDesc="#{bindings.SaleSummaryVO1.hints.CustCode.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.InvHeadType.name}" filterable="true" sortable="true"
+                 headerText="Inv Head Type" id="c4">
+        <af:outputText value="#{row.InvHeadType}" shortDesc="#{bindings.SaleSummaryVO1.hints.InvHeadType.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.StockType.name}" filterable="true" sortable="true"
+                 headerText="Stock Type" id="c5">
+        <af:outputText value="#{row.StockType}" shortDesc="#{bindings.SaleSummaryVO1.hints.StockType.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.GrossAmount.name}" filterable="true" sortable="true"
+                 headerText="Gross Amount" id="c6">
+        <af:outputText value="#{row.GrossAmount}" shortDesc="#{bindings.SaleSummaryVO1.hints.GrossAmount.tooltip}"
+                       id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.GrossAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.NetAmount.name}" filterable="true" sortable="true"
+                 headerText="Net Amount" id="c7">
+        <af:outputText value="#{row.NetAmount}" shortDesc="#{bindings.SaleSummaryVO1.hints.NetAmount.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.NetAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.OtherTax.name}" filterable="true" sortable="true"
+                 headerText="Other Tax" id="c8">
+        <af:outputText value="#{row.OtherTax}" shortDesc="#{bindings.SaleSummaryVO1.hints.OtherTax.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.OtherTax.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.DisAmt.name}" filterable="true" sortable="true"
+                 headerText="Dis Amount" id="c9">
+        <af:outputText value="#{row.DisAmt}" shortDesc="#{bindings.SaleSummaryVO1.hints.DisAmt.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.DisAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.TcsAmt.name}" filterable="true" sortable="true"
+                 headerText="TCS Amount" id="c10">
+        <af:outputText value="#{row.TcsAmt}" shortDesc="#{bindings.SaleSummaryVO1.hints.TcsAmt.tooltip}" id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.TcsAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.OtherAmount.name}" filterable="true" sortable="true"
+                 headerText="Other Amount" id="c11">
+        <af:outputText value="#{row.OtherAmount}" shortDesc="#{bindings.SaleSummaryVO1.hints.OtherAmount.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.OtherAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="Name" id="c12">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.SaleSummaryVO1.hints.Name.tooltip}" id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="Qty" id="c13">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.SaleSummaryVO1.hints.Qty.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c14">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.SaleSummaryVO1.hints.UnitCode.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.Destination.name}" filterable="true" sortable="true"
+                 headerText="Destination" id="c15">
+        <af:outputText value="#{row.Destination}" shortDesc="#{bindings.SaleSummaryVO1.hints.Destination.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.ChName.name}" filterable="true" sortable="true"
+                 headerText="Ch Name" id="c16">
+        <af:outputText value="#{row.ChName}" shortDesc="#{bindings.SaleSummaryVO1.hints.ChName.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.TaxName.name}" filterable="true" sortable="true"
+                 headerText="Tax Name" id="c17">
+        <af:outputText value="#{row.TaxName}" shortDesc="#{bindings.SaleSummaryVO1.hints.TaxName.tooltip}" id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.GrossAmount1.name}" filterable="true" sortable="true"
+                 headerText="Gross Amount" id="c18">
+        <af:outputText value="#{row.GrossAmount1}" shortDesc="#{bindings.SaleSummaryVO1.hints.GrossAmount1.tooltip}"
+                       id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.GrossAmount1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c19">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.SaleSummaryVO1.hints.ItemCd.tooltip}" id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.Sgst.name}" filterable="true" sortable="true"
+                 headerText="SGST" id="c20">
+        <af:outputText value="#{row.Sgst}" shortDesc="#{bindings.SaleSummaryVO1.hints.Sgst.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.Sgst.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.Cgst.name}" filterable="true" sortable="true"
+                 headerText="CGST" id="c21">
+        <af:outputText value="#{row.Cgst}" shortDesc="#{bindings.SaleSummaryVO1.hints.Cgst.tooltip}" id="ot21">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.Cgst.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.Igst.name}" filterable="true" sortable="true"
+                 headerText="IGST" id="c22">
+        <af:outputText value="#{row.Igst}" shortDesc="#{bindings.SaleSummaryVO1.hints.Igst.tooltip}" id="ot22">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.Igst.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.GstCode.name}" filterable="true" sortable="true"
+                 headerText="GST Code" id="c23">
+        <af:outputText value="#{row.GstCode}" shortDesc="#{bindings.SaleSummaryVO1.hints.GstCode.tooltip}" id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.GstinNo.name}" filterable="true" sortable="true"
+                 headerText="GSTIN No" id="c24">
+        <af:outputText value="#{row.GstinNo}" shortDesc="#{bindings.SaleSummaryVO1.hints.GstinNo.tooltip}" id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.SessionId.name}" filterable="true" sortable="true"
+                 headerText="Session Id" id="c25">
+        <af:outputText value="#{row.SessionId}" shortDesc="#{bindings.SaleSummaryVO1.hints.SessionId.tooltip}"
+                       id="ot25">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SaleSummaryVO1.hints.SessionId.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SaleSummaryVO1.hints.PlaceOfSupply.name}" filterable="true" sortable="true"
+                 headerText="Place Of Supply" id="c26">
+        <af:outputText value="#{row.PlaceOfSupply}" shortDesc="#{bindings.SaleSummaryVO1.hints.PlaceOfSupply.tooltip}"
+                       id="ot26"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

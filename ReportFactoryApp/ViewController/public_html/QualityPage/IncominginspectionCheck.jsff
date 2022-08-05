@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Incoming Inspection" id="ph1"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.IncominginspectionCheckVO11.collectionModel}" var="row"
+              rows="#{bindings.IncominginspectionCheckVO11.rangeSize}"
+              emptyText="#{bindings.IncominginspectionCheckVO11.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.IncominginspectionCheckVO11.collectionModel.selectedRow}"
+              selectionListener="#{bindings.IncominginspectionCheckVO11.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.IncominginspectionCheckVO11.rangeSize}"
+              filterModel="#{bindings.IncominginspectionCheckVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.IncominginspectionCheckVO1Query.processQuery}" varStatus="vs" id="t1"
+              columnStretching="column:c2">
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.ItemCode.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.ItemCode.label}" id="c1">
+        <af:outputText value="#{row.ItemCode}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.ItemCode.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.ItemDesc.label}" id="c2">
+        <af:outputText value="#{row.ItemDesc}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.ItemDesc.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.CheckMethod.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.CheckMethod.label}" id="c3">
+        <af:outputText value="#{row.CheckMethod}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.CheckMethod.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.ChkptSeqNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.ChkptSeqNo.label}" id="c4">
+        <af:outputText value="#{row.ChkptSeqNo}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.ChkptSeqNo.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.ChkptDesc.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.ChkptDesc.label}" id="c5">
+        <af:outputText value="#{row.ChkptDesc}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.ChkptDesc.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.BaseLimit.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.BaseLimit.label}" id="c6">
+        <af:outputText value="#{row.BaseLimit}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.BaseLimit.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncominginspectionCheckVO11.hints.BaseLimit.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.UpperLimit.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.UpperLimit.label}" id="c7">
+        <af:outputText value="#{row.UpperLimit}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.UpperLimit.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncominginspectionCheckVO11.hints.UpperLimit.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.LowerLimit.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.LowerLimit.label}" id="c8">
+        <af:outputText value="#{row.LowerLimit}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.LowerLimit.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.IncominginspectionCheckVO11.hints.LowerLimit.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.UomOfLimits.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.UomOfLimits.label}" id="c9">
+        <af:outputText value="#{row.UomOfLimits}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.UomOfLimits.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.InsStage.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.InsStage.label}" id="c10">
+        <af:outputText value="#{row.InsStage}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.InsStage.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IncominginspectionCheckVO11.hints.InspItem.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.IncominginspectionCheckVO11.hints.InspItem.label}" id="c11">
+        <af:outputText value="#{row.InspItem}"
+                       shortDesc="#{bindings.IncominginspectionCheckVO11.hints.InspItem.tooltip}" id="ot11"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

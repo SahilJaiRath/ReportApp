@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="BOM V/S Actual Comsumption " id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="#{bindings.UnitCode.label}"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Execute" id="b1" actionListener="#{BOMVSActualComsumptionBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="BOM V/S Actual Comsumption Report.xls"
+                                             title="BOM V/S Actual Comsumption Report "/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BOMVSActualComsumptionVO1.collectionModel}" var="row"
+              rows="#{bindings.BOMVSActualComsumptionVO1.rangeSize}"
+              emptyText="#{bindings.BOMVSActualComsumptionVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.BOMVSActualComsumptionVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BOMVSActualComsumptionVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.BOMVSActualComsumptionVO1.rangeSize}"
+              filterModel="#{bindings.BOMVSActualComsumptionVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.BOMVSActualComsumptionVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.Jobcard.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.Jobcard.label}" id="c1">
+        <af:outputText value="#{row.Jobcard}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.Jobcard.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.ItemCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.ItemCd.label}" id="c2">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.ItemCd.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.Description.label}" id="c3">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.Description.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.BatchNo.label}" id="c4">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.BatchNo.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.ConsumeCode.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.ConsumeCode.label}" id="c5">
+        <af:outputText value="#{row.ConsumeCode}"
+                       shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.ConsumeCode.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.Name1.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.BOMVSActualComsumptionVO1.hints.Name1.label}" id="c6">
+        <af:outputText value="#{row.Name1}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.Name1.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.BOMVSActualComsumptionVO1.hints.Uom.label}" id="c7">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.Uom.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.BomQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.BomQty.label}" id="c8">
+        <af:outputText value="#{row.BomQty}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.BomQty.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMVSActualComsumptionVO1.hints.BomQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.JcQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.BOMVSActualComsumptionVO1.hints.JcQty.label}" id="c9">
+        <af:outputText value="#{row.JcQty}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.JcQty.tooltip}"
+                       id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMVSActualComsumptionVO1.hints.JcQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.IssQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.IssQty.label}" id="c10">
+        <af:outputText value="#{row.IssQty}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.IssQty.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMVSActualComsumptionVO1.hints.IssQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.ConsumedQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.ConsumedQty.label}" id="c11">
+        <af:outputText value="#{row.ConsumedQty}"
+                       shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.ConsumedQty.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BOMVSActualComsumptionVO1.hints.ConsumedQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.Balance.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.Balance.label}" id="c12">
+        <af:outputText value="#{row.Balance}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.Balance.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BOMVSActualComsumptionVO1.hints.Balance.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.UnitCd.label}" id="c13">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.UnitCd.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.JobcardQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.JobcardQty.label}" id="c14">
+        <af:outputText value="#{row.JobcardQty}"
+                       shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.JobcardQty.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BOMVSActualComsumptionVO1.hints.JobcardQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BOMVSActualComsumptionVO1.hints.ProducedQty.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.BOMVSActualComsumptionVO1.hints.ProducedQty.label}" id="c15">
+        <af:outputText value="#{row.ProducedQty}"
+                       shortDesc="#{bindings.BOMVSActualComsumptionVO1.hints.ProducedQty.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BOMVSActualComsumptionVO1.hints.ProducedQty.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

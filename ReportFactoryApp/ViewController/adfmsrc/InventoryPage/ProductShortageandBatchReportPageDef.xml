@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="ProductShortageandBatchReportPageDef" Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ProductShortageandBatchReportVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="ProductShortageandBatchReportVO1Iterator"/>
+    <searchRegion Binds="ProductShortageandBatchReportVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ProductShortageandBatchReportVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ProductShortageandBatchReportVO1Iterator" id="ProductShortageandBatchReportVO1">
+      <nodeDefinition DefName="model.inventory.views.ProductShortageandBatchReportVO"
+                      Name="ProductShortageandBatchReportVO10">
+        <AttrNames>
+          <Item Value="SrNmo"/>
+          <Item Value="UnitCd"/>
+          <Item Value="ProdCodeFor"/>
+          <Item Value="ProdCode"/>
+          <Item Value="ProdName"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemName"/>
+          <Item Value="ItemGroupCode"/>
+          <Item Value="GroupName"/>
+          <Item Value="ReqBatchQty"/>
+          <Item Value="NoOfRmBatch"/>
+          <Item Value="NoOfPmBatch"/>
+          <Item Value="NoOfSfBatch"/>
+          <Item Value="NoOfFinalBatch"/>
+          <Item Value="LastIssBatch"/>
+          <Item Value="RequiredQty"/>
+          <Item Value="StockQty"/>
+          <Item Value="ShortQty"/>
+          <Item Value="SessionId"/>
+          <Item Value="UserId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_ProductShortageandBatch_ProductName"
+                  id="ProductShortageandBatch_ProductName"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p1">
+      <AttrNames>
+        <Item Value="LV_p1"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callProductShortageandBatch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callProductShortageandBatch" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_PRODUCT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_REQUESTQTY" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

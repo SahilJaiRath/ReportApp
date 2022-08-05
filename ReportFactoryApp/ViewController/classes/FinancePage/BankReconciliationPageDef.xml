@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="BankReconciliationPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BankReconciliationVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="BankReconciliationVO1Iterator"/>
+    <searchRegion Binds="BankReconciliationVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BankReconciliationVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BankReconciliationVO1Iterator" id="BankReconciliationVO1">
+      <nodeDefinition DefName="model.finance.views.BankReconciliationVO" Name="BankReconciliationVO10">
+        <AttrNames>
+          <Item Value="FinTvouchVouNo"/>
+          <Item Value="GnrlLedGlCd"/>
+          <Item Value="FinTvouchVouDate"/>
+          <Item Value="Debit"/>
+          <Item Value="Credit"/>
+          <Item Value="BankName"/>
+          <Item Value="RecoNo"/>
+          <Item Value="BankAmt"/>
+          <Item Value="BankDate"/>
+          <Item Value="Description"/>
+          <Item Value="SubLedgerName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_BankReconcilation_GL"
+                  id="BankReconcilation_GL"/>
+    <methodAction id="callBankRecociliation" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callBankRecociliation" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_GL" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

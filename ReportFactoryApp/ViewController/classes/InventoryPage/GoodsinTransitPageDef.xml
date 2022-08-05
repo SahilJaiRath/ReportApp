@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="GoodsinTransitPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="GoodsinTransitVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="GoodsinTransitVO1Iterator"/>
+    <searchRegion Binds="GoodsinTransitVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="GoodsinTransitVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="GoodsinTransitVO1Iterator" id="GoodsinTransitVO1">
+      <nodeDefinition DefName="model.inventory.views.GoodsinTransitVO" Name="GoodsinTransitVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="ChallanNo"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="PartyCd"/>
+          <Item Value="PartyName"/>
+          <Item Value="GateExitNo"/>
+          <Item Value="Status"/>
+          <Item Value="FrmLoc"/>
+          <Item Value="ToLoc"/>
+          <Item Value="GateExitDt"/>
+          <Item Value="ItemCd"/>
+          <Item Value="BatchNo"/>
+          <Item Value="Qty"/>
+          <Item Value="EntNo"/>
+          <Item Value="LocCd"/>
+          <Item Value="RecQty"/>
+          <Item Value="PendQty"/>
+          <Item Value="ChallanType"/>
+          <Item Value="CurrStock"/>
+          <Item Value="MfgDate"/>
+          <Item Value="ExpDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_GoodsinTransit_ChallanNo"
+                  id="GoodsinTransit_ChallanNo"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callGoodsinTransit" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callGoodsinTransit" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_CHALLANNO" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubLedger_UnitCode" id="SubLedger_UnitCode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

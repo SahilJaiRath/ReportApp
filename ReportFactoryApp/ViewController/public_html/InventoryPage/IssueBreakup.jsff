@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelHeader text="Issue Breakup" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180px;" labelStyle="width:100px" autoSubmit="true" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="lOCId" popupTitle="Search and Select: #{bindings.LOC.hints.label}"
+                                        value="#{bindings.LOC.inputValue}" label="Location"
+                                        model="#{bindings.LOC.listOfValuesModel}"
+                                        required="#{bindings.LOC.hints.mandatory}"
+                                        columns="#{bindings.LOC.hints.displayWidth}"
+                                        shortDesc="#{bindings.LOC.hints.tooltip}" contentStyle="width:170px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.LOC.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id1" contentStyle="width:180px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2" contentStyle="width:190px;" labelStyle="width:100px">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callIssueBreakup.enabled}"
+                     actionListener="#{IssueBreakupBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Issue Breakup.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.IssueBreakupVO1.collectionModel}" var="row" rows="#{bindings.IssueBreakupVO1.rangeSize}"
+              emptyText="#{bindings.IssueBreakupVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.IssueBreakupVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.IssueBreakupVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.IssueBreakupVO1.rangeSize}"
+              filterModel="#{bindings.IssueBreakupVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.IssueBreakupVO1Query.processQuery}" varStatus="vs" id="t1" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c1">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.IssueBreakupVO1.hints.ItemCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.Description.name}" filterable="true" sortable="true"
+                 headerText="Description" id="c2">
+        <af:outputText value="#{row.Description}" shortDesc="#{bindings.IssueBreakupVO1.hints.Description.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.OpQty.name}" filterable="true" sortable="true"
+                 headerText="OP Qty" id="c3">
+        <af:outputText value="#{row.OpQty}" shortDesc="#{bindings.IssueBreakupVO1.hints.OpQty.tooltip}" id="ot3">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueBreakupVO1.hints.OpQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.RecQty.name}" filterable="true" sortable="true"
+                 headerText="Rec Qty" id="c4">
+        <af:outputText value="#{row.RecQty}" shortDesc="#{bindings.IssueBreakupVO1.hints.RecQty.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueBreakupVO1.hints.RecQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.IssQty.name}" filterable="true" sortable="true"
+                 headerText="Iss Qty" id="c5">
+        <af:outputText value="#{row.IssQty}" shortDesc="#{bindings.IssueBreakupVO1.hints.IssQty.tooltip}" id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueBreakupVO1.hints.IssQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.BalQty.name}" filterable="true" sortable="true"
+                 headerText="Balance Qty" id="c6">
+        <af:outputText value="#{row.BalQty}" shortDesc="#{bindings.IssueBreakupVO1.hints.BalQty.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueBreakupVO1.hints.BalQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.Loc.name}" filterable="true" sortable="true"
+                 headerText="Location" id="c7">
+        <af:outputText value="#{row.Loc}" shortDesc="#{bindings.IssueBreakupVO1.hints.Loc.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.IssTo.name}" filterable="true" sortable="true"
+                 headerText="Iss To" id="c8">
+        <af:outputText value="#{row.IssTo}" shortDesc="#{bindings.IssueBreakupVO1.hints.IssTo.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.LongDesc.name}" filterable="true" sortable="true"
+                 headerText="Long Desc" id="c9">
+        <af:outputText value="#{row.LongDesc}" shortDesc="#{bindings.IssueBreakupVO1.hints.LongDesc.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.BreakupOfIssue.name}" filterable="true" sortable="true"
+                 headerText="Breakup Of Issue" id="c10">
+        <af:outputText value="#{row.BreakupOfIssue}"
+                       shortDesc="#{bindings.IssueBreakupVO1.hints.BreakupOfIssue.tooltip}" id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueBreakupVO1.hints.BreakupOfIssue.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.ItemUom.name}" filterable="true" sortable="true"
+                 headerText="Item UOM" id="c11">
+        <af:outputText value="#{row.ItemUom}" shortDesc="#{bindings.IssueBreakupVO1.hints.ItemUom.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.UnApqty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.IssueBreakupVO1.hints.UnApqty.label}" id="c12">
+        <af:outputText value="#{row.UnApqty}" shortDesc="#{bindings.IssueBreakupVO1.hints.UnApqty.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueBreakupVO1.hints.UnApqty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.Sid.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.IssueBreakupVO1.hints.Sid.label}" id="c13">
+        <af:outputText value="#{row.Sid}" shortDesc="#{bindings.IssueBreakupVO1.hints.Sid.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.IssueBreakupVO1.hints.Sid.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c14">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.IssueBreakupVO1.hints.UnitCd.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.GroupCode.name}" filterable="true" sortable="true"
+                 headerText="Group Code" id="c15">
+        <af:outputText value="#{row.GroupCode}" shortDesc="#{bindings.IssueBreakupVO1.hints.GroupCode.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.ItemType.name}" filterable="true" sortable="true"
+                 headerText="Item Type" id="c16">
+        <af:outputText value="#{row.ItemType}" shortDesc="#{bindings.IssueBreakupVO1.hints.ItemType.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.CostCentre.name}" filterable="true" sortable="true"
+                 headerText="Cost Centre" id="c17">
+        <af:outputText value="#{row.CostCentre}" shortDesc="#{bindings.IssueBreakupVO1.hints.CostCentre.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.IssueBreakupVO1.hints.CostCenterName.name}" filterable="true" sortable="true"
+                 headerText="Cost Center Name" id="c18">
+        <af:outputText value="#{row.CostCenterName}"
+                       shortDesc="#{bindings.IssueBreakupVO1.hints.CostCenterName.tooltip}" id="ot18"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

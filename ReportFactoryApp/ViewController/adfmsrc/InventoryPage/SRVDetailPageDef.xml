@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SRVDetailPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SRVDetailVO1" RangeSize="50" DataControl="AppModuleDataControl" id="SRVDetailVO1Iterator"/>
+    <searchRegion Binds="SRVDetailVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SRVDetailVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SRVDetailVO1Iterator" id="SRVDetailVO1">
+      <nodeDefinition DefName="model.inventory.views.SRVDetailVO" Name="SRVDetailVO10">
+        <AttrNames>
+          <Item Value="UnitCd"/>
+          <Item Value="VendorCode"/>
+          <Item Value="VendorName"/>
+          <Item Value="SrvNo"/>
+          <Item Value="SrvDt"/>
+          <Item Value="ChallanNo"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="InvNo"/>
+          <Item Value="InvDt"/>
+          <Item Value="GtEheadGateEno"/>
+          <Item Value="Status"/>
+          <Item Value="GateDt"/>
+          <Item Value="EWayBillNo"/>
+          <Item Value="InvoiceValue"/>
+          <Item Value="BillType"/>
+          <Item Value="BillNo"/>
+          <Item Value="BillDate"/>
+          <Item Value="ItemCd"/>
+          <Item Value="GstRegNo"/>
+          <Item Value="ChallanQty"/>
+          <Item Value="ReceiptQty"/>
+          <Item Value="Uom"/>
+          <Item Value="AcceptQty"/>
+          <Item Value="CurrencyRate"/>
+          <Item Value="Location"/>
+          <Item Value="RejectQty"/>
+          <Item Value="ProcSeq"/>
+          <Item Value="ProcCd"/>
+          <Item Value="PoNo"/>
+          <Item Value="PoDt"/>
+          <Item Value="PoHeadAmdNo"/>
+          <Item Value="PayTerm"/>
+          <Item Value="NetRate"/>
+          <Item Value="MaterialRate"/>
+          <Item Value="BasicAmount"/>
+          <Item Value="DiscountRs"/>
+          <Item Value="DiscountAmount"/>
+          <Item Value="SalesTaxAmt"/>
+          <Item Value="ExcAmt"/>
+          <Item Value="FreightUnit"/>
+          <Item Value="FreightAmount"/>
+          <Item Value="GstCode"/>
+          <Item Value="ImportIgst"/>
+          <Item Value="RateOfTax"/>
+          <Item Value="IgstRate"/>
+          <Item Value="IgstAmt"/>
+          <Item Value="SgstAmt"/>
+          <Item Value="CgstAmt"/>
+          <Item Value="SrvHsnCode"/>
+          <Item Value="CgstRate"/>
+          <Item Value="SgstRate"/>
+          <Item Value="PackingForward"/>
+          <Item Value="PackAmount"/>
+          <Item Value="CustomDuty"/>
+          <Item Value="Other1"/>
+          <Item Value="Other2"/>
+          <Item Value="ShortageAllowed"/>
+          <Item Value="TransporterDebited"/>
+          <Item Value="GrandTotal"/>
+          <Item Value="LandedCost"/>
+          <Item Value="ItemDecs"/>
+          <Item Value="GroupCode"/>
+          <Item Value="SubGrpCd"/>
+          <Item Value="ApproveBy"/>
+          <Item Value="ApproveByName"/>
+          <Item Value="AuthDt"/>
+          <Item Value="MaterialType"/>
+          <Item Value="BoeNo"/>
+          <Item Value="BoeDt"/>
+          <Item Value="Insurance"/>
+          <Item Value="BillPrepBy"/>
+          <Item Value="BillPassDate"/>
+          <Item Value="DueDate"/>
+          <Item Value="VoucherNo"/>
+          <Item Value="VoucherDate"/>
+          <Item Value="BillAmount"/>
+          <Item Value="PassedAmount"/>
+          <Item Value="DifferenceAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_LocationFilter"
+                  id="SRVDetail_LocationFilter"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_StockAdjustment_PartName"
+                  id="StockAdjustment_PartName"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubGroupCd" id="SubGroupCd"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_GroupCd" id="GroupCd"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_ApproveFilter" id="SRVDetail_ApproveFilter"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_Statusfilter" id="SRVDetail_Statusfilter"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="callSRVDetail" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callSRVDetail"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_LocationFilter" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ITEM" NDType="java.lang.String"/>
+      <NamedData NDName="LV_GroupCd" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SubGroupCd" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ApproveFilter" NDType="java.lang.String"/>
+      <NamedData NDName="LV_Statusfilter" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

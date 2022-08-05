@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="testPageDef"
+                Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <taskFlow id="PendingMRNforPurchaseInvoiceTF1"
+              taskFlowId="/WEB-INF/InventoryTaskflow/PendingMRNforPurchaseInvoiceTF.xml#PendingMRNforPurchaseInvoiceTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="SRVDetailTF1" taskFlowId="/WEB-INF/InventoryTaskflow/SRVDetailTF.xml#SRVDetailTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="TrialBalanceTF1" taskFlowId="/WEB-INF/FinanceTaskflow/TrialBalanceTF.xml#TrialBalanceTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="FGStockTF1" taskFlowId="/WEB-INF/InventoryTaskflow/FGStockTF.xml#FGStockTF" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="DailyStockStatementTF1"
+              taskFlowId="/WEB-INF/InventoryTaskflow/DailyStockStatementTF.xml#DailyStockStatementTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="ApprovedPurchaseIndentTF1"
+              taskFlowId="/WEB-INF/InventoryTaskflow/ApprovedPurchaseIndentTF.xml#ApprovedPurchaseIndentTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="TRF Register " id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.SubLedger_UnitCode.inputValue}"
+                              label="Unit Name"
+                              required="#{bindings.SubLedger_UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.SubLedger_UnitCode.hints.tooltip}" id="soc1" contentStyle="width:187px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.SubLedger_UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.SubLedger_UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="tRFRegister_ProductFilterId"
+                                        popupTitle="Search and Select: #{bindings.TRFRegister_ProductFilter.hints.label}"
+                                        value="#{bindings.TRFRegister_ProductFilter.inputValue}"
+                                        label="Product"
+                                        model="#{bindings.TRFRegister_ProductFilter.listOfValuesModel}"
+                                        required="#{bindings.TRFRegister_ProductFilter.hints.mandatory}"
+                                        columns="#{bindings.TRFRegister_ProductFilter.hints.displayWidth}"
+                                        shortDesc="#{bindings.TRFRegister_ProductFilter.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.TRFRegister_ProductFilter.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id4" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id3" contentStyle="width:192px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{TRFRegisterBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="TRF Register report.xls"
+                                             title="TRF Register report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.TRFRegisterVO1.collectionModel}" var="row" rows="#{bindings.TRFRegisterVO1.rangeSize}"
+              emptyText="#{bindings.TRFRegisterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.TRFRegisterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.TRFRegisterVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.TRFRegisterVO1.rangeSize}"
+              filterModel="#{bindings.TRFRegisterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.TRFRegisterVO1Query.processQuery}" varStatus="vs" id="t2" scrollPolicy="page">
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.TRFRegisterVO1.hints.UnitCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleNo.name}" filterable="true" sortable="true"
+                 headerText="Sample No" id="c2">
+        <af:outputText value="#{row.SampleNo}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.ItemName.name}" filterable="true" sortable="true"
+                 headerText="Item Name" id="c7">
+        <af:outputText value="#{row.ItemName}" shortDesc="#{bindings.TRFRegisterVO1.hints.ItemName.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleProduct.name}" filterable="true" sortable="true"
+                 headerText="Code" id="c6">
+        <af:outputText value="#{row.SampleProduct}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleProduct.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.JcNo.name}" filterable="true" sortable="true"
+                 headerText="JC No" id="c11">
+        <af:outputText value="#{row.JcNo}" shortDesc="#{bindings.TRFRegisterVO1.hints.JcNo.tooltip}" id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleType.name}" filterable="true" sortable="true"
+                 headerText="Sample Type" id="c3">
+        <af:outputText value="#{row.SampleType}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleType.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.InspectType.name}" filterable="true" sortable="true"
+                 headerText="Inspect Type" id="c4">
+        <af:outputText value="#{row.InspectType}" shortDesc="#{bindings.TRFRegisterVO1.hints.InspectType.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleDate.name}" filterable="true" sortable="true"
+                 headerText="Sample Date" id="c5">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.TRFRegisterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.SampleDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.TRFRegisterVO1.hints.SampleDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.SampleDate}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleDate.tooltip}"
+                       id="ot5">
+          <af:convertDateTime pattern="#{bindings.TRFRegisterVO1.hints.SampleDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.ProcessCd.name}" filterable="true" sortable="true"
+                 headerText="Process Code" id="c22">
+        <af:outputText value="#{row.ProcessCd}" shortDesc="#{bindings.TRFRegisterVO1.hints.ProcessCd.tooltip}"
+                       id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.ProcessDesc.name}" filterable="true" sortable="true"
+                 headerText="Process Description" id="c23">
+        <af:outputText value="#{row.ProcessDesc}" shortDesc="#{bindings.TRFRegisterVO1.hints.ProcessDesc.tooltip}"
+                       id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.ProcessSeq.name}" filterable="true" sortable="true"
+                 headerText="Process Seq" id="c24">
+        <af:outputText value="#{row.ProcessSeq}" shortDesc="#{bindings.TRFRegisterVO1.hints.ProcessSeq.tooltip}"
+                       id="ot24">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TRFRegisterVO1.hints.ProcessSeq.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleQty.name}" filterable="true" sortable="true"
+                 headerText="Sample Qty" id="c8">
+        <af:outputText value="#{row.SampleQty}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleQty.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TRFRegisterVO1.hints.SampleQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleQtyUom.name}" filterable="true" sortable="true"
+                 headerText="Sample Qty UOM" id="c27">
+        <af:outputText value="#{row.SampleQtyUom}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleQtyUom.tooltip}"
+                       id="ot27"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleLocation.name}" filterable="true" sortable="true"
+                 headerText="Sample Location" id="c10">
+        <af:outputText value="#{row.SampleLocation}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleLocation.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.LocationName.name}" filterable="true" sortable="true"
+                 headerText="Location Name" id="c29">
+        <af:outputText value="#{row.LocationName}" shortDesc="#{bindings.TRFRegisterVO1.hints.LocationName.tooltip}"
+                       id="ot29"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.BatchNo.name}" filterable="true" sortable="true"
+                 headerText="Batch No" id="c12">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.TRFRegisterVO1.hints.BatchNo.tooltip}" id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.BatchSize.name}" filterable="true" sortable="true"
+                 headerText="Batch Size" id="c13">
+        <af:outputText value="#{row.BatchSize}" shortDesc="#{bindings.TRFRegisterVO1.hints.BatchSize.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleUom.name}" filterable="true" sortable="true"
+                 headerText="Batch Qty UOM" id="c9">
+        <af:outputText value="#{row.SampleUom}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleUom.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.QcStatus.name}" filterable="true" sortable="true"
+                 headerText="QC Status" id="c15">
+        <af:outputText value="#{row.QcStatus}" shortDesc="#{bindings.TRFRegisterVO1.hints.QcStatus.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleBy.name}" filterable="true" sortable="true"
+                 headerText="Sample By" id="c18">
+        <af:outputText value="#{row.SampleBy}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleBy.tooltip}" id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleByName.name}" filterable="true" sortable="true"
+                 headerText="Sample By Name" id="c28">
+        <af:outputText value="#{row.SampleByName}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleByName.tooltip}"
+                       id="ot28"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.NoOfSampleCollect.name}" filterable="true"
+                 sortable="true" headerText="No Of Sample Collect" id="c16">
+        <af:outputText value="#{row.NoOfSampleCollect}"
+                       shortDesc="#{bindings.TRFRegisterVO1.hints.NoOfSampleCollect.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TRFRegisterVO1.hints.NoOfSampleCollect.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleCollectDate.name}" filterable="true"
+                 sortable="true" headerText="Sample Collect Date" id="c17">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.TRFRegisterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.SampleCollectDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.TRFRegisterVO1.hints.SampleCollectDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.SampleCollectDate}"
+                       shortDesc="#{bindings.TRFRegisterVO1.hints.SampleCollectDate.tooltip}" id="ot17">
+          <af:convertDateTime pattern="#{bindings.TRFRegisterVO1.hints.SampleCollectDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.CollectionBy.name}" filterable="true" sortable="true"
+                 headerText="Collection By" id="c26">
+        <af:outputText value="#{row.CollectionBy}" shortDesc="#{bindings.TRFRegisterVO1.hints.CollectionBy.tooltip}"
+                       id="ot26"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.CreatedBy.name}" filterable="true" sortable="true"
+                 headerText="Created By" id="c21">
+        <af:outputText value="#{row.CreatedBy}" shortDesc="#{bindings.TRFRegisterVO1.hints.CreatedBy.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.Remark.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.TRFRegisterVO1.hints.Remark.label}" id="c14">
+        <af:outputText value="#{row.Remark}" shortDesc="#{bindings.TRFRegisterVO1.hints.Remark.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.ApprovedBy.name}" filterable="true" sortable="true"
+                 headerText="Approved By" id="c19">
+        <af:outputText value="#{row.ApprovedBy}" shortDesc="#{bindings.TRFRegisterVO1.hints.ApprovedBy.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.ApprovedByName.name}" filterable="true" sortable="true"
+                 headerText="Approved By Name" id="c30">
+        <af:outputText value="#{row.ApprovedByName}" shortDesc="#{bindings.TRFRegisterVO1.hints.ApprovedByName.tooltip}"
+                       id="ot30"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.SampleId.name}" filterable="true" sortable="true"
+                 headerText="Sample Id" id="c20">
+        <af:outputText value="#{row.SampleId}" shortDesc="#{bindings.TRFRegisterVO1.hints.SampleId.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TRFRegisterVO1.hints.SampleId.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TRFRegisterVO1.hints.Type.name}" filterable="true" sortable="true"
+                 headerText="Type" id="c25">
+        <af:outputText value="#{row.Type}" shortDesc="#{bindings.TRFRegisterVO1.hints.Type.tooltip}" id="ot25"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

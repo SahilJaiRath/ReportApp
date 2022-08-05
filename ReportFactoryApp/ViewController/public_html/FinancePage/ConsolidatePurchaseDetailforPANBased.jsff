@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Consolidate Purchase Detail for TDS PAN Based" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b1"
+                     actionListener="#{ConsolidatePurchaseDetailforTDSPANBasedBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Consolidate Purchase Detail for TDS PAN Based.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.collectionModel}" var="row"
+              rows="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.rangeSize}"
+              emptyText="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.rangeSize}"
+              filterModel="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1Query.queryDescriptor}"
+              filterVisible="false"
+              queryListener="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1Query.processQuery}" varStatus="vs"
+              id="t2" scrollPolicy="page" columnStretching="column:c6">
+      <af:column sortProperty="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.VendorCode.name}"
+                 filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c1">
+        <af:outputText value="#{row.VendorCode}"
+                       shortDesc="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.VendorCode.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.VendorName.name}"
+                 filterable="true" sortable="true"
+                 headerText="Vendor Name" id="c2">
+        <af:outputText value="#{row.VendorName}"
+                       shortDesc="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.VendorName.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.PanNo.name}"
+                 filterable="true" sortable="true"
+                 headerText="Pan No" id="c3">
+        <af:outputText value="#{row.PanNo}"
+                       shortDesc="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.PanNo.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.GstinNo.name}"
+                 filterable="true" sortable="true"
+                 headerText="Gstin No" id="c4">
+        <af:outputText value="#{row.GstinNo}"
+                       shortDesc="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.GstinNo.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.StateCode.name}"
+                 filterable="true" sortable="true"
+                 headerText="State Code" id="c5">
+        <af:outputText value="#{row.StateCode}"
+                       shortDesc="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.StateCode.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.VendorAddress.name}"
+                 filterable="true" sortable="true"
+                 headerText="Vendor Adddress" id="c6">
+        <af:outputText value="#{row.VendorAddress}"
+                       shortDesc="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.VendorAddress.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.PurchaseAmount.name}"
+                 filterable="true" sortable="true"
+                 headerText="Purchase Amount "
+                 id="c7">
+        <af:outputText value="#{row.PurchaseAmount}"
+                       shortDesc="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.PurchaseAmount.tooltip}"
+                       id="ot7">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.ConsolidatePurchaseDetailforTDSPANBasedVVO1.hints.PurchaseAmount.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Batch wise BMR Consumption" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;" labelStyle="width:100px"
+                              autoSubmit="true">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="batchwiseBMRConsumption_partCodeId"
+                                        popupTitle="Search and Select: #{bindings.BatchwiseBMRConsumption_partCode.hints.label}"
+                                        value="#{bindings.BatchwiseBMRConsumption_partCode.inputValue}"
+                                        label="Part Code"
+                                        model="#{bindings.BatchwiseBMRConsumption_partCode.listOfValuesModel}"
+                                        required="#{bindings.BatchwiseBMRConsumption_partCode.hints.mandatory}"
+                                        columns="#{bindings.BatchwiseBMRConsumption_partCode.hints.displayWidth}"
+                                        shortDesc="#{bindings.BatchwiseBMRConsumption_partCode.hints.tooltip}"
+                                        contentStyle="width:170.0px;" labelStyle="width:100px" autoSubmit="true">
+            <f:validator binding="#{bindings.BatchwiseBMRConsumption_partCode.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:inputComboboxListOfValues id="batchwiseBMRConsumption_BatchNoId"
+                                        popupTitle="Search and Select: #{bindings.BatchwiseBMRConsumption_BatchNo.hints.label}"
+                                        value="#{bindings.BatchwiseBMRConsumption_BatchNo.inputValue}" label="Batch No"
+                                        model="#{bindings.BatchwiseBMRConsumption_BatchNo.listOfValuesModel}"
+                                        required="#{bindings.BatchwiseBMRConsumption_BatchNo.hints.mandatory}"
+                                        columns="#{bindings.BatchwiseBMRConsumption_BatchNo.hints.displayWidth}"
+                                        shortDesc="#{bindings.BatchwiseBMRConsumption_BatchNo.hints.tooltip}"
+                                        contentStyle="width:180.0px;" labelStyle="width:100px" autoSubmit="true">
+            <f:validator binding="#{bindings.BatchwiseBMRConsumption_BatchNo.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id3"  contentStyle="width:180.0px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2" contentStyle="width:185.0px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:spacer width="53" height="10" id="s1"/>
+          <af:button text="Execute" id="b1"
+                     actionListener="#{BatchwiseBMRConsumptionBean.onClickButton}"
+                     disabled="#{!bindings.callBatchwiseBMRConsumption.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Batch wise BMR Consumption.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BatchwiseBMRConsumptionVO1.collectionModel}" var="row"
+              rows="#{bindings.BatchwiseBMRConsumptionVO1.rangeSize}"
+              emptyText="#{bindings.BatchwiseBMRConsumptionVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.BatchwiseBMRConsumptionVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BatchwiseBMRConsumptionVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.BatchwiseBMRConsumptionVO1.rangeSize}"
+              filterModel="#{bindings.BatchwiseBMRConsumptionVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.BatchwiseBMRConsumptionVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.UnitCd.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.PartCode.name}" filterable="true"
+                 sortable="true" headerText="Part Code" id="c4">
+        <af:outputText value="#{row.PartCode}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.PartCode.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.JobCardNo.name}" filterable="true"
+                 sortable="true" headerText="Job Card No" id="c2">
+        <af:outputText value="#{row.JobCardNo}"
+                       shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.JobCardNo.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.JobCardDate.name}" filterable="true"
+                 sortable="true" headerText="Job Card Date" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.BatchwiseBMRConsumptionVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.JobCardDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.JobCardDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.JobCardDate}"
+                       shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.JobCardDate.tooltip}" id="ot3">
+          <af:convertDateTime pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.JobCardDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.PartDesc.name}" filterable="true"
+                 sortable="true" headerText="Part Description" id="c5">
+        <af:outputText value="#{row.PartDesc}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.PartDesc.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.BatchSize.name}" filterable="true"
+                 sortable="true" headerText="Batch Size" id="c6">
+        <af:outputText value="#{row.BatchSize}"
+                       shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.BatchSize.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.BatchSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="Batch No" id="c7">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.BatchNo.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.ItemCode.name}" filterable="true"
+                 sortable="true" headerText="Item Code" id="c8">
+        <af:outputText value="#{row.ItemCode}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.ItemCode.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.ItemName.name}" filterable="true"
+                 sortable="true" headerText="Item Name" id="c9">
+        <af:outputText value="#{row.ItemName}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.ItemName.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.ItemUom.name}" filterable="true"
+                 sortable="true" headerText="Item UOM" id="c10">
+        <af:outputText value="#{row.ItemUom}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.ItemUom.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.ProcCode.name}" filterable="true"
+                 sortable="true" headerText="Proc Code" id="c11">
+        <af:outputText value="#{row.ProcCode}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.ProcCode.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.ProcSeq.name}" filterable="true"
+                 sortable="true" headerText="Proc Seq" id="c12">
+        <af:outputText value="#{row.ProcSeq}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.ProcSeq.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.ProcSeq.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.ReqQty.name}" filterable="true"
+                 sortable="true" headerText="Req Qty" id="c13">
+        <af:outputText value="#{row.ReqQty}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.ReqQty.tooltip}"
+                       id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.ReqQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.OverallRecpQty.name}" filterable="true"
+                 sortable="true" headerText="Over All Recp Qty"
+                 id="c14">
+        <af:outputText value="#{row.OverallRecpQty}"
+                       shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.OverallRecpQty.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.OverallRecpQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.RecpFromStore.name}" filterable="true"
+                 sortable="true" headerText="Recp From Store" id="c15">
+        <af:outputText value="#{row.RecpFromStore}"
+                       shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.RecpFromStore.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.RecpFromStore.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.RecpFromStoreAdd.name}" filterable="true"
+                 sortable="true" headerText="Recp From Store Add"
+                 id="c16">
+        <af:outputText value="#{row.RecpFromStoreAdd}"
+                       shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.RecpFromStoreAdd.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.RecpFromStoreAdd.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.Consume.name}" filterable="true"
+                 sortable="true" headerText="Consume" id="c17">
+        <af:outputText value="#{row.Consume}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.Consume.tooltip}"
+                       id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.Consume.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchwiseBMRConsumptionVO1.hints.RmBal.name}" filterable="true"
+                 sortable="true" headerText="Rm Bal" id="c18">
+        <af:outputText value="#{row.RmBal}" shortDesc="#{bindings.BatchwiseBMRConsumptionVO1.hints.RmBal.tooltip}"
+                       id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchwiseBMRConsumptionVO1.hints.RmBal.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

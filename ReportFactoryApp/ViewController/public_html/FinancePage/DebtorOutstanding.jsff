@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Debtor Outstanding" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" labelStyle="Width:100px"
+                              contentStyle = "Width:180.0px;">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="collectionCustId"
+                                        popupTitle="Search and Select: #{bindings.CollectionCust.hints.label}"
+                                        value="#{bindings.CollectionCust.inputValue}" label="Cust Code"
+                                        model="#{bindings.CollectionCust.listOfValuesModel}"
+                                        required="#{bindings.CollectionCust.hints.mandatory}"
+                                        columns="#{bindings.CollectionCust.hints.displayWidth}"
+                                        shortDesc="#{bindings.CollectionCust.hints.tooltip}" contentStyle="Width:180px;"
+                                        labelStyle="Width:100px;">
+            <f:validator binding="#{bindings.CollectionCust.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="Para Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id3" contentStyle="Width:180px;" labelStyle="Width:100px;">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:panelGridLayout id="pgl2"/>
+    <af:panelFormLayout id="pfl1" rows="1" maxColumns="7">
+      <af:inputText value="0" label="P1" required="#{bindings.LV_p1.hints.mandatory}"
+                    columns="#{bindings.LV_p1.hints.displayWidth}" maximumLength="#{bindings.LV_p1.hints.precision}"
+                    shortDesc="#{bindings.LV_p1.hints.tooltip}" id="it1" binding="#{DebtorOutstandingBean.LV_p1}"
+                    contentStyle="Width:30px;" labelStyle="Width:100px;">
+        <f:validator binding="#{bindings.LV_p1.validator}"/>
+      </af:inputText>
+      <af:inputText value="30" label="P2" required="#{bindings.LV_p2.hints.mandatory}"
+                    columns="#{bindings.LV_p2.hints.displayWidth}" maximumLength="#{bindings.LV_p2.hints.precision}"
+                    shortDesc="#{bindings.LV_p2.hints.tooltip}" id="it2" binding="#{DebtorOutstandingBean.lv_p2}"
+                    contentStyle="Width:20px;" labelStyle="Width:100px;">
+        <f:validator binding="#{bindings.LV_p2.validator}"/>
+      </af:inputText>
+      <af:inputText value="60" label="P3" required="#{bindings.LV_p3.hints.mandatory}"
+                    columns="#{bindings.LV_p3.hints.displayWidth}" maximumLength="#{bindings.LV_p3.hints.precision}"
+                    shortDesc="#{bindings.LV_p3.hints.tooltip}" id="it3" binding="#{DebtorOutstandingBean.lv_p3}"
+                    contentStyle="Width:50px;" labelStyle="Width:80px;">
+        <f:validator binding="#{bindings.LV_p3.validator}"/>
+      </af:inputText>
+      <af:inputText value="90" label="P4" required="#{bindings.LV_p4.hints.mandatory}"
+                    columns="#{bindings.LV_p4.hints.displayWidth}" maximumLength="#{bindings.LV_p4.hints.precision}"
+                    shortDesc="#{bindings.LV_p4.hints.tooltip}" id="it4" binding="#{DebtorOutstandingBean.lv_p4}"
+                    contentStyle="Width:50px;" labelStyle="Width:80px;">
+        <f:validator binding="#{bindings.LV_p4.validator}"/>
+      </af:inputText>
+      <af:inputText value="120" label="P5" required="#{bindings.LV_p5.hints.mandatory}"
+                    columns="#{bindings.LV_p5.hints.displayWidth}" maximumLength="#{bindings.LV_p5.hints.precision}"
+                    shortDesc="#{bindings.LV_p5.hints.tooltip}" id="it5" binding="#{DebtorOutstandingBean.lv_p5}"
+                    contentStyle="Width:50px;" labelStyle="Width:50px;">
+        <f:validator binding="#{bindings.LV_p5.validator}"/>
+      </af:inputText>
+      <af:inputText value="150" label="P6" required="#{bindings.LV_p6.hints.mandatory}"
+                    columns="#{bindings.LV_p6.hints.displayWidth}" maximumLength="#{bindings.LV_p6.hints.precision}"
+                    shortDesc="#{bindings.LV_p6.hints.tooltip}" id="it6" binding="#{DebtorOutstandingBean.lv_p6}"
+                    contentStyle="Width:50px;" labelStyle="Width:50px;">
+        <f:validator binding="#{bindings.LV_p6.validator}"/>
+      </af:inputText>
+      <af:button text="Execute" id="b2" disabled="#{!bindings.callDebtorOutstanding.enabled}"
+                 actionListener="#{DebtorOutstandingBean.onClickButton}" styleClass="Width:50px;"
+                 inlineStyle="Width:50px;"/>
+    </af:panelFormLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Debtor Outstanding.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.DebtorOutstandingVO1.collectionModel}" var="row"
+              rows="#{bindings.DebtorOutstandingVO1.rangeSize}"
+              emptyText="#{bindings.DebtorOutstandingVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.DebtorOutstandingVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.DebtorOutstandingVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.DebtorOutstandingVO1.rangeSize}"
+              filterModel="#{bindings.DebtorOutstandingVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.DebtorOutstandingVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c4">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.UnitCode.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.VenCd.name}" filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c1">
+        <af:outputText value="#{row.VenCd}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.VenCd.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="Name" id="c2">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.Name.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.Address.name}" filterable="true" sortable="true"
+                 headerText="Address" id="c3">
+        <af:outputText value="#{row.Address}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.Address.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.BillAmt.name}" filterable="true" sortable="true"
+                 headerText="Bill Amount" id="c8">
+        <af:outputText value="#{row.BillAmt}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.BillAmt.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.BillAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.AdvanceCreditNote.name}" filterable="true"
+                 sortable="true" headerText="Advance Credit Note" id="c9">
+        <af:outputText value="#{row.AdvanceCreditNote}"
+                       shortDesc="#{bindings.DebtorOutstandingVO1.hints.AdvanceCreditNote.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.DebtorOutstandingVO1.hints.AdvanceCreditNote.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.BalAmt.name}" filterable="true" sortable="true" id="c10"
+                 headerText="Balance Amt">
+        <af:outputText value="#{row.BalAmt}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.BalAmt.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.BalAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.DueDate.name}" filterable="true" sortable="true"
+                 headerText="Due Date" id="c11">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.DebtorOutstandingVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DueDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.DebtorOutstandingVO1.hints.DueDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DueDate}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.DueDate.tooltip}"
+                       id="ot11">
+          <af:convertDateTime pattern="#{bindings.DebtorOutstandingVO1.hints.DueDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.RefNo.name}" filterable="true" sortable="true"
+                 headerText="Ref No" id="c5">
+        <af:outputText value="#{row.RefNo}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.RefNo.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.RefDate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DebtorOutstandingVO1.hints.RefDate.label}" id="c6">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.DebtorOutstandingVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.RefDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.DebtorOutstandingVO1.hints.RefDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.RefDate}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.RefDate.tooltip}"
+                       id="ot6">
+          <af:convertDateTime pattern="#{bindings.DebtorOutstandingVO1.hints.RefDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.SessionId.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DebtorOutstandingVO1.hints.SessionId.label}" id="c7">
+        <af:outputText value="#{row.SessionId}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.SessionId.tooltip}"
+                       id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.SessionId.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.LoanType.name}" filterable="true" sortable="true"
+                 headerText="Loan Type" id="c12">
+        <af:outputText value="#{row.LoanType}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.LoanType.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.P1.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DebtorOutstandingVO1.hints.P1.label}" id="c13">
+        <af:outputText value="#{row.P1}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.P1.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.P1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.P2.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DebtorOutstandingVO1.hints.P2.label}" id="c14">
+        <af:outputText value="#{row.P2}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.P2.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.P2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.P3.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DebtorOutstandingVO1.hints.P3.label}" id="c15">
+        <af:outputText value="#{row.P3}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.P3.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.P3.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.P4.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DebtorOutstandingVO1.hints.P4.label}" id="c16">
+        <af:outputText value="#{row.P4}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.P4.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.P4.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.P5.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DebtorOutstandingVO1.hints.P5.label}" id="c17">
+        <af:outputText value="#{row.P5}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.P5.tooltip}" id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.P5.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DebtorOutstandingVO1.hints.P6.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.DebtorOutstandingVO1.hints.P6.label}" id="c18">
+        <af:outputText value="#{row.P6}" shortDesc="#{bindings.DebtorOutstandingVO1.hints.P6.tooltip}" id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DebtorOutstandingVO1.hints.P6.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="STO From Sales Warehouse" id="ph1"/>
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelGridLayout id="pgl1">
+    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+      <af:gridCell marginStart="5px" width="50%" id="gc1">
+        <af:selectOneChoice value="#{bindings.WarehouseName.inputValue}" label="Warehouse Name"
+                            required="#{bindings.WarehouseName.hints.mandatory}"
+                            shortDesc="#{bindings.WarehouseName.hints.tooltip}" id="soc1" contentStyle = "width:180.0px;"
+                            labelStyle = "width:100px">
+          <f:selectItems value="#{bindings.WarehouseName.items}" id="si1"/>
+          <f:validator binding="#{bindings.WarehouseName.validator}"/>
+        </af:selectOneChoice>
+      </af:gridCell>
+      <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+        <af:button text="Execute" id="b2"
+                   disabled="#{!bindings.callSTOfromSalesWarehouse.enabled}"
+                   actionListener="#{STOFromSaleWarehouseBean.onClickButton}"/>
+      </af:gridCell>
+    </af:gridRow>
+  </af:panelGridLayout>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="STO From Sale Warehouse.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.STOfromSalesWarehouseVO1.collectionModel}" var="row"
+              rows="#{bindings.STOfromSalesWarehouseVO1.rangeSize}"
+              emptyText="#{bindings.STOfromSalesWarehouseVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.STOfromSalesWarehouseVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.STOfromSalesWarehouseVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.STOfromSalesWarehouseVO1.rangeSize}"
+              filterModel="#{bindings.STOfromSalesWarehouseVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.STOfromSalesWarehouseVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page" columnStretching="column:c2">
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.Code.name}" filterable="true" sortable="true"
+                 headerText="Product Code" id="c1">
+        <af:outputText value="#{row.Code}" shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.Code.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.Name1.name}" filterable="true" sortable="true"
+                 headerText="Product Name" id="c2">
+        <af:outputText value="#{row.Name1}" shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.Name1.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.Batch1.name}" filterable="true" sortable="true"
+                 headerText="Batch" id="c3">
+        <af:outputText value="#{row.Batch1}" shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.Batch1.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="Qty" id="c4">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.Qty.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.STOfromSalesWarehouseVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.IcNo.name}" filterable="true" sortable="true"
+                 headerText="Invoice Challan" id="c5">
+        <af:outputText value="#{row.IcNo}" shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.IcNo.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.CreatedDate.name}" filterable="true"
+                 sortable="true" headerText="Created Date" id="c6">
+        <af:outputText value="#{row.CreatedDate}"
+                       shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.CreatedDate.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.SaleFrom.name}" filterable="true"
+                 sortable="true" headerText="Sale From" id="c7">
+        <af:outputText value="#{row.SaleFrom}" shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.SaleFrom.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.SaleTo.name}" filterable="true" sortable="true"
+                 headerText="Sale To" id="c8">
+        <af:outputText value="#{row.SaleTo}" shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.SaleTo.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.SaleToName.name}" filterable="true"
+                 sortable="true" headerText="Sale To Name" id="c9">
+        <af:outputText value="#{row.SaleToName}"
+                       shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.SaleToName.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.STOfromSalesWarehouseVO1.hints.Reciving.name}" filterable="true"
+                 sortable="true" headerText="Receiving" id="c10">
+        <af:outputText value="#{row.Reciving}" shortDesc="#{bindings.STOfromSalesWarehouseVO1.hints.Reciving.tooltip}"
+                       id="ot10"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

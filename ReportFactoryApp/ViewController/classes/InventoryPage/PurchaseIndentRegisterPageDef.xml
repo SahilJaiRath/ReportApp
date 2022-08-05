@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PurchaseIndentRegisterPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="PurchaseIndentRegisterVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PurchaseIndentRegisterVO1Iterator"/>
+    <searchRegion Binds="PurchaseIndentRegisterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PurchaseIndentRegisterVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="PurchaseIndentRegisterVO1Iterator" id="PurchaseIndentRegisterVO1">
+      <nodeDefinition DefName="model.inventory.views.PurchaseIndentRegisterVO" Name="PurchaseIndentRegisterVO10">
+        <AttrNames>
+          <Item Value="SrlNo"/>
+          <Item Value="IndNo"/>
+          <Item Value="IndDt"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Uom"/>
+          <Item Value="IndQty"/>
+          <Item Value="Department"/>
+          <Item Value="IndentBy"/>
+          <Item Value="ReqByDate"/>
+          <Item Value="PoNo"/>
+          <Item Value="PoDt"/>
+          <Item Value="VenCd"/>
+          <Item Value="Name"/>
+          <Item Value="Qty"/>
+          <Item Value="Rate"/>
+          <Item Value="Amount"/>
+          <Item Value="BalQty"/>
+          <Item Value="MrnNo"/>
+          <Item Value="MrnDt"/>
+          <Item Value="MrnQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callPurchaseIndentRegister" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPurchaseIndentRegister" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

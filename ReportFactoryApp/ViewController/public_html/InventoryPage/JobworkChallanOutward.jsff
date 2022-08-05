@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Jobwork Challan (Outward)" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:185.0px;"
+                                labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="stockAdjustment_PartNameId"
+                                        popupTitle="Search and Select: #{bindings.StockAdjustment_PartName.hints.label}"
+                                        value="#{bindings.StockAdjustment_PartName.inputValue}"
+                                        label="Item Name"
+                                        model="#{bindings.StockAdjustment_PartName.listOfValuesModel}"
+                                        required="#{bindings.StockAdjustment_PartName.hints.mandatory}"
+                                        columns="#{bindings.StockAdjustment_PartName.hints.displayWidth}"
+                                        shortDesc="#{bindings.StockAdjustment_PartName.hints.tooltip}" contentStyle="width:165.0px;"
+                                labelStyle="width:100px" >
+            <f:validator binding="#{bindings.StockAdjustment_PartName.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id3" contentStyle="width:180.0px;"
+                                labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2" contentStyle="width:180.0px;"
+                                labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2"
+                     actionListener="#{JobworkChallanOutwardBean.onClickButton}"
+                     disabled="#{!bindings.callJobworkChallanOutward.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Jobwork Challan (Outward).xml"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.JobworkChallanOutwardVO1.collectionModel}" var="row"
+              rows="#{bindings.JobworkChallanOutwardVO1.rangeSize}"
+              emptyText="#{bindings.JobworkChallanOutwardVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.JobworkChallanOutwardVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.JobworkChallanOutwardVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.JobworkChallanOutwardVO1.rangeSize}"
+              filterModel="#{bindings.JobworkChallanOutwardVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.JobworkChallanOutwardVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.PartyName.name}" filterable="true"
+                 sortable="true" headerText="Party Name" id="c1">
+        <af:outputText value="#{row.PartyName}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.PartyName.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.ChallanNo.name}" filterable="true"
+                 sortable="true" headerText="Challan No" id="c2">
+        <af:outputText value="#{row.ChallanNo}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.ChallanNo.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.DocNo.name}" filterable="true" sortable="true"
+                 headerText="Doc No" id="c5">
+        <af:outputText value="#{row.DocNo}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.DocNo.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.ExciseType.name}" filterable="true"
+                 sortable="true" headerText="Excise Type" id="c6">
+        <af:outputText value="#{row.ExciseType}"
+                       shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.ExciseType.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.ExitType.name}" filterable="true"
+                 sortable="true" headerText="Exit Type" id="c7">
+        <af:outputText value="#{row.ExitType}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.ExitType.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.TargetDate.name}" filterable="true"
+                 sortable="true" headerText="Target Date" id="c8">
+        <af:outputText value="#{row.TargetDate}"
+                       shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.TargetDate.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.JobworkChallanOutwardVO1.hints.TargetDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.ItemSfg.name}" filterable="true"
+                 sortable="true" headerText="Item sfg" id="c9">
+        <af:outputText value="#{row.ItemSfg}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.ItemSfg.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.ProductName.name}" filterable="true"
+                 sortable="true" headerText="Product Name" id="c10">
+        <af:outputText value="#{row.ProductName}"
+                       shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.ProductName.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="Batch No" id="c16">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.BatchNo.tooltip}"
+                       id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.IssueQty.name}" filterable="true"
+                 sortable="true" headerText="Issue Qty" id="c17">
+        <af:outputText value="#{row.IssueQty}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.IssueQty.tooltip}"
+                       id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobworkChallanOutwardVO1.hints.IssueQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.ProcCd.name}" filterable="true" sortable="true"
+                 headerText="Proc Cd" id="c11">
+        <af:outputText value="#{row.ProcCd}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.ProcCd.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.HsnNo.name}" filterable="true" sortable="true"
+                 headerText="Hsn No" id="c12">
+        <af:outputText value="#{row.HsnNo}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.HsnNo.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="Qty" id="c13">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.Qty.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobworkChallanOutwardVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM " id="c14">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.Uom.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.Amt.name}" filterable="true" sortable="true"
+                 headerText="Amt" id="c15">
+        <af:outputText value="#{row.Amt}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.Amt.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.JobworkChallanOutwardVO1.hints.Amt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.ChallanDt.name}" filterable="true"
+                 sortable="true" headerText="Challan Date" id="c3">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.JobworkChallanOutwardVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ChallanDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.JobworkChallanOutwardVO1.hints.ChallanDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ChallanDt}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.ChallanDt.tooltip}"
+                       id="ot3">
+          <af:convertDateTime pattern="#{bindings.JobworkChallanOutwardVO1.hints.ChallanDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.JobworkChallanOutwardVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c4">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.JobworkChallanOutwardVO1.hints.UnitCd.tooltip}"
+                       id="ot4"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

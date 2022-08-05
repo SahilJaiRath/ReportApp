@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="Inventory Vs Stock FG Report" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Inventory Vs Stock FG Report.xls"
+                                             title="Inventory Vs Stock FG Report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.InventoryVsStockFGVO1.collectionModel}" var="row"
+              rows="#{bindings.InventoryVsStockFGVO1.rangeSize}"
+              emptyText="#{bindings.InventoryVsStockFGVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.InventoryVsStockFGVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.InventoryVsStockFGVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.InventoryVsStockFGVO1.rangeSize}"
+              filterModel="#{bindings.InventoryVsStockFGVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.InventoryVsStockFGVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.UnitCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.ProductCode.name}" filterable="true"
+                 sortable="true" headerText="Product Code" id="c2">
+        <af:outputText value="#{row.ProductCode}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.ProductCode.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="Description" id="c10">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.Description.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.BatchSize.name}" filterable="true" sortable="true"
+                 headerText="Batch Size" id="c7">
+        <af:outputText value="#{row.BatchSize}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.BatchSize.tooltip}"
+                       id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.BatchSize.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.Meaning.name}" filterable="true" sortable="true"
+                 headerText="Category" id="c9">
+        <af:outputText value="#{row.Meaning}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.Meaning.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.SubGroup.name}" filterable="true" sortable="true"
+                 headerText="Sub Group" id="c20">
+        <af:outputText value="#{row.SubGroup}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.SubGroup.tooltip}"
+                       id="ot20"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.GroupDesc.name}" filterable="true" sortable="true"
+                 headerText="Group Description" id="c21">
+        <af:outputText value="#{row.GroupDesc}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.GroupDesc.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.Mrp.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InventoryVsStockFGVO1.hints.Mrp.label}" id="c8">
+        <af:outputText value="#{row.Mrp}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.Mrp.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.Mrp.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.FirstQ21.name}" filterable="true" sortable="true"
+                 headerText="AVG Sale Q1 PCS" id="c11">
+        <af:outputText value="#{row.FirstQ21}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.FirstQ21.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.FirstQ21.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.SecoundQ21.name}" filterable="true"
+                 sortable="true" headerText="AVG Sale Q2 PCS" id="c12">
+        <af:outputText value="#{row.SecoundQ21}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.SecoundQ21.tooltip}"
+                       id="ot12">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.SecoundQ21.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.ThirdQ21.name}" filterable="true" sortable="true"
+                 headerText="AVG Sale Q3 PCS" id="c13">
+        <af:outputText value="#{row.ThirdQ21}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.ThirdQ21.tooltip}"
+                       id="ot13">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.ThirdQ21.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.InTransistA1.name}" filterable="true"
+                 sortable="true" headerText="In-Transit A1 in PCS" id="c15">
+        <af:outputText value="#{row.InTransistA1}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.InTransistA1.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.InTransistA1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.InTransistA2.name}" filterable="true"
+                 sortable="true" headerText="In-Transit U2 in PCS" id="c16">
+        <af:outputText value="#{row.InTransistA2}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.InTransistA2.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.InTransistA2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockaD28.name}" filterable="true"
+                 sortable="true" headerText="Closing Stock" id="c3">
+        <af:outputText value="#{row.ClosingStockaD28}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockaD28.tooltip}" id="ot3">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockaD28.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockNotD2860001.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockNotD2860001.label}"
+                 id="c4">
+        <af:outputText value="#{row.ClosingStockNotD2860001}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockNotD2860001.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockNotD2860001.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockD2860002.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockD2860002.label}"
+                 id="c5">
+        <af:outputText value="#{row.ClosingStockD2860002}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockD2860002.tooltip}" id="ot5">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockD2860002.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockNotD2860002.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockNotD2860002.label}"
+                 id="c6">
+        <af:outputText value="#{row.ClosingStockNotD2860002}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockNotD2860002.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.InventoryVsStockFGVO1.hints.ClosingStockNotD2860002.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.FourthQ22.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InventoryVsStockFGVO1.hints.FourthQ22.label}" id="c14">
+        <af:outputText value="#{row.FourthQ22}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.FourthQ22.tooltip}"
+                       id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.FourthQ22.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.Wip1.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InventoryVsStockFGVO1.hints.Wip1.label}" id="c17">
+        <af:outputText value="#{row.Wip1}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.Wip1.tooltip}" id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.Wip1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.Wip2.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.InventoryVsStockFGVO1.hints.Wip2.label}" id="c18">
+        <af:outputText value="#{row.Wip2}" shortDesc="#{bindings.InventoryVsStockFGVO1.hints.Wip2.tooltip}" id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.InventoryVsStockFGVO1.hints.Wip2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.InventoryVsStockFGVO1.hints.StockPosition.name}" filterable="true"
+                 sortable="true" headerText="Stock Position" id="c19">
+        <af:outputText value="#{row.StockPosition}"
+                       shortDesc="#{bindings.InventoryVsStockFGVO1.hints.StockPosition.tooltip}" id="ot19">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.InventoryVsStockFGVO1.hints.StockPosition.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

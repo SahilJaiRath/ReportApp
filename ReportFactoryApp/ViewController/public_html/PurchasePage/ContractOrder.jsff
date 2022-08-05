@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Contract Order" id="ph1">
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="Width:180.0px;"
+                              labelStyle = "Width:100px">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id10" contentStyle="Width:180.0px;"
+                              labelStyle = "Width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id9" contentStyle="Width:180.0px;"
+                              labelStyle = "Width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2" disabled="#{!bindings.callContractOrder.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s1"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Contract Order.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ContractOrderVO1.collectionModel}" var="row"
+              rows="#{bindings.ContractOrderVO1.rangeSize}"
+              emptyText="#{bindings.ContractOrderVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.ContractOrderVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ContractOrderVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.ContractOrderVO1.rangeSize}"
+              filterModel="#{bindings.ContractOrderVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.ContractOrderVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ReqNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ReqNo.label}" id="c1">
+        <af:outputText value="#{row.ReqNo}" shortDesc="#{bindings.ContractOrderVO1.hints.ReqNo.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ReqDate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ReqDate.label}" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ContractOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ReqDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ReqDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ReqDate}" shortDesc="#{bindings.ContractOrderVO1.hints.ReqDate.tooltip}" id="ot2">
+          <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ReqDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.QuotNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.QuotNo.label}" id="c3">
+        <af:outputText value="#{row.QuotNo}" shortDesc="#{bindings.ContractOrderVO1.hints.QuotNo.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.RequestType.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.RequestType.label}" id="c4">
+        <af:outputText value="#{row.RequestType}" shortDesc="#{bindings.ContractOrderVO1.hints.RequestType.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.PrepBy.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.PrepBy.label}" id="c5">
+        <af:outputText value="#{row.PrepBy}" shortDesc="#{bindings.ContractOrderVO1.hints.PrepBy.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ApprovedBy.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ApprovedBy.label}" id="c6">
+        <af:outputText value="#{row.ApprovedBy}" shortDesc="#{bindings.ContractOrderVO1.hints.ApprovedBy.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ReqAppDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ReqAppDt.label}" id="c7">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ContractOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ReqAppDt.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ReqAppDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ReqAppDt}" shortDesc="#{bindings.ContractOrderVO1.hints.ReqAppDt.tooltip}" id="ot7">
+          <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ReqAppDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ContractNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ContractNo.label}" id="c8">
+        <af:outputText value="#{row.ContractNo}" shortDesc="#{bindings.ContractOrderVO1.hints.ContractNo.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ContractDate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ContractDate.label}" id="c9">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ContractOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ContractDate.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ContractDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ContractDate}" shortDesc="#{bindings.ContractOrderVO1.hints.ContractDate.tooltip}"
+                       id="ot9">
+          <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ContractDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ContractAmdNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ContractAmdNo.label}" id="c10">
+        <af:outputText value="#{row.ContractAmdNo}" shortDesc="#{bindings.ContractOrderVO1.hints.ContractAmdNo.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ContractOrderVO1.hints.ContractAmdNo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ContractAmdDate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ContractOrderVO1.hints.ContractAmdDate.label}" id="c11">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ContractOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ContractAmdDate.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ContractAmdDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ContractAmdDate}"
+                       shortDesc="#{bindings.ContractOrderVO1.hints.ContractAmdDate.tooltip}" id="ot11">
+          <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ContractAmdDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.VenCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.VenCd.label}" id="c12">
+        <af:outputText value="#{row.VenCd}" shortDesc="#{bindings.ContractOrderVO1.hints.VenCd.tooltip}" id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ContractorName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ContractorName.label}" id="c13">
+        <af:outputText value="#{row.ContractorName}"
+                       shortDesc="#{bindings.ContractOrderVO1.hints.ContractorName.tooltip}" id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.Gstin.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.Gstin.label}" id="c14">
+        <af:outputText value="#{row.Gstin}" shortDesc="#{bindings.ContractOrderVO1.hints.Gstin.tooltip}" id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.Loc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.Loc.label}" id="c15">
+        <af:outputText value="#{row.Loc}" shortDesc="#{bindings.ContractOrderVO1.hints.Loc.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.LocName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.LocName.label}" id="c16">
+        <af:outputText value="#{row.LocName}" shortDesc="#{bindings.ContractOrderVO1.hints.LocName.tooltip}" id="ot16"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.Dept.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.Dept.label}" id="c17">
+        <af:outputText value="#{row.Dept}" shortDesc="#{bindings.ContractOrderVO1.hints.Dept.tooltip}" id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.DeptName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.DeptName.label}" id="c18">
+        <af:outputText value="#{row.DeptName}" shortDesc="#{bindings.ContractOrderVO1.hints.DeptName.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.CoPrepBy.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.CoPrepBy.label}" id="c19">
+        <af:outputText value="#{row.CoPrepBy}" shortDesc="#{bindings.ContractOrderVO1.hints.CoPrepBy.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.CoPrepByName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.CoPrepByName.label}" id="c20">
+        <af:outputText value="#{row.CoPrepByName}" shortDesc="#{bindings.ContractOrderVO1.hints.CoPrepByName.tooltip}"
+                       id="ot20"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.CoApprovedBy.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.CoApprovedBy.label}" id="c21">
+        <af:outputText value="#{row.CoApprovedBy}" shortDesc="#{bindings.ContractOrderVO1.hints.CoApprovedBy.tooltip}"
+                       id="ot21"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.CoApprovedByName.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ContractOrderVO1.hints.CoApprovedByName.label}" id="c22">
+        <af:outputText value="#{row.CoApprovedByName}"
+                       shortDesc="#{bindings.ContractOrderVO1.hints.CoApprovedByName.tooltip}" id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.MatStatus.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.MatStatus.label}" id="c23">
+        <af:outputText value="#{row.MatStatus}" shortDesc="#{bindings.ContractOrderVO1.hints.MatStatus.tooltip}"
+                       id="ot23"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.UnitCd.label}" id="c24">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.ContractOrderVO1.hints.UnitCd.tooltip}" id="ot24"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.Justification.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.Justification.label}" id="c25">
+        <af:outputText value="#{row.Justification}" shortDesc="#{bindings.ContractOrderVO1.hints.Justification.tooltip}"
+                       id="ot25"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.WorkQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.WorkQty.label}" id="c26">
+        <af:outputText value="#{row.WorkQty}" shortDesc="#{bindings.ContractOrderVO1.hints.WorkQty.tooltip}" id="ot26">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ContractOrderVO1.hints.WorkQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.Value.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.Value.label}" id="c27">
+        <af:outputText value="#{row.Value}" shortDesc="#{bindings.ContractOrderVO1.hints.Value.tooltip}" id="ot27">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ContractOrderVO1.hints.Value.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.Uom.label}" id="c28">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.ContractOrderVO1.hints.Uom.tooltip}" id="ot28"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.JobCode.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.JobCode.label}" id="c29">
+        <af:outputText value="#{row.JobCode}" shortDesc="#{bindings.ContractOrderVO1.hints.JobCode.tooltip}" id="ot29"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.JobDetail.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.JobDetail.label}" id="c30">
+        <af:outputText value="#{row.JobDetail}" shortDesc="#{bindings.ContractOrderVO1.hints.JobDetail.tooltip}"
+                       id="ot30"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ValidFrom.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ValidFrom.label}" id="c31">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ContractOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ValidFrom.value}"
+                        id="id5">
+            <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ValidFrom.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ValidFrom}" shortDesc="#{bindings.ContractOrderVO1.hints.ValidFrom.tooltip}"
+                       id="ot31">
+          <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ValidFrom.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.ValidTo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.ValidTo.label}" id="c32">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ContractOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ValidTo.value}"
+                        id="id6">
+            <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ValidTo.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ValidTo}" shortDesc="#{bindings.ContractOrderVO1.hints.ValidTo.tooltip}" id="ot32">
+          <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.ValidTo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.JoBillNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.JoBillNo.label}" id="c33">
+        <af:outputText value="#{row.JoBillNo}" shortDesc="#{bindings.ContractOrderVO1.hints.JoBillNo.tooltip}"
+                       id="ot33"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.JoBillDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.JoBillDt.label}" id="c34">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ContractOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.JoBillDt.value}"
+                        id="id7">
+            <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.JoBillDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.JoBillDt}" shortDesc="#{bindings.ContractOrderVO1.hints.JoBillDt.tooltip}"
+                       id="ot34">
+          <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.JoBillDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.VendorBillNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.VendorBillNo.label}" id="c35">
+        <af:outputText value="#{row.VendorBillNo}" shortDesc="#{bindings.ContractOrderVO1.hints.VendorBillNo.tooltip}"
+                       id="ot35"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.BillDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.BillDt.label}" id="c36">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ContractOrderVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BillDt.value}"
+                        id="id8">
+            <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.BillDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.BillDt}" shortDesc="#{bindings.ContractOrderVO1.hints.BillDt.tooltip}" id="ot36">
+          <af:convertDateTime pattern="#{bindings.ContractOrderVO1.hints.BillDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.BillAmt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.BillAmt.label}" id="c37">
+        <af:outputText value="#{row.BillAmt}" shortDesc="#{bindings.ContractOrderVO1.hints.BillAmt.tooltip}" id="ot37">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ContractOrderVO1.hints.BillAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.AppAmt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.AppAmt.label}" id="c38">
+        <af:outputText value="#{row.AppAmt}" shortDesc="#{bindings.ContractOrderVO1.hints.AppAmt.tooltip}" id="ot38">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ContractOrderVO1.hints.AppAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.BillPassAmt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.BillPassAmt.label}" id="c39">
+        <af:outputText value="#{row.BillPassAmt}" shortDesc="#{bindings.ContractOrderVO1.hints.BillPassAmt.tooltip}"
+                       id="ot39">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ContractOrderVO1.hints.BillPassAmt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ContractOrderVO1.hints.PassedBy.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ContractOrderVO1.hints.PassedBy.label}" id="c40">
+        <af:outputText value="#{row.PassedBy}" shortDesc="#{bindings.ContractOrderVO1.hints.PassedBy.tooltip}"
+                       id="ot40"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

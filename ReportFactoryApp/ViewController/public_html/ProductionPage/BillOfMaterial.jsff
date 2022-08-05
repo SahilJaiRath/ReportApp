@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Bill Of Material(BOM)" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:inputComboboxListOfValues id="bOM_Product_CDId"
+                                        popupTitle="Search and Select: #{bindings.BOM_Product_CD.hints.label}"
+                                        value="#{bindings.BOM_Product_CD.inputValue}"
+                                        label="#{bindings.BOM_Product_CD.hints.label}"
+                                        model="#{bindings.BOM_Product_CD.listOfValuesModel}"
+                                        required="#{bindings.BOM_Product_CD.hints.mandatory}"
+                                        columns="#{bindings.BOM_Product_CD.hints.displayWidth}"
+                                        shortDesc="#{bindings.BOM_Product_CD.hints.tooltip}">
+            <f:validator binding="#{bindings.BOM_Product_CD.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callBillOfMaterial.enabled}"
+                     actionListener="#{BillOfMaterialBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Bill Of Material.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BillOfMaterialVO1.collectionModel}" var="row"
+              rows="#{bindings.BillOfMaterialVO1.rangeSize}"
+              emptyText="#{bindings.BillOfMaterialVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.BillOfMaterialVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BillOfMaterialVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.BillOfMaterialVO1.rangeSize}"
+              filterModel="#{bindings.BillOfMaterialVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.BillOfMaterialVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page" columnStretching="column:c2">
+      <af:column sortProperty="#{bindings.BillOfMaterialVO1.hints.ProductCode.name}" filterable="true" sortable="true"
+                 headerText="Product Code" id="c1">
+        <af:outputText value="#{row.ProductCode}" shortDesc="#{bindings.BillOfMaterialVO1.hints.ProductCode.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BillOfMaterialVO1.hints.ProdName.name}" filterable="true" sortable="true"
+                 headerText="Product Name" id="c2">
+        <af:outputText value="#{row.ProdName}" shortDesc="#{bindings.BillOfMaterialVO1.hints.ProdName.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BillOfMaterialVO1.hints.PUom.name}" filterable="true" sortable="true"
+                 headerText="Product UOM" id="c8">
+        <af:outputText value="#{row.PUom}" shortDesc="#{bindings.BillOfMaterialVO1.hints.PUom.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BillOfMaterialVO1.hints.PartCode.name}" filterable="true" sortable="true"
+                 headerText="Part Code" id="c3">
+        <af:outputText value="#{row.PartCode}" shortDesc="#{bindings.BillOfMaterialVO1.hints.PartCode.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BillOfMaterialVO1.hints.ItemDesc.name}" filterable="true" sortable="true"
+                 headerText="Item Description" id="c4">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.BillOfMaterialVO1.hints.ItemDesc.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BillOfMaterialVO1.hints.NoOff.name}" filterable="true" sortable="true"
+                 headerText="No Off" id="c5">
+        <af:outputText value="#{row.NoOff}" shortDesc="#{bindings.BillOfMaterialVO1.hints.NoOff.tooltip}" id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BillOfMaterialVO1.hints.NoOff.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BillOfMaterialVO1.hints.BatchQty.name}" filterable="true" sortable="true"
+                 headerText="Batch Qty" id="c7">
+        <af:outputText value="#{row.BatchQty}" shortDesc="#{bindings.BillOfMaterialVO1.hints.BatchQty.tooltip}"
+                       id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BillOfMaterialVO1.hints.BatchQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BillOfMaterialVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c6">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.BillOfMaterialVO1.hints.Uom.tooltip}" id="ot6"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

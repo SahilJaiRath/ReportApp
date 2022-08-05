@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ItemWhereUsedVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.production.views.ItemWhereUsedVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P169_PART_NAME"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[WITH DATA AS  
+(SELECT  DISTINCT S.PRODUCT_CODE PROD_CODE, S.LEAF_CODE PART_CODE,  
+S.NO_OFF PART_QTY, A.ALT_PART_CD ALT_PART_CD, A.ALT_NO_OFF ALT_PART_QTY 
+FROM BOM_SPRING S 
+LEFT OUTER JOIN ALT_BOM A 
+ON S.PRODUCT_CODE = A.PROD_CODE 
+AND S.LEAF_CODE = A.PART_CD 
+WHERE S.LEAF_CODE = :P169_PART_NAME--'1511000010' 
+UNION ALL 
+SELECT DISTINCT L.LEAF_CD,P.ITEM_CODE, L.BATCH_QTY, NULL , NULL  
+  FROM LOT_BATCH_DETAIL L 
+  LEFT JOIN PART_PROC_INPUT P 
+    ON L.LEAF_CD = P.PART_CODE 
+WHERE P.ITEM_CODE = :P169_PART_NAME 
+), 
+PROD AS  
+(SELECT CODE, DESCRIPTION, UNIT_OF_MEASUREMENT UOM FROM PRODUCT 
+UNION 
+SELECT PART_CODE, DESCRIPTION, MEASUREMENT_UNIT FROM PART_MASTER  
+) 
+SELECT D.PART_CODE,  
+(SELECT DESCRIPTION FROM PROD WHERE CODE = D.PART_CODE) PART_NAME, 
+(SELECT UOM FROM PROD WHERE CODE = D.PART_CODE) PART_UOM, 
+D.PART_QTY, D.PROD_CODE , --P.DESCRIPTION, 
+(SELECT DESCRIPTION FROM PROD WHERE CODE = D.PROD_CODE) PROD_NAME, 
+(SELECT UOM FROM PROD WHERE CODE = D.PROD_CODE) PROD_UOM, 
+B.NO_OFF PROD_QTY, D.ALT_PART_CD,  
+(SELECT DESCRIPTION FROM PROD WHERE CODE = D.ALT_PART_CD) ALT_PROD_NAME, 
+(SELECT UOM FROM PROD WHERE CODE = D.ALT_PART_CD) ALT_UOM, 
+D.ALT_PART_QTY 
+FROM DATA D 
+LEFT OUTER JOIN BOM B 
+ON D.PROD_CODE = B.PRODUCT_CODE 
+ORDER BY 5,1]]></SQLQuery>
+  <ViewAttribute
+    Name="PartCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PART_CODE"
+    Expression="PART_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PART_NAME"
+    Expression="PART_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartUom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PART_UOM"
+    Expression="PART_UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PART_QTY"
+    Expression="PART_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ProdCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROD_CODE"
+    Expression="PROD_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProdName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROD_NAME"
+    Expression="PROD_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProdUom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROD_UOM"
+    Expression="PROD_UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProdQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PROD_QTY"
+    Expression="PROD_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="AltPartCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ALT_PART_CD"
+    Expression="ALT_PART_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AltProdName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ALT_PROD_NAME"
+    Expression="ALT_PROD_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AltUom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ALT_UOM"
+    Expression="ALT_UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AltPartQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ALT_PART_QTY"
+    Expression="ALT_PART_QTY"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

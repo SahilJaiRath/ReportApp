@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="IndentPending_CloseReportPageDef" Package="bspl.reportfactory.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="IndentPendingAndCloseVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="IndentPendingAndCloseVO1Iterator"/>
+    <searchRegion Binds="IndentPendingAndCloseVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="IndentPendingAndCloseVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="IndentPendingAndCloseVO1Iterator" id="IndentPendingAndCloseVO1">
+      <nodeDefinition DefName="model.Purchase.views.IndentPendingAndCloseVO" Name="IndentPendingAndCloseVO10">
+        <AttrNames>
+          <Item Value="UnitCode"/>
+          <Item Value="IndentNo"/>
+          <Item Value="IndentDate"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="IndentCloseSt"/>
+          <Item Value="IndentCancelSt"/>
+          <Item Value="LocatonName"/>
+          <Item Value="ApprovedQty"/>
+          <Item Value="PoQty"/>
+          <Item Value="BalanceQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callIndentPendingAndClose" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callIndentPendingAndClose" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_TYPE" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

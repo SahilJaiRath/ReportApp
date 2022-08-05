@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="ARNumberAgainstMRNITEMPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ARNumberAgainstMRNITEMVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="ARNumberAgainstMRNITEMVO1Iterator"/>
+    <searchRegion Binds="ARNumberAgainstMRNITEMVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ARNumberAgainstMRNITEMVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ARNumberAgainstMRNITEMVO1Iterator" id="ARNumberAgainstMRNITEMVO1">
+      <nodeDefinition DefName="model.inventory.views.ARNumberAgainstMRNITEMVO" Name="ARNumberAgainstMRNITEMVO10">
+        <AttrNames>
+          <Item Value="SrvNo"/>
+          <Item Value="SrvDt"/>
+          <Item Value="ChallanNo"/>
+          <Item Value="InvNo"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="UnitCd"/>
+          <Item Value="BillNo"/>
+          <Item Value="BillDate"/>
+          <Item Value="Vendor"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ChallanQty"/>
+          <Item Value="ReceiptQty"/>
+          <Item Value="AcceptQty"/>
+          <Item Value="RejectQty"/>
+          <Item Value="ArNo"/>
+          <Item Value="ArDate"/>
+          <Item Value="GroupCode"/>
+          <Item Value="ItemGroup"/>
+          <Item Value="SubGrpCd"/>
+          <Item Value="SubGrpDesc"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ItemUom"/>
+          <Item Value="VendorName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubLedger_UnitCode" id="SubLedger_UnitCode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_GroupCd" id="GroupCd"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_SubGroupCd" id="SubGroupCd"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_ARNumberAgainstMRNITEM_ItemName"
+                  id="ARNumberAgainstMRNITEM_ItemName"/>
+    <methodAction id="callARNumberAgainstMRNITEM" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callARNumberAgainstMRNITEM" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_GroupCd" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SubGroupCd" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ItemName" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

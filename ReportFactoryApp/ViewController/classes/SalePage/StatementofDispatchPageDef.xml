@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="StatementofDispatchPageDef"
+                Package="SalePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="StatementofDispatchVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="StatementofDispatchVO1Iterator"/>
+    <searchRegion Binds="StatementofDispatchVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="StatementofDispatchVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="StatementofDispatchVO1Iterator" id="StatementofDispatchVO1">
+      <nodeDefinition DefName="model.sale.views.StatementofDispatchVO" Name="StatementofDispatchVO10">
+        <AttrNames>
+          <Item Value="InvHeadType"/>
+          <Item Value="StockType"/>
+          <Item Value="Invoice"/>
+          <Item Value="Dates"/>
+          <Item Value="CustCode"/>
+          <Item Value="Name"/>
+          <Item Value="RefDocNo"/>
+          <Item Value="CrDays"/>
+          <Item Value="DueDate"/>
+          <Item Value="ProdCode"/>
+          <Item Value="Description"/>
+          <Item Value="UnitCode"/>
+          <Item Value="DomesticQty"/>
+          <Item Value="DomesticRate"/>
+          <Item Value="DomesticValue"/>
+          <Item Value="ExportQty"/>
+          <Item Value="ExportRate"/>
+          <Item Value="ExportValue"/>
+          <Item Value="DeemedExportQty"/>
+          <Item Value="DeemedExportRate"/>
+          <Item Value="DeemedExportValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callStatementofDispatch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callStatementofDispatch" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

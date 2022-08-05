@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Purchase Indent Register" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:186px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id1" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1"
+                     actionListener="#{PurchaseIndentRegisterBean.onClickButton}"
+                     disabled="#{!bindings.callPurchaseIndentRegister.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Purchase Indent Register Report.xls"
+                                             title="Purchase Indent Register Report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PurchaseIndentRegisterVO1.collectionModel}" var="row"
+              rows="#{bindings.PurchaseIndentRegisterVO1.rangeSize}"
+              emptyText="#{bindings.PurchaseIndentRegisterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PurchaseIndentRegisterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PurchaseIndentRegisterVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.PurchaseIndentRegisterVO1.rangeSize}"
+              filterModel="#{bindings.PurchaseIndentRegisterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PurchaseIndentRegisterVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.IndNo.name}" filterable="true" sortable="true"
+                 headerText="Indent Number" id="c2">
+        <af:outputText value="#{row.IndNo}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.IndNo.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.IndDt.name}" filterable="true" sortable="true"
+                 headerText="Indent Date" id="c3">
+        <af:outputText value="#{row.IndDt}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.IndDt.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.ItemCd.name}" filterable="true"
+                 sortable="true" headerText="Item Code" id="c4">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.ItemCd.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="Item Description " id="c5">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.ItemDesc.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.ReqByDate.name}" filterable="true"
+                 sortable="true" headerText="Req By Date" id="c10">
+        <af:outputText value="#{row.ReqByDate}"
+                       shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.ReqByDate.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.PoNo.name}" filterable="true" sortable="true"
+                 headerText="Po No " id="c11">
+        <af:outputText value="#{row.PoNo}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.PoNo.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.PoDt.name}" filterable="true" sortable="true"
+                 headerText="Po Date" id="c12">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PurchaseIndentRegisterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.PoDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.PurchaseIndentRegisterVO1.hints.PoDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.PoDt}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.PoDt.tooltip}"
+                       id="ot12">
+          <af:convertDateTime pattern="#{bindings.PurchaseIndentRegisterVO1.hints.PoDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.VenCd.name}" filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c13">
+        <af:outputText value="#{row.VenCd}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.VenCd.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="Name" id="c14">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.Name.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="Qty" id="c15">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.Qty.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PurchaseIndentRegisterVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.Rate.name}" filterable="true" sortable="true"
+                 headerText="Rate" id="c16">
+        <af:outputText value="#{row.Rate}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.Rate.tooltip}"
+                       id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PurchaseIndentRegisterVO1.hints.Rate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.BalQty.name}" filterable="true"
+                 sortable="true" headerText="Balance Qty" id="c18">
+        <af:outputText value="#{row.BalQty}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.BalQty.tooltip}"
+                       id="ot18">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PurchaseIndentRegisterVO1.hints.BalQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="UOM" id="c6">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.Uom.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.Department.name}" filterable="true"
+                 sortable="true" headerText="Department " id="c8">
+        <af:outputText value="#{row.Department}"
+                       shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.Department.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.Amount.name}" filterable="true"
+                 sortable="true" headerText="Amount " id="c17">
+        <af:outputText value="#{row.Amount}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.Amount.tooltip}"
+                       id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PurchaseIndentRegisterVO1.hints.Amount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.MrnNo.name}" filterable="true" sortable="true"
+                 headerText="Mrn No" id="c19">
+        <af:outputText value="#{row.MrnNo}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.MrnNo.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.MrnDt.name}" filterable="true" sortable="true"
+                 headerText="Mrn Date" id="c20">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PurchaseIndentRegisterVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.MrnDt.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.PurchaseIndentRegisterVO1.hints.MrnDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.MrnDt}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.MrnDt.tooltip}"
+                       id="ot20">
+          <af:convertDateTime pattern="#{bindings.PurchaseIndentRegisterVO1.hints.MrnDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.MrnQty.name}" filterable="true"
+                 sortable="true" headerText="Mrn Qty" id="c21">
+        <af:outputText value="#{row.MrnQty}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.MrnQty.tooltip}"
+                       id="ot21">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PurchaseIndentRegisterVO1.hints.MrnQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.SrlNo.name}" filterable="true" sortable="true"
+                 headerText="Srl No" id="c1">
+        <af:outputText value="#{row.SrlNo}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.SrlNo.tooltip}"
+                       id="ot1">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PurchaseIndentRegisterVO1.hints.SrlNo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.IndentBy.name}" filterable="true"
+                 sortable="true" headerText="Indent By" id="c9">
+        <af:outputText value="#{row.IndentBy}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.IndentBy.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PurchaseIndentRegisterVO1.hints.IndQty.name}" filterable="true"
+                 sortable="true" headerText="Indend Qty" id="c7">
+        <af:outputText value="#{row.IndQty}" shortDesc="#{bindings.PurchaseIndentRegisterVO1.hints.IndQty.tooltip}"
+                       id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PurchaseIndentRegisterVO1.hints.IndQty.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

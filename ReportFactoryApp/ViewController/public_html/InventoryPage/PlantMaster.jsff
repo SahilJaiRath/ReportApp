@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="Plant Master" id="ph1"/>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Expot To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Plant Master Report.xls"
+                                             title="Plant Master Report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PlantMasterVO1.collectionModel}" var="row" rows="#{bindings.PlantMasterVO1.rangeSize}"
+              emptyText="#{bindings.PlantMasterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PlantMasterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PlantMasterVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PlantMasterVO1.rangeSize}"
+              filterModel="#{bindings.PlantMasterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PlantMasterVO1Query.processQuery}" varStatus="vs" id="t2" scrollPolicy="page"
+              columnStretching="column:c8">
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.Code.name}" filterable="true" sortable="true"
+                 headerText="Code" id="c1">
+        <af:outputText value="#{row.Code}" shortDesc="#{bindings.PlantMasterVO1.hints.Code.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="Name" id="c2">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.PlantMasterVO1.hints.Name.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.ShortName.name}" filterable="true" sortable="true"
+                 headerText="Short Name" id="c3">
+        <af:outputText value="#{row.ShortName}" shortDesc="#{bindings.PlantMasterVO1.hints.ShortName.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.PanNo.name}" filterable="true" sortable="true"
+                 headerText="Pan No" id="c4">
+        <af:outputText value="#{row.PanNo}" shortDesc="#{bindings.PlantMasterVO1.hints.PanNo.tooltip}" id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.GstRegNo.name}" filterable="true" sortable="true"
+                 headerText="Gst Reg No" id="c5">
+        <af:outputText value="#{row.GstRegNo}" shortDesc="#{bindings.PlantMasterVO1.hints.GstRegNo.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.Cin.name}" filterable="true" sortable="true"
+                 headerText="Cin" id="c6">
+        <af:outputText value="#{row.Cin}" shortDesc="#{bindings.PlantMasterVO1.hints.Cin.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.UnitCurr.name}" filterable="true" sortable="true"
+                 headerText="Unit Curr" id="c7">
+        <af:outputText value="#{row.UnitCurr}" shortDesc="#{bindings.PlantMasterVO1.hints.UnitCurr.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.Address.name}" filterable="true" sortable="true"
+                 headerText="Address" id="c8">
+        <af:outputText value="#{row.Address}" shortDesc="#{bindings.PlantMasterVO1.hints.Address.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.Email.name}" filterable="true" sortable="true"
+                 headerText="Email" id="c9">
+        <af:outputText value="#{row.Email}" shortDesc="#{bindings.PlantMasterVO1.hints.Email.tooltip}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PlantMasterVO1.hints.Website.name}" filterable="true" sortable="true"
+                 headerText="Website" id="c10">
+        <af:outputText value="#{row.Website}" shortDesc="#{bindings.PlantMasterVO1.hints.Website.tooltip}" id="ot10"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

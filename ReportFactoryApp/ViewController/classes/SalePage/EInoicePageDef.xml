@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="EInoicePageDef"
+                Package="SalePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="EInvoiceVO1" RangeSize="25" DataControl="AppModuleDataControl" id="EInvoiceVO1Iterator"/>
+    <searchRegion Binds="EInvoiceVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="EInvoiceVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="EInvoiceVO1Iterator" id="EInvoiceVO1">
+      <nodeDefinition DefName="model.sale.views.EInvoiceVO" Name="EInvoiceVO10">
+        <AttrNames>
+          <Item Value="SupplyTypeCode"/>
+          <Item Value="ReverseCharge"/>
+          <Item Value="ECommGstin"/>
+          <Item Value="IgstOnIntra"/>
+          <Item Value="DocumentType"/>
+          <Item Value="DocumentNo"/>
+          <Item Value="DocumentDate"/>
+          <Item Value="BuyerGstin"/>
+          <Item Value="BuyerLegalName"/>
+          <Item Value="BuyerTradeName"/>
+          <Item Value="BuyerPos"/>
+          <Item Value="BuyerAddr1"/>
+          <Item Value="BuyerAddr2"/>
+          <Item Value="BuyerLocation"/>
+          <Item Value="BuyerPinCode"/>
+          <Item Value="BuyerState"/>
+          <Item Value="BuyerPhoneNumber"/>
+          <Item Value="BuyerEmailId"/>
+          <Item Value="DispatchName"/>
+          <Item Value="DispatchAddr1"/>
+          <Item Value="DispatchAddr2"/>
+          <Item Value="DispatchLocation"/>
+          <Item Value="DispatchPinCode"/>
+          <Item Value="DispatchState"/>
+          <Item Value="ShippingGstin"/>
+          <Item Value="ShippingLegalName"/>
+          <Item Value="ShippingTradeName"/>
+          <Item Value="ShippingAddr1"/>
+          <Item Value="ShippingAddr2"/>
+          <Item Value="ShippingLocation"/>
+          <Item Value="ShippingPinCode"/>
+          <Item Value="ShippingState"/>
+          <Item Value="SlNo"/>
+          <Item Value="ProdDesc"/>
+          <Item Value="IsService"/>
+          <Item Value="HsnCode"/>
+          <Item Value="BarCode"/>
+          <Item Value="Quantity"/>
+          <Item Value="FreeQuantity"/>
+          <Item Value="Unit"/>
+          <Item Value="UnitPrice"/>
+          <Item Value="GrossAmount"/>
+          <Item Value="Discount"/>
+          <Item Value="PreTaxValue"/>
+          <Item Value="TaxableValue"/>
+          <Item Value="GstRate"/>
+          <Item Value="SgstAmt"/>
+          <Item Value="CgstAmt"/>
+          <Item Value="IgstAmt"/>
+          <Item Value="CessRate"/>
+          <Item Value="CessAmtAdval"/>
+          <Item Value="CessNonAdvalAmt"/>
+          <Item Value="StateCessRate"/>
+          <Item Value="StateCessAdvalAmt"/>
+          <Item Value="StateCessNonAdvalAmt"/>
+          <Item Value="OtherCharges"/>
+          <Item Value="ItemTotal"/>
+          <Item Value="OrderLineReference"/>
+          <Item Value="OriginCountry"/>
+          <Item Value="UniqueItemSlNo"/>
+          <Item Value="BatchName"/>
+          <Item Value="BatchExpiryDate"/>
+          <Item Value="WarrantyDate"/>
+          <Item Value="AttributeDetailsOfItem"/>
+          <Item Value="AttributeValueOfItem"/>
+          <Item Value="TotalTaxableValue"/>
+          <Item Value="TotSgstAmt"/>
+          <Item Value="TotCgstAmt"/>
+          <Item Value="TotIgstAmt"/>
+          <Item Value="CessAmt"/>
+          <Item Value="StateCessAmt"/>
+          <Item Value="Discount1"/>
+          <Item Value="OtherCharges1"/>
+          <Item Value="RoundOff"/>
+          <Item Value="TotInvoiceVal"/>
+          <Item Value="TotInvcValAddnlCurr"/>
+          <Item Value="ShippingBillNo"/>
+          <Item Value="ShippingBillDate"/>
+          <Item Value="Port"/>
+          <Item Value="SupplierRefund"/>
+          <Item Value="ForeignCurrency"/>
+          <Item Value="CountryCode"/>
+          <Item Value="ExportDutyAmount"/>
+          <Item Value="TransId"/>
+          <Item Value="TransName"/>
+          <Item Value="TransMode"/>
+          <Item Value="Distance"/>
+          <Item Value="TransDocNo"/>
+          <Item Value="TransDocDate"/>
+          <Item Value="VehicleNumber"/>
+          <Item Value="VehicleType"/>
+          <Item Value="PayeeName"/>
+          <Item Value="AccountNumber"/>
+          <Item Value="Mode1"/>
+          <Item Value="BranchIfscCode"/>
+          <Item Value="TermOfPayment"/>
+          <Item Value="PaymentInstuction"/>
+          <Item Value="CreditTransfer"/>
+          <Item Value="DirectDebit"/>
+          <Item Value="CreditDays"/>
+          <Item Value="PaidedAmount"/>
+          <Item Value="DueAmount"/>
+          <Item Value="Remarks"/>
+          <Item Value="InvoicePeriodStateDate"/>
+          <Item Value="InvoicePeriodEndDate"/>
+          <Item Value="OriginalInvoice"/>
+          <Item Value="PrecedingInvcDate"/>
+          <Item Value="OtherReference"/>
+          <Item Value="RcptAdviceNo"/>
+          <Item Value="DateOfRcptAdvice"/>
+          <Item Value="LotBatchRefNo"/>
+          <Item Value="ContractRefNo"/>
+          <Item Value="AnyOtherRef"/>
+          <Item Value="ProjectRefNo"/>
+          <Item Value="VendorPoRefNo"/>
+          <Item Value="VendorPoRefDate"/>
+          <Item Value="SupportingDocUrl"/>
+          <Item Value="SuppDocBase64Format"/>
+          <Item Value="AnyAddnlInfo"/>
+          <Item Value="ErrorList"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_EInvoice_InvoiceNo"
+                  id="EInvoice_InvoiceNo"/>
+    <methodAction id="callEInvoice" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callEInvoice"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_INVOICE" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelHeader text="Sub Group Master" id="ph1"/>
+  <af:spacer width="10" height="10" id="s3"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="Sub Group Master Report.xls"
+                                             title="Sub Group Master"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.SubGroupMasterVO1.collectionModel}" var="row"
+              rows="#{bindings.SubGroupMasterVO1.rangeSize}"
+              emptyText="#{bindings.SubGroupMasterVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.SubGroupMasterVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.SubGroupMasterVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.SubGroupMasterVO1.rangeSize}"
+              filterModel="#{bindings.SubGroupMasterVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.SubGroupMasterVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page" columnStretching="column:c3">
+      <af:column sortProperty="#{bindings.SubGroupMasterVO1.hints.SubGrpCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.SubGroupMasterVO1.hints.SubGrpCd.label}" id="c1">
+        <af:outputText value="#{row.SubGrpCd}" shortDesc="#{bindings.SubGroupMasterVO1.hints.SubGrpCd.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubGroupMasterVO1.hints.SubGrpDesc.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.SubGroupMasterVO1.hints.SubGrpDesc.label}" id="c2">
+        <af:outputText value="#{row.SubGrpDesc}" shortDesc="#{bindings.SubGroupMasterVO1.hints.SubGrpDesc.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubGroupMasterVO1.hints.GroupCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.SubGroupMasterVO1.hints.GroupCd.label}" id="c3">
+        <af:outputText value="#{row.GroupCd}" shortDesc="#{bindings.SubGroupMasterVO1.hints.GroupCd.tooltip}" id="ot3"/>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+  <af:spacer width="10" height="10" id="s1"/>
+</jsp:root>

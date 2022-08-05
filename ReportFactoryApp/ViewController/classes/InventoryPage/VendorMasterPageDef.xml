@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="VendorMasterPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VendorMasterVO1" DataControl="AppModuleDataControl" id="VendorMasterVO1Iterator" RangeSize="50"/>
+    <searchRegion Binds="VendorMasterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VendorMasterVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VendorMasterVO1Iterator" id="VendorMasterVO1">
+      <nodeDefinition DefName="model.inventory.views.VendorMasterVO" Name="VendorMasterVO10">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="VendorCode"/>
+          <Item Value="VendorStatus"/>
+          <Item Value="RegisterationDate"/>
+          <Item Value="GstRegNo"/>
+          <Item Value="PanNo"/>
+          <Item Value="UnitCode"/>
+          <Item Value="UnitName"/>
+          <Item Value="RegisteredDealer"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="PayTerm"/>
+          <Item Value="VendorFlag"/>
+          <Item Value="VendorType"/>
+          <Item Value="VendorAddressType"/>
+          <Item Value="ContactPerson"/>
+          <Item Value="Phones"/>
+          <Item Value="Telex"/>
+          <Item Value="WeekOff"/>
+          <Item Value="Selectobjects18"/>
+          <Item Value="CityCode"/>
+          <Item Value="City"/>
+          <Item Value="State"/>
+          <Item Value="StateGstCode"/>
+          <Item Value="Country"/>
+          <Item Value="PinCode"/>
+          <Item Value="RegFlag"/>
+          <Item Value="InterUnit"/>
+          <Item Value="PartyType"/>
+          <Item Value="QaStatus"/>
+          <Item Value="ObjectVersionNumber"/>
+          <Item Value="RegistrationFlag"/>
+          <Item Value="StaxType"/>
+          <Item Value="VenTp"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

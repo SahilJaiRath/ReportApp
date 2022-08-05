@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HSNSummaryVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.finance.views.HSNSummaryVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P176_UNIT"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P176_FROM_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P176_TO_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <SQLQuery><![CDATA[SELECT UNIT_CODE, HSN_NO, HSN_Desc, UOM, SUM(NVL(QUANTITY,0)) QTY, SUM(NVL(IGST_AMT,0)) IGST,  
+SUM(NVL(CGST_AMT,0)) CGST, SUM(NVL(SGST_AMT,0)) SGST, SUM(NVL(BAMOUNT,0)) AMOUNT,  
+(SUM(NVL(IGST_AMT,0)) + SUM(NVL(CGST_AMT,0)) + SUM(NVL(SGST_AMT,0)) + SUM(BAMOUNT)) TOT_VAL, 
+SUM(NVL(CESS_AMT,0)) CESS_AMT FROM ( 
+SELECT H.UNIT_CODE, D.HSN_NO, (SELECT HSN_DESC FROM HSN_MASTER WHERE HSN_NO = D.HSN_NO) HSN_Desc, 
+        D.UOM, D.QUANTITY, D.IGST_AMT, D.CGST_AMT, D.SGST_AMT, D.BAMOUNT,  
+        (NVL(D.IGST_AMT,0) + NVL(D.CGST_AMT,0) + NVL(D.SGST_AMT,0) + D.BAMOUNT) TOT_VAL , NVL(D.CESS_AMT,0) CESS_AMT 
+  FROM INVOICE_HEADER H 
+  LEFT JOIN INVOICE_DETAIL D 
+  ON H.IDENTIFIER = D.INV_HEAD_IDENTIFIER 
+  WHERE (H.UNIT_CODE = :P176_UNIT OR 'ALL' = :P176_UNIT ) 
+  AND DATES BETWEEN :P176_FROM_DATE AND :P176_TO_DATE 
+  ) 
+  GROUP BY UNIT_CODE, HSN_NO, UOM, HSN_Desc 
+  ORDER BY 1, 2, 4]]></SQLQuery>
+  <ViewAttribute
+    Name="UnitCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CODE"
+    Expression="UNIT_CODE"
+    SQLType="CHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HsnNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HSN_NO"
+    Expression="HSN_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HsnDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="300"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HSN_DESC"
+    Expression="HSN_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Uom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UOM"
+    Expression="UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Qty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="QTY"
+    Expression="QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Igst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="IGST"
+    Expression="IGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Cgst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CGST"
+    Expression="CGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Sgst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SGST"
+    Expression="SGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Amount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AMOUNT"
+    Expression="AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotVal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOT_VAL"
+    Expression="TOT_VAL"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CessAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CESS_AMT"
+    Expression="CESS_AMT"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

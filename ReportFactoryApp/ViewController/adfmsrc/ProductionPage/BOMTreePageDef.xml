@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="BOMTreePageDef"
+                Package="ProductionPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BOMTreeVO1" RangeSize="50" DataControl="AppModuleDataControl" id="BOMTreeVO1Iterator"/>
+    <searchRegion Binds="BOMTreeVO1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="BOMTreeVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BOMTreeVO1Iterator" id="BOMTreeVO1">
+      <nodeDefinition DefName="model.production.views.BOMTreeVO" Name="BOMTreeVO10">
+        <AttrNames>
+          <Item Value="BomProduct"/>
+          <Item Value="ItemName"/>
+          <Item Value="BatchSize"/>
+          <Item Value="Partcode"/>
+          <Item Value="PartName"/>
+          <Item Value="NoOff"/>
+          <Item Value="Uom"/>
+          <Item Value="AltUom"/>
+          <Item Value="PartTyp"/>
+          <Item Value="ProcurmentTyp"/>
+          <Item Value="ConversionFactor"/>
+          <Item Value="ReqNoOff"/>
+          <Item Value="ReqMaterialPerCld"/>
+          <Item Value="Version"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="RequiredBatch">
+      <AttrNames>
+        <Item Value="RequiredBatch"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callBOMTree" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callBOMTree"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_BOMTREE_PRD_CD" NDType="java.lang.String"/>
+      <NamedData NDName="LV_REQUESTQTY" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="BOMTree_Batchqty1">
+      <AttrNames>
+        <Item Value="BOMTree_Batchqty"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_BOMTree_BOM_Prd_cd"
+                  id="BOMTree_BOM_Prd_cd"/>
+  </bindings>
+</pageDefinition>
