@@ -245,5 +245,7 @@ public interface AppModule extends ApplicationModule {
     void callApprovedPurchaseIndent(String LV_UNIT, Date FRDATE, Date TODATE);
 
     void callShortExcessRegister(String LV_UNIT, Date FRDATE, Date TODATE, String LV_REPTYPE);
+
+    void callSummaryOfDispatch(String LV_UNIT, Date FRDATE, Date TODATE);
 }
 

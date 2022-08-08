@@ -181,6 +181,7 @@
     <page path="/InventoryPage/ApprovedPurchaseIndent.jsff"
           usageId="bspl_reportfactory_view_ApprovedPurchaseIndentPageDef"/>
     <page path="/InventoryPage/ShortExcessRegister.jsff" usageId="bspl_reportfactory_view_ShortExcessRegisterPageDef"/>
+    <page path="/SalePage/SummaryOfDispatch.jsff" usageId="bspl_reportfactory_view_SummaryOfDispatchPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="bspl_reportfactory_view_PartyBalancePageDef" path="FinancePage.PartyBalancePageDef"/>
@@ -353,6 +354,7 @@
     <page id="bspl_reportfactory_view_ApprovedPurchaseIndentPageDef"
           path="InventoryPage.ApprovedPurchaseIndentPageDef"/>
     <page id="bspl_reportfactory_view_ShortExcessRegisterPageDef" path="InventoryPage.ShortExcessRegisterPageDef"/>
+    <page id="bspl_reportfactory_view_SummaryOfDispatchPageDef" path="SalePage.SummaryOfDispatchPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="model.service"

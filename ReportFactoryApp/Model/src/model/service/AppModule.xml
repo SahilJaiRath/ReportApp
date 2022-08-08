@@ -410,6 +410,9 @@
   <ViewUsage
     Name="ShortExcessRegisterVO1"
     ViewObjectName="model.inventory.views.ShortExcessRegisterVO"/>
+  <ViewUsage
+    Name="SummaryOfDispatchVO1"
+    ViewObjectName="model.sale.views.SummaryOfDispatchVO"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -8130,6 +8133,22 @@
       <Parameter
         Name="LV_REPTYPE"
         Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="callSummaryOfDispatch"
+      MethodName="callSummaryOfDispatch">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="FRDATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TODATE"
+        Type="java.util.Date"/>
     </Method>
   </ClientInterface>
 </AppModule>

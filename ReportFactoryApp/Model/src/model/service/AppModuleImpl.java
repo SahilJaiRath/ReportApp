@@ -4283,6 +4283,41 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     }
     }
 
+
+    /**
+     * Container's getter for SummaryOfDispatchVO1.
+     * @return SummaryOfDispatchVO1
+     */
+    public ViewObjectImpl getSummaryOfDispatchVO1() {
+        return (ViewObjectImpl) findViewObject("SummaryOfDispatchVO1");
+    }
+    
+    public void callSummaryOfDispatch(String LV_UNIT,Date FRDATE,Date TODATE ){
+        ViewObjectImpl vo = this.getSummaryOfDispatchVO1();
+        System.out.println(LV_UNIT + "--"  + FRDATE + "--" + TODATE+"--");
+        
+    if ( LV_UNIT != null &&  FRDATE != null && TODATE != null ) {
+        System.out.println("Inside condition!");
+    try {
+
+        
+       
+        vo.setNamedWhereClauseParam("P96_FROM_DATE", FRDATE);
+        vo.setNamedWhereClauseParam("P96_TO_DATE", TODATE);
+        vo.setNamedWhereClauseParam("P96_UNIT", LV_UNIT);
+        
+       
+        vo.executeQuery();
+        
+        
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    
+    }
+    }
+    }
+    
     
     
 }

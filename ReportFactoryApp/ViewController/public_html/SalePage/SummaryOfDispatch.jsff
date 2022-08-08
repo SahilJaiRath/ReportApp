@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Summary of Dispatch " id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1"  contentStyle="width:186px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id3" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1" actionListener="#{SummaryOfDispatchBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                             filename="Summary of Dispatch report.xls"
+                                             title="Summary of Dispatch report"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.SummaryOfDispatchVO1.collectionModel}" var="row"
+              rows="#{bindings.SummaryOfDispatchVO1.rangeSize}"
+              emptyText="#{bindings.SummaryOfDispatchVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.SummaryOfDispatchVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.SummaryOfDispatchVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.SummaryOfDispatchVO1.rangeSize}"
+              filterModel="#{bindings.SummaryOfDispatchVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.SummaryOfDispatchVO1Query.processQuery}" varStatus="vs" id="t2"
+              scrollPolicy="page" columnStretching="column:c2">
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.ProdCode.name}" filterable="true" sortable="true"
+                 headerText="Prod Code" id="c1">
+        <af:outputText value="#{row.ProdCode}" shortDesc="#{bindings.SummaryOfDispatchVO1.hints.ProdCode.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.SummaryOfDispatchVO1.hints.Description.label}" id="c2">
+        <af:outputText value="#{row.Description}" shortDesc="#{bindings.SummaryOfDispatchVO1.hints.Description.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.UnitCode.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c3">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.SummaryOfDispatchVO1.hints.UnitCode.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.DomesticQty.name}" filterable="true"
+                 sortable="true" headerText="Domestic Qty" id="c5">
+        <af:outputText value="#{row.DomesticQty}" shortDesc="#{bindings.SummaryOfDispatchVO1.hints.DomesticQty.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SummaryOfDispatchVO1.hints.DomesticQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.DomesticRate.name}" filterable="true"
+                 sortable="true" headerText="Domestic Rate" id="c6">
+        <af:outputText value="#{row.DomesticRate}"
+                       shortDesc="#{bindings.SummaryOfDispatchVO1.hints.DomesticRate.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SummaryOfDispatchVO1.hints.DomesticRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.DomesticValue.name}" filterable="true"
+                 sortable="true" headerText="Domestic Value" id="c7">
+        <af:outputText value="#{row.DomesticValue}"
+                       shortDesc="#{bindings.SummaryOfDispatchVO1.hints.DomesticValue.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SummaryOfDispatchVO1.hints.DomesticValue.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.ExportQty.name}" filterable="true" sortable="true"
+                 headerText="Export Qty" id="c8">
+        <af:outputText value="#{row.ExportQty}" shortDesc="#{bindings.SummaryOfDispatchVO1.hints.ExportQty.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SummaryOfDispatchVO1.hints.ExportQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.ExportRate.name}" filterable="true" sortable="true"
+                 headerText="Export Rate" id="c9">
+        <af:outputText value="#{row.ExportRate}" shortDesc="#{bindings.SummaryOfDispatchVO1.hints.ExportRate.tooltip}"
+                       id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SummaryOfDispatchVO1.hints.ExportRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.ExportValue.name}" filterable="true"
+                 sortable="true" headerText="Export Value" id="c10">
+        <af:outputText value="#{row.ExportValue}" shortDesc="#{bindings.SummaryOfDispatchVO1.hints.ExportValue.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SummaryOfDispatchVO1.hints.ExportValue.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportQty.name}" filterable="true"
+                 sortable="true" headerText="Deemed Export Qty" id="c11">
+        <af:outputText value="#{row.DeemedExportQty}"
+                       shortDesc="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportQty.tooltip}" id="ot11">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportRate.name}" filterable="true"
+                 sortable="true" headerText="Export Export Rate" id="c12">
+        <af:outputText value="#{row.DeemedExportRate}"
+                       shortDesc="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportRate.tooltip}" id="ot12">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportValue.name}" filterable="true"
+                 sortable="true" headerText="Deemed Export Value" id="c13">
+        <af:outputText value="#{row.DeemedExportValue}"
+                       shortDesc="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportValue.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.SummaryOfDispatchVO1.hints.DeemedExportValue.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SummaryOfDispatchVO1.hints.Dates.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.SummaryOfDispatchVO1.hints.Dates.label}" id="c4">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.SummaryOfDispatchVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Dates.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.SummaryOfDispatchVO1.hints.Dates.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.Dates}" shortDesc="#{bindings.SummaryOfDispatchVO1.hints.Dates.tooltip}" id="ot4">
+          <af:convertDateTime pattern="#{bindings.SummaryOfDispatchVO1.hints.Dates.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

@@ -21,6 +21,8 @@
     <taskFlow id="ShortExcessRegisterTF1"
               taskFlowId="/WEB-INF/InventoryTaskflow/ShortExcessRegisterTF.xml#ShortExcessRegisterTF"
               activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="SummaryOfDispatchTF1" taskFlowId="/WEB-INF/SaleTaskFlow/SummaryOfDispatchTF.xml#SummaryOfDispatchTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

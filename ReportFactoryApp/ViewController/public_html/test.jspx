@@ -6,7 +6,7 @@
         <af:document title="test.jspx" id="d1">
             <af:form id="f1">
                 <f:subview id="A1">
-                    <af:region value="#{bindings.ShortExcessRegisterTF1.regionModel}" id="r1"/>
+                    <af:region value="#{bindings.SummaryOfDispatchTF1.regionModel}" id="r1"/>
                 </f:subview>
             </af:form>
         </af:document>
