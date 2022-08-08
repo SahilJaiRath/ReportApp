@@ -4317,7 +4317,41 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     }
     }
     }
+
+
+    /**
+     * Container's getter for MonthlyPackingSummaryVO1.
+     * @return MonthlyPackingSummaryVO1
+     */
+    public ViewObjectImpl getMonthlyPackingSummaryVO1() {
+        return (ViewObjectImpl) findViewObject("MonthlyPackingSummaryVO1");
+    }
     
+    public void callMonthlyPackingSummary(String LV_CATEGARYCD){
+        ViewObjectImpl vo = this.getMonthlyPackingSummaryVO1();
+        System.out.println(LV_CATEGARYCD + "--"  );
+        
+    if ( LV_CATEGARYCD != null  ) {
+        System.out.println("Inside condition!");
+    try {
+
+        
+       
+        vo.setNamedWhereClauseParam("P265_CATEGORY_CD", LV_CATEGARYCD);
+        
+        
+       
+        vo.executeQuery();
+        
+        
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    
+    }
+    }
+    }
+
     
     
 }

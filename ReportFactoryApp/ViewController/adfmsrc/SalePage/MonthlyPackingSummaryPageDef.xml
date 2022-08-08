@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="MonthlyPackingSummaryPageDef"
+                Package="SalePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MonthlyPackingSummaryVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="MonthlyPackingSummaryVO1Iterator"/>
+    <searchRegion Binds="MonthlyPackingSummaryVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="MonthlyPackingSummaryVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MonthlyPackingSummaryVO1Iterator" id="MonthlyPackingSummaryVO1">
+      <nodeDefinition DefName="model.sale.views.MonthlyPackingSummaryVO" Name="MonthlyPackingSummaryVO10">
+        <AttrNames>
+          <Item Value="Date1"/>
+          <Item Value="Category"/>
+          <Item Value="Unit1"/>
+          <Item Value="Group1"/>
+          <Item Value="SubGroup1"/>
+          <Item Value="TragetQtyU1"/>
+          <Item Value="TragetValueU1"/>
+          <Item Value="AcctualQtyU1"/>
+          <Item Value="AcctualValueU1"/>
+          <Item Value="Unit2"/>
+          <Item Value="Group2"/>
+          <Item Value="SubGroup2"/>
+          <Item Value="TragetQtyU2"/>
+          <Item Value="TragetValueU2"/>
+          <Item Value="AcctualQtyU2"/>
+          <Item Value="AcctualValueU2"/>
+          <Item Value="Unit3"/>
+          <Item Value="Group3"/>
+          <Item Value="SubGroup3"/>
+          <Item Value="TragetQtyU3"/>
+          <Item Value="TragetValueU3"/>
+          <Item Value="AcctualQtyU3"/>
+          <Item Value="AcctualValueU3"/>
+          <Item Value="TotalTragetQty"/>
+          <Item Value="TotalValueQty"/>
+          <Item Value="TotalAcctualQty"/>
+          <Item Value="TotalAcctualValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_MonthlyPackingSummary_CategaryCd"
+          id="MonthlyPackingSummary_CategaryCd" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="callMonthlyPackingSummary" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callMonthlyPackingSummary" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_CATEGARYCD" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

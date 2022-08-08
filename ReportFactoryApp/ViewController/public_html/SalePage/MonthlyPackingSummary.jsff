@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Monthly Packing Summary" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1">
+          <af:selectOneChoice value="#{bindings.MonthlyPackingSummary_CategaryCd.inputValue}"
+                              label="Categary Code"
+                              required="#{bindings.MonthlyPackingSummary_CategaryCd.hints.mandatory}"
+                              shortDesc="#{bindings.MonthlyPackingSummary_CategaryCd.hints.tooltip}" id="soc1" contentStyle="width:180.0px;"
+                               labelStyle= "width:150px" >
+            <f:selectItems value="#{bindings.MonthlyPackingSummary_CategaryCd.items}" id="si1"/>
+            <f:validator binding="#{bindings.MonthlyPackingSummary_CategaryCd.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+          <af:button text="Execute" id="b2"
+                     actionListener="#{MonthlyPackingSummaryBean.onClickButton}"
+                     disabled="#{!bindings.callMonthlyPackingSummary.enabled}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Monthly Packing Summary.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.MonthlyPackingSummaryVO1.collectionModel}" var="row"
+              rows="#{bindings.MonthlyPackingSummaryVO1.rangeSize}"
+              emptyText="#{bindings.MonthlyPackingSummaryVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.MonthlyPackingSummaryVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.MonthlyPackingSummaryVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.MonthlyPackingSummaryVO1.rangeSize}"
+              filterModel="#{bindings.MonthlyPackingSummaryVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.MonthlyPackingSummaryVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.Unit2.name}" filterable="true" sortable="true"
+                 headerText="Unit2" id="c10">
+        <af:outputText value="#{row.Unit2}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.Unit2.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.Unit3.name}" filterable="true" sortable="true"
+                 headerText="Unit3" id="c17">
+        <af:outputText value="#{row.Unit3}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.Unit3.tooltip}"
+                       id="ot17"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.Date1.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.MonthlyPackingSummaryVO1.hints.Date1.label}" id="c1">
+        <af:outputText value="#{row.Date1}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.Date1.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.Category.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.MonthlyPackingSummaryVO1.hints.Category.label}" id="c2">
+        <af:outputText value="#{row.Category}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.Category.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU1.name}" filterable="true"
+                 sortable="true" headerText="Target Qty U1" id="c6">
+        <af:outputText value="#{row.TragetQtyU1}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU1.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU1.name}" filterable="true"
+                 sortable="true" headerText="Target Value U1" id="c7">
+        <af:outputText value="#{row.TragetValueU1}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU1.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU1.name}" filterable="true"
+                 sortable="true" headerText="Acctual Qty U1" id="c8">
+        <af:outputText value="#{row.AcctualQtyU1}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU1.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU1.name}" filterable="true"
+                 sortable="true" headerText="Acctual Value U1" id="c9">
+        <af:outputText value="#{row.AcctualValueU1}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU1.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU1.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU2.name}" filterable="true"
+                 sortable="true" headerText="Target Qty U2" id="c13">
+        <af:outputText value="#{row.TragetQtyU2}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU2.tooltip}" id="ot13">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU2.name}" filterable="true"
+                 sortable="true" headerText="Target Value U2" id="c14">
+        <af:outputText value="#{row.TragetValueU2}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU2.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU2.name}" filterable="true"
+                 sortable="true" headerText="Acctual Qty u2" id="c15">
+        <af:outputText value="#{row.AcctualQtyU2}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU2.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU2.name}" filterable="true"
+                 sortable="true" headerText="Acctual Value U2" id="c16">
+        <af:outputText value="#{row.AcctualValueU2}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU2.tooltip}" id="ot16">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU2.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU3.name}" filterable="true"
+                 sortable="true" headerText="Target Qty U3" id="c20">
+        <af:outputText value="#{row.TragetQtyU3}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU3.tooltip}" id="ot20">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TragetQtyU3.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU3.name}" filterable="true"
+                 sortable="true" headerText="Target Value U3" id="c21">
+        <af:outputText value="#{row.TragetValueU3}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU3.tooltip}" id="ot21">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TragetValueU3.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TotalTragetQty.name}" filterable="true"
+                 sortable="true" headerText="Total Target Qty" id="c24">
+        <af:outputText value="#{row.TotalTragetQty}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TotalTragetQty.tooltip}" id="ot24">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TotalTragetQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.Unit1.name}" filterable="true" sortable="true"
+                 headerText="Unit1" id="c3">
+        <af:outputText value="#{row.Unit1}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.Unit1.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.Group1.name}" filterable="true" sortable="true"
+                 headerText="Group1" id="c4">
+        <af:outputText value="#{row.Group1}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.Group1.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.SubGroup1.name}" filterable="true"
+                 sortable="true" headerText="Sub Group1" id="c5">
+        <af:outputText value="#{row.SubGroup1}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.SubGroup1.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.Group2.name}" filterable="true" sortable="true"
+                 headerText="Group2" id="c11">
+        <af:outputText value="#{row.Group2}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.Group2.tooltip}"
+                       id="ot11"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.SubGroup2.name}" filterable="true"
+                 sortable="true" headerText="Sub Group2" id="c12">
+        <af:outputText value="#{row.SubGroup2}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.SubGroup2.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.Group3.name}" filterable="true" sortable="true"
+                 headerText="Group3" id="c18">
+        <af:outputText value="#{row.Group3}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.Group3.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.SubGroup3.name}" filterable="true"
+                 sortable="true" headerText="Sub Group3" id="c19">
+        <af:outputText value="#{row.SubGroup3}" shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.SubGroup3.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU3.name}" filterable="true"
+                 sortable="true" headerText="Actual Qty U3" id="c22">
+        <af:outputText value="#{row.AcctualQtyU3}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU3.tooltip}" id="ot22">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualQtyU3.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU3.name}" filterable="true"
+                 sortable="true" headerText="Acctual Value U3" id="c23">
+        <af:outputText value="#{row.AcctualValueU3}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU3.tooltip}" id="ot23">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.AcctualValueU3.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TotalValueQty.name}" filterable="true"
+                 sortable="true" headerText="Total Value Qty" id="c25">
+        <af:outputText value="#{row.TotalValueQty}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TotalValueQty.tooltip}" id="ot25">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TotalValueQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TotalAcctualQty.name}" filterable="true"
+                 sortable="true" headerText="Total Acctual Qty" id="c26">
+        <af:outputText value="#{row.TotalAcctualQty}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TotalAcctualQty.tooltip}" id="ot26">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TotalAcctualQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthlyPackingSummaryVO1.hints.TotalAcctualValue.name}" filterable="true"
+                 sortable="true" headerText="Total Acctual Value"
+                 id="c27">
+        <af:outputText value="#{row.TotalAcctualValue}"
+                       shortDesc="#{bindings.MonthlyPackingSummaryVO1.hints.TotalAcctualValue.tooltip}" id="ot27">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthlyPackingSummaryVO1.hints.TotalAcctualValue.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

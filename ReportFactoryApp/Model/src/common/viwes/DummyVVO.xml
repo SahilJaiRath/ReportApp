@@ -442,6 +442,10 @@
     Name="ShortExcessRegister_RepTypeVVO1"
     ViewObjectName="common.viwes.ShortExcessRegister_RepTypeVVO"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="MonthlyPackingSummary_CategaryCdVVO1"
+    ViewObjectName="common.viwes.MonthlyPackingSummary_CategaryCdVVO"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_UnitCode"
     ListVOName="UnitVVO1"
@@ -1805,6 +1809,24 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Display"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_MonthlyPackingSummary_CategaryCd"
+    ListVOName="MonthlyPackingSummary_CategaryCdVVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="MonthlyPackingSummary_CategaryCd"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -3384,6 +3406,26 @@
     AliasName="VIEW_ATTR"
     SQLType="VARCHAR"
     LOVName="LOV_ShortExcessRegister_RepType">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MonthlyPackingSummary_CategaryCd"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_MonthlyPackingSummary_CategaryCd">
     <Properties>
       <SchemaBasedProperties>
         <DISPLAYWIDTH
