@@ -44,12 +44,12 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_MonthlyPackingSummary_CategaryCd"
-          id="MonthlyPackingSummary_CategaryCd" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <methodAction id="callMonthlyPackingSummary" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="callMonthlyPackingSummary" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.dataProvider">
       <NamedData NDName="LV_CATEGARYCD" NDType="java.lang.String"/>
     </methodAction>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_MonthlyPackingSummary_CategaryCd"
+          id="MonthlyPackingSummary_CategaryCd" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

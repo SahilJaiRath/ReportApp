@@ -249,5 +249,7 @@ public interface AppModule extends ApplicationModule {
     void getData();
 
     void getFGdata();
+
+    void callSaleOrderVsDispatch(String LV_UNIT, Date FRDATE, Date TODATE);
 }
 

@@ -18,12 +18,15 @@
         ResId="common.viwes.MonthlyPackingSummary_CategaryCdVVO_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
-  <SQLQuery><![CDATA[SELECT DISTINCT X.DESCRIPTION, A.PD_SEC 
+  <SQLQuery><![CDATA[select  'ALL' DESCRIPTION , 'ALL' PD_SEC from dual  
+union 
  
-FROM SEC_CONTROL_VALUES X, PRODUCT A 
- 
-where X.CONTROL_CODE=A.PD_SEC 
- 
+SELECT DISTINCT X.DESCRIPTION , A.PD_SEC  
+  
+FROM SEC_CONTROL_VALUES X, PRODUCT A  
+  
+where X.CONTROL_CODE=A.PD_SEC  
+  
 GROUP BY a.PD_SEC,x.DESCRIPTION]]></SQLQuery>
   <ViewAttribute
     Name="Description"

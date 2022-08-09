@@ -10,7 +10,7 @@
                               label="Categary Code"
                               required="#{bindings.MonthlyPackingSummary_CategaryCd.hints.mandatory}"
                               shortDesc="#{bindings.MonthlyPackingSummary_CategaryCd.hints.tooltip}" id="soc1" contentStyle="width:180.0px;"
-                               labelStyle= "width:150px" >
+                              labelStyle="width:150px" >
             <f:selectItems value="#{bindings.MonthlyPackingSummary_CategaryCd.items}" id="si1"/>
             <f:validator binding="#{bindings.MonthlyPackingSummary_CategaryCd.validator}"/>
           </af:selectOneChoice>

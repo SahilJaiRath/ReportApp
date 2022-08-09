@@ -4352,6 +4352,41 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     }
     }
 
+
+    /**
+     * Container's getter for SaleOrderVsDispatchVO1.
+     * @return SaleOrderVsDispatchVO1
+     */
+    public ViewObjectImpl getSaleOrderVsDispatchVO1() {
+        return (ViewObjectImpl) findViewObject("SaleOrderVsDispatchVO1");
+    }
+    public void callSaleOrderVsDispatch(String LV_UNIT,Date FRDATE,Date TODATE ){
+        ViewObjectImpl vo = this.getSaleOrderVsDispatchVO1();
+        System.out.println(LV_UNIT + "--"  + FRDATE + "--" + TODATE+"--");
+        
+    if ( LV_UNIT != null &&  FRDATE != null && TODATE != null ) {
+        System.out.println("Inside condition!");
+    try {
+
+        
+        vo.setNamedWhereClauseParam("P117_UNIT", LV_UNIT);
+        vo.setNamedWhereClauseParam("P117_FR_DT", FRDATE);
+        vo.setNamedWhereClauseParam("P117_TO_DT", TODATE);
+        
+        
+       
+        vo.executeQuery();
+        
+        
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    
+    }
+    }
+    }
+
+
     
     
 }

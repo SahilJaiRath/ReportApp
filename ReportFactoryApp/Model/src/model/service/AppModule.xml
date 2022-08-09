@@ -416,6 +416,9 @@
   <ViewUsage
     Name="MonthlyPackingSummaryVO1"
     ViewObjectName="model.sale.views.MonthlyPackingSummaryVO"/>
+  <ViewUsage
+    Name="SaleOrderVsDispatchVO1"
+    ViewObjectName="model.sale.views.SaleOrderVsDispatchVO"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -2436,6 +2439,22 @@
       <Return
         Name="_return_type_"
         Type="void"/>
+    </Method>
+    <Method
+      Name="callSaleOrderVsDispatch"
+      MethodName="callSaleOrderVsDispatch">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="FRDATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TODATE"
+        Type="java.util.Date"/>
     </Method>
   </ClientInterface>
 </AppModule>
