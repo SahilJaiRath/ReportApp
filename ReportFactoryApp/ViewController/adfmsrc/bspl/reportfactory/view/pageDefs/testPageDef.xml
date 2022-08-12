@@ -3,9 +3,9 @@
                 Package="bspl.reportfactory.view.pageDefs">
   <parameters/>
   <executables>
-    <taskFlow id="SaleOrderVsDispatchTF1"
-              taskFlowId="/WEB-INF/SaleTaskFlow/SaleOrderVsDispatchTF.xml#SaleOrderVsDispatchTF" activation="deferred"
-              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="ShortExcessRegisterTF1"
+              taskFlowId="/WEB-INF/InventoryTaskflow/ShortExcessRegisterTF.xml#ShortExcessRegisterTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

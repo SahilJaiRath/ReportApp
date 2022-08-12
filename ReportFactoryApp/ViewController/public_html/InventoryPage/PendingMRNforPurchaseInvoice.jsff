@@ -23,7 +23,7 @@
           </af:inputDate>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
-          <af:button text="callPendingMRNforPurchaseInvoice" id="b2"
+          <af:button text="Execute" id="b2"
                      actionListener="#{PendingMRNforPurchaseInvBean.onClickButtoon}"
                      disabled="#{!bindings.callPendingMRNforPurchaseInvoice.enabled}"/>
         </af:gridCell>

@@ -29,7 +29,7 @@ import oracle.binding.OperationBinding;
     public void onClickButton(ActionEvent actionEvent) {
         DCIteratorBinding pvIter = (DCIteratorBinding) getBindings().get("DummyVVO1Iterator");
         String Unit = (String) pvIter.getCurrentRow().getAttribute("UnitCode");
-        oracle.jbo.domain.Date fromDate = (oracle.jbo.domain.Date) pvIter.getCurrentRow().getAttribute("fromDate");
+         oracle.jbo.domain.Date fromDate = (oracle.jbo.domain.Date) pvIter.getCurrentRow().getAttribute("fromDate");
         oracle.jbo.domain.Date toDate = (oracle.jbo.domain.Date) pvIter.getCurrentRow().getAttribute("toDate");
         
 
