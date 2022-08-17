@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="ApprovedPurchaseIndentVO1" RangeSize="25" DataControl="AppModuleDataControl"
+    <iterator Binds="ApprovedPurchaseIndentVO1" RangeSize="50" DataControl="AppModuleDataControl"
               id="ApprovedPurchaseIndentVO1Iterator"/>
     <searchRegion Binds="ApprovedPurchaseIndentVO1Iterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ApprovedPurchaseIndentVO1Query"/>

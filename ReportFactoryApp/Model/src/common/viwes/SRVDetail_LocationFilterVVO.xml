@@ -39,6 +39,12 @@ SELECT LOCAT_CODE || ',' || SHORT_DESC DESCRIPTION FROM LOCATION where UNIT_CODE
     <DesignTime>
       <Attr Name="_DisplaySize" Value="37"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ResourceBundle>
     <PropertiesBundle

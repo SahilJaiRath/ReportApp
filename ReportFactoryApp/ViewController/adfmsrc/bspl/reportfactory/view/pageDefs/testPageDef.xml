@@ -6,6 +6,14 @@
     <taskFlow id="ShortExcessRegisterTF1"
               taskFlowId="/WEB-INF/InventoryTaskflow/ShortExcessRegisterTF.xml#ShortExcessRegisterTF"
               activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="SaleOrderVsDispatchTF1"
+              taskFlowId="/WEB-INF/SaleTaskFlow/SaleOrderVsDispatchTF.xml#SaleOrderVsDispatchTF" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="ApprovedPurchaseIndentTF1"
+              taskFlowId="/WEB-INF/InventoryTaskflow/ApprovedPurchaseIndentTF.xml#ApprovedPurchaseIndentTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="SRVDetailTF1" taskFlowId="/WEB-INF/InventoryTaskflow/SRVDetailTF.xml#SRVDetailTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>
