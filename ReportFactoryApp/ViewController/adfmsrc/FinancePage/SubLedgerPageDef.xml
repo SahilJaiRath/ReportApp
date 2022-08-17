@@ -5,9 +5,10 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
-    <iterator Binds="SubLedgerVO1" RangeSize="25" DataControl="AppModuleDataControl" id="SubLedgerVO1Iterator"/>
-    <searchRegion Binds="SubLedgerVO1Iterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SubLedgerVO1Query"/>
+    <iterator Binds="SubLedgerTrialVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="SubLedgerTrialVO1Iterator"/>
+    <searchRegion Binds="SubLedgerTrialVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SubLedgerTrialVO1Query"/>
   </executables>
   <bindings>
     <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
@@ -32,8 +33,11 @@
       <NamedData NDName="FRDATE" NDType="java.util.Date"/>
       <NamedData NDName="TODATE" NDType="java.util.Date"/>
     </methodAction>
-    <tree IterBinding="SubLedgerVO1Iterator" id="SubLedgerVO1">
-      <nodeDefinition DefName="model.finance.views.SubLedgerTrialVO" Name="SubLedgerVO10">
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_GlCode" id="GlCode"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_FinYear" id="FinYear" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <tree IterBinding="SubLedgerTrialVO1Iterator" id="SubLedgerTrialVO1">
+      <nodeDefinition DefName="model.finance.views.SubLedgerTrialVO" Name="SubLedgerTrialVO10">
         <AttrNames>
           <Item Value="SubCode"/>
           <Item Value="Name"/>
@@ -50,8 +54,5 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_GlCode" id="GlCode"/>
-    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_FinYear" id="FinYear" DTSupportsMRU="true"
-          SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

@@ -73,79 +73,82 @@
       </af:toolbar>
     </f:facet>
     <f:facet name="statusbar"/>
-    <af:table value="#{bindings.SubLedgerVO1.collectionModel}" var="row" rows="#{bindings.SubLedgerVO1.rangeSize}"
-              emptyText="#{bindings.SubLedgerVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
-              rowBandingInterval="0" selectedRowKeys="#{bindings.SubLedgerVO1.collectionModel.selectedRow}"
-              selectionListener="#{bindings.SubLedgerVO1.collectionModel.makeCurrent}" rowSelection="single"
-              fetchSize="#{bindings.SubLedgerVO1.rangeSize}" filterModel="#{bindings.SubLedgerVO1Query.queryDescriptor}"
-              filterVisible="false" queryListener="#{bindings.SubLedgerVO1Query.processQuery}" varStatus="vs" id="t1">
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.SubCode.name}" filterable="true" sortable="true"
+    <af:table value="#{bindings.SubLedgerTrialVO1.collectionModel}" var="row"
+              rows="#{bindings.SubLedgerTrialVO1.rangeSize}"
+              emptyText="#{bindings.SubLedgerTrialVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.SubLedgerTrialVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.SubLedgerTrialVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.SubLedgerTrialVO1.rangeSize}"
+              filterModel="#{bindings.SubLedgerTrialVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.SubLedgerTrialVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.Unit.name}" filterable="true" sortable="true"
+                 headerText="Unit Code" id="c10">
+        <af:outputText value="#{row.Unit}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.Unit.tooltip}" id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.SubCode.name}" filterable="true" sortable="true"
                  headerText="Subledger Code" id="c1">
-        <af:outputText value="#{row.SubCode}" shortDesc="#{bindings.SubLedgerVO1.hints.SubCode.tooltip}" id="ot1"/>
+        <af:outputText value="#{row.SubCode}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.SubCode.tooltip}" id="ot1"/>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.Name.name}" filterable="true" sortable="true"
-                 headerText="Name" id="c2">
-        <af:outputText value="#{row.Name}" shortDesc="#{bindings.SubLedgerVO1.hints.Name.tooltip}" id="ot2"/>
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="Subledger Name" id="c2">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.Name.tooltip}" id="ot2"/>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.OpDr.name}" filterable="true" sortable="true"
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.OpDr.name}" filterable="true" sortable="true"
                  headerText="Opening Debit" id="c3">
-        <af:outputText value="#{row.OpDr}" shortDesc="#{bindings.SubLedgerVO1.hints.OpDr.tooltip}" id="ot3">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.OpDr.format}"/>
+        <af:outputText value="#{row.OpDr}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.OpDr.tooltip}" id="ot3">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerTrialVO1.hints.OpDr.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.OpCr.name}" filterable="true" sortable="true"
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.OpCr.name}" filterable="true" sortable="true"
                  headerText="Opening Credit" id="c4">
-        <af:outputText value="#{row.OpCr}" shortDesc="#{bindings.SubLedgerVO1.hints.OpCr.tooltip}" id="ot4">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.OpCr.format}"/>
+        <af:outputText value="#{row.OpCr}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.OpCr.tooltip}" id="ot4">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerTrialVO1.hints.OpCr.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.TranDr.name}" filterable="true" sortable="true"
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.TranDr.name}" filterable="true" sortable="true"
                  headerText="Transaction Debit" id="c5">
-        <af:outputText value="#{row.TranDr}" shortDesc="#{bindings.SubLedgerVO1.hints.TranDr.tooltip}" id="ot5">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.TranDr.format}"/>
+        <af:outputText value="#{row.TranDr}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.TranDr.tooltip}" id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerTrialVO1.hints.TranDr.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.TranCr.name}" filterable="true" sortable="true"
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.TranCr.name}" filterable="true" sortable="true"
                  headerText="Transaction Credit" id="c6">
-        <af:outputText value="#{row.TranCr}" shortDesc="#{bindings.SubLedgerVO1.hints.TranCr.tooltip}" id="ot6">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.TranCr.format}"/>
+        <af:outputText value="#{row.TranCr}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.TranCr.tooltip}" id="ot6">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerTrialVO1.hints.TranCr.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.ClDr.name}" filterable="true" sortable="true"
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.ClDr.name}" filterable="true" sortable="true"
                  headerText="Closing Debit" id="c7">
-        <af:outputText value="#{row.ClDr}" shortDesc="#{bindings.SubLedgerVO1.hints.ClDr.tooltip}" id="ot7">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.ClDr.format}"/>
+        <af:outputText value="#{row.ClDr}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.ClDr.tooltip}" id="ot7">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerTrialVO1.hints.ClDr.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.ClCr.name}" filterable="true" sortable="true"
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.ClCr.name}" filterable="true" sortable="true"
                  headerText="Closing Credit" id="c8">
-        <af:outputText value="#{row.ClCr}" shortDesc="#{bindings.SubLedgerVO1.hints.ClCr.tooltip}" id="ot8">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerVO1.hints.ClCr.format}"/>
+        <af:outputText value="#{row.ClCr}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.ClCr.tooltip}" id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SubLedgerTrialVO1.hints.ClCr.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.Sessionid.name}" filterable="true" sortable="true"
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.Sessionid.name}" filterable="true" sortable="true"
                  headerText="Session Id" id="c9">
-        <af:outputText value="#{row.Sessionid}" shortDesc="#{bindings.SubLedgerVO1.hints.Sessionid.tooltip}" id="ot9"/>
+        <af:outputText value="#{row.Sessionid}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.Sessionid.tooltip}"
+                       id="ot9"/>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.Unit.name}" filterable="true" sortable="true"
-                 headerText="Unit" id="c10">
-        <af:outputText value="#{row.Unit}" shortDesc="#{bindings.SubLedgerVO1.hints.Unit.tooltip}" id="ot10"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.EntDt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SubLedgerVO1.hints.EntDt.label}" id="c11">
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.EntDt.name}" filterable="true" sortable="true"
+                 headerText="EntDt" id="c11">
         <f:facet name="filter">
-          <af:inputDate value="#{bindings.SubLedgerVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EntDt.value}"
+          <af:inputDate value="#{bindings.SubLedgerTrialVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EntDt.value}"
                         id="id1">
-            <af:convertDateTime pattern="#{bindings.SubLedgerVO1.hints.EntDt.format}"/>
+            <af:convertDateTime pattern="#{bindings.SubLedgerTrialVO1.hints.EntDt.format}"/>
           </af:inputDate>
         </f:facet>
-        <af:outputText value="#{row.EntDt}" shortDesc="#{bindings.SubLedgerVO1.hints.EntDt.tooltip}" id="ot11">
-          <af:convertDateTime pattern="#{bindings.SubLedgerVO1.hints.EntDt.format}"/>
+        <af:outputText value="#{row.EntDt}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.EntDt.tooltip}" id="ot11">
+          <af:convertDateTime pattern="#{bindings.SubLedgerTrialVO1.hints.EntDt.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SubLedgerVO1.hints.GlCd.name}" filterable="true" sortable="true"
+      <af:column sortProperty="#{bindings.SubLedgerTrialVO1.hints.GlCd.name}" filterable="true" sortable="true"
                  headerText="Gl Code" id="c12">
-        <af:outputText value="#{row.GlCd}" shortDesc="#{bindings.SubLedgerVO1.hints.GlCd.tooltip}" id="ot12"/>
+        <af:outputText value="#{row.GlCd}" shortDesc="#{bindings.SubLedgerTrialVO1.hints.GlCd.tooltip}" id="ot12"/>
       </af:column>
     </af:table>
   </af:panelCollection>
