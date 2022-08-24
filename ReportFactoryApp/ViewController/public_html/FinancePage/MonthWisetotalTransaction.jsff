@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="Month Wise total Transaction" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1"/>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:button text="Back" id="b1" action="Back"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s3"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                             filename="Month Wise Total Transaction.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.MonthWisetotalTransactionsVO1.collectionModel}" var="row"
+              rows="#{bindings.MonthWisetotalTransactionsVO1.rangeSize}"
+              emptyText="#{bindings.MonthWisetotalTransactionsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0"
+              selectedRowKeys="#{bindings.MonthWisetotalTransactionsVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.MonthWisetotalTransactionsVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.MonthWisetotalTransactionsVO1.rangeSize}"
+              filterModel="#{bindings.MonthWisetotalTransactionsVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.MonthWisetotalTransactionsVO1Query.processQuery}" varStatus="vs" id="t1"
+              columnStretching="multiple">
+      <af:column sortProperty="#{bindings.MonthWisetotalTransactionsVO1.hints.VoucherType.name}" filterable="false"
+                 sortable="true" headerText="#{bindings.MonthWisetotalTransactionsVO1.hints.VoucherType.label}" id="c1">
+        <af:outputText value="#{row.VoucherType}"
+                       shortDesc="#{bindings.MonthWisetotalTransactionsVO1.hints.VoucherType.tooltip}" id="ot1"
+                       binding="#{FinancialTransactionBean.voucherTypeBind}"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthWisetotalTransactionsVO1.hints.Month.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.MonthWisetotalTransactionsVO1.hints.Month.label}" id="c2">
+        <af:outputText value="#{row.Month}" shortDesc="#{bindings.MonthWisetotalTransactionsVO1.hints.Month.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.MonthWisetotalTransactionsVO1.hints.TotalCount.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.MonthWisetotalTransactionsVO1.hints.TotalCount.label}" id="c3">
+        <af:outputText value="#{row.TotalCount}"
+                       shortDesc="#{bindings.MonthWisetotalTransactionsVO1.hints.TotalCount.tooltip}" id="ot3">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.MonthWisetotalTransactionsVO1.hints.TotalCount.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

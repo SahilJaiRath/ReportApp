@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="FinancialTransactionsTF_FinancialTransactionsTF_callMonthwiseTotalTransactionPageDef"
+                Package="FinanceTaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="callMonthwiseTotalTransaction" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callMonthwiseTotalTransaction" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDValue="#{bindings.UnitCode.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDValue="#{bindings.fromDate.validator}" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDValue="#{bindings.toDate.inputValue}" NDType="java.util.Date"/>
+      <NamedData NDName="LV_VOUCHERTYPE" NDValue="#{row.VoucherType}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

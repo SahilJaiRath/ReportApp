@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Pending Return Gate Pass" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:185px;" labelStyle="width:100px" >
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="TR Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id4" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id6" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id5" contentStyle="width:180px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callPendingReturnGatePass.enabled}"
+                     actionListener="#{PendingReturnGatePasBean.onClickButton}"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Pending Return Gate Pass.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.PendingReturnGatePassVO1.collectionModel}" var="row"
+              rows="#{bindings.PendingReturnGatePassVO1.rangeSize}"
+              emptyText="#{bindings.PendingReturnGatePassVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PendingReturnGatePassVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PendingReturnGatePassVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PendingReturnGatePassVO1.rangeSize}"
+              filterModel="#{bindings.PendingReturnGatePassVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.PendingReturnGatePassVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.UnitCode.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.UnitCode}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.UnitCode.tooltip}"
+                       id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.Vend.name}" filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c2">
+        <af:outputText value="#{row.Vend}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.Vend.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="Vendor Name" id="c3">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.Name.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.Chalno.name}" filterable="true" sortable="true"
+                 headerText="Challan Number" id="c4">
+        <af:outputText value="#{row.Chalno}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.Chalno.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.ChallanDt.name}" filterable="true"
+                 sortable="true" headerText="Challan Date" id="c5">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingReturnGatePassVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ChallanDt.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.PendingReturnGatePassVO1.hints.ChallanDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ChallanDt}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.ChallanDt.tooltip}"
+                       id="ot5">
+          <af:convertDateTime pattern="#{bindings.PendingReturnGatePassVO1.hints.ChallanDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.RetRespDept.name}" filterable="true"
+                 sortable="true" headerText="Department" id="c6">
+        <af:outputText value="#{row.RetRespDept}"
+                       shortDesc="#{bindings.PendingReturnGatePassVO1.hints.RetRespDept.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.RetRespEmp.name}" filterable="true"
+                 sortable="true" headerText="Employee Number" id="c7">
+        <af:outputText value="#{row.RetRespEmp}"
+                       shortDesc="#{bindings.PendingReturnGatePassVO1.hints.RetRespEmp.tooltip}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.PgtDate.name}" filterable="true"
+                 sortable="true" headerText="Target Date" id="c8">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingReturnGatePassVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.PgtDate.value}"
+                        id="id2">
+            <af:convertDateTime pattern="#{bindings.PendingReturnGatePassVO1.hints.PgtDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.PgtDate}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.PgtDate.tooltip}"
+                       id="ot8">
+          <af:convertDateTime pattern="#{bindings.PendingReturnGatePassVO1.hints.PgtDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.ForProces.name}" filterable="true"
+                 sortable="true" headerText="For Process" id="c9">
+        <af:outputText value="#{row.ForProces}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.ForProces.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.E57f3No.name}" filterable="true"
+                 sortable="true" headerText="E57F3 Number" id="c10">
+        <af:outputText value="#{row.E57f3No}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.E57f3No.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.E57f3Dt.name}" filterable="true"
+                 sortable="true" headerText="E57F3 Date" id="c11">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PendingReturnGatePassVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.E57f3Dt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.PendingReturnGatePassVO1.hints.E57f3Dt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.E57f3Dt}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.E57f3Dt.tooltip}"
+                       id="ot11">
+          <af:convertDateTime pattern="#{bindings.PendingReturnGatePassVO1.hints.E57f3Dt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.Item.name}" filterable="true" sortable="true"
+                 headerText="Item Code" id="c12">
+        <af:outputText value="#{row.Item}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.Item.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="Item Description" id="c13">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.ItemDesc.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.Qty.name}" filterable="true" sortable="true"
+                 headerText="Quantity" id="c14">
+        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.Qty.tooltip}" id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingReturnGatePassVO1.hints.Qty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.ProcCd.name}" filterable="true" sortable="true"
+                 headerText="Process Code" id="c15">
+        <af:outputText value="#{row.ProcCd}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.ProcCd.tooltip}"
+                       id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PendingReturnGatePassVO1.hints.Rate.name}" filterable="true" sortable="true"
+                 headerText="Rate" id="c16">
+        <af:outputText value="#{row.Rate}" shortDesc="#{bindings.PendingReturnGatePassVO1.hints.Rate.tooltip}"
+                       id="ot16">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PendingReturnGatePassVO1.hints.Rate.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

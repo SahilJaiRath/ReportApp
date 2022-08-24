@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="MonthWisetotalTransactionPageDef" Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MonthWisetotalTransactionsVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="MonthWisetotalTransactionsVO1Iterator"/>
+    <searchRegion Binds="MonthWisetotalTransactionsVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MonthWisetotalTransactionsVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MonthWisetotalTransactionsVO1Iterator" id="MonthWisetotalTransactionsVO1">
+      <nodeDefinition DefName="model.finance.views.MonthWisetotalTransactionsVO" Name="MonthWisetotalTransactionsVO10">
+        <AttrNames>
+          <Item Value="VoucherType"/>
+          <Item Value="Month"/>
+          <Item Value="TotalCount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

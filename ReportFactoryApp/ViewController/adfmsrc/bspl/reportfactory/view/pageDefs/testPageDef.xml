@@ -3,7 +3,8 @@
                 Package="bspl.reportfactory.view.pageDefs">
   <parameters/>
   <executables>
-    <taskFlow id="SubLedgerTrialTF1" taskFlowId="/WEB-INF/FinanceTaskflow/SubLedgerTrialTF.xml#SubLedgerTrialTF"
+    <taskFlow id="FinancialTransactionsTF1"
+              taskFlowId="/WEB-INF/FinanceTaskflow/FinancialTransactionsTF.xml#FinancialTransactionsTF"
               activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>

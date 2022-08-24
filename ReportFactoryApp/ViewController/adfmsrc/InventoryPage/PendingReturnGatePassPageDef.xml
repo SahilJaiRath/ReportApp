@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PendingReturnGatePassPageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PendingReturnGatePassVO1" RangeSize="50" DataControl="AppModuleDataControl"
+              id="PendingReturnGatePassVO1Iterator"/>
+    <searchRegion Binds="PendingReturnGatePassVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PendingReturnGatePassVO1Query"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PendingReturnGatePassVO1Iterator" id="PendingReturnGatePassVO1">
+      <nodeDefinition DefName="model.inventory.views.PendingReturnGatePassVO" Name="PendingReturnGatePassVO10">
+        <AttrNames>
+          <Item Value="UnitCode"/>
+          <Item Value="Vend"/>
+          <Item Value="Name"/>
+          <Item Value="Chalno"/>
+          <Item Value="ChallanDt"/>
+          <Item Value="RetRespDept"/>
+          <Item Value="RetRespEmp"/>
+          <Item Value="PgtDate"/>
+          <Item Value="ForProces"/>
+          <Item Value="E57f3No"/>
+          <Item Value="E57f3Dt"/>
+          <Item Value="Item"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Qty"/>
+          <Item Value="ProcCd"/>
+          <Item Value="Rate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
+      <AttrNames>
+        <Item Value="toDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callPendingReturnGatePass" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callPendingReturnGatePass" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="TRDATE" NDType="java.util.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -245,6 +245,11 @@
             <hash>
                <url n="content-folder-url" path="adfmsrc/bspl/reportfactory/view/"/>
                <list n="pattern-filters">
+                  <string v="+bspl/reportfactory/view/MonthWisetotalTransactionBean.java"/>
+                  <string v="+bspl/reportfactory/view/FintransactionMonthwiseLinkBean.java"/>
+                  <string v="+bspl/reportfactory/view/FinancialTransactionBean.java"/>
+                  <string v="+bspl/reportfactory/view/PendingReturnGatePasBean.java"/>
+                  <string v="+bspl/reportfactory/view/PendingReturnGatePassBean.java"/>
                   <string v="+bspl/reportfactory/view/SaleOrderVsDispatchBean.java"/>
                   <string v="+bspl/reportfactory/view/MonthlyPackingSummaryBean.java"/>
                   <string v="+bspl/reportfactory/view/SummaryOfDispatchBean.java"/>

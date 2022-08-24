@@ -184,6 +184,18 @@
     <page path="/SalePage/SummaryOfDispatch.jsff" usageId="bspl_reportfactory_view_SummaryOfDispatchPageDef"/>
     <page path="/SalePage/MonthlyPackingSummary.jsff" usageId="bspl_reportfactory_view_MonthlyPackingSummaryPageDef"/>
     <page path="/SalePage/SaleOrderVsDispatch.jsff" usageId="bspl_reportfactory_view_SaleOrderVsDispatchPageDef"/>
+    <page path="/InventoryPage/PendingReturnGatePass.jsff"
+          usageId="bspl_reportfactory_view_PendingReturnGatePassPageDef"/>
+    <page path="/FinancePage/FinancialTransactions.jsff"
+          usageId="bspl_reportfactory_view_FinancialTransactionsPageDef"/>
+    <page path="/FinancePage/MonthWisetotalTransaction.jsff"
+          usageId="bspl_reportfactory_view_MonthWisetotalTransactionPageDef"/>
+    <page path="/FinancePage/FintransactionMonthwiseLink.jsff"
+          usageId="bspl_reportfactory_view_FintransactionMonthwiseLinkPageDef"/>
+    <page path="/WEB-INF/FinanceTaskflow/FinancialTransactionsTF.xml#FinancialTransactionsTF@Execute"
+          usageId="bspl_reportfactory_view_FinancialTransactionsTF_FinancialTransactionsTF_ExecutePageDef"/>
+    <page path="/WEB-INF/FinanceTaskflow/FinancialTransactionsTF.xml#FinancialTransactionsTF@callMonthwiseTotalTransaction"
+          usageId="bspl_reportfactory_view_FinancialTransactionsTF_FinancialTransactionsTF_callMonthwiseTotalTransactionPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="bspl_reportfactory_view_PartyBalancePageDef" path="FinancePage.PartyBalancePageDef"/>
@@ -359,6 +371,16 @@
     <page id="bspl_reportfactory_view_SummaryOfDispatchPageDef" path="SalePage.SummaryOfDispatchPageDef"/>
     <page id="bspl_reportfactory_view_MonthlyPackingSummaryPageDef" path="SalePage.MonthlyPackingSummaryPageDef"/>
     <page id="bspl_reportfactory_view_SaleOrderVsDispatchPageDef" path="SalePage.SaleOrderVsDispatchPageDef"/>
+    <page id="bspl_reportfactory_view_PendingReturnGatePassPageDef" path="InventoryPage.PendingReturnGatePassPageDef"/>
+    <page id="bspl_reportfactory_view_FinancialTransactionsPageDef" path="FinancePage.FinancialTransactionsPageDef"/>
+    <page id="bspl_reportfactory_view_MonthWisetotalTransactionPageDef"
+          path="FinancePage.MonthWisetotalTransactionPageDef"/>
+    <page id="bspl_reportfactory_view_FintransactionMonthwiseLinkPageDef"
+          path="FinancePage.FintransactionMonthwiseLinkPageDef"/>
+    <page id="bspl_reportfactory_view_FinancialTransactionsTF_FinancialTransactionsTF_ExecutePageDef"
+          path="FinanceTaskflow.FinancialTransactionsTF_FinancialTransactionsTF_ExecutePageDef"/>
+    <page id="bspl_reportfactory_view_FinancialTransactionsTF_FinancialTransactionsTF_callMonthwiseTotalTransactionPageDef"
+          path="FinanceTaskflow.FinancialTransactionsTF_FinancialTransactionsTF_callMonthwiseTotalTransactionPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="model.service"

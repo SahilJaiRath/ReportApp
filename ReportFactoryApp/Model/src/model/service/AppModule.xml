@@ -419,6 +419,15 @@
   <ViewUsage
     Name="SaleOrderVsDispatchVO1"
     ViewObjectName="model.sale.views.SaleOrderVsDispatchVO"/>
+  <ViewUsage
+    Name="PendingReturnGatePassVO1"
+    ViewObjectName="model.inventory.views.PendingReturnGatePassVO"/>
+  <ViewUsage
+    Name="FinancialTransactionsVO1"
+    ViewObjectName="model.finance.views.FinancialTransactionsVO"/>
+  <ViewUsage
+    Name="MonthWisetotalTransactionsVO1"
+    ViewObjectName="model.finance.views.MonthWisetotalTransactionsVO"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -1072,6 +1081,22 @@
         Type="java.lang.String"/>
     </Method>
     <Method
+      Name="callFinancialTransactions"
+      MethodName="callFinancialTransactions">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="FRDATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TODATE"
+        Type="java.util.Date"/>
+    </Method>
+    <Method
       Name="callGateEntryDetail"
       MethodName="callGateEntryDetail">
       <Return
@@ -1474,6 +1499,25 @@
         Type="java.lang.String"/>
     </Method>
     <Method
+      Name="callMonthwiseTotalTransaction"
+      MethodName="callMonthwiseTotalTransaction">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="FRDATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TODATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="LV_VOUCHERTYPE"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
       Name="callNonMovingItem"
       MethodName="callNonMovingItem">
       <Return
@@ -1674,6 +1718,25 @@
       <Parameter
         Name="LV_VALIDTILL"
         Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="callPendingReturnGatePass"
+      MethodName="callPendingReturnGatePass">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="FRDATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TODATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TRDATE"
+        Type="java.util.Date"/>
     </Method>
     <Method
       Name="callPendingSRVForQc"
@@ -2060,6 +2123,22 @@
         Type="java.lang.String"/>
     </Method>
     <Method
+      Name="callSaleOrderVsDispatch"
+      MethodName="callSaleOrderVsDispatch">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="FRDATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TODATE"
+        Type="java.util.Date"/>
+    </Method>
+    <Method
       Name="callSaleRegisterDetail4"
       MethodName="callSaleRegisterDetail4">
       <Return
@@ -2439,22 +2518,6 @@
       <Return
         Name="_return_type_"
         Type="void"/>
-    </Method>
-    <Method
-      Name="callSaleOrderVsDispatch"
-      MethodName="callSaleOrderVsDispatch">
-      <Return
-        Name="_return_type_"
-        Type="void"/>
-      <Parameter
-        Name="LV_UNIT"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="FRDATE"
-        Type="java.util.Date"/>
-      <Parameter
-        Name="TODATE"
-        Type="java.util.Date"/>
     </Method>
   </ClientInterface>
 </AppModule>

@@ -16,14 +16,6 @@
   </DesignTime>
   <Containee
     Name="viwes"
-    PackageName="common.HR.viwes"
-    ObjectType="JboPackage">
-    <DesignTime>
-      <Attr Name="_VO" Value="true"/>
-    </DesignTime>
-  </Containee>
-  <Containee
-    Name="viwes"
     PackageName="common.viwes"
     ObjectType="JboPackage">
     <DesignTime>
@@ -33,6 +25,14 @@
   <Containee
     Name="views"
     PackageName="model.finance.views"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="viwes"
+    PackageName="model.HR.viwes"
     ObjectType="JboPackage">
     <DesignTime>
       <Attr Name="_VO" Value="true"/>
