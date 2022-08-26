@@ -43,8 +43,11 @@
       </af:column>
       <af:column sortProperty="#{bindings.MonthWisetotalTransactionsVO1.hints.Month.name}" filterable="true"
                  sortable="true" headerText="#{bindings.MonthWisetotalTransactionsVO1.hints.Month.label}" id="c2">
-        <af:outputText value="#{row.Month}" shortDesc="#{bindings.MonthWisetotalTransactionsVO1.hints.Month.tooltip}"
-                       id="ot2"/>
+        <af:link id="l1" actionListener="#{FinancialTransactionBean.onClickButton3}"
+                 action="callTransactionsoftheMonth">                
+          <af:outputText value="#{row.Month}" shortDesc="#{bindings.MonthWisetotalTransactionsVO1.hints.Month.tooltip}"
+                         id="ot2"/>
+        </af:link>
       </af:column>
       <af:column sortProperty="#{bindings.MonthWisetotalTransactionsVO1.hints.TotalCount.name}" filterable="true"
                  sortable="true" headerText="#{bindings.MonthWisetotalTransactionsVO1.hints.TotalCount.label}" id="c3">

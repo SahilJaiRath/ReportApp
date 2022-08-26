@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="VoucherDetailReportPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VoucherDetailreportVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VoucherDetailreportVO1Iterator"/>
+    <searchRegion Binds="VoucherDetailreportVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VoucherDetailreportVO1Query"/>
+    <iterator Binds="TransactionsoftheMonthVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="TransactionsoftheMonthVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VoucherDetailreportVO1Iterator" id="VoucherDetailreportVO1">
+      <nodeDefinition DefName="model.finance.views.VoucherDetailreportVO" Name="VoucherDetailreportVO10">
+        <AttrNames>
+          <Item Value="FinTvouchUnitCode"/>
+          <Item Value="VoucherType"/>
+          <Item Value="VoucherSeries"/>
+          <Item Value="FinTvouchVouDate"/>
+          <Item Value="FinTvouchVouNo"/>
+          <Item Value="Description"/>
+          <Item Value="VouTp"/>
+          <Item Value="SubLedgerName"/>
+          <Item Value="Debit"/>
+          <Item Value="Credit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="TransactionsoftheMonthVO1Iterator" id="VouNo">
+      <AttrNames>
+        <Item Value="VouNo"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

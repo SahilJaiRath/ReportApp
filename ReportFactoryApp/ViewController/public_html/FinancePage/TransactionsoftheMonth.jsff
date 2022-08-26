@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="Transactions of the Month" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1"/>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:button text="Back" id="b1" action="TransoftheMonthBackButton"/>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b2">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Transactions of the Month.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.TransactionsoftheMonthVO1.collectionModel}" var="row"
+              rows="#{bindings.TransactionsoftheMonthVO1.rangeSize}"
+              emptyText="#{bindings.TransactionsoftheMonthVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.TransactionsoftheMonthVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.TransactionsoftheMonthVO1.collectionModel.makeCurrent}"
+              rowSelection="single" fetchSize="#{bindings.TransactionsoftheMonthVO1.rangeSize}"
+              filterModel="#{bindings.TransactionsoftheMonthVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.TransactionsoftheMonthVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.TransactionsoftheMonthVO1.hints.VouNo.name}" filterable="true" sortable="true"
+                 headerText="Voucher No" id="c1">
+        <af:link id="l1" actionListener="#{FinancialTransactionBean.onClickButton4}" action="callVoucherDetailReport">
+          <af:outputText value="#{row.VouNo}" shortDesc="#{bindings.TransactionsoftheMonthVO1.hints.VouNo.tooltip}"
+                         id="ot1"/>
+        </af:link>
+      </af:column>
+      <af:column sortProperty="#{bindings.TransactionsoftheMonthVO1.hints.VouDate.name}" filterable="true"
+                 sortable="true" headerText="Voucher Date" id="c2">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.TransactionsoftheMonthVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.VouDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.TransactionsoftheMonthVO1.hints.VouDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.VouDate}" shortDesc="#{bindings.TransactionsoftheMonthVO1.hints.VouDate.tooltip}"
+                       id="ot2">
+          <af:convertDateTime pattern="#{bindings.TransactionsoftheMonthVO1.hints.VouDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.TransactionsoftheMonthVO1.hints.MonthName.name}" filterable="true"
+                 sortable="true" headerText="Month Name" id="c3"
+                 binding="#{FinancialTransactionBean.transactionMonthBind}">
+        <af:outputText value="#{bindings.Month.inputValue}"
+                       shortDesc="#{bindings.Month.hints.tooltip}" id="ot3"
+                       binding="#{FinancialTransactionBean.monthNameBind}"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TransactionsoftheMonthVO1.hints.VouTp.name}" filterable="true" sortable="true"
+                 headerText="Voucher Type" id="c4">
+        <af:outputText value="#{bindings.VoucherType.inputValue}" shortDesc="#{bindings.VoucherType.hints.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.TransactionsoftheMonthVO1.hints.Amount.name}" filterable="true"
+                 sortable="true" headerText="Amount" id="c5">
+        <af:outputText value="#{row.Amount}" shortDesc="#{bindings.TransactionsoftheMonthVO1.hints.Amount.tooltip}"
+                       id="ot5">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.TransactionsoftheMonthVO1.hints.Amount.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

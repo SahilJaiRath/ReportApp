@@ -257,5 +257,7 @@ public interface AppModule extends ApplicationModule {
     void getData();
 
     void getFGdata();
+
+    void callTransactionsoftheMonth(String LV_UNIT, Date FRDATE, Date TODATE, String LV_VOUCHERTYPE, String LV_MONTH);
 }
 

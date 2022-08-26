@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="TransactionsoftheMonthPageDef"
+                Package="FinancePage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="TransactionsoftheMonthVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="TransactionsoftheMonthVO1Iterator"/>
+    <searchRegion Binds="TransactionsoftheMonthVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="TransactionsoftheMonthVO1Query"/>
+    <iterator Binds="MonthWisetotalTransactionsVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="MonthWisetotalTransactionsVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="TransactionsoftheMonthVO1Iterator" id="TransactionsoftheMonthVO1">
+      <nodeDefinition DefName="model.finance.views.TransactionsoftheMonthVO" Name="TransactionsoftheMonthVO10">
+        <AttrNames>
+          <Item Value="VouNo"/>
+          <Item Value="VouDate"/>
+          <Item Value="MonthName"/>
+          <Item Value="VouTp"/>
+          <Item Value="Amount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MonthWisetotalTransactionsVO1Iterator" id="VoucherType">
+      <AttrNames>
+        <Item Value="VoucherType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MonthWisetotalTransactionsVO1Iterator" id="Month">
+      <AttrNames>
+        <Item Value="Month"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

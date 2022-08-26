@@ -9,13 +9,13 @@
       <property
          name="pageFragment">true</property>
       <property
-         name="x">167.0</property>
+         name="x">71.0</property>
       <property
          name="start">true</property>
       <property
          name="description">&lt;html>&lt;p>&lt;b>view1&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
-         name="y">395.3369</property>
+         name="y">125.831055</property>
       <property
          name="page">/FinancePage/FinancialTransactions.jsff</property>
       <property
@@ -28,11 +28,11 @@
       <property
          name="pageFragment">true</property>
       <property
-         name="x">561.69727</property>
+         name="x">540.69727</property>
       <property
          name="description">&lt;html>&lt;p>&lt;b>MonthWisetotalTransaction&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
-         name="y">199.1543</property>
+         name="y">116.75195</property>
       <property
          name="page">/FinancePage/MonthWisetotalTransaction.jsff</property>
       <property
@@ -46,7 +46,7 @@
       <property
          name="fromOutcome">FinMonthwiseTransactionLink</property>
       <property
-         name="sdm:polyPoints">T50,167.0,340.98633,279.36816,178.44824,B50</property>
+         name="sdm:polyPoints">R46,112.0,121.98047,282.36816,-1.9541016,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -60,18 +60,18 @@
       <property
          name="fromsrcid">__4</property>
       <property
-         name="sdm:polyPoints">L50,520.69727,198.80371,208.0,394.98633,R50</property>
+         name="sdm:polyPoints">L54,499.69727,119.90137,113.179344,128.98047,R54</property>
    </ControlFlowCase>
    <MethodCall
       id="MethodCall13">
       <property
          name="activityId">callMonthwiseTotalTransaction</property>
       <property
-         name="x">279.36816</property>
+         name="x">323.36816</property>
       <property
          name="description">&lt;html>&lt;p>&lt;b>callMonthwiseTotalTransaction&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
       <property
-         name="y">124.79883</property>
+         name="y">-1.6035156</property>
       <property
          name="exceptionHandler">false</property>
    </MethodCall>
@@ -83,6 +83,80 @@
       <property
          name="fromOutcome">callMonthwiseTotalTransaction</property>
       <property
-         name="sdm:polyPoints">R50,320.36816,124.79883,520.69727,195.30371,L46</property>
+         name="sdm:polyPoints">R50,364.36816,-1.9541016,499.69727,112.90137,L46</property>
+   </ControlFlowCase>
+   <View
+      id="View9">
+      <property
+         name="activityId">TransactionsoftheMonth</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">864.0</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>TransactionsoftheMonth&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">107.896484</property>
+      <property
+         name="page">/FinancePage/TransactionsoftheMonth.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase10"
+      from="View3"
+      to="View9">
+      <property
+         name="fromOutcome">callTransactionsoftheMonth</property>
+      <property
+         name="sdm:polyPoints">R46,581.69727,112.90137,822.8716,104.0459,L46</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase12"
+      from="View9"
+      to="View3">
+      <property
+         name="fromOutcome">TransoftheMonthBackButton</property>
+      <property
+         name="sdm:polyPoints">L54,823.0,111.0459,581.8257,119.90137,R54</property>
+   </ControlFlowCase>
+   <View
+      id="View13">
+      <property
+         name="activityId">VoucherDetailReport</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">1243.0</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>VoucherDetailReport&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">104.896484</property>
+      <property
+         name="page">/FinancePage/VoucherDetailReport.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase14"
+      from="View9"
+      to="View13">
+      <property
+         name="fromOutcome">callVoucherDetailReport</property>
+      <property
+         name="sdm:polyPoints">R46,905.0,104.0459,1201.9646,101.0459,L46</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase16"
+      from="View13"
+      to="View9">
+      <property
+         name="fromOutcome">VoucherDetailBackButton</property>
+      <property
+         name="sdm:polyPoints">L54,1202.0,108.0459,905.03534,111.0459,R54</property>
    </ControlFlowCase>
 </SDM>

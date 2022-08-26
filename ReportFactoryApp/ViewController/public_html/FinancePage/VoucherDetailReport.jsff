@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="10" id="s1"/>
+  <af:panelHeader text="Voucher Detail" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1"/>
+        <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Back" id="b2" action="VoucherDetailBackButton"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:spacer width="10" height="10" id="s2"/>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Export To Excel" id="b1">
+          <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Voucher Detail.xls"/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.VoucherDetailreportVO1.collectionModel}" var="row"
+              rows="#{bindings.VoucherDetailreportVO1.rangeSize}"
+              emptyText="#{bindings.VoucherDetailreportVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.VoucherDetailreportVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.VoucherDetailreportVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.VoucherDetailreportVO1.rangeSize}"
+              filterModel="#{bindings.VoucherDetailreportVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.VoucherDetailreportVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.FinTvouchUnitCode.name}" filterable="true"
+                 sortable="true" headerText="Unit Code" id="c1">
+        <af:outputText value="#{row.FinTvouchUnitCode}"
+                       shortDesc="#{bindings.VoucherDetailreportVO1.hints.FinTvouchUnitCode.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.VoucherType.name}" filterable="true"
+                 sortable="true" headerText="Voucher Type" id="c2">
+        <af:outputText value="#{row.VoucherType}"
+                       shortDesc="#{bindings.VoucherDetailreportVO1.hints.VoucherType.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.VoucherSeries.name}" filterable="true"
+                 sortable="true" headerText="Voucher Series" id="c3">
+        <af:outputText value="#{row.VoucherSeries}"
+                       shortDesc="#{bindings.VoucherDetailreportVO1.hints.VoucherSeries.tooltip}" id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.FinTvouchVouDate.name}" filterable="true"
+                 sortable="true" headerText="Voucher Date" id="c4">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.VoucherDetailreportVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.FinTvouchVouDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.VoucherDetailreportVO1.hints.FinTvouchVouDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.FinTvouchVouDate}"
+                       shortDesc="#{bindings.VoucherDetailreportVO1.hints.FinTvouchVouDate.tooltip}" id="ot4">
+          <af:convertDateTime pattern="#{bindings.VoucherDetailreportVO1.hints.FinTvouchVouDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.FinTvouchVouNo.name}" filterable="true"
+                 sortable="true" headerText="Voucher Number" id="c5">
+        <af:outputText value="#{bindings.VouNo.inputValue}"
+                       shortDesc="#{bindings.VouNo.hints.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.Description.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.VoucherDetailreportVO1.hints.Description.label}" id="c6">
+        <af:outputText value="#{row.Description}"
+                       shortDesc="#{bindings.VoucherDetailreportVO1.hints.Description.tooltip}" id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.VouTp.name}" filterable="true" sortable="true"
+                 headerText="Voucher Type" id="c7">
+        <af:outputText value="#{row.VouTp}" shortDesc="#{bindings.VoucherDetailreportVO1.hints.VouTp.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.SubLedgerName.name}" filterable="true"
+                 sortable="true" headerText="Sub Ledger Name" id="c8">
+        <af:outputText value="#{row.SubLedgerName}"
+                       shortDesc="#{bindings.VoucherDetailreportVO1.hints.SubLedgerName.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.Debit.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VoucherDetailreportVO1.hints.Debit.label}" id="c9">
+        <af:outputText value="#{row.Debit}" shortDesc="#{bindings.VoucherDetailreportVO1.hints.Debit.tooltip}" id="ot9">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.VoucherDetailreportVO1.hints.Debit.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.VoucherDetailreportVO1.hints.Credit.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.VoucherDetailreportVO1.hints.Credit.label}" id="c10">
+        <af:outputText value="#{row.Credit}" shortDesc="#{bindings.VoucherDetailreportVO1.hints.Credit.tooltip}"
+                       id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.VoucherDetailreportVO1.hints.Credit.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

@@ -27,6 +27,12 @@
         <fixed-outcome>callMonthwiseTotalTransaction</fixed-outcome>
       </outcome>
     </method-call>
+    <view id="TransactionsoftheMonth">
+      <page>/FinancePage/TransactionsoftheMonth.jsff</page>
+    </view>
+    <view id="VoucherDetailReport">
+      <page>/FinancePage/VoucherDetailReport.jsff</page>
+    </view>
     <control-flow-rule id="__2">
       <from-activity-id>view1</from-activity-id>
       <control-flow-case id="__3">
@@ -40,12 +46,34 @@
         <from-outcome>Back</from-outcome>
         <to-activity-id>view1</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>callTransactionsoftheMonth</from-outcome>
+        <to-activity-id>TransactionsoftheMonth</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__12">
       <from-activity-id>callMonthwiseTotalTransaction</from-activity-id>
       <control-flow-case id="__13">
         <from-outcome>callMonthwiseTotalTransaction</from-outcome>
         <to-activity-id>MonthWisetotalTransaction</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>TransactionsoftheMonth</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>TransoftheMonthBackButton</from-outcome>
+        <to-activity-id>MonthWisetotalTransaction</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome>callVoucherDetailReport</from-outcome>
+        <to-activity-id>VoucherDetailReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>VoucherDetailReport</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>VoucherDetailBackButton</from-outcome>
+        <to-activity-id>TransactionsoftheMonth</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

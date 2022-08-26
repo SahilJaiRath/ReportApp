@@ -196,6 +196,9 @@
           usageId="bspl_reportfactory_view_FinancialTransactionsTF_FinancialTransactionsTF_ExecutePageDef"/>
     <page path="/WEB-INF/FinanceTaskflow/FinancialTransactionsTF.xml#FinancialTransactionsTF@callMonthwiseTotalTransaction"
           usageId="bspl_reportfactory_view_FinancialTransactionsTF_FinancialTransactionsTF_callMonthwiseTotalTransactionPageDef"/>
+    <page path="/FinancePage/TransactionsoftheMonth.jsff"
+          usageId="bspl_reportfactory_view_TransactionsoftheMonthPageDef"/>
+    <page path="/FinancePage/VoucherDetailReport.jsff" usageId="bspl_reportfactory_view_VoucherDetailReportPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="bspl_reportfactory_view_PartyBalancePageDef" path="FinancePage.PartyBalancePageDef"/>
@@ -381,6 +384,8 @@
           path="FinanceTaskflow.FinancialTransactionsTF_FinancialTransactionsTF_ExecutePageDef"/>
     <page id="bspl_reportfactory_view_FinancialTransactionsTF_FinancialTransactionsTF_callMonthwiseTotalTransactionPageDef"
           path="FinanceTaskflow.FinancialTransactionsTF_FinancialTransactionsTF_callMonthwiseTotalTransactionPageDef"/>
+    <page id="bspl_reportfactory_view_TransactionsoftheMonthPageDef" path="FinancePage.TransactionsoftheMonthPageDef"/>
+    <page id="bspl_reportfactory_view_VoucherDetailReportPageDef" path="FinancePage.VoucherDetailReportPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="model.service"

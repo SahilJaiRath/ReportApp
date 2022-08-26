@@ -4487,7 +4487,78 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         }
         }
         }
-    
 
+
+    /**
+     * Container's getter for TransactionsoftheMonthVO1.
+     * @return TransactionsoftheMonthVO1
+     */
+    public ViewObjectImpl getTransactionsoftheMonthVO1() {
+        return (ViewObjectImpl) findViewObject("TransactionsoftheMonthVO1");
+    }
+    public void callTransactionsoftheMonth(String LV_UNIT,Date FRDATE,Date TODATE ,String LV_VOUCHERTYPE 
+                                           , String  LV_MONTH){
+            ViewObjectImpl vo = this.getTransactionsoftheMonthVO1();
+    //            LV_VOUCHERTYPE = "SALES VOUCHER";
+            System.out.println(LV_UNIT + "--"  + FRDATE + "--" + TODATE+"--" + LV_VOUCHERTYPE + LV_MONTH );
+            
+        if ( LV_UNIT != null &&  FRDATE != null && TODATE != null &&  LV_VOUCHERTYPE != null && LV_MONTH != null) {
+            System.out.println("Inside condition!");
+        try {
+
+            
+            vo.setNamedWhereClauseParam("P474_UNIT_CD", LV_UNIT);
+            vo.setNamedWhereClauseParam("P473_FROM_DATE", FRDATE);
+            vo.setNamedWhereClauseParam("P474_TO_DT", TODATE);  
+            vo.setNamedWhereClauseParam("P474_VOUCHER_TYPE", LV_VOUCHERTYPE);
+            vo.setNamedWhereClauseParam("P474_MONTH", LV_MONTH);
+
+            
+           
+            vo.executeQuery();
+            
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+        }
+        }
+
+    /**
+     * Container's getter for VoucherDetailreportVO1.
+     * @return VoucherDetailreportVO1
+     */
+    public ViewObjectImpl getVoucherDetailreportVO1() {
+        return (ViewObjectImpl) findViewObject("VoucherDetailreportVO1");
+    }
+    
+    public void callvoucherDetailreport(String LV_UNIT, String  LV_VOUCHERNO){
+            ViewObjectImpl vo = this.getVoucherDetailreportVO1();
+            
+            System.out.println(LV_UNIT + "--"  +  LV_VOUCHERNO );
+            
+        if ( LV_UNIT != null &&  LV_VOUCHERNO != null) {
+            System.out.println("Inside condition!");
+        try {
+
+            
+            vo.setNamedWhereClauseParam("P193_UNIT_CD", LV_UNIT);
+            vo.setNamedWhereClauseParam("P193_VOUCH_NO1", LV_VOUCHERNO);
+
+            
+           
+            vo.executeQuery();
+            
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+        }
+        }
+    
 }
 
