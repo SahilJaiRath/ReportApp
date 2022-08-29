@@ -66,12 +66,37 @@ public class FinancialTransactionBean {
         operationBinding.getParamsMap().put("LV_UNIT",Unit);
         operationBinding.getParamsMap().put("FRDATE",fromDate);
         operationBinding.getParamsMap().put("TODATE",toDate);
+        operationBinding.getParamsMap().put("LV_UNIT1",Unit);
+        operationBinding.getParamsMap().put("FRDATE1",fromDate);
+        operationBinding.getParamsMap().put("TODATE1",toDate);
+        operationBinding.getParamsMap().put("LV_UNIT2",Unit);
+        operationBinding.getParamsMap().put("FRDATE2",fromDate);
+        operationBinding.getParamsMap().put("TODATE2",toDate);    
 
         Object result = operationBinding.execute();
         
         ADFUtils.setEL("#{pageFlowScope.UnitCd}", Unit);
         ADFUtils.setEL("#{pageFlowScope.FromDT}", fromDate);
         ADFUtils.setEL("#{pageFlowScope.toDT}", toDate);
+        
+//            System.out.println("**==="+ADFUtils.resolveExpression("#{pageFlowScope.UnitCd}"));
+//              System.out.println("**==="+ADFUtils.resolveExpression("#{pageFlowScope.FromDT}"));
+//              System.out.println("**==="+ADFUtils.resolveExpression("#{pageFlowScope.toDT}"));
+//              
+//              
+//            String UnitForDebiNote=(String)ADFUtils.resolveExpression("#{pageFlowScope.UnitCd}");
+//
+//            oracle.jbo.domain.Date FrDate=(oracle.jbo.domain.Date)ADFUtils.resolveExpression("#{pageFlowScope.FromDT}");
+//            oracle.jbo.domain.Date ToDate=(oracle.jbo.domain.Date)ADFUtils.resolveExpression("#{pageFlowScope.toDT}");
+//            
+//            
+//            AppModuleImpl am=(AppModuleImpl)resolvElDC("AppModuleDataControl");
+//              ViewObjectImpl vo = am.getPendingDebitNotesVO1();
+//              
+//            vo.setNamedWhereClauseParam("P472_UNIT_CD", UnitForDebiNote);
+//            vo.setNamedWhereClauseParam("P472_FROM_DT", FrDate);
+//            vo.setNamedWhereClauseParam("P472_TO_DATE", ToDate);
+//        
         
         
         }
@@ -171,7 +196,7 @@ public class FinancialTransactionBean {
         String Unit=(String)ADFUtils.resolveExpression("#{pageFlowScope.UnitCd}");
         String VoucherNumber=(String)ADFUtils.resolveExpression("#{row.VouNo}");
         
-        System.out.println("=========" + VoucherNumber );
+        System.out.println("VoucherNumber===" + VoucherNumber );
 
        
         

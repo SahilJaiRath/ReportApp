@@ -9,6 +9,15 @@
               id="FinancialTransactionsVO1Iterator"/>
     <searchRegion Binds="FinancialTransactionsVO1Iterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="FinancialTransactionsVO1Query"/>
+    <iterator Binds="PendingDebitNotesVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="PendingDebitNotesVO1Iterator"/>
+    <searchRegion Binds="PendingDebitNotesVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PendingDebitNotesVO1Query"/>
+    <iterator Binds="PendingPurchaseandServiceBillsVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="PendingPurchaseandServiceBillsVO1Iterator"/>
+    <searchRegion Binds="PendingPurchaseandServiceBillsVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PendingPurchaseandServiceBillsVO1Query"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
@@ -23,13 +32,6 @@
     </attributeValues>
     <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
           SelectItemValueMode="ListObject"/>
-    <methodAction id="callFinancialTransactions" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="callFinancialTransactions" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
-                  InstanceName="data.AppModuleDataControl.dataProvider">
-      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
-      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
-      <NamedData NDName="TODATE" NDType="java.util.Date"/>
-    </methodAction>
     <tree IterBinding="FinancialTransactionsVO1Iterator" id="FinancialTransactionsVO1">
       <nodeDefinition DefName="model.finance.views.FinancialTransactionsVO" Name="FinancialTransactionsVO10">
         <AttrNames>
@@ -38,5 +40,35 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <tree IterBinding="PendingDebitNotesVO1Iterator" id="PendingDebitNotesVO1">
+      <nodeDefinition DefName="model.finance.views.PendingDebitNotesVO" Name="PendingDebitNotesVO10">
+        <AttrNames>
+          <Item Value="VoucherType"/>
+          <Item Value="TotalCount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="PendingPurchaseandServiceBillsVO1Iterator" id="PendingPurchaseandServiceBillsVO1">
+      <nodeDefinition DefName="model.finance.views.PendingPurchaseandServiceBillsVO"
+                      Name="PendingPurchaseandServiceBillsVO10">
+        <AttrNames>
+          <Item Value="VoucherType"/>
+          <Item Value="TotalCount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callFinancialTransactions" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callFinancialTransactions" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="LV_UNIT1" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE1" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE1" NDType="java.util.Date"/>
+      <NamedData NDName="LV_UNIT2" NDType="java.lang.String"/>
+      <NamedData NDName="FRDATE2" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE2" NDType="java.util.Date"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

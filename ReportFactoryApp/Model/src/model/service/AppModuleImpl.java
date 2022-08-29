@@ -4428,27 +4428,43 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewObjectImpl getFinancialTransactionsVO1() {
         return (ViewObjectImpl) findViewObject("FinancialTransactionsVO1");
-    }    public void callFinancialTransactions(String LV_UNIT,Date FRDATE,Date TODATE ){
+    }    public void callFinancialTransactions(String LV_UNIT,Date FRDATE,Date TODATE,String LV_UNIT1,Date FRDATE1,Date TODATE1
+                                               ,String LV_UNIT2,Date FRDATE2,Date TODATE2){
         ViewObjectImpl vo = this.getFinancialTransactionsVO1();
-        System.out.println(LV_UNIT + "--"  + FRDATE + "--" + TODATE+"--"  );
+        ViewObjectImpl vo1 = this.getPendingDebitNotesVO1();
+        ViewObjectImpl vo2 = this.getPendingPurchaseandServiceBillsVO1();
         
-    if ( LV_UNIT != null &&  FRDATE != null && TODATE != null ) {
+        System.out.println(LV_UNIT + "--"  + FRDATE + "--" + TODATE+"--" + LV_UNIT2 + "--"  + FRDATE2 + "--" + TODATE2 + "--" 
+                           );
+        
+    if ( LV_UNIT != null &&  FRDATE != null && TODATE != null && LV_UNIT1 != null &&  FRDATE1 != null && TODATE1 != null
+            && LV_UNIT2 != null &&  FRDATE2 != null && TODATE2 != null) {
         System.out.println("Inside condition!");
     try {
 
         
         vo.setNamedWhereClauseParam("P472_UNIT_CD", LV_UNIT);
         vo.setNamedWhereClauseParam("P472_FROM_DT", FRDATE);
-        vo.setNamedWhereClauseParam("P472_TO_DATE", TODATE);        
+        vo.setNamedWhereClauseParam("P472_TO_DATE", TODATE);
+        vo1.setNamedWhereClauseParam("P472_UNIT_CD", LV_UNIT1);
+        vo1.setNamedWhereClauseParam("P472_FROM_DT", FRDATE1);
+        vo1.setNamedWhereClauseParam("P472_TO_DATE", TODATE1);
+        vo2.setNamedWhereClauseParam("P472_UNIT_CD", LV_UNIT2);
+        vo2.setNamedWhereClauseParam("P472_FROM_DT", FRDATE2);
+        vo2.setNamedWhereClauseParam("P472_TO_DATE", TODATE2);
+        
         
        
         vo.executeQuery();
+        vo1.executeQuery();
+        vo2.executeQuery();
         
         
 
     } catch (Exception e) {
         e.printStackTrace();
     
+
     }
     }
     }
@@ -4559,6 +4575,71 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         }
         }
         }
+
+    /**
+     * Container's getter for PendingDebitNotesVO1.
+     * @return PendingDebitNotesVO1
+     */
+    public ViewObjectImpl getPendingDebitNotesVO1() {
+        return (ViewObjectImpl) findViewObject("PendingDebitNotesVO1");
+    }
+    public void callPendingDebitNotes(String LV_UNIT,Date FRDATE,Date TODATE ){
+            ViewObjectImpl vo = this.getPendingDebitNotesVO1();
+            System.out.println(LV_UNIT + "--"  + FRDATE + "--" + TODATE+"--"  );
+            
+        if ( LV_UNIT != null &&  FRDATE != null && TODATE != null ) {
+            System.out.println("Inside condition!");
+        try {
+
+            
+            vo.setNamedWhereClauseParam("P472_UNIT_CD", LV_UNIT);
+            vo.setNamedWhereClauseParam("P472_FROM_DT", FRDATE);
+            vo.setNamedWhereClauseParam("P472_TO_DATE", TODATE);        
+            
+           
+            vo.executeQuery();
+            
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+        }
+        }
+
+    /**
+     * Container's getter for PendingPurchaseandServiceBillsVO1.
+     * @return PendingPurchaseandServiceBillsVO1
+     */
+    public ViewObjectImpl getPendingPurchaseandServiceBillsVO1() {
+        return (ViewObjectImpl) findViewObject("PendingPurchaseandServiceBillsVO1");
+    }
+    public void callPendingPurchaseandServiceBills(String LV_UNIT,Date FRDATE,Date TODATE ){
+            ViewObjectImpl vo = this.getPendingDebitNotesVO1();
+            System.out.println(LV_UNIT + "--"  + FRDATE + "--" + TODATE+"--"  );
+            
+        if ( LV_UNIT != null &&  FRDATE != null && TODATE != null ) {
+            System.out.println("Inside condition!");
+        try {
+
+            
+            vo.setNamedWhereClauseParam("P472_UNIT_CD", LV_UNIT);
+            vo.setNamedWhereClauseParam("P472_FROM_DT", FRDATE);
+            vo.setNamedWhereClauseParam("P472_TO_DATE", TODATE);        
+            
+           
+            vo.executeQuery();
+            
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+        }
+        }
+    
     
 }
 
