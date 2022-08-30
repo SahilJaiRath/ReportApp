@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Stock Valuation" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.AR_Unit.inputValue}" label="#{bindings.AR_Unit.label}"
+                              required="#{bindings.AR_Unit.hints.mandatory}"
+                              shortDesc="#{bindings.AR_Unit.hints.tooltip}" id="soc1" autoSubmit="true">
+            <f:selectItems value="#{bindings.AR_Unit.items}" id="si1"/>
+            <f:validator binding="#{bindings.AR_Unit.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="aR_LocationId"
+                                        popupTitle="Search and Select: #{bindings.AR_Location.hints.label}"
+                                        value="#{bindings.AR_Location.inputValue}"
+                                        label="#{bindings.AR_Location.hints.label}"
+                                        model="#{bindings.AR_Location.listOfValuesModel}"
+                                        required="#{bindings.AR_Location.hints.mandatory}"
+                                        columns="#{bindings.AR_Location.hints.displayWidth}"
+                                        shortDesc="#{bindings.AR_Location.hints.tooltip}" autoSubmit="true">
+            <f:validator binding="#{bindings.AR_Location.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:inputComboboxListOfValues id="itemCdId" popupTitle="Search and Select: #{bindings.ItemCd.hints.label}"
+                                        value="#{bindings.ItemCd.inputValue}" label="#{bindings.ItemCd.hints.label}"
+                                        model="#{bindings.ItemCd.listOfValuesModel}"
+                                        required="#{bindings.ItemCd.hints.mandatory}"
+                                        columns="#{bindings.ItemCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.ItemCd.hints.tooltip}">
+            <f:validator binding="#{bindings.ItemCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="#{bindings.fromDate.hints.label}"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id1">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="#{bindings.toDate.hints.label}"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id2">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6"/>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t1"/>
+      </f:facet>
+      <f:facet name="statusbar"/>
+    </af:panelCollection>
+  </af:panelHeader>
+</jsp:root>

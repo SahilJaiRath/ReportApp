@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="StockAsOnDatePageDef"
+                Package="InventoryPage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_AR_Unit" id="AR_Unit" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_AR_Location" id="AR_Location"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p1">
+      <AttrNames>
+        <Item Value="LV_p1"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Stock as on Date" id="ph1">
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.AR_Unit.inputValue}" label="#{bindings.AR_Unit.label}"
+                              required="#{bindings.AR_Unit.hints.mandatory}"
+                              shortDesc="#{bindings.AR_Unit.hints.tooltip}" id="soc1" autoSubmit="true">
+            <f:selectItems value="#{bindings.AR_Unit.items}" id="si1"/>
+            <f:validator binding="#{bindings.AR_Unit.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputComboboxListOfValues id="aR_LocationId"
+                                        popupTitle="Search and Select: #{bindings.AR_Location.hints.label}"
+                                        value="#{bindings.AR_Location.inputValue}"
+                                        label="#{bindings.AR_Location.hints.label}"
+                                        model="#{bindings.AR_Location.listOfValuesModel}"
+                                        required="#{bindings.AR_Location.hints.mandatory}"
+                                        columns="#{bindings.AR_Location.hints.displayWidth}"
+                                        shortDesc="#{bindings.AR_Location.hints.tooltip}" autoSubmit="true">
+            <f:validator binding="#{bindings.AR_Location.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputText value="#{bindings.LV_p1.inputValue}" label="#{bindings.LV_p1.hints.label}"
+                        required="#{bindings.LV_p1.hints.mandatory}" columns="#{bindings.LV_p1.hints.displayWidth}"
+                        maximumLength="#{bindings.LV_p1.hints.precision}" shortDesc="#{bindings.LV_p1.hints.tooltip}"
+                        id="it1">
+            <f:validator binding="#{bindings.LV_p1.validator}"/>
+          </af:inputText>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:button text="Execute" id="b1"/>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="statusbar"/>
+  </af:panelCollection>
+</jsp:root>

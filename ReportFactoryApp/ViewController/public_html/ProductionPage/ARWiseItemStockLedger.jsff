@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="AR wise Item Stock Ledger" id="ph1">
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGridLayout id="pgl1">
+      <af:gridRow marginTop="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="34%" id="gc1">
+          <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="#{bindings.UnitCode.label}"
+                              required="#{bindings.UnitCode.hints.mandatory}"
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" autoSubmit="true">
+            <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
+            <f:validator binding="#{bindings.UnitCode.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc2">
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="#{bindings.fromDate.hints.label}"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id2">
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="#{bindings.toDate.hints.label}"
+                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id1">
+            <f:validator binding="#{bindings.toDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.toDate.format}"/>
+          </af:inputDate>
+        </af:gridCell>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" id="gr2">
+        <af:gridCell marginStart="5px" width="34%" id="gc4">
+          <af:inputComboboxListOfValues id="lOCId" popupTitle="Search and Select: #{bindings.LOC.hints.label}"
+                                        value="#{bindings.LOC.inputValue}" label="#{bindings.LOC.hints.label}"
+                                        model="#{bindings.LOC.listOfValuesModel}"
+                                        required="#{bindings.LOC.hints.mandatory}"
+                                        columns="#{bindings.LOC.hints.displayWidth}"
+                                        shortDesc="#{bindings.LOC.hints.tooltip}">
+            <f:validator binding="#{bindings.LOC.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc5">
+          <af:inputComboboxListOfValues id="aR_GROUPId" popupTitle="Search and Select: #{bindings.AR_GROUP.hints.label}"
+                                        value="#{bindings.AR_GROUP.inputValue}" label="#{bindings.AR_GROUP.hints.label}"
+                                        model="#{bindings.AR_GROUP.listOfValuesModel}"
+                                        required="#{bindings.AR_GROUP.hints.mandatory}"
+                                        columns="#{bindings.AR_GROUP.hints.displayWidth}"
+                                        shortDesc="#{bindings.AR_GROUP.hints.tooltip}" autoSubmit="true">
+            <f:validator binding="#{bindings.AR_GROUP.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+          <af:inputComboboxListOfValues id="aR_SubGroupId"
+                                        popupTitle="Search and Select: #{bindings.AR_SubGroup.hints.label}"
+                                        value="#{bindings.AR_SubGroup.inputValue}"
+                                        label="#{bindings.AR_SubGroup.hints.label}"
+                                        model="#{bindings.AR_SubGroup.listOfValuesModel}"
+                                        required="#{bindings.AR_SubGroup.hints.mandatory}"
+                                        columns="#{bindings.AR_SubGroup.hints.displayWidth}"
+                                        shortDesc="#{bindings.AR_SubGroup.hints.tooltip}" autoSubmit="true">
+            <f:validator binding="#{bindings.AR_SubGroup.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+        <af:gridCell marginStart="5px" width="34%" id="gc7">
+          <af:inputComboboxListOfValues id="aR_ITEMId" popupTitle="Search and Select: #{bindings.AR_ITEM.hints.label}"
+                                        value="#{bindings.AR_ITEM.inputValue}" label="#{bindings.AR_ITEM.hints.label}"
+                                        model="#{bindings.AR_ITEM.listOfValuesModel}"
+                                        required="#{bindings.AR_ITEM.hints.mandatory}"
+                                        columns="#{bindings.AR_ITEM.hints.displayWidth}"
+                                        shortDesc="#{bindings.AR_ITEM.hints.tooltip}" autoSubmit="true">
+            <f:validator binding="#{bindings.AR_ITEM.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" id="gc8">
+          <af:inputComboboxListOfValues id="aR_AR_NOId" popupTitle="Search and Select: #{bindings.AR_AR_NO.hints.label}"
+                                        value="#{bindings.AR_AR_NO.inputValue}" label="#{bindings.AR_AR_NO.hints.label}"
+                                        model="#{bindings.AR_AR_NO.listOfValuesModel}"
+                                        required="#{bindings.AR_AR_NO.hints.mandatory}"
+                                        columns="#{bindings.AR_AR_NO.hints.displayWidth}"
+                                        shortDesc="#{bindings.AR_AR_NO.hints.tooltip}" autoSubmit="true">
+            <f:validator binding="#{bindings.AR_AR_NO.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc9">
+          <af:selectOneChoice value="#{bindings.rep_type.inputValue}" label="#{bindings.rep_type.label}"
+                              required="#{bindings.rep_type.hints.mandatory}"
+                              shortDesc="#{bindings.rep_type.hints.tooltip}" id="soc2">
+            <f:selectItems value="#{bindings.rep_type.items}" id="si2"/>
+            <f:validator binding="#{bindings.rep_type.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="10" id="s2"/>
+  </af:panelHeader>
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth" >
+    <f:facet name="menus"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Export To Excel" id="b2"/>
+        <af:button text="Export To PDF" id="b3">
+          <af:fileDownloadActionListener/>
+        </af:button>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="statusbar"/>
+  </af:panelCollection>
+</jsp:root>

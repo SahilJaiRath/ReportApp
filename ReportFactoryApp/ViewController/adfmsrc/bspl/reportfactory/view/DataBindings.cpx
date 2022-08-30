@@ -199,6 +199,12 @@
     <page path="/FinancePage/TransactionsoftheMonth.jsff"
           usageId="bspl_reportfactory_view_TransactionsoftheMonthPageDef"/>
     <page path="/FinancePage/VoucherDetailReport.jsff" usageId="bspl_reportfactory_view_VoucherDetailReportPageDef"/>
+    <page path="/ProductionPage/ARWiseItemStockLedger.jsff"
+          usageId="bspl_reportfactory_view_ARWiseItemStockLedgerPageDef"/>
+    <page path="/InventoryPage/StockValuation.jsff" usageId="bspl_reportfactory_view_StockValuationPageDef"/>
+    <page path="/InventoryPage/StockAsOnDate.jsff" usageId="bspl_reportfactory_view_StockAsOnDatePageDef"/>
+    <page path="/InventoryPage/ProductShortageAndBatch.jsff"
+          usageId="bspl_reportfactory_view_ProductShortageAndBatchPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="bspl_reportfactory_view_PartyBalancePageDef" path="FinancePage.PartyBalancePageDef"/>
@@ -386,6 +392,11 @@
           path="FinanceTaskflow.FinancialTransactionsTF_FinancialTransactionsTF_callMonthwiseTotalTransactionPageDef"/>
     <page id="bspl_reportfactory_view_TransactionsoftheMonthPageDef" path="FinancePage.TransactionsoftheMonthPageDef"/>
     <page id="bspl_reportfactory_view_VoucherDetailReportPageDef" path="FinancePage.VoucherDetailReportPageDef"/>
+    <page id="bspl_reportfactory_view_ARWiseItemStockLedgerPageDef" path="ProductionPage.ARWiseItemStockLedgerPageDef"/>
+    <page id="bspl_reportfactory_view_StockValuationPageDef" path="InventoryPage.StockValuationPageDef"/>
+    <page id="bspl_reportfactory_view_StockAsOnDatePageDef" path="InventoryPage.StockAsOnDatePageDef"/>
+    <page id="bspl_reportfactory_view_ProductShortageAndBatchPageDef"
+          path="InventoryPage.ProductShortageAndBatchPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="model.service"
