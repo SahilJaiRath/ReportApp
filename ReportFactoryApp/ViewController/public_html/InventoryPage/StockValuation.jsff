@@ -9,22 +9,20 @@
           <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
                               required="#{bindings.UnitCode.hints.mandatory}"
                               shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:190.0px;"
-                               labelStyle="width:100px" >
+                               labelStyle="width:100px" autoSubmit="true">
             <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
             <f:validator binding="#{bindings.UnitCode.validator}"/>
           </af:selectOneChoice>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" id="gc2">
-          <af:inputComboboxListOfValues id="aR_LocationId"
-                                        popupTitle="Search and Select: #{bindings.AR_Location.hints.label}"
-                                        value="#{bindings.AR_Location.inputValue}"
-                                        label="Location"
-                                        model="#{bindings.AR_Location.listOfValuesModel}"
-                                        required="#{bindings.AR_Location.hints.mandatory}"
-                                        columns="#{bindings.AR_Location.hints.displayWidth}"
-                                        shortDesc="#{bindings.AR_Location.hints.tooltip}" autoSubmit="true"  contentStyle="width:180.0px;"
-                               labelStyle="width:100px" >
-            <f:validator binding="#{bindings.AR_Location.validator}"/>
+          <af:inputComboboxListOfValues id="lOCId" popupTitle="Search and Select: #{bindings.LOC.hints.label}"
+                                        value="#{bindings.LOC.inputValue}" label="Location"
+                                        model="#{bindings.LOC.listOfValuesModel}"
+                                        required="#{bindings.LOC.hints.mandatory}"
+                                        columns="#{bindings.LOC.hints.displayWidth}"
+                                        shortDesc="#{bindings.LOC.hints.tooltip}" contentStyle="width:180.0px;" labelStyle="width:100px"
+                                        autoSubmit="true">
+            <f:validator binding="#{bindings.LOC.validator}"/>
           </af:inputComboboxListOfValues>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" id="gc3">
@@ -34,7 +32,7 @@
                                         required="#{bindings.ItemCd.hints.mandatory}"
                                         columns="#{bindings.ItemCd.hints.displayWidth}"
                                         shortDesc="#{bindings.ItemCd.hints.tooltip}"  contentStyle="width:180.0px;"
-                               labelStyle="width:100px" >
+                               labelStyle="width:100px" autoSubmit="true">
             <f:validator binding="#{bindings.ItemCd.validator}"/>
           </af:inputComboboxListOfValues>
         </af:gridCell>

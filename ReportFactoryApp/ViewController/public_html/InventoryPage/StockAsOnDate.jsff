@@ -9,35 +9,33 @@
           <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
                               required="#{bindings.UnitCode.hints.mandatory}"
                               shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;"
-                               labelStyle="width:100px" >
+                               labelStyle="width:100px" autoSubmit="true">
             <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
             <f:validator binding="#{bindings.UnitCode.validator}"/>
           </af:selectOneChoice>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="33%" id="gc2">
-          <af:inputComboboxListOfValues id="aR_LocationId"
-                                        popupTitle="Search and Select: #{bindings.AR_Location.hints.label}"
-                                        value="#{bindings.AR_Location.inputValue}"
-                                        label="Location"
-                                        model="#{bindings.AR_Location.listOfValuesModel}"
-                                        required="#{bindings.AR_Location.hints.mandatory}"
-                                        columns="#{bindings.AR_Location.hints.displayWidth}"
-                                        shortDesc="#{bindings.AR_Location.hints.tooltip}" autoSubmit="true" contentStyle="width:180.0px;"
-                               labelStyle="width:100px" >
-            <f:validator binding="#{bindings.AR_Location.validator}"/>
+          <af:inputComboboxListOfValues id="lOCId" popupTitle="Search and Select: #{bindings.LOC.hints.label}"
+                                        value="#{bindings.LOC.inputValue}" label="Location"
+                                        model="#{bindings.LOC.listOfValuesModel}"
+                                        required="#{bindings.LOC.hints.mandatory}"
+                                        columns="#{bindings.LOC.hints.displayWidth}"
+                                        shortDesc="#{bindings.LOC.hints.tooltip}" contentStyle="width:180.0px;"
+                                         labelStyle="width:100px" autoSubmit="true">
+            <f:validator binding="#{bindings.LOC.validator}"/>
           </af:inputComboboxListOfValues>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
       </af:gridRow>
       <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
         <af:gridCell marginStart="5px" width="34%" id="gc4">
-          <af:inputText value="#{bindings.LV_p1.inputValue}" label="As On Date"
-                        required="#{bindings.LV_p1.hints.mandatory}" columns="#{bindings.LV_p1.hints.displayWidth}"
-                        maximumLength="#{bindings.LV_p1.hints.precision}" shortDesc="#{bindings.LV_p1.hints.tooltip}"
-                        id="it1" contentStyle="width:180.0px;"
-                               labelStyle="width:100px" >
-            <f:validator binding="#{bindings.LV_p1.validator}"/>
-          </af:inputText>
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="As On Date"
+                        required="#{bindings.fromDate.hints.mandatory}"
+                        columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
+                        id="id1" contentStyle="width:180.0px;" labelStyle="width:100px" >
+            <f:validator binding="#{bindings.fromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
+          </af:inputDate>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="33%" id="gc5">
           <af:selectOneChoice value="#{bindings.rep_type.inputValue}" label="Report Type"

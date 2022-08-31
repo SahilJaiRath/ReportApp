@@ -34,6 +34,10 @@
     Name="P272_ITEM_S_GROUP"
     Kind="where"
     Type="java.lang.String"/>
+  <Variable
+    Name="P272_LOCATION"
+    Kind="where"
+    Type="java.lang.String"/>
   <SQLQuery><![CDATA[With AR_List 
 As 
 (Select 'ALL' ITEM_NAME, 'ALL' AR_NO, 1 SN From Dual 

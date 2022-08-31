@@ -9,7 +9,7 @@
           <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
                               required="#{bindings.UnitCode.hints.mandatory}"
                               shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:200.0px;"
-                               labelStyle="width:100px" >
+                               labelStyle="width:100px" autoSubmit="true">
             <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
             <f:validator binding="#{bindings.UnitCode.validator}"/>
           </af:selectOneChoice>
@@ -23,7 +23,7 @@
                                         required="#{bindings.Bulk_IssueSlipNo.hints.mandatory}"
                                         columns="#{bindings.Bulk_IssueSlipNo.hints.displayWidth}"
                                         shortDesc="#{bindings.Bulk_IssueSlipNo.hints.tooltip}" contentStyle="width:180.0px;"
-                               labelStyle="width:100px" >
+                               labelStyle="width:100px" autoSubmit="true">
             <f:validator binding="#{bindings.Bulk_IssueSlipNo.validator}"/>
           </af:inputComboboxListOfValues>
         </af:gridCell>
@@ -39,7 +39,7 @@
                                         required="#{bindings.Bulk_ItemName.hints.mandatory}"
                                         columns="#{bindings.Bulk_ItemName.hints.displayWidth}"
                                         shortDesc="#{bindings.Bulk_ItemName.hints.tooltip}"  contentStyle="width:180.0px;"
-                               labelStyle="width:100px" >
+                               labelStyle="width:100px" autoSubmit="true">
             <f:validator binding="#{bindings.Bulk_ItemName.validator}"/>
           </af:inputComboboxListOfValues>
         </af:gridCell>

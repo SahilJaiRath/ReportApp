@@ -7,15 +7,15 @@
     <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
   </executables>
   <bindings>
-    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_AR_Location" id="AR_Location"/>
-    <attributeValues IterBinding="DummyVVO1Iterator" id="LV_p1">
-      <AttrNames>
-        <Item Value="LV_p1"/>
-      </AttrNames>
-    </attributeValues>
     <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_rep_type" id="rep_type" DTSupportsMRU="true"
           SelectItemValueMode="ListObject"/>
     <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
           SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_LOC" id="LOC"/>
+    <attributeValues IterBinding="DummyVVO1Iterator" id="fromDate">
+      <AttrNames>
+        <Item Value="fromDate"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

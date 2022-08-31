@@ -19,9 +19,15 @@ import java.sql.ResultSet;
 
 import java.sql.SQLException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
 import java.util.HashMap;
 
 import java.util.Map;
+
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -150,12 +156,52 @@ public class ServletClass extends HttpServlet {
             }
         }
     }
+    public String newConvertStringToJboDate(String datestring) throws ParseException {
+        System.out.println("Inside ADFUtils for date!");
+        if (!datestring.equals("-")) {
+            //                    System.out.println("inside else FALSE !(Slash format)");
+            //                java.text.SimpleDateFormat sdf1 = new java.text.SimpleDateFormat("mm/dd/yyyy");
+            //
+            //                java.text.SimpleDateFormat sdfsql = new java.text.SimpleDateFormat("dd-MMM-yyyy");
+            //                java.util.Date date = null;
+            //                try {
+            //                        System.out.println("Inside try block!");
+            //                    date = sdf1.parse(datestring);
+            //                } catch (Exception exc) {
+            //                        System.out.println("Date error");
+            //                }
+            //                return new oracle.jbo.domain.Date(sdfsql.format(date));
+            SimpleDateFormat format1 = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat format2 = new SimpleDateFormat("dd-MMM-yy");
+            Date date = format1.parse(datestring);
+            System.out.println(format2.format(date));
+            return format2.format(date);
+            }
+        return "";
+    }
+    public static boolean isValidFormat(String format, String value) {
+            System.out.println("Inside valid format function!");
+        Date date = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            date = sdf.parse(value);
+            if (!value.equals(sdf.format(date))) {
+                date = null;
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return date != null;
+    }
     
+ 
     
-
+        
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         response.setContentType(CONTENT_TYPE);
+        Random rand = new Random();
+        int SessionId = rand.nextInt(9023632) + 1000000;
         Connection conn = null;
         PreparedStatement psfile = null;
         ResultSet reportPathRsfile = null;
@@ -166,30 +212,26 @@ public class ServletClass extends HttpServlet {
         BufferedImage image=null;
         String DocNo = request.getParameter("DocNo").toString();
         String UnitCode = request.getParameter("UnitCode").toString();
-        String RepFormat = request.getParameter("Format").toString();
-//        String InvParam = request.getParameter("InvParam").toString();
-//        String EmpCode = request.getParameter("EmpCode").toString();
+        String RepFormat = request.getParameter("RepFormat").toString();
+        String RepName = request.getParameter("RepName").toString();
+        String ItemCode = request.getParameter("ItemCode").toString();
+        String ItemGroup = request.getParameter("ItemGroup").toString();
+        String SubGroup = request.getParameter("SubGroup").toString();
+        String LocCode = request.getParameter("LocCode").toString();
+        String FromDate = request.getParameter("FromDate").toString();
+        String ToDate = request.getParameter("ToDate").toString();
+        String EmpCode = request.getParameter("EmpCode").toString();
+
         try 
         {
             Context ctx = new InitialContext();
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/APPLICATIONDBDS");
             conn = ds.getConnection();
-
             String path;
-
-
-       
-
-
-
-
             ps = conn.prepareStatement("SELECT PATH FROM SERVER_PATH WHERE MODULE = 'REPSERVERPATH'");
             reportPathRs = ps.executeQuery();
-
             path = null;
-
             //path = "/home/aakash/Jasper Reports/";
-
             while (reportPathRs.next()) 
             {
                 path = reportPathRs.getString(1);
@@ -201,14 +243,10 @@ public class ServletClass extends HttpServlet {
             }
             String serverpath = path.substring(0, last_index + 1);
             System.out.println("the server path is -->" + serverpath);
-
-
             System.out.println("Invoice No--->>:" + DocNo + " Unit-->>:" + UnitCode + " Invoice Mode-->>:" +
                                RepFormat + " Inv Param-->>:" );
-
             String defaultFileName = request.getParameter("defpath").toString();
             System.out.println("Default----->>:" + defaultFileName);
-
             if (!(defaultFileName == null || defaultFileName.equals(""))) 
             {
                 defaultFileName = defaultFileName.substring(0, defaultFileName.lastIndexOf("."));
@@ -226,13 +264,29 @@ public class ServletClass extends HttpServlet {
             }
 
             Map parameters = new HashMap();
-
-                System.out.println("When Invoice Type Debit Or Credit");
+            
+            if(RepName.equals("SRV")){
+                System.out.println("When Srv Details");
                 parameters.put("p_no", DocNo);
-                parameters.put("p_unit", UnitCode);
-       
-
-
+                parameters.put("p_unit", UnitCode);  
+            }
+           if(RepName.equals("ARW")){
+               
+               
+               
+               
+                    parameters.put("P_AR_NO", DocNo);
+                    parameters.put("P_UNIT_CD", UnitCode);
+                    parameters.put("P_ITEM_CD", ItemCode);
+                    parameters.put("P_ITEM_GROUP", ItemGroup);
+                    parameters.put("P_ITEM_S_GROUP", SubGroup);
+                    parameters.put("P_LOC_CD", LocCode);
+                    parameters.put("P_FROM_DATE",newConvertStringToJboDate(FromDate)  );
+                    parameters.put("P_TO_DATE",  newConvertStringToJboDate(ToDate));
+                    parameters.put("P_CREATED_BY", EmpCode);
+                    parameters.put("P_SESSION_ID", SessionId);
+                }
+               
             System.out.println("callinf jasper reportName:" + reportName);
             callJasper(reportName, serverpath, parameters, conn, DocNo,RepFormat,response);
 

@@ -122,86 +122,86 @@ public class  SRVDetailBean {
         return conn;
     }
 
-    public void downloadJrxml(FacesContext facesContext, OutputStream outputStream) {
-        Connection conn = null;
-        try {
-            String file_name = "srv_accounts.jasper";
-            OperationBinding binding = ADFUtils.findOperation("fileNameForPrint");
-            binding.getParamsMap().put("fileId", "MTL0000000125");
-            binding.execute();
-            System.out.println("Binding Result :" + binding.getResult().toString());
-            if (binding.getResult() != null) {
-
-                String result = binding.getResult().toString();
-                int last_index = result.lastIndexOf("/");
-                if (last_index == -1) {
-                    last_index = result.lastIndexOf("\\");
-                }
-                String path = result.substring(0, last_index + 1) + file_name;
-                InputStream input = new FileInputStream(path);
-                System.out.println("path"+path);
-                // InputStream input = new FileInputStream(binding.getResult().toString());
-                //  InputStream input = new FileInputStream("//home//beta3//Jasper//Jour_prn1.jrxml");
-                DCIteratorBinding poIter =
-                    (DCIteratorBinding) getBindings().get("SRVDetailVO1Iterator");
-                String p_srv_no = (String)poIter.getCurrentRow().getAttribute("SrvNo");
-                String unitCode = poIter.getCurrentRow().getAttribute("UnitCd").toString();
-                System.out.println("Srv No. :- " + p_srv_no + " " + unitCode);
-                Map n = new HashMap();
-                n.put("p_no", p_srv_no);
-                n.put("p_unit", unitCode);
-
-                conn = getConnection();
-
-                JasperReport design = (JasperReport) JRLoader.loadObject(input);
-                System.out.println("Path : " + input + " -------" + design + " param:" + n);
-
-                @SuppressWarnings("unchecked")
-                net.sf.jasperreports.engine.JasperPrint print = JasperFillManager.fillReport(design, n, conn);
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                JasperExportManager.exportReportToPdfStream(print, byteArrayOutputStream);
-                byte pdf[] = JasperExportManager.exportReportToPdf(print);
-                HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
-                response.getOutputStream().write(pdf);
-                response.getOutputStream().flush();
-                response.getOutputStream().close();
-                facesContext.responseComplete();
-            } else
-                System.out.println("File Name/File Path not found.");
-        } catch (FileNotFoundException fnfe) {
-            // TODO: Add catch code
-            fnfe.printStackTrace();
-            try {
-                System.out.println("in finally connection closed");
-                conn.close();
-                conn = null;
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            // TODO: Add catch code
-            e.printStackTrace();
-            try {
-                System.out.println("in finally connection closed");
-                conn.close();
-                conn = null;
-
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-        } finally {
-            try {
-                System.out.println("in finally connection closed");
-                conn.close();
-                conn = null;
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
+//    public void downloadJrxml(FacesContext facesContext, OutputStream outputStream) {
+//        Connection conn = null;
+//        try {
+//            String file_name = "srv_accounts.jasper";
+//            OperationBinding binding = ADFUtils.findOperation("fileNameForPrint");
+//            binding.getParamsMap().put("fileId", "MTL0000000125");
+//            binding.execute();
+//            System.out.println("Binding Result :" + binding.getResult().toString());
+//            if (binding.getResult() != null) {
+//
+//                String result = binding.getResult().toString();
+//                int last_index = result.lastIndexOf("/");
+//                if (last_index == -1) {
+//                    last_index = result.lastIndexOf("\\");
+//                }
+//                String path = result.substring(0, last_index + 1) + file_name;
+//                InputStream input = new FileInputStream(path);
+//                System.out.println("path"+path);
+//                // InputStream input = new FileInputStream(binding.getResult().toString());
+//                //  InputStream input = new FileInputStream("//home//beta3//Jasper//Jour_prn1.jrxml");
+//                DCIteratorBinding poIter =
+//                    (DCIteratorBinding) getBindings().get("SRVDetailVO1Iterator");
+//                String p_srv_no = (String)poIter.getCurrentRow().getAttribute("SrvNo");
+//                String unitCode = poIter.getCurrentRow().getAttribute("UnitCd").toString();
+//                System.out.println("Srv No. :- " + p_srv_no + " " + unitCode);
+//                Map n = new HashMap();
+//                n.put("p_no", p_srv_no);
+//                n.put("p_unit", unitCode);
+//
+//                conn = getConnection();
+//
+//                JasperReport design = (JasperReport) JRLoader.loadObject(input);
+//                System.out.println("Path : " + input + " -------" + design + " param:" + n);
+//
+//                @SuppressWarnings("unchecked")
+//                net.sf.jasperreports.engine.JasperPrint print = JasperFillManager.fillReport(design, n, conn);
+//                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//                JasperExportManager.exportReportToPdfStream(print, byteArrayOutputStream);
+//                byte pdf[] = JasperExportManager.exportReportToPdf(print);
+//                HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+//                response.getOutputStream().write(pdf);
+//                response.getOutputStream().flush();
+//                response.getOutputStream().close();
+//                facesContext.responseComplete();
+//            } else
+//                System.out.println("File Name/File Path not found.");
+//        } catch (FileNotFoundException fnfe) {
+//            // TODO: Add catch code
+//            fnfe.printStackTrace();
+//            try {
+//                System.out.println("in finally connection closed");
+//                conn.close();
+//                conn = null;
+//
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        } catch (Exception e) {
+//            // TODO: Add catch code
+//            e.printStackTrace();
+//            try {
+//                System.out.println("in finally connection closed");
+//                conn.close();
+//                conn = null;
+//
+//            } catch (SQLException e1) {
+//                e1.printStackTrace();
+//            }
+//        } finally {
+//            try {
+//                System.out.println("in finally connection closed");
+//                conn.close();
+//                conn = null;
+//
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//    }
     public String getJaspeReportName() 
     {
         String path = ADFUtils.jasperReportFileName("MTL0000000125");

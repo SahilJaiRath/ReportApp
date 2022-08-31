@@ -22,8 +22,23 @@
     Name="P70_UNIT"
     Kind="where"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[SELECT LOC_CD || ',' || SHORT_DESC SHORT_DESC FROM UNIT_STORE A,LOCATION B      
+  <SQLQuery><![CDATA[SELECT LOC_CD , LOC_CD || ',' ||SHORT_DESC SHORT_DESC FROM UNIT_STORE A,LOCATION B       
 WHERE LOC_CD=LOCAT_CODE AND A.UNIT_CD=:P70_UNIT]]></SQLQuery>
+  <ViewAttribute
+    Name="LocCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LOC_CD"
+    Expression="LOC_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="ShortDesc"
     IsUpdateable="false"

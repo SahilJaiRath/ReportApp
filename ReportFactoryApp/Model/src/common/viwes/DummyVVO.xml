@@ -470,19 +470,42 @@
       <PIMap Variable="P272_LOCATION">
         <TransientExpression
           trustMode="untrusted"
-          Name="ExpressionScript"><![CDATA[AR_Location]]></TransientExpression>
+          Name="ExpressionScript"><![CDATA[LOC]]></TransientExpression>
       </PIMap>
       <PIMap Variable="P272_UNIT">
         <TransientExpression
           trustMode="untrusted"
-          Name="ExpressionScript"><![CDATA[AR_Unit]]></TransientExpression>
+          Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
   <ViewAccessor
     Name="AR_ITEMVVO1"
     ViewObjectName="common.viwes.AR_ITEMVVO"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="P272_ITEM_GROUP">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[AR_GROUP]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P272_ITEM_S_GROUP">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[AR_SubGroup]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P272_LOCATION">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[LOC]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P272_UNIT">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ViewAccessor
     Name="AR_AR_NOVVO1"
     ViewObjectName="common.viwes.AR_AR_NOVVO"
@@ -497,6 +520,16 @@
         <TransientExpression
           trustMode="untrusted"
           Name="ExpressionScript"><![CDATA[AR_GROUP]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P272_ITEM_S_GROUP">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[AR_SubGroup]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P272_UNIT">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
@@ -513,7 +546,12 @@
       <PIMap Variable="P272_LOCATION">
         <TransientExpression
           trustMode="untrusted"
-          Name="ExpressionScript"><![CDATA[AR_Location]]></TransientExpression>
+          Name="ExpressionScript"><![CDATA[LOC]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P272_UNIT">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
@@ -535,11 +573,27 @@
   <ViewAccessor
     Name="Bulk_IssueSlipNoVVO1"
     ViewObjectName="common.viwes.Bulk_IssueSlipNoVVO"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="P279_UNIT">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ViewAccessor
     Name="Bulk_ItemNameVVO1"
     ViewObjectName="common.viwes.Bulk_ItemNameVVO"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="P279_SLIP_NO">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[Bulk_IssueSlipNo]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_UnitCode"
     ListVOName="UnitVVO1"
@@ -1016,7 +1070,7 @@
     </AttrArray>
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
-      <Item Value="ShortDesc"/>
+      <Item Value="LocCd"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="ShortDesc"/>
@@ -1977,6 +2031,7 @@
       <Item Value="GroupCode"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="GroupCode"/>
       <Item Value="GroupName"/>
     </AttrArray>
     <DisplayCriteria/>
@@ -1996,9 +2051,11 @@
       <Item Value="ItemCd"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ItemCd"/>
       <Item Value="ItemName"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
     Name="LOV_AR_AR_NO"
@@ -2015,9 +2072,11 @@
       <Item Value="ArNo"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ArNo"/>
       <Item Value="ItemName"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
     Name="LOV_AR_SubGroup"
@@ -2219,6 +2278,10 @@
       <SchemaBasedProperties>
         <DISPLAYWIDTH
           Value="25"/>
+        <FMT_FORMAT
+          ResId="common.viwes.DummyVVO.toDate_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="common.viwes.DummyVVO.toDate_FMT_FORMATTER"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -3754,10 +3817,10 @@
     LOVName="LOV_AR_GROUP">
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <AUTOSUBMIT
           Value="true"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -3774,10 +3837,10 @@
     LOVName="LOV_AR_ITEM">
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <AUTOSUBMIT
           Value="true"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -3794,10 +3857,10 @@
     LOVName="LOV_AR_AR_NO">
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <AUTOSUBMIT
           Value="true"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
