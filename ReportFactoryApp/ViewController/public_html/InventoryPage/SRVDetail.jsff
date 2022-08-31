@@ -70,7 +70,15 @@
             <f:validator binding="#{bindings.SRVDetail_ApproveFilter.validator}"/>
           </af:selectOneChoice>
         </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc8"/>
+        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc8">
+          <af:selectOneChoice value="#{bindings.rep_type.inputValue}" label="Report Type"
+                              required="#{bindings.rep_type.hints.mandatory}"
+                             shortDesc="#{bindings.rep_type.hints.tooltip}" id="soc4" autoSubmit="true" contentStyle="width:180.0px;"
+                                >
+            <f:selectItems value="#{bindings.rep_type.items}" id="si4"/>
+            <f:validator binding="#{bindings.rep_type.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
       </af:gridRow>
       <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
         <af:gridCell marginStart="5px" width="25%" id="gc9">
@@ -100,6 +108,7 @@
           </af:selectOneChoice>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc12">
+          <af:spacer width="70" height="10" id="s1"/>
           <af:button text="Execute" id="b1" actionListener="#{SRVDetailBean.onClickButton}"/>
         </af:gridCell>
       </af:gridRow>
@@ -113,6 +122,11 @@
           <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="SRV Detail Report.xls"
                                              title="SRV Detail Report"/>
         </af:button>
+        <af:button text="PDF" id="b3" targetFrame="_blank"
+                   destination="/reports/ServletClass?defpath=#{SRVDetailBean.jaspeReportName}&amp;Format=PDF&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{row.SrvNo}">
+        </af:button>
+        <af:button actionListener="#{bindings.Next.execute}" text="Next" disabled="#{!bindings.Next.enabled}"
+               visible="false"    partialSubmit="true" id="b4"/>
       </af:toolbar>
     </f:facet>
     <f:facet name="statusbar"/>
@@ -122,14 +136,18 @@
               selectionListener="#{bindings.SRVDetailVO1.collectionModel.makeCurrent}" rowSelection="single"
               fetchSize="#{bindings.SRVDetailVO1.rangeSize}" filterModel="#{bindings.SRVDetailVO1Query.queryDescriptor}"
               filterVisible="false" queryListener="#{bindings.SRVDetailVO1Query.processQuery}" varStatus="vs" id="t2"
-              scrollPolicy="page">
+              scrollPolicy="page" partialTriggers="::b4">
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.UnitCd.name}" filterable="true" sortable="true"
                  headerText="Unit Code" id="c1">
         <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.SRVDetailVO1.hints.UnitCd.tooltip}" id="ot1"/>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SrvNo.name}" filterable="true" sortable="true"
-                 headerText="SRV No" id="c4">
-        <af:outputText value="#{row.SrvNo}" shortDesc="#{bindings.SRVDetailVO1.hints.SrvNo.tooltip}" id="ot4"/>
+      
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SrvNo.name}" filterable="true"
+                 headerText="SRV No" id="c4" sortable="true">
+        <af:link text="" id="l1"
+                 destination="/reports/ServletClass?defpath=#{SRVDetailBean.jaspeReportName}&amp;Format=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{row.SrvNo}">
+          <af:outputText value="#{row.SrvNo}" shortDesc="#{bindings.SRVDetailVO1.hints.SrvNo.tooltip}" id="ot4"/>
+        </af:link>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SrvDt.name}" filterable="true" sortable="true"
                  headerText="SRV Date" id="c5">

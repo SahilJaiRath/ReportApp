@@ -4,7 +4,8 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="SRVDetailVO1" RangeSize="50" DataControl="AppModuleDataControl" id="SRVDetailVO1Iterator"/>
+    <iterator Binds="SRVDetailVO1" RangeSize="50" DataControl="AppModuleDataControl" id="SRVDetailVO1Iterator"
+              Sortable="true"/>
     <searchRegion Binds="SRVDetailVO1Iterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SRVDetailVO1Query"/>
     <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
@@ -14,8 +15,6 @@
       <nodeDefinition DefName="model.inventory.views.SRVDetailVO" Name="SRVDetailVO10">
         <AttrNames>
           <Item Value="UnitCd"/>
-          <Item Value="VendorCode"/>
-          <Item Value="VendorName"/>
           <Item Value="SrvNo"/>
           <Item Value="SrvDt"/>
           <Item Value="ChallanNo"/>
@@ -23,14 +22,16 @@
           <Item Value="InvNo"/>
           <Item Value="InvDt"/>
           <Item Value="GtEheadGateEno"/>
-          <Item Value="Status"/>
-          <Item Value="GateDt"/>
-          <Item Value="EWayBillNo"/>
-          <Item Value="InvoiceValue"/>
           <Item Value="BillType"/>
           <Item Value="BillNo"/>
           <Item Value="BillDate"/>
           <Item Value="ItemCd"/>
+          <Item Value="GateDt"/>
+          <Item Value="VendorCode"/>
+          <Item Value="VendorName"/>
+          <Item Value="Status"/>
+          <Item Value="EWayBillNo"/>
+          <Item Value="InvoiceValue"/>
           <Item Value="GstRegNo"/>
           <Item Value="ChallanQty"/>
           <Item Value="ReceiptQty"/>
@@ -129,5 +130,14 @@
       <NamedData NDName="FRDATE" NDType="java.util.Date"/>
       <NamedData NDName="TODATE" NDType="java.util.Date"/>
     </methodAction>
+    <methodAction id="fileNameForPrint" RequiresUpdateModel="true" Action="invokeMethod" MethodName="fileNameForPrint"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.fileNameForPrint_AppModuleDataControl_dataProvider_fileNameForPrint_result">
+      <NamedData NDName="fileId" NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="SRVDetailVO1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_rep_type" id="rep_type" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

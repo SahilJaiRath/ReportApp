@@ -985,6 +985,45 @@ public class ADFUtils {
     public static void setValueToPageFlowScope(String key, Object value){
         AdfFacesContext.getCurrentInstance().getPageFlowScope().put(key, value);    
     }
+    
+    public Connection getConnection() throws Exception {
+        InitialContext initialContext = new InitialContext();
+        // Production setup you can use JNDI name
+        DataSource ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/APPLICATIONDBDS");
+
+        java.sql.Connection conn = ds.getConnection();
+        return conn;
+    }
+    
+    public static String jasperReportFileName(String fileId) 
+    {
+        PreparedStatement ps = null;
+        ResultSet reportPathRs = null;
+        Connection conn = null;
+
+        String reportFileName = null;
+
+        try {
+            conn = openDataSourceConnection();
+            ps =
+                conn.prepareStatement("SELECT PRINT_FILE_NAME FROM FILE_MASTER_ERP WHERE FILE_ID ='" +fileId+"'");
+            reportPathRs = ps.executeQuery();
+            while (reportPathRs.next()) 
+            {
+                reportFileName = reportPathRs.getString(1);
+                System.out.println("Main Server path is---->>" + reportPathRs.getString(1));
+            }
+        } catch (Exception e) {
+            if(conn!=null){
+            closeDataSourceConnection(conn);
+            }
+        } finally{
+            if(conn!=null){
+            closeDataSourceConnection(conn);
+            }
+        }
+        return reportFileName;
+    } 
 
 }
 

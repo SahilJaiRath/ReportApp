@@ -3,7 +3,7 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="AR_ITEMVVO"
+  Name="Bulk_IssueSlipNoVVO"
   Version="12.2.1.11.57"
   InheritPersonalization="merge"
   BindingStyle="OracleName"
@@ -15,53 +15,29 @@
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="common.viwes.AR_ITEMVVO_LABEL"/>
+        ResId="common.viwes.Bulk_IssueSlipNoVVO_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="P272_UNIT"
+    Name="P279_UNIT"
     Kind="where"
     Type="java.lang.String"/>
-  <Variable
-    Name="P272_LOCATION"
-    Kind="where"
-    Type="java.lang.String"/>
-  <Variable
-    Name="P272_ITEM_GROUP"
-    Kind="where"
-    Type="java.lang.String"/>
-  <Variable
-    Name="P272_ITEM_S_GROUP"
-    Kind="where"
-    Type="java.lang.String"/>
-  <SQLQuery><![CDATA[With Item_list 
-AS 
-(Select 'ALL' ITEM_CD, 'ALL' ITEM_NAME, 1 SN 
-  From DUAL 
-Union ALL 
-Select ITEM_CD, ITEM_DESC ITEM_NAME, 2 SN 
-  From VW_ALL_ITEM_MAS 
- Where Unit_Cd = :P272_UNIT 
-   And DEFAULT_LOC = :P272_LOCATION 
-   AND GROUP_CODE = DECODE(NVL(:P272_ITEM_GROUP, 'ALL'), 'ALL', GROUP_CODE, :P272_ITEM_GROUP) 
-   AND SUB_GRP_CD = DECODE(NVL(:P272_ITEM_S_GROUP, 'ALL'), 'ALL', SUB_GRP_CD, :P272_ITEM_S_GROUP) 
-) 
-Select ITEM_CD, ITEM_NAME 
-  From Item_List   
- Order BY SN, ITEM_NAME]]></SQLQuery>
+  <SQLQuery><![CDATA[SELECT DISTINCT SLIP_NO ISSUE_SLIP_NO, SLIP_NO  FROM ISS_HSLIP 
+ WHERE UNIT_CD = :P279_UNIT 
+ ORDER BY 1]]></SQLQuery>
   <ViewAttribute
-    Name="ItemCd"
+    Name="IssueSlipNo"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
     Precision="255"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    AliasName="ITEM_CD"
-    Expression="ITEM_CD"
+    AliasName="ISSUE_SLIP_NO"
+    Expression="ISSUE_SLIP_NO"
     SQLType="VARCHAR">
     <DesignTime>
-      <Attr Name="_DisplaySize" Value="30"/>
+      <Attr Name="_DisplaySize" Value="15"/>
     </DesignTime>
     <Properties>
       <SchemaBasedProperties>
@@ -71,18 +47,18 @@ Select ITEM_CD, ITEM_NAME
     </Properties>
   </ViewAttribute>
   <ViewAttribute
-    Name="ItemName"
+    Name="SlipNo"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="120"
+    Precision="15"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    AliasName="ITEM_NAME"
-    Expression="ITEM_NAME"
+    AliasName="SLIP_NO"
+    Expression="SLIP_NO"
     SQLType="VARCHAR">
     <DesignTime>
-      <Attr Name="_DisplaySize" Value="120"/>
+      <Attr Name="_DisplaySize" Value="15"/>
     </DesignTime>
     <Properties>
       <SchemaBasedProperties>

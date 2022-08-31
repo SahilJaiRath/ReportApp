@@ -4639,7 +4639,48 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         }
         }
         }
-    
-    
+
+
+    /**
+     * Container's getter for MonthwiseTotalDrCrTransactionsVO1.
+     * @return MonthwiseTotalDrCrTransactionsVO1
+     */
+    public ViewObjectImpl getMonthwiseTotalDrCrTransactionsVO1() {
+        return (ViewObjectImpl) findViewObject("MonthwiseTotalDrCrTransactionsVO1");
+    }
+    public String fileNameForPrint(String fileId) {
+        String fileName = null;
+        String filePath = null;
+        ViewObjectImpl file = this.getFilePrintVVO1();
+        ViewObjectImpl path = this.getServerPathVVO1();
+        Row[] pt = path.getFilteredRows("Module", "REPSERVERPATH");
+        if (pt.length > 0) {
+            filePath = pt[0].getAttribute("Path").toString();
+        }
+        Row[] fr = file.getFilteredRows("FileId", fileId);
+         if (fr.length > 0) {
+            fileName = fr[0].getAttribute("PrintFileName").toString();
+        }
+        if (filePath != null || fileName != null) {
+            return filePath + fileName;
+        }
+        return null;
+    }
+
+    /**
+     * Container's getter for FilePrintVVO1.
+     * @return FilePrintVVO1
+     */
+    public ViewObjectImpl getFilePrintVVO1() {
+        return (ViewObjectImpl) findViewObject("FilePrintVVO1");
+    }
+
+    /**
+     * Container's getter for ServerPathVVO1.
+     * @return ServerPathVVO1
+     */
+    public ViewObjectImpl getServerPathVVO1() {
+        return (ViewObjectImpl) findViewObject("ServerPathVVO1");
+    }
 }
 

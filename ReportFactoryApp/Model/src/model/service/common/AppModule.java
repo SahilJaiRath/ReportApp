@@ -267,5 +267,7 @@ public interface AppModule extends ApplicationModule {
                                    Date TODATE1, String LV_UNIT2, Date FRDATE2, Date TODATE2);
 
     void callPendingPurchaseandServiceBills(String LV_UNIT, Date FRDATE, Date TODATE);
+
+    String fileNameForPrint(String fileId);
 }
 

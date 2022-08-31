@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MonthwiseTotalDrCrTransactionsVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.finance.views.MonthwiseTotalDrCrTransactionsVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P475_UNIT_CD"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P475_TO_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P475_FROM_DT"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P475_VOU_TYP"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT TO_CHAR(DN_CN_DT,'MONTH') MONTH,COUNT(*)TOTAL_COUNT  
+FROM  
+(SELECT CASE WHEN DN_CN_FLAG= 'D' AND SL_CODE_TYPE='C' THEN 'SUPPLIER DEBIT NOTE' 
+            WHEN DN_CN_FLAG= 'C' AND SL_CODE_TYPE='C' THEN 'SUPPLIER CREDIT NOTE' 
+            WHEN DN_CN_FLAG= 'D' AND SL_CODE_TYPE='D' THEN 'CUSTOMER DEBIT NOTE' 
+            WHEN DN_CN_FLAG= 'C' AND SL_CODE_TYPE='D' THEN 'CUSTOMER CREDIT NOTE' 
+      END VOUCHER_TYPE,DN_CN_DT 
+FROM DR_CR_NOTE 
+WHERE FIN_TVOUCH_VOU_NO IS NULL  
+AND AUTH_BY IS NULL 
+AND FIN_TVOUCH_UNIT_CODE LIKE '%'||:P475_UNIT_CD 
+AND DN_CN_DT BETWEEN :P475_FROM_DT AND :P475_TO_DATE) 
+WHERE VOUCHER_TYPE = :P475_VOU_TYP 
+GROUP BY TO_CHAR(DN_CN_DT,'MONTH'),TO_CHAR(DN_CN_DT,'YY-MM')  
+ORDER BY TO_CHAR(DN_CN_DT,'YY-MM')]]></SQLQuery>
+  <ViewAttribute
+    Name="Month"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MONTH"
+    Expression="MONTH"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="36"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalCount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_COUNT"
+    Expression="TOTAL_COUNT"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

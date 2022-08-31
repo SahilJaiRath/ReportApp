@@ -205,6 +205,7 @@
     <page path="/InventoryPage/StockAsOnDate.jsff" usageId="bspl_reportfactory_view_StockAsOnDatePageDef"/>
     <page path="/InventoryPage/ProductShortageAndBatch.jsff"
           usageId="bspl_reportfactory_view_ProductShortageAndBatchPageDef"/>
+    <page path="/InventoryPage/BulkLevelPrint.jsff" usageId="bspl_reportfactory_view_BulkLevelPrintPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="bspl_reportfactory_view_PartyBalancePageDef" path="FinancePage.PartyBalancePageDef"/>
@@ -397,6 +398,7 @@
     <page id="bspl_reportfactory_view_StockAsOnDatePageDef" path="InventoryPage.StockAsOnDatePageDef"/>
     <page id="bspl_reportfactory_view_ProductShortageAndBatchPageDef"
           path="InventoryPage.ProductShortageAndBatchPageDef"/>
+    <page id="bspl_reportfactory_view_BulkLevelPrintPageDef" path="InventoryPage.BulkLevelPrintPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="model.service"
