@@ -1,5 +1,7 @@
 package bspl.reportfactory.view;
 
+import bspl.reportfactory.bean.ADFUtils;
+
 import java.util.Map;
 import java.util.Random;
 
@@ -25,7 +27,17 @@ public class ProductShortageandBatchBean {
     }
     
     private static final ADFLogger logger = ADFLogger.createADFLogger(AppModuleImpl.class);
-
+    private String jaspeReportName;
+    public String getJaspeReportName() 
+    {
+        String path = ADFUtils.jasperReportFileName("MTL0000000200");
+        System.out.println("Inside Getter of  Path: " + path);
+        if (path != null) 
+        {
+            return path;
+        }
+        return jaspeReportName;
+    }
     public void onClickButton(ActionEvent actionEvent) {
         DCIteratorBinding pvIter = (DCIteratorBinding) getBindings().get("DummyVVO1Iterator");
         String Unit = (String) pvIter.getCurrentRow().getAttribute("UnitCode");
@@ -41,10 +53,12 @@ public class ProductShortageandBatchBean {
         int SID = rand.nextInt(9023632) + 1000000;
         
         System.out.println("==========="+SID);
-        ADFContext adfCtx = ADFContext.getCurrent();
-        Map pageFlowScope = adfCtx.getPageFlowScope();
-        Object val = pageFlowScope.put("SID", SID);
+//        ADFContext adfCtx = ADFContext.getCurrent();
+//        Map pageFlowScope = adfCtx.getPageFlowScope();
+//        Object val = pageFlowScope.put("SID", SID);
+        ADFUtils.setEL("#{pageFlowScope.SID}", SID);
         
+        String EMP=(String) ADFUtils.resolveExpression("#{pageFlowScope.empCode}");
         System.out.println("Parameters -- UnitCode-" + Unit + "LV_LocWip-" + ProdCode + "ProductShortageandBatch_ProductName-" );
         
         
@@ -63,9 +77,10 @@ public class ProductShortageandBatchBean {
         
         
     }
+
+    public void setJaspeReportName(String jaspeReportName) {
+        this.jaspeReportName = jaspeReportName;
+    }
 }
-    
-    
-    
-    
+
 

@@ -16,19 +16,18 @@
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" id="gc2">
           <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
-                        required="#{bindings.fromDate.hints.mandatory}"
                         columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
                         id="id2" contentStyle="width:180.0px;"
-                               labelStyle="width:100px" autoSubmit="true">
+                               labelStyle="width:100px" autoSubmit="true" showRequired="true" required="true">
             <f:validator binding="#{bindings.fromDate.validator}"/>
             <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
           </af:inputDate>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" id="gc3">
           <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
-                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
+                         columns="#{bindings.toDate.hints.displayWidth}"
                         shortDesc="#{bindings.toDate.hints.tooltip}" id="id1" contentStyle="width:180.0px;"
-                               labelStyle="width:100px" autoSubmit="true">
+                               labelStyle="width:100px" autoSubmit="true" showRequired="true" required="true">
             <f:validator binding="#{bindings.toDate.validator}"/>
             <af:convertDateTime pattern="#{bindings.toDate.format}"/>
           </af:inputDate>
@@ -40,7 +39,8 @@
           <af:inputComboboxListOfValues id="lOCId" popupTitle="Search and Select: #{bindings.LOC.hints.label}"
                                         value="#{bindings.LOC.inputValue}" label="Location"
                                         model="#{bindings.LOC.listOfValuesModel}"
-                                        required="#{bindings.LOC.hints.mandatory}"
+                                        showRequired="true" required="true"
+                                        
                                         columns="#{bindings.LOC.hints.displayWidth}"
                                         shortDesc="#{bindings.LOC.hints.tooltip}" contentStyle="width:180.0px;"
                                labelStyle="width:100px" autoSubmit="true">
@@ -51,7 +51,7 @@
           <af:inputComboboxListOfValues id="aR_GROUPId" popupTitle="Search and Select: #{bindings.AR_GROUP.hints.label}"
                                         value="#{bindings.AR_GROUP.inputValue}" label="Group"
                                         model="#{bindings.AR_GROUP.listOfValuesModel}"
-                                        required="#{bindings.AR_GROUP.hints.mandatory}"
+                                        showRequired="true" required="true"
                                         columns="#{bindings.AR_GROUP.hints.displayWidth}"
                                         shortDesc="#{bindings.AR_GROUP.hints.tooltip}" autoSubmit="true" contentStyle="width:180.0px;"
                                labelStyle="width:100px" >
@@ -64,21 +64,25 @@
                                         value="#{bindings.AR_SubGroup.inputValue}"
                                         label="Sub Group"
                                         model="#{bindings.AR_SubGroup.listOfValuesModel}"
-                                        required="#{bindings.AR_SubGroup.hints.mandatory}"
+                                       showRequired="true" required="true"
                                         columns="#{bindings.AR_SubGroup.hints.displayWidth}"
                                         shortDesc="#{bindings.AR_SubGroup.hints.tooltip}" autoSubmit="true" contentStyle="width:180.0px;"
                                labelStyle="width:100px" >
             <f:validator binding="#{bindings.AR_SubGroup.validator}"/>
           </af:inputComboboxListOfValues>
         </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc8"/>
+        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc8">
+          <af:button text="Execute" id="b2"
+                     disabled="#{!bindings.callARwiseItemStockLedger.enabled}"
+                     actionListener="#{ArWiseItemStockLedgerBean.onClickButton}"/>
+        </af:gridCell>
       </af:gridRow>
       <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
         <af:gridCell marginStart="5px" width="25%" id="gc9">
           <af:inputComboboxListOfValues id="aR_ITEMId" popupTitle="Search and Select: #{bindings.AR_ITEM.hints.label}"
                                         value="#{bindings.AR_ITEM.inputValue}" label="Item"
                                         model="#{bindings.AR_ITEM.listOfValuesModel}"
-                                        required="#{bindings.AR_ITEM.hints.mandatory}"
+                                       showRequired="true" required="true"
                                         columns="#{bindings.AR_ITEM.hints.displayWidth}"
                                         shortDesc="#{bindings.AR_ITEM.hints.tooltip}" autoSubmit="true" contentStyle="width:180.0px;"
                                labelStyle="width:100px" >
@@ -89,7 +93,7 @@
           <af:inputComboboxListOfValues id="aR_AR_NOId" popupTitle="Search and Select: #{bindings.AR_AR_NO.hints.label}"
                                         value="#{bindings.AR_AR_NO.inputValue}" label="AR No"
                                         model="#{bindings.AR_AR_NO.listOfValuesModel}"
-                                        required="#{bindings.AR_AR_NO.hints.mandatory}"
+                                        showRequired="true" required="true"
                                         columns="#{bindings.AR_AR_NO.hints.displayWidth}"
                                         shortDesc="#{bindings.AR_AR_NO.hints.tooltip}" autoSubmit="true" contentStyle="width:180.0px;"
                                labelStyle="width:100px" >
@@ -98,17 +102,19 @@
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" id="gc11">
           <af:selectOneChoice value="#{bindings.rep_type.inputValue}" label="Report Type"
-                              required="#{bindings.rep_type.hints.mandatory}" autoSubmit="true"
+                              autoSubmit="true"
                               shortDesc="#{bindings.rep_type.hints.tooltip}" id="soc2" contentStyle="width:200.0px;"
-                               labelStyle="width:100px" >
+                               labelStyle="width:100px">
             <f:selectItems value="#{bindings.rep_type.items}" id="si2"/>
             <f:validator binding="#{bindings.rep_type.validator}"/>
           </af:selectOneChoice>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc12">
           <af:button text="Get Report" id="b1"
-          
-            destination="/reports/ServletClass?defpath=#{ARWiseItemStockLedgerBean.jaspeReportName}&amp;RepFormat=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{bindings.AR_AR_NO.inputValue}&amp;RepName=ARW&amp;ItemCode=#{bindings.AR_ITEM.inputValue}&amp;ItemGroup=#{bindings.AR_GROUP.inputValue}&amp;SubGroup=#{bindings.AR_SubGroup.inputValue}&amp;LocCode=#{bindings.LOC.inputValue}&amp;FromDate=#{bindings.fromDate.inputValue}&amp;ToDate=#{bindings.toDate.inputValue}&amp;EmpCode=#{pageFlowScope.empCode}">
+          targetFrame="_blank"
+            destination="/reports/ServletClass?defpath=#{ARWiseItemStockLedgerBean.jaspeReportName}&amp;RepFormat=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{bindings.AR_AR_NO.inputValue}&amp;RepName=ARW&amp;ItemCode=#{bindings.AR_ITEM.inputValue}&amp;ItemGroup=#{bindings.AR_GROUP.inputValue}&amp;SubGroup=#{bindings.AR_SubGroup.inputValue}&amp;LocCode=#{bindings.LOC.inputValue}&amp;FromDate=#{bindings.fromDate.inputValue}&amp;ToDate=#{bindings.toDate.inputValue}&amp;EmpCode=#{pageFlowScope.empCode}&amp;SID=#{pageFlowScope.SID}"
+                   disabled="#{bindings.ARwiseItemStockLedgerVO1Iterator.estimatedRowCount==0}"
+                     partialTriggers="pc1:t1 soc2">
           </af:button>
           
         </af:gridCell>
@@ -116,9 +122,144 @@
     </af:panelGridLayout>
     <af:spacer width="10" height="10" id="s2"/>
   </af:panelHeader>
-  <af:panelCollection id="pc1"  visible="false" styleClass="AFStretchWidth">
+  <af:panelCollection id="pc1"  styleClass="AFStretchWidth">
     <f:facet name="menus"/>
     <f:facet name="toolbar"/>
     <f:facet name="statusbar"/>
+    <af:table value="#{bindings.ARwiseItemStockLedgerVO1.collectionModel}" var="row"
+              rows="#{bindings.ARwiseItemStockLedgerVO1.rangeSize}"
+              emptyText="#{bindings.ARwiseItemStockLedgerVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.ARwiseItemStockLedgerVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ARwiseItemStockLedgerVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.ARwiseItemStockLedgerVO1.rangeSize}"
+              filterModel="#{bindings.ARwiseItemStockLedgerVO1Query.queryDescriptor}" filterVisible="false"
+              queryListener="#{bindings.ARwiseItemStockLedgerVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.Line.name}" filterable="true" sortable="true"
+                 headerText="Line" id="c1">
+        <af:outputText value="#{row.Line}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.Line.tooltip}" id="ot1">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ARwiseItemStockLedgerVO1.hints.Line.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.UnitCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.UnitCd.label}" id="c2">
+        <af:outputText value="#{row.UnitCd}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.UnitCd.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.LocCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.LocCd.label}" id="c3">
+        <af:outputText value="#{row.LocCd}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.LocCd.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemGroup.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemGroup.label}" id="c4">
+        <af:outputText value="#{row.ItemGroup}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemGroup.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.SubGrpDesc.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.SubGrpDesc.label}" id="c5">
+        <af:outputText value="#{row.SubGrpDesc}"
+                       shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.SubGrpDesc.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemCd.label}" id="c6" partialTriggers=":::soc2">
+        <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemCd.tooltip}"
+                       id="ot6"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemDesc.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemDesc.label}" id="c7">
+        <af:outputText value="#{row.ItemDesc}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemDesc.tooltip}"
+                       id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemUom.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemUom.label}" id="c8">
+        <af:outputText value="#{row.ItemUom}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.ItemUom.tooltip}"
+                       id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.TranType.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.TranType.label}" id="c9">
+        <af:outputText value="#{row.TranType}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.TranType.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.DocNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.DocNo.label}" id="c10">
+        <af:outputText value="#{row.DocNo}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.DocNo.tooltip}"
+                       id="ot10"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.DocDt.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.DocDt.label}" id="c11">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ARwiseItemStockLedgerVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DocDt.value}"
+                        id="id3">
+            <af:convertDateTime pattern="#{bindings.ARwiseItemStockLedgerVO1.hints.DocDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DocDt}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.DocDt.tooltip}"
+                       id="ot11">
+          <af:convertDateTime pattern="#{bindings.ARwiseItemStockLedgerVO1.hints.DocDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.VenCd.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.VenCd.label}" id="c12">
+        <af:outputText value="#{row.VenCd}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.VenCd.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.VenName.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.VenName.label}" id="c13">
+        <af:outputText value="#{row.VenName}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.VenName.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.BillNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.BillNo.label}" id="c14">
+        <af:outputText value="#{row.BillNo}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.BillNo.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.ArNoBatchNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.ArNoBatchNo.label}" id="c15">
+        <af:outputText value="#{row.ArNoBatchNo}"
+                       shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.ArNoBatchNo.tooltip}" id="ot15"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.ArDtBatchDt.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.ArDtBatchDt.label}" id="c16">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.ARwiseItemStockLedgerVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ArDtBatchDt.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.ARwiseItemStockLedgerVO1.hints.ArDtBatchDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ArDtBatchDt}"
+                       shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.ArDtBatchDt.tooltip}" id="ot16">
+          <af:convertDateTime pattern="#{bindings.ARwiseItemStockLedgerVO1.hints.ArDtBatchDt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.Rate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.Rate.label}" id="c17">
+        <af:outputText value="#{row.Rate}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.Rate.tooltip}"
+                       id="ot17">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ARwiseItemStockLedgerVO1.hints.Rate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.RecQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.RecQty.label}" id="c18">
+        <af:outputText value="#{row.RecQty}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.RecQty.tooltip}"
+                       id="ot18"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.IssQty.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.IssQty.label}" id="c19">
+        <af:outputText value="#{row.IssQty}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.IssQty.tooltip}"
+                       id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.Balance.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.Balance.label}" id="c20">
+        <af:outputText value="#{row.Balance}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.Balance.tooltip}"
+                       id="ot20">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ARwiseItemStockLedgerVO1.hints.Balance.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.ARwiseItemStockLedgerVO1.hints.BatchNo.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.ARwiseItemStockLedgerVO1.hints.BatchNo.label}" id="c21">
+        <af:outputText value="#{row.BatchNo}" shortDesc="#{bindings.ARwiseItemStockLedgerVO1.hints.BatchNo.tooltip}"
+                       id="ot21"/>
+      </af:column>
+    </af:table>
   </af:panelCollection>
 </jsp:root>

@@ -99,85 +99,91 @@
       <af:gridRow marginTop="5px" height="auto" id="gr4">
         <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc8">
           <af:spacer width="10" height="10" id="s5"/>
-          <af:panelCollection id="pc3" inlineStyle="width:340px;">
-            <f:facet name="menus"/>
-            <f:facet name="toolbar">
-              <af:toolbar id="t4">
-                <af:button text="Export To Excel" id="b3">
-                  <af:exportCollectionActionListener type="excelHTML" exportedId="t3"
-                                                     filename="Pending Debit Notes.xls"/>
-                </af:button>
-              </af:toolbar>
-            </f:facet>
-            <f:facet name="statusbar"/>
-            <af:table value="#{bindings.PendingDebitNotesVO1.collectionModel}" var="row"
-                      rows="#{bindings.PendingDebitNotesVO1.rangeSize}"
-                      emptyText="#{bindings.PendingDebitNotesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
-                      rowBandingInterval="0"
-                      selectedRowKeys="#{bindings.PendingDebitNotesVO1.collectionModel.selectedRow}"
-                      selectionListener="#{bindings.PendingDebitNotesVO1.collectionModel.makeCurrent}"
-                      rowSelection="single" fetchSize="#{bindings.PendingDebitNotesVO1.rangeSize}"
-                      filterModel="#{bindings.PendingDebitNotesVO1Query.queryDescriptor}" filterVisible="true"
-                      queryListener="#{bindings.PendingDebitNotesVO1Query.processQuery}" varStatus="vs" id="t3"
-                      columnStretching="column:c3">
-              <af:column sortProperty="#{bindings.PendingDebitNotesVO1.hints.VoucherType.name}" filterable="true"
-                         sortable="true" headerText="Voucher Type" id="c3">
-                <af:outputText value="#{row.VoucherType}"
-                               shortDesc="#{bindings.PendingDebitNotesVO1.hints.VoucherType.tooltip}" id="ot3"/>
-              </af:column>
-              <af:column sortProperty="#{bindings.PendingDebitNotesVO1.hints.TotalCount.name}" filterable="true"
-                         sortable="true" headerText="Total Count" id="c4">
-                <af:outputText value="#{row.TotalCount}"
-                               shortDesc="#{bindings.PendingDebitNotesVO1.hints.TotalCount.tooltip}" id="ot4">
-                  <af:convertNumber groupingUsed="false"
-                                    pattern="#{bindings.PendingDebitNotesVO1.hints.TotalCount.format}"/>
-                </af:outputText>
-              </af:column>
-            </af:table>
-          </af:panelCollection>
+          <af:panelHeader text="Pending Debit Note" id="ph3">
+            <af:spacer width="10" height="10" id="s6"/>
+            <af:panelCollection id="pc3" inlineStyle="width:340px;">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t4">
+                  <af:button text="Export To Excel" id="b3">
+                    <af:exportCollectionActionListener type="excelHTML" exportedId="t3"
+                                                       filename="Pending Debit Notes.xls"/>
+                  </af:button>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.PendingDebitNotesVO1.collectionModel}" var="row"
+                        rows="#{bindings.PendingDebitNotesVO1.rangeSize}"
+                        emptyText="#{bindings.PendingDebitNotesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.PendingDebitNotesVO1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.PendingDebitNotesVO1.collectionModel.makeCurrent}"
+                        rowSelection="single" fetchSize="#{bindings.PendingDebitNotesVO1.rangeSize}"
+                        filterModel="#{bindings.PendingDebitNotesVO1Query.queryDescriptor}" filterVisible="true"
+                        queryListener="#{bindings.PendingDebitNotesVO1Query.processQuery}" varStatus="vs" id="t3"
+                        columnStretching="column:c3">
+                <af:column sortProperty="#{bindings.PendingDebitNotesVO1.hints.VoucherType.name}" filterable="true"
+                           sortable="true" headerText="Voucher Type" id="c3">
+                  <af:outputText value="#{row.VoucherType}"
+                                 shortDesc="#{bindings.PendingDebitNotesVO1.hints.VoucherType.tooltip}" id="ot3"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.PendingDebitNotesVO1.hints.TotalCount.name}" filterable="true"
+                           sortable="true" headerText="Total Count" id="c4">
+                  <af:outputText value="#{row.TotalCount}"
+                                 shortDesc="#{bindings.PendingDebitNotesVO1.hints.TotalCount.tooltip}" id="ot4">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.PendingDebitNotesVO1.hints.TotalCount.format}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelHeader>
         </af:gridCell>
       </af:gridRow>
       <af:gridRow marginTop="5px" height="auto" id="gr5">
         <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc9">
-          <af:panelCollection id="pc4" inlineStyle="width:350px;">
-            <f:facet name="menus"/>
-            <f:facet name="toolbar">
-              <af:toolbar id="t6">
-                <af:button text="Export To Excel " id="b4">
-                  <af:exportCollectionActionListener type="excelHTML" exportedId="t5"
-                                                     filename="Pending Purchase and Service Bills.xls"/>
-                </af:button>
-              </af:toolbar>
-            </f:facet>
-            <f:facet name="statusbar"/>
-            <af:table value="#{bindings.PendingPurchaseandServiceBillsVO1.collectionModel}" var="row"
-                      rows="#{bindings.PendingPurchaseandServiceBillsVO1.rangeSize}"
-                      emptyText="#{bindings.PendingPurchaseandServiceBillsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
-                      rowBandingInterval="0"
-                      selectedRowKeys="#{bindings.PendingPurchaseandServiceBillsVO1.collectionModel.selectedRow}"
-                      selectionListener="#{bindings.PendingPurchaseandServiceBillsVO1.collectionModel.makeCurrent}"
-                      rowSelection="single" fetchSize="#{bindings.PendingPurchaseandServiceBillsVO1.rangeSize}"
-                      filterModel="#{bindings.PendingPurchaseandServiceBillsVO1Query.queryDescriptor}"
-                      filterVisible="true"
-                      queryListener="#{bindings.PendingPurchaseandServiceBillsVO1Query.processQuery}" varStatus="vs"
-                      id="t5" columnStretching="column:c5">
-              <af:column sortProperty="#{bindings.PendingPurchaseandServiceBillsVO1.hints.VoucherType.name}"
-                         filterable="true" sortable="true" headerText="Voucher Type" id="c5">
-                <af:outputText value="#{row.VoucherType}"
-                               shortDesc="#{bindings.PendingPurchaseandServiceBillsVO1.hints.VoucherType.tooltip}"
-                               id="ot5"/>
-              </af:column>
-              <af:column sortProperty="#{bindings.PendingPurchaseandServiceBillsVO1.hints.TotalCount.name}"
-                         filterable="true" sortable="true" headerText="Total Count" id="c6">
-                <af:outputText value="#{row.TotalCount}"
-                               shortDesc="#{bindings.PendingPurchaseandServiceBillsVO1.hints.TotalCount.tooltip}"
-                               id="ot6">
-                  <af:convertNumber groupingUsed="false"
-                                    pattern="#{bindings.PendingPurchaseandServiceBillsVO1.hints.TotalCount.format}"/>
-                </af:outputText>
-              </af:column>
-            </af:table>
-          </af:panelCollection>
+          <af:panelHeader text="Pending Purchase and Service Bill" id="ph2">
+            <af:spacer width="10" height="10" id="s7"/>
+            <af:panelCollection id="pc4" inlineStyle="width:350px;">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t6">
+                  <af:button text="Export To Excel " id="b4">
+                    <af:exportCollectionActionListener type="excelHTML" exportedId="t5"
+                                                       filename="Pending Purchase and Service Bills.xls"/>
+                  </af:button>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.PendingPurchaseandServiceBillsVO1.collectionModel}" var="row"
+                        rows="#{bindings.PendingPurchaseandServiceBillsVO1.rangeSize}"
+                        emptyText="#{bindings.PendingPurchaseandServiceBillsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.PendingPurchaseandServiceBillsVO1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.PendingPurchaseandServiceBillsVO1.collectionModel.makeCurrent}"
+                        rowSelection="single" fetchSize="#{bindings.PendingPurchaseandServiceBillsVO1.rangeSize}"
+                        filterModel="#{bindings.PendingPurchaseandServiceBillsVO1Query.queryDescriptor}"
+                        filterVisible="true"
+                        queryListener="#{bindings.PendingPurchaseandServiceBillsVO1Query.processQuery}" varStatus="vs"
+                        id="t5" columnStretching="column:c5">
+                <af:column sortProperty="#{bindings.PendingPurchaseandServiceBillsVO1.hints.VoucherType.name}"
+                           filterable="true" sortable="true" headerText="Voucher Type" id="c5">
+                  <af:outputText value="#{row.VoucherType}"
+                                 shortDesc="#{bindings.PendingPurchaseandServiceBillsVO1.hints.VoucherType.tooltip}"
+                                 id="ot5"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.PendingPurchaseandServiceBillsVO1.hints.TotalCount.name}"
+                           filterable="true" sortable="true" headerText="Total Count" id="c6">
+                  <af:outputText value="#{row.TotalCount}"
+                                 shortDesc="#{bindings.PendingPurchaseandServiceBillsVO1.hints.TotalCount.tooltip}"
+                                 id="ot6">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.PendingPurchaseandServiceBillsVO1.hints.TotalCount.format}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelHeader>
         </af:gridCell>
       </af:gridRow>
       <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr6">

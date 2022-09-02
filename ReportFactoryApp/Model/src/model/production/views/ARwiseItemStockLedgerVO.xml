@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ARwiseItemStockLedgerVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.production.views.ARwiseItemStockLedgerVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P272_ITEM_CD"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P272_ITEM_GROUP"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P272_ITEM_S_GROUP"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P272_AR_NO"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P272_TO_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P272_FROM_DATE"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P_USER_NAME"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindSession"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[With OPEN_LOT_STOCK_DTL    
+AS    
+(SELECT 1 SN, UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM    
+      , 'R' TRAN_TYPE, 'OPENING' DOC_NO, TO_Date(:P272_FROM_DATE) DOC_DT, NULL VEN_CD, NULL VEN_NAME, NULL BILL_NO    
+      , NULL AR_NO_Batch_No, NULL AR_DT_Batch_DT    
+      , NULL RATE, SUM(Decode(TRAN_TYPE, 'R', QTY, -QTY)) REC_QTY, 0 ISS_QTY    
+      , GROUP_CODE, SUB_GRP_CD    
+   FROM REP_LOT_STOCK_DTL    
+  WHERE CREATED_BY = :P_USER_NAME    
+    AND SESSION_ID = :bindSession    
+    AND Trunc(DOC_DT) < to_date(:P272_FROM_DATE)    
+  Group by UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM, GROUP_CODE, SUB_GRP_CD    
+Union ALL    
+SELECT 1 SN, UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM    
+      , 'R' TRAN_TYPE, 'OPENING' DOC_NO, TO_Date(:P272_FROM_DATE) DOC_DT, NULL VEN_CD, NULL VEN_NAME, NULL BILL_NO    
+      , NULL AR_NO_Batch_No, NULL AR_DT_Batch_DT    
+      , NULL RATE, 0 REC_QTY, 0 ISS_QTY    
+      , GROUP_CODE, SUB_GRP_CD    
+   FROM REP_LOT_STOCK_DTL    
+  WHERE CREATED_BY = :P_USER_NAME    
+    AND SESSION_ID = :bindSession    
+  Group by UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM, GROUP_CODE, SUB_GRP_CD)    
+, Ar_ledger_Dtl    
+As    
+(SELECT 1 SN, UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM    
+      , 'R' TRAN_TYPE, 'OPENING' DOC_NO, DOC_DT, NULL VEN_CD, NULL VEN_NAME, NULL BILL_NO    
+      , NULL AR_NO_Batch_No, NULL AR_DT_Batch_DT    
+      , NULL RATE, SUM(REC_QTY) REC_QTY, 0 ISS_QTY    
+      , GROUP_CODE, SUB_GRP_CD, '-' Batch_NO    
+   FROM OPEN_LOT_STOCK_DTL    
+  Group by UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM, DOC_DT, GROUP_CODE, SUB_GRP_CD    
+  UNION ALL     
+ SELECT 2 SN, UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM    
+       , TRAN_TYPE, DOC_NO, DOC_DT, VEN_CD, VEN_NAME, BILL_NO    
+       , NVL(AR_NO, HEAT_NO) AR_NO_Batch_No, NVL(AR_DT, MANF_DT) AR_DT_Batch_DT    
+       , RATE, Decode(TRAN_TYPE, 'R', QTY, 0) REC_QTY, Decode(TRAN_TYPE, 'I', QTY, 0) ISS_QTY    
+       , GROUP_CODE, SUB_GRP_CD    
+       , Decode(GROUP_CODE, 15, HEAT_NO, 99, HEAT_NO, '-') Batch_NO    
+    FROM REP_LOT_STOCK_DTL    
+   WHERE CREATED_BY = :P_USER_NAME    
+     AND SESSION_ID = :bindSession    
+     AND Trunc(DOC_DT) between  to_date(:P272_FROM_DATE) AND  to_date(:P272_TO_DATE)    
+   UNION ALL    
+  SELECT 3 SN, UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM    
+       , 'R' TRAN_TYPE, 'CLOSING' DOC_NO, TO_Date(:P272_TO_DATE) DOC_DT, NULL VEN_CD, NULL VEN_NAME, NULL BILL_NO    
+       , NULL AR_NO_Batch_No, NULL AR_DT_Batch_DT    
+       , NULL RATE, SUM(Decode(TRAN_TYPE, 'R', QTY, -QTY)) REC_QTY, 0 ISS_QTY    
+       , GROUP_CODE, SUB_GRP_CD, '-' Batch_NO    
+    FROM REP_LOT_STOCK_DTL    
+   WHERE CREATED_BY = :P_USER_NAME    
+     AND SESSION_ID = :bindSession    
+     AND Trunc(DOC_DT) <=  to_date(:P272_TO_DATE)    
+     --AND 1 <> 1    
+   Group by UNIT_CD, LOC_CD, ITEM_GROUP, SUB_GRP_DESC, ITEM_CD, ITEM_DESC, ITEM_UOM, GROUP_CODE, SUB_GRP_CD)    
+SELECT ROW_NUMBER()  OVER ( Partition By ALD.UNIT_CD, ALD.LOC_CD, ALD.ITEM_CD    
+                            ORDER BY ALD.UNIT_CD, ALD.LOC_CD, ALD.ITEM_CD    
+                      , ALD.SN, ALD.DOC_DT, ALD.TRAN_TYPE Desc, Rownum) LINE    
+     , ALD.UNIT_CD, ALD.LOC_CD, ALD.ITEM_GROUP, ALD.SUB_GRP_DESC, ALD.ITEM_CD, ALD.ITEM_DESC, ALD.ITEM_UOM    
+     , ALD.TRAN_TYPE, ALD.DOC_NO, ALD.DOC_DT, ALD.VEN_CD, ALD.VEN_NAME, ALD.BILL_NO    
+     , ALD.AR_NO_Batch_No, ALD.AR_DT_Batch_DT, ALD.RATE RATE    
+     , Decode(SN, 3, Null, NVL(ALD.REC_QTY,0)) REC_QTY    
+     , Decode(SN, 3, Null, NVL(ALD.ISS_QTY,0)) ISS_QTY    
+     , SUM(Decode(ALD.TRAN_TYPE, 'R', Decode(SN, 3, 0, NVL(ALD.REC_QTY,0)), -1*Decode(SN, 3, Null, NVL(ALD.ISS_QTY,0))))     
+            OVER (Partition By ALD.UNIT_CD, ALD.LOC_CD, ALD.ITEM_CD      
+                      ORDER BY ALD.UNIT_CD, ALD.LOC_CD, ALD.ITEM_CD    
+                      , ALD.SN, ALD.DOC_DT, ALD.TRAN_TYPE Desc, Rownum) BALANCE    
+     , ALD.Batch_NO    
+  FROM AR_LEDGER_DTL ALD     
+ Where ALD.ITEM_CD = Decode(NVL(:P272_ITEM_CD, 'ALL'), 'ALL', ALD.ITEM_CD, :P272_ITEM_CD)    
+   AND ALD.GROUP_CODE = DECODE(NVL(:P272_ITEM_GROUP, 'ALL'), 'ALL', GROUP_CODE, :P272_ITEM_GROUP)    
+   AND ALD.SUB_GRP_CD = DECODE(NVL(:P272_ITEM_S_GROUP, 'ALL'), 'ALL', SUB_GRP_CD, :P272_ITEM_S_GROUP)    
+   AND (ALD.AR_NO_Batch_No  = :P272_AR_NO OR 'ALL' = NVL(:P272_AR_NO, 'ALL'))    
+   --AND ALD.AR_NO_Batch_No = DECODE(NVL(:P272_AR_NO, 'ALL'), 'ALL', ALD.AR_NO_Batch_No, :P272_AR_NO)    
+ order By ALD.UNIT_CD, ALD.LOC_CD, ALD.ITEM_CD, ALD.SN, ALD.DOC_DT, ALD.TRAN_TYPE Desc, ALD.DOC_NO]]></SQLQuery>
+  <ViewAttribute
+    Name="Line"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LINE"
+    Expression="LINE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LocCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LOC_CD"
+    Expression="LOC_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemGroup"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_GROUP"
+    Expression="ITEM_GROUP"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubGrpDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="75"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUB_GRP_DESC"
+    Expression="SUB_GRP_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="75"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_CD"
+    Expression="ITEM_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESC"
+    Expression="ITEM_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemUom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_UOM"
+    Expression="ITEM_UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TranType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRAN_TYPE"
+    Expression="TRAN_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DOC_NO"
+    Expression="DOC_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="DOC_DT"
+    Expression="DOC_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="VenCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VEN_CD"
+    Expression="VEN_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VenName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VEN_NAME"
+    Expression="VEN_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BillNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_NO"
+    Expression="BILL_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ArNoBatchNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="45"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AR_NO_BATCH_NO"
+    Expression="AR_NO_BATCH_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ArDtBatchDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="AR_DT_BATCH_DT"
+    Expression="AR_DT_BATCH_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="Rate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RATE"
+    Expression="RATE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="RecQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REC_QTY"
+    Expression="REC_QTY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IssQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ISS_QTY"
+    Expression="ISS_QTY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Balance"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BALANCE"
+    Expression="BALANCE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BatchNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="45"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_NO"
+    Expression="BATCH_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

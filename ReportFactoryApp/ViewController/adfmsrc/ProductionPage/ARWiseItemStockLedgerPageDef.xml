@@ -5,6 +5,10 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="ARwiseItemStockLedgerVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="ARwiseItemStockLedgerVO1Iterator"/>
+    <searchRegion Binds="ARwiseItemStockLedgerVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ARwiseItemStockLedgerVO1Query"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="DummyVVO1Iterator" id="toDate">
@@ -26,5 +30,47 @@
     <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
           SelectItemValueMode="ListObject"/>
     <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_LOC" id="LOC"/>
+    <tree IterBinding="ARwiseItemStockLedgerVO1Iterator" id="ARwiseItemStockLedgerVO1">
+      <nodeDefinition DefName="model.production.views.ARwiseItemStockLedgerVO" Name="ARwiseItemStockLedgerVO10">
+        <AttrNames>
+          <Item Value="Line"/>
+          <Item Value="UnitCd"/>
+          <Item Value="LocCd"/>
+          <Item Value="ItemGroup"/>
+          <Item Value="SubGrpDesc"/>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="ItemUom"/>
+          <Item Value="TranType"/>
+          <Item Value="DocNo"/>
+          <Item Value="DocDt"/>
+          <Item Value="VenCd"/>
+          <Item Value="VenName"/>
+          <Item Value="BillNo"/>
+          <Item Value="ArNoBatchNo"/>
+          <Item Value="ArDtBatchDt"/>
+          <Item Value="Rate"/>
+          <Item Value="RecQty"/>
+          <Item Value="IssQty"/>
+          <Item Value="Balance"/>
+          <Item Value="BatchNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callARwiseItemStockLedger" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callARwiseItemStockLedger" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_LOCATION" NDType="java.lang.String"/>
+      <NamedData NDName="LV_GROUP" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SUBGROUP" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ITEM" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ARNO" NDType="java.lang.String"/>
+      <NamedData NDName="LV_REPTYPE" NDType="java.lang.String"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.Integer"/>
+      <NamedData NDName="FRDATE" NDType="java.util.Date"/>
+      <NamedData NDName="TODATE" NDType="java.util.Date"/>
+      <NamedData NDName="EMP_CD" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

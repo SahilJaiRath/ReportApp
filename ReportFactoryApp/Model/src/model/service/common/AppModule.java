@@ -269,5 +269,9 @@ public interface AppModule extends ApplicationModule {
     void callPendingPurchaseandServiceBills(String LV_UNIT, Date FRDATE, Date TODATE);
 
     String fileNameForPrint(String fileId);
+
+    void callARwiseItemStockLedger(String LV_UNIT, String LV_LOCATION, String LV_GROUP, String LV_SUBGROUP,
+                                   String LV_ITEM, String LV_ARNO, String LV_REPTYPE, Integer LV_SID, Date FRDATE,
+                                   Date TODATE, String EMP_CD);
 }
 

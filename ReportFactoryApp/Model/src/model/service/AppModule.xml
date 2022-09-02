@@ -449,6 +449,12 @@
   <ViewUsage
     Name="ServerPathVVO1"
     ViewObjectName="common.viwes.ServerPathVVO"/>
+  <ViewUsage
+    Name="BulkLabelPrintVO1"
+    ViewObjectName="model.inventory.views.BulkLabelPrintVO"/>
+  <ViewUsage
+    Name="ARwiseItemStockLedgerVO1"
+    ViewObjectName="model.production.views.ARwiseItemStockLedgerVO"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -2633,6 +2639,46 @@
         Type="java.lang.String"/>
       <Parameter
         Name="fileId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="callARwiseItemStockLedger"
+      MethodName="callARwiseItemStockLedger">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_LOCATION"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_GROUP"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_SUBGROUP"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_ITEM"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_ARNO"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_REPTYPE"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_SID"
+        Type="java.lang.Integer"/>
+      <Parameter
+        Name="FRDATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="TODATE"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="EMP_CD"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

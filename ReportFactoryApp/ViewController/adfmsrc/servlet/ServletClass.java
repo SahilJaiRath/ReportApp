@@ -1,5 +1,7 @@
 package servlet;
 
+import bspl.reportfactory.bean.ADFUtils;
+
 import java.awt.image.BufferedImage;
 
 import java.io.ByteArrayOutputStream;
@@ -65,6 +67,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
+
+import oracle.adf.share.ADFContext;
 
 @WebServlet(name = "ServletClass", urlPatterns = { "/reports/ServletClass" })
 public class ServletClass extends HttpServlet {
@@ -210,18 +214,89 @@ public class ServletClass extends HttpServlet {
         String reportName =null;
         String FilePath = null;
         BufferedImage image=null;
-        String DocNo = request.getParameter("DocNo").toString();
-        String UnitCode = request.getParameter("UnitCode").toString();
-        String RepFormat = request.getParameter("RepFormat").toString();
-        String RepName = request.getParameter("RepName").toString();
-        String ItemCode = request.getParameter("ItemCode").toString();
-        String ItemGroup = request.getParameter("ItemGroup").toString();
-        String SubGroup = request.getParameter("SubGroup").toString();
-        String LocCode = request.getParameter("LocCode").toString();
-        String FromDate = request.getParameter("FromDate").toString();
-        String ToDate = request.getParameter("ToDate").toString();
-        String EmpCode = request.getParameter("EmpCode").toString();
-
+        
+        String DocNo = null;
+        String UnitCode = null;
+        String RepFormat = null;
+        String RepName = null;
+        String ItemCode =  null;
+        String ItemGroup = null;
+        String SubGroup = null;
+        String LocCode =  null;
+        String FromDate = null;
+        String ToDate = null;
+        String EmpCode =  null;
+        String SID =  null;
+        String ReqQty = null;
+        
+        if(null==request.getParameter("DocNo")){
+            
+        }else{
+            DocNo = request.getParameter("DocNo").toString();
+        }
+        if(null==request.getParameter("UnitCode")){
+            
+        }else{
+            UnitCode = request.getParameter("UnitCode").toString();
+        }
+        if(null==request.getParameter("RepFormat")){
+            
+        }else{
+            RepFormat = request.getParameter("RepFormat").toString();
+        }
+        if(null==request.getParameter("RepName")){
+            
+        }else{
+            RepName = request.getParameter("RepName").toString();
+        }
+        if(null==request.getParameter("ItemCode")){
+            
+        }else{
+            ItemCode = request.getParameter("ItemCode").toString();
+        }
+        if(null==request.getParameter("ItemGroup")){
+            
+        }else{
+            ItemGroup = request.getParameter("ItemGroup").toString();
+        }
+        if(null==request.getParameter("SubGroup")){
+            
+        }else{
+            SubGroup = request.getParameter("SubGroup").toString();
+        }
+        if(null==request.getParameter("LocCode")){
+            
+        }else{
+            LocCode = request.getParameter("LocCode").toString();
+        }
+        if(null==request.getParameter("FromDate")){
+            
+        }else{
+            FromDate = request.getParameter("FromDate").toString();
+        }
+        if(null==request.getParameter("ToDate")){
+            
+        }else{
+            ToDate = request.getParameter("ToDate").toString();
+        }
+        
+        if(null==request.getParameter("EmpCode")){
+            
+        }else{
+            EmpCode = request.getParameter("EmpCode").toString();
+        }
+       
+        if(null==request.getParameter("SID")){
+            
+        }else{
+            SID = request.getParameter("SID").toString();
+        }
+        if(null==request.getParameter("ReqQty")){
+            
+        }else{
+            ReqQty = request.getParameter("ReqQty").toString();
+        }
+         
         try 
         {
             Context ctx = new InitialContext();
@@ -271,10 +346,6 @@ public class ServletClass extends HttpServlet {
                 parameters.put("p_unit", UnitCode);  
             }
            if(RepName.equals("ARW")){
-               
-               
-               
-               
                     parameters.put("P_AR_NO", DocNo);
                     parameters.put("P_UNIT_CD", UnitCode);
                     parameters.put("P_ITEM_CD", ItemCode);
@@ -284,9 +355,22 @@ public class ServletClass extends HttpServlet {
                     parameters.put("P_FROM_DATE",newConvertStringToJboDate(FromDate)  );
                     parameters.put("P_TO_DATE",  newConvertStringToJboDate(ToDate));
                     parameters.put("P_CREATED_BY", EmpCode);
-                    parameters.put("P_SESSION_ID", SessionId);
+                    parameters.put("P_SESSION_ID", SID);
                 }
-               
+            if(RepName.equals("SAOD")){
+                     parameters.put("P_UNIT_CD", UnitCode);
+                     parameters.put("P_LOC_CD", LocCode);
+                     parameters.put("P_FROM_DATE",newConvertStringToJboDate(FromDate)  );
+                 }
+            
+            if(RepName.equals("PSB")){
+                     DocNo = DocNo.split(",")[0];
+                     parameters.put("p_unit", UnitCode);
+                     parameters.put("p_prod", DocNo);
+                     parameters.put("p_reqQty",ReqQty);
+                     parameters.put("p_user",EmpCode );
+                     parameters.put("p_session_id",SID  );
+                 }
             System.out.println("callinf jasper reportName:" + reportName);
             callJasper(reportName, serverpath, parameters, conn, DocNo,RepFormat,response);
 

@@ -4682,5 +4682,65 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewObjectImpl getServerPathVVO1() {
         return (ViewObjectImpl) findViewObject("ServerPathVVO1");
     }
+
+    /**
+     * Container's getter for BulkLabelPrintVO1.
+     * @return BulkLabelPrintVO1
+     */
+    public ViewObjectImpl getBulkLabelPrintVO1() {
+        return (ViewObjectImpl) findViewObject("BulkLabelPrintVO1");
+    }
+
+
+    /**
+     * Container's getter for ARwiseItemStockLedgerVO1.
+     * @return ARwiseItemStockLedgerVO1
+     */
+    public ViewObjectImpl getARwiseItemStockLedgerVO1() {
+        return (ViewObjectImpl) findViewObject("ARwiseItemStockLedgerVO1");
+    }
+    public void callARwiseItemStockLedger(String LV_UNIT, String LV_LOCATION,String LV_GROUP, String LV_SUBGROUP,
+                                           String LV_ITEM, String LV_ARNO, String LV_REPTYPE,  Integer LV_SID, Date FRDATE, Date TODATE,String EMP_CD){
+        ViewObjectImpl vo = this.getARwiseItemStockLedgerVO1();
+        
+    
+        System.out.println(LV_UNIT + "--" + LV_SID +"---" + FRDATE +"--" + TODATE +"--"  + LV_LOCATION + "--" + LV_GROUP + "--" + LV_SUBGROUP + "--"
+                            + LV_ITEM + "-----" + LV_ARNO + "---" + LV_REPTYPE + "----" );
+        
+        if (LV_UNIT != null && FRDATE != null && TODATE != null && LV_SID != null && LV_LOCATION != null  && LV_GROUP != null && LV_SUBGROUP != null
+                 && LV_ITEM != null && LV_ARNO !=null && LV_REPTYPE != null  ){
+            
+            
+            System.out.println("inside condition");
+            
+            try {
+    
+                callStoredProcedure("terms.REP_AR_WISE_STOCK_DETAILS(?,?,?,?,?,?)", new Object[]
+                                    { LV_UNIT, TODATE,  LV_LOCATION,EMP_CD , LV_SID, LV_ITEM });         
+              
+                vo.setNamedWhereClauseParam("bindSession", LV_SID);
+                vo.setNamedWhereClauseParam("P272_AR_NO", LV_ARNO);
+                vo.setNamedWhereClauseParam("P272_ITEM_CD", LV_ITEM);
+                vo.setNamedWhereClauseParam("P272_ITEM_GROUP", LV_GROUP);
+                vo.setNamedWhereClauseParam("P272_ITEM_S_GROUP", LV_SUBGROUP);
+                vo.setNamedWhereClauseParam("P_USER_NAME",EMP_CD);
+                vo.setNamedWhereClauseParam("P272_TO_DATE", TODATE);
+                vo.setNamedWhereClauseParam("P272_FROM_DATE", FRDATE);
+                
+                     
+                vo.executeQuery();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            
+        }
+        
+        
+    }
+    
+    }
+    
+    
+    
 }
 

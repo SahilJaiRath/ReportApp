@@ -46,7 +46,7 @@
       <property
          name="fromOutcome">FinMonthwiseTransactionLink</property>
       <property
-         name="sdm:polyPoints">R46,112.0,121.98047,282.36816,-1.9541016,L50</property>
+         name="sdm:polyPoints">R41,116.592995,117.38744,277.77512,-1.9541016,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -60,7 +60,7 @@
       <property
          name="fromsrcid">__4</property>
       <property
-         name="sdm:polyPoints">L54,499.69727,119.90137,113.179344,128.98047,R54</property>
+         name="sdm:polyPoints">L59,495.10428,124.49439,119.36003,133.57349,R59</property>
    </ControlFlowCase>
    <MethodCall
       id="MethodCall13">
@@ -83,7 +83,7 @@
       <property
          name="fromOutcome">callMonthwiseTotalTransaction</property>
       <property
-         name="sdm:polyPoints">R50,364.36816,-1.9541016,499.69727,112.90137,L46</property>
+         name="sdm:polyPoints">R50,368.96115,-1.9541016,495.10428,108.30834,L41</property>
    </ControlFlowCase>
    <View
       id="View9">
@@ -110,7 +110,7 @@
       <property
          name="fromOutcome">callTransactionsoftheMonth</property>
       <property
-         name="sdm:polyPoints">R46,581.69727,112.90137,822.8716,104.0459,L46</property>
+         name="sdm:polyPoints">R41,586.2903,108.30834,818.09814,99.45287,L41</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -120,7 +120,7 @@
       <property
          name="fromOutcome">TransoftheMonthBackButton</property>
       <property
-         name="sdm:polyPoints">L54,823.0,111.0459,581.8257,119.90137,R54</property>
+         name="sdm:polyPoints">L59,818.407,115.63892,586.59894,124.49439,R59</property>
    </ControlFlowCase>
    <View
       id="View13">
@@ -147,7 +147,7 @@
       <property
          name="fromOutcome">callVoucherDetailReport</property>
       <property
-         name="sdm:polyPoints">R46,905.0,104.0459,1201.9646,101.0459,L46</property>
+         name="sdm:polyPoints">R41,909.593,99.45287,1197.3226,96.45287,L41</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -157,6 +157,21 @@
       <property
          name="fromOutcome">VoucherDetailBackButton</property>
       <property
-         name="sdm:polyPoints">L54,1202.0,108.0459,905.03534,111.0459,R54</property>
+         name="sdm:polyPoints">L59,1197.407,112.63892,909.67737,115.63892,R59</property>
    </ControlFlowCase>
+   <View
+      id="View17">
+      <property
+         name="activityId">MonthWiseTotalDrCrTransactions</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">380.0</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>MonthWiseTotalDrCrTransactions&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">273.94824</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
 </SDM>

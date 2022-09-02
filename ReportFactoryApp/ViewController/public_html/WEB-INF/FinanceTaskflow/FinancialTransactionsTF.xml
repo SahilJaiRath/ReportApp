@@ -33,6 +33,7 @@
     <view id="VoucherDetailReport">
       <page>/FinancePage/VoucherDetailReport.jsff</page>
     </view>
+    <view id="MonthWiseTotalDrCrTransactions"></view>
     <control-flow-rule id="__2">
       <from-activity-id>view1</from-activity-id>
       <control-flow-case id="__3">

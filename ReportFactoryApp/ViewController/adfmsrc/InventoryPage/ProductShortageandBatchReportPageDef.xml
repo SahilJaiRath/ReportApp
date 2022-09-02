@@ -56,5 +56,13 @@
       <NamedData NDName="LV_REQUESTQTY" NDType="java.lang.String"/>
       <NamedData NDName="LV_SID" NDType="java.lang.String"/>
     </methodAction>
+    <methodAction id="fileNameForPrint" RequiresUpdateModel="true" Action="invokeMethod" MethodName="fileNameForPrint"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.fileNameForPrint_AppModuleDataControl_dataProvider_fileNameForPrint_result">
+      <NamedData NDName="fileId" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_rep_type" id="rep_type" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

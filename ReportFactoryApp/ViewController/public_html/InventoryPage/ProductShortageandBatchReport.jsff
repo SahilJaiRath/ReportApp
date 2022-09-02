@@ -8,7 +8,8 @@
         <af:gridCell marginStart="5px" width="34%" id="gc1">
           <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
                               required="#{bindings.UnitCode.hints.mandatory}"
-                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;" labelStyle="width:100px" >
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180.0px;" labelStyle="width:100px"
+                              autoSubmit="true">
             <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
             <f:validator binding="#{bindings.UnitCode.validator}"/>
           </af:selectOneChoice>
@@ -21,28 +22,42 @@
                                         model="#{bindings.ProductShortageandBatch_ProductName.listOfValuesModel}"
                                         required="#{bindings.ProductShortageandBatch_ProductName.hints.mandatory}"
                                         columns="#{bindings.ProductShortageandBatch_ProductName.hints.displayWidth}"
-                                        shortDesc="#{bindings.ProductShortageandBatch_ProductName.hints.tooltip}" contentStyle="width:180.0px;" labelStyle="width:100px"  >
+                                        shortDesc="#{bindings.ProductShortageandBatch_ProductName.hints.tooltip}" contentStyle="width:180.0px;" labelStyle="width:100px"
+                                        autoSubmit="true">
             <f:validator binding="#{bindings.ProductShortageandBatch_ProductName.validator}"/>
           </af:inputComboboxListOfValues>
         </af:gridCell>
-        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
+          <af:button text="Execute" id="b2" actionListener="#{ProductShortageandBatchBean.onClickButton}"
+                     disabled="#{!bindings.callProductShortageandBatch.enabled}"/>
+        </af:gridCell>
       </af:gridRow>
       <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
         <af:gridCell marginStart="5px" width="34%" id="gc4">
           <af:inputText value="#{bindings.LV_p1.inputValue}" label="Required Qty"
                         required="#{bindings.LV_p1.hints.mandatory}" columns="#{bindings.LV_p1.hints.displayWidth}"
                         maximumLength="#{bindings.LV_p1.hints.precision}" shortDesc="#{bindings.LV_p1.hints.tooltip}"
-                        id="it1" contentStyle="width:180.0px;" labelStyle="width:100px" >
+                        id="it1" contentStyle="width:180.0px;" labelStyle="width:100px" autoSubmit="true">
             <f:validator binding="#{bindings.LV_p1.validator}"/>
           </af:inputText>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="33%" id="gc5">
-          <af:spacer width="30" height="10" id="s3"/>
-          <af:button text="Execute" id="b2"
-                     actionListener="#{ProductShortageandBatchBean.onClickButton}"
-                     disabled="#{!bindings.callProductShortageandBatch.enabled}"/>
+          <af:selectOneChoice value="#{bindings.rep_type.inputValue}" label="Report Type"
+                              required="#{bindings.rep_type.hints.mandatory}"
+                              shortDesc="#{bindings.rep_type.hints.tooltip}" id="soc2" contentStyle="width:200.0px;" labelStyle="width:100px"
+                              autoSubmit="true">
+            <f:selectItems value="#{bindings.rep_type.items}" id="si2"/>
+            <f:validator binding="#{bindings.rep_type.validator}"/>
+          </af:selectOneChoice>
         </af:gridCell>
-        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6"/>
+        <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
+         <af:button text="Get Report" id="b1"
+          targetFrame="_blank"
+            destination="/reports/ServletClass?defpath=#{ProductShortageandBatchBean.jaspeReportName}&amp;RepFormat=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{bindings.ProductShortageandBatch_ProductName.inputValue}&amp;RepName=PSB&amp;ReqQty=#{bindings.LV_p1.inputValue}&amp;EmpCode=#{pageFlowScope.empCode}&amp;SID=#{pageFlowScope.SID}"
+                   disabled="#{bindings.ProductShortageandBatchReportVO1Iterator.estimatedRowCount==0}"
+                >
+          </af:button>
+        </af:gridCell>
       </af:gridRow>
     </af:panelGridLayout>
     <af:spacer width="10" height="10" id="s1"/>
@@ -51,7 +66,7 @@
     <f:facet name="menus"/>
     <f:facet name="toolbar">
       <af:toolbar id="t2">
-        <af:button text="Export To Excel" id="b1">
+        <af:button text="Export To Excel" id="b3">
           <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
                                              filename="Product Shortage And Batch report.xls"/>
         </af:button>

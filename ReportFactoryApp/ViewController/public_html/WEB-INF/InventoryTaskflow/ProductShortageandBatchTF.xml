@@ -5,6 +5,16 @@
     <data-control-scope>
       <shared/>
     </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>SID</name>
+      <value>#{pageFlowScope.SID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__3">
+      <name>empCode</name>
+      <value>#{pageFlowScope.empCode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
     <managed-bean id="__1">
       <managed-bean-name>ProductShortageandBatchBean</managed-bean-name>
       <managed-bean-class>bspl.reportfactory.view.ProductShortageandBatchBean</managed-bean-class>

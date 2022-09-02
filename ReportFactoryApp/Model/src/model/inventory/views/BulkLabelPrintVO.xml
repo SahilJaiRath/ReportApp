@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BulkLabelPrintVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.inventory.views.BulkLabelPrintVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P279_UNIT"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P279_SLIP_NO"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P279_ITEM_CODE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT DISTINCT H.UNIT_CD,  
+NVL(B.BATCH_LINE_ID, D.SLIP_LINE_ID) LINE_ID,  
+D.ISS_HSLIP_SLIP_NO SLIP_NO,  
+D.ITEM_CD, M.ITEM_DESC, B.BATCH_NO, B.AR_NO , 
+apex_item.HIDDEN(p_idx => 1, p_value => D.SLIP_LINE_ID) as I_SLIP_LINE_ID, 
+apex_item.HIDDEN(p_idx => 2, p_value => H.UNIT_CD) as UNIT, 
+apex_item.HIDDEN(p_idx => 3, p_value => D.ISS_HSLIP_SLIP_NO) as ISS_HSLIP_SLIP_NO, 
+apex_item.HIDDEN(p_idx => 4, p_value => D.ITEM_CD) as ITEM, 
+apex_item.HIDDEN(p_idx => 5, p_value => M.ITEM_DESC) as ITEM_NAME, 
+apex_item.HIDDEN(p_idx => 6, p_value => B.BATCH_NO) as BATCH, 
+apex_item.HIDDEN(p_idx => 7, p_value => B.AR_NO) as AR, 
+APEX_ITEM.TEXT (p_idx =>  8, p_value => 0) as PRINT , D.QTY 
+FROM ISS_DSLIP D 
+LEFT JOIN ISS_HSLIP H 
+ON D.ISS_HSLIP_SLIP_NO = H.SLIP_NO 
+LEFT JOIN iss_dslip_batch B 
+ON B.ISS_SLIP_NO = D.ISS_HSLIP_SLIP_NO 
+AND B.ITEM_CD = D.ITEM_CD 
+AND B.UNIT_CD = H.UNIT_CD 
+LEFT JOIN vw_all_item_mas M 
+ON D.ITEM_CD = M.ITEM_CD 
+WHERE H.UNIT_CD = :P279_UNIT 
+AND D.ISS_HSLIP_SLIP_NO = :P279_SLIP_NO 
+AND (D.ITEM_CD = :P279_ITEM_CODE OR 'ALL' = :P279_ITEM_CODE) 
+ORDER BY 1, 2, 3]]></SQLQuery>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LineId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LINE_ID"
+    Expression="LINE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SlipNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SLIP_NO"
+    Expression="SLIP_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_CD"
+    Expression="ITEM_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESC"
+    Expression="ITEM_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BatchNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_NO"
+    Expression="BATCH_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ArNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AR_NO"
+    Expression="AR_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Qty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="QTY"
+    Expression="QTY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -5,6 +5,11 @@
     <data-control-scope>
       <shared/>
     </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>StockAsOnDateBean</managed-bean-name>
+      <managed-bean-class>bspl.reportfactory.view.StockAsOnDateBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="view1">
       <page>/InventoryPage/StockAsOnDate.jsff</page>
     </view>
