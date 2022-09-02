@@ -5,6 +5,14 @@
     <data-control-scope>
       <shared/>
     </data-control-scope>
+    <task-flow-reentry>
+      <reentry-allowed/>
+    </task-flow-reentry>
+    <input-parameter-definition id="__2">
+      <name>SID</name>
+      <value>#{pageFlowScope.SID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
     <view id="view1">
       <page>/InventoryPage/StockValuation.jsff</page>
     </view>

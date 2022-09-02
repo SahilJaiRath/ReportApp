@@ -455,6 +455,9 @@
   <ViewUsage
     Name="ARwiseItemStockLedgerVO1"
     ViewObjectName="model.production.views.ARwiseItemStockLedgerVO"/>
+  <ViewUsage
+    Name="StockValuaionVO1"
+    ViewObjectName="model.inventory.views.StockValuaionVO"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -2679,6 +2682,31 @@
         Type="java.util.Date"/>
       <Parameter
         Name="EMP_CD"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="callStockValuation"
+      MethodName="callStockValuation">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="LV_UNIT"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_ITEM_CD"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_Location"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="LV_frmDate"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="LV_tDate"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="LV_SID"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

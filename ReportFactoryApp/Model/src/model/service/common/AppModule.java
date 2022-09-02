@@ -273,5 +273,8 @@ public interface AppModule extends ApplicationModule {
     void callARwiseItemStockLedger(String LV_UNIT, String LV_LOCATION, String LV_GROUP, String LV_SUBGROUP,
                                    String LV_ITEM, String LV_ARNO, String LV_REPTYPE, Integer LV_SID, Date FRDATE,
                                    Date TODATE, String EMP_CD);
+
+    void callStockValuation(String LV_UNIT, String LV_ITEM_CD, String LV_Location, oracle.jbo.domain.Date LV_frmDate,
+                            oracle.jbo.domain.Date LV_tDate, String LV_SID);
 }
 

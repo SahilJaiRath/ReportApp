@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="StockValuaionVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.inventory.views.StockValuaionVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P180_FR_DT"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="P180_LOC"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P180_ITEM"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="p180_unit"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P180_TO_DT"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="bindSession"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[WITH OPENING_QTY AS         
+(SELECT UNIT_CD, ITEM_CD, ROUND(SUM(REC_QTY)- SUM(ISS_QTY),2) OPN_QTY         
+FROM (        
+SELECT UNIT_CD, ITEM_CD, NVL(REC_QTY,0) REC_QTY, NVL(ISS_QTY,0) ISS_QTY --, NVL(REC_QTY,0) - NVL(ISS_QTY,0) OPN_QTY        
+FROM STOCK_LEDGER S        
+WHERE TO_DATE(STORE_E_DT) < TO_DATE(:P180_FR_DT,'RRRR-MM-DD')        
+------------            
+--AND TO_CHAR(STORE_E_DT,'YY') = (select TO_CHAR(FIN_YEAR_FROM,'YY') from fin_year where TO_DATE(:P180_FR_DT) between FIN_YEAR_FROM and FIN_YEAR_TO)            
+------------            
+AND NVL(S.REC_FROM, S.ISS_FROM) LIKE :P180_LOC||'%'        
+)GROUP BY UNIT_CD, ITEM_CD),        
+OPN_STOCK AS        
+(SELECT ITEM_STOCK_ITEM_CD, UNIT_CD, NVL(OPN_STK,0) OPN_STK        
+FROM MNTH_BAL         
+WHERE ITEM_STOCK_ITEM_CD LIKE '%'||:P180_ITEM         
+AND FIN_YEAR = (select FIN_YEAR_CODE from fin_year where TO_DATE(:P180_FR_DT, 'RRRR-MM-DD')         
+between FIN_YEAR_FROM and FIN_YEAR_TO)        
+AND LOC_CD LIKE :P180_LOC||'%'         
+AND UNIT_CD LIKE '%'||:p180_unit        
+),        
+REC_ISS_QTY AS        
+(SELECT UNIT_CD, ITEM_CD, ROUND(SUM(REC_QTY),2) REC_QTY, ROUND(SUM(ISS_QTY),2) ISS_QTY         
+FROM (        
+SELECT UNIT_CD, ITEM_CD, NVL(REC_QTY,0) REC_QTY, NVL(ISS_QTY,0) ISS_QTY         
+FROM STOCK_LEDGER S        
+WHERE TO_DATE(STORE_E_DT) BETWEEN TO_DATE(:P180_FR_DT,'RRRR-MM-DD') AND TO_DATE(:P180_TO_DT, 'RRRR-MM-DD')        
+AND NVL(S.REC_FROM, S.ISS_FROM) LIKE :P180_LOC||'%'        
+) GROUP BY UNIT_CD, ITEM_CD )        
+SELECT DISTINCT S.ITEM_CD,(SELECT ITEM_DESC FROM ITEM_STOCK WHERE ITEM_CD=S.ITEM_CD) ITEM_DESC,        
+(SELECT REC_UOM FROM ITEM_STOCK WHERE ITEM_CD=S.ITEM_CD) UOM,        
+S.TRAN_DT, --(NVL(D.OPN_QTY,0)+         
+                    
+            NVL(O.OPN_STK,0) OPN_QTY, R.REC_QTY, R.ISS_QTY,        
+NVL(TO_NUMBER(BAL_QTY),0) BAL_QTY,S.UNIT_CD,ROUND(BAL_RATE,2) Rate,        
+ROUND(nvl(bal_qty ,0)*nvl(bal_rate,0),2) value        
+FROM STOCK_VAL_WAV S LEFT OUTER JOIN SRV_HEADS H        
+ON S.DOC_NO = H.SRV_NO        
+LEFT JOIN OPENING_QTY D        
+ON S.ITEM_CD = D.ITEM_CD        
+AND S.UNIT_CD = D.UNIT_CD         
+LEFT JOIN REC_ISS_QTY R        
+ON S.ITEM_CD = R.ITEM_CD        
+AND S.UNIT_CD = R.UNIT_CD        
+LEFT JOIN OPN_STOCK O        
+ON S.ITEM_CD = O.ITEM_STOCK_ITEM_CD        
+AND S.UNIT_CD = O.UNIT_CD        
+WHERE S.unit_cd LIKE :p180_unit||'%'         
+and SESSION_ID= :bindSession        
+and S.ITEM_CD like :P180_ITEM||'%'        
+and (S.ITEM_CD, S.TRAN_SEQ) in        
+(        
+SELECT  B.ITEM_CD, Max(B.TRAN_SEQ)         
+  FROM STOCK_VAL_WAV B        
+ WHERE B.ITEM_CD like :P180_ITEM||'%'        
+   and trunc(B.TRAN_DT) <= TO_DATE(:P180_TO_DT, 'RRRR-MM-DD')        
+  and SESSION_ID= :bindSession        
+ group by B.ITEM_CD        
+ )        
+order by S.ITEM_CD,S.TRAN_DT]]></SQLQuery>
+  <ViewAttribute
+    Name="ItemCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_CD"
+    Expression="ITEM_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESC"
+    Expression="ITEM_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Uom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UOM"
+    Expression="UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TranDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="TRAN_DT"
+    Expression="TRAN_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="OpnQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="OPN_QTY"
+    Expression="OPN_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="RecQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="REC_QTY"
+    Expression="REC_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="IssQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ISS_QTY"
+    Expression="ISS_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BalQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BAL_QTY"
+    Expression="BAL_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Rate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RATE"
+    Expression="RATE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Value"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VALUE"
+    Expression="VALUE"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

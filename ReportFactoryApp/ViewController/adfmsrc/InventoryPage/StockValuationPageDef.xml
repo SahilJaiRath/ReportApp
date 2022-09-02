@@ -5,6 +5,9 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="DummyVVO1" RangeSize="25" DataControl="AppModuleDataControl" id="DummyVVO1Iterator"/>
+    <iterator Binds="StockValuaionVO1" RangeSize="25" DataControl="AppModuleDataControl" id="StockValuaionVO1Iterator"/>
+    <searchRegion Binds="StockValuaionVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="StockValuaionVO1Query"/>
   </executables>
   <bindings>
     <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_ItemCd" id="ItemCd"/>
@@ -23,5 +26,38 @@
     <list IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_UnitCode" id="UnitCode" DTSupportsMRU="true"
           SelectItemValueMode="ListObject"/>
     <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_LOC" id="LOC"/>
+    <methodAction id="callStockValuation" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callStockValuation" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="LV_UNIT" NDType="java.lang.String"/>
+      <NamedData NDName="LV_ITEM_CD" NDType="java.lang.String"/>
+      <NamedData NDName="LV_Location" NDType="java.lang.String"/>
+      <NamedData NDName="LV_frmDate" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="LV_tDate" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="LV_SID" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="StockValuaionVO1Iterator" id="StockValuaionVO1">
+      <nodeDefinition DefName="model.inventory.views.StockValuaionVO" Name="StockValuaionVO10">
+        <AttrNames>
+          <Item Value="ItemCd"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Uom"/>
+          <Item Value="TranDt"/>
+          <Item Value="OpnQty"/>
+          <Item Value="RecQty"/>
+          <Item Value="IssQty"/>
+          <Item Value="BalQty"/>
+          <Item Value="UnitCd"/>
+          <Item Value="Rate"/>
+          <Item Value="Value"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="fileNameForPrint" RequiresUpdateModel="true" Action="invokeMethod" MethodName="fileNameForPrint"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.fileNameForPrint_AppModuleDataControl_dataProvider_fileNameForPrint_result">
+      <NamedData NDName="fileId" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

@@ -70,7 +70,7 @@ import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 
 import oracle.adf.share.ADFContext;
 
-@WebServlet(name = "ServletClass", urlPatterns = { "/reports/ServletClass" })
+@WebServlet(name = "ServletClass", urlPatterns = {"/reports/ServletClass" })
 public class ServletClass extends HttpServlet {
     private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
 
@@ -358,9 +358,9 @@ public class ServletClass extends HttpServlet {
                     parameters.put("P_SESSION_ID", SID);
                 }
             if(RepName.equals("SAOD")){
-                     parameters.put("P_UNIT_CD", UnitCode);
-                     parameters.put("P_LOC_CD", LocCode);
-                     parameters.put("P_FROM_DATE",newConvertStringToJboDate(FromDate)  );
+                     parameters.put("p_unit", UnitCode);
+                     parameters.put("p_loc", LocCode);
+                     parameters.put("p_as_on_dt",newConvertStringToJboDate(FromDate)  );
                  }
             
             if(RepName.equals("PSB")){
@@ -370,6 +370,19 @@ public class ServletClass extends HttpServlet {
                      parameters.put("p_reqQty",ReqQty);
                      parameters.put("p_user",EmpCode );
                      parameters.put("p_session_id",SID  );
+                 }
+            if(RepName.equals("STKV")){
+                     DocNo = DocNo.split(",")[0];
+                     parameters.put("p_unit", UnitCode);
+                     parameters.put("p_loc", LocCode);
+                     if(DocNo.equalsIgnoreCase("ALL")){
+                     parameters.put("p_item", "%");
+                     }else{
+                     parameters.put("p_item", DocNo);
+                     }
+                     parameters.put("p_fr_dt",newConvertStringToJboDate(FromDate)  );
+                     parameters.put("p_to_dt",  newConvertStringToJboDate(ToDate));
+                     parameters.put("p_sid",SID  );
                  }
             System.out.println("callinf jasper reportName:" + reportName);
             callJasper(reportName, serverpath, parameters, conn, DocNo,RepFormat,response);

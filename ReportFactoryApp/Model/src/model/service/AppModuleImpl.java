@@ -4739,8 +4739,50 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     }
     
     }
-    
-    
-    
+    public void callStockValuation(String LV_UNIT, String LV_ITEM_CD, String LV_Location,
+                                      oracle.jbo.domain.Date LV_frmDate, oracle.jbo.domain.Date LV_tDate, String LV_SID) {
+           ViewObjectImpl vo = this.getStockValuaionVO1();
+           System.out.println(LV_UNIT + "--" + LV_ITEM_CD + "--" + LV_SID + "--" + LV_Location + "--" + LV_frmDate + "--" +
+                              LV_tDate + "--");
+
+           if (LV_UNIT != null && LV_frmDate != null && LV_tDate != null && LV_ITEM_CD != null && LV_SID != null &&
+               LV_Location != null) {
+               System.out.println("Inside condition!");
+               try {
+
+
+                   callStoredProcedure("TERMS.DPR_STOCK_VAL_WOPN(?,?,?,?,?,?)",
+                                       new Object[] { LV_frmDate, LV_tDate, LV_Location, LV_ITEM_CD, LV_SID, LV_UNIT });
+
+                   vo.setNamedWhereClauseParam("P180_FR_DT", LV_frmDate);
+                   System.out.println(LV_frmDate);
+                   vo.setNamedWhereClauseParam("P180_LOC", LV_Location);
+                   vo.setNamedWhereClauseParam("bindSession", LV_SID);
+                   vo.setNamedWhereClauseParam("P180_ITEM", LV_ITEM_CD);
+                   vo.setNamedWhereClauseParam("P180_TO_DT", LV_tDate);
+                   System.out.println(LV_tDate);
+                   vo.setNamedWhereClauseParam("p180_unit", LV_UNIT);
+
+                  System.out.println(vo.getQuery().toString());
+                   vo.executeQuery();
+                   System.out.println(vo.getEstimatedRowCount());
+                   System.out.println(vo.getQuery().toString());
+
+               } catch (Exception e) {
+                   e.printStackTrace();
+
+               }
+           }
+
+       }
+
+
+    /**
+     * Container's getter for StockValuaionVO1.
+     * @return StockValuaionVO1
+     */
+    public ViewObjectImpl getStockValuaionVO1() {
+        return (ViewObjectImpl) findViewObject("StockValuaionVO1");
+    }
 }
 
