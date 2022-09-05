@@ -34,11 +34,10 @@
     Kind="where"
     Type="java.lang.String">
     <Properties>
-      <CustomProperties>
-        <Property
-          Name="DISPLAYHINT"
+      <SchemaBasedProperties>
+        <DISPLAYHINT
           Value="Hide"/>
-      </CustomProperties>
+      </SchemaBasedProperties>
     </Properties>
   </Variable>
   <SQLQuery><![CDATA[Select UNIT_CD, LM.SHORT_DESC||'[ '||LM.LOCAT_CODE||']' LOC_NAME, LM.LOCAT_CODE    
@@ -49,7 +48,7 @@
                  Where UNIT_CD Like :P272_UNIT    
                    AND ULM.EMP_CD In (SELECT UM.EMP_ID    
                                         FROM USER_MASTER UM    
-                                       WHERE UPPER (UM.USER_NAME) = UPPER(:P_USER_NAME))    
+                                       WHERE UPPER (UM.EMP_CD) = UPPER(:P_USER_NAME))    
                    AND LM.LOCAT_CODE = ULM.LOC_CD)]]></SQLQuery>
   <ViewAttribute
     Name="UnitCd"

@@ -516,7 +516,7 @@
       <PIMap Variable="P272_LOCATION">
         <TransientExpression
           trustMode="untrusted"
-          Name="ExpressionScript"><![CDATA[LOC]]></TransientExpression>
+          Name="ExpressionScript"><![CDATA[AR_Location]]></TransientExpression>
       </PIMap>
       <PIMap Variable="P272_UNIT">
         <TransientExpression

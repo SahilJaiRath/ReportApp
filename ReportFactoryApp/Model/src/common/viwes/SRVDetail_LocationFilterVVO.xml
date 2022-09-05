@@ -22,8 +22,8 @@
     Name="BindUnit"
     Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[SELECT 'ALL'  UNIT_CODE, 'ALL' DESCRIPTION FROM DUAL               
-UNION               
+  <SQLQuery><![CDATA[SELECT code UNIT_CODE, 'ALL' DESCRIPTION FROM DUAL,Unit            
+UNION all           
 SELECT UNIT_CODE,LOCAT_CODE || ',' || SHORT_DESC DESCRIPTION FROM LOCATION      
 order by  UNIT_CODE desc]]></SQLQuery>
   <ViewAttribute

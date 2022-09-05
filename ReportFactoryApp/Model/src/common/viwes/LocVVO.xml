@@ -22,7 +22,7 @@
     Name="bindUnit"
     Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[select 'ALL' UNIT_CD, 'ALL' LOC_CD, 'ALL' SHORT_DESC from dual                                      
+  <SQLQuery><![CDATA[SELECT code UNIT_CD, 'ALL' LOC_CD, 'ALL' SHORT_DESC FROM DUAL,Unit                                       
 union all                                      
 SELECT A.UNIT_CD, LOC_CD , LOC_CD || ',' ||SHORT_DESC SHORT_DESC FROM UNIT_STORE A,LOCATION B                                                 
 WHERE LOC_CD=LOCAT_CODE]]></SQLQuery>
