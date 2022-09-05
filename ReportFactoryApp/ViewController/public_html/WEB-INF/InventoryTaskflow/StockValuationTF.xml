@@ -13,6 +13,11 @@
       <value>#{pageFlowScope.SID}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>StockValuationBean</managed-bean-name>
+      <managed-bean-class>bspl.reportfactory.view.StockValuationBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="view1">
       <page>/InventoryPage/StockValuation.jsff</page>
     </view>

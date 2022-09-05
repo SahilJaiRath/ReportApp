@@ -19,8 +19,8 @@
                                         popupTitle="Search and Select: #{bindings.ProductShortageandBatch_ProductName.hints.label}"
                                         value="#{bindings.ProductShortageandBatch_ProductName.inputValue}"
                                         label="Product Code"
+                                        showRequired="true" required="true"
                                         model="#{bindings.ProductShortageandBatch_ProductName.listOfValuesModel}"
-                                        required="#{bindings.ProductShortageandBatch_ProductName.hints.mandatory}"
                                         columns="#{bindings.ProductShortageandBatch_ProductName.hints.displayWidth}"
                                         shortDesc="#{bindings.ProductShortageandBatch_ProductName.hints.tooltip}" contentStyle="width:180.0px;" labelStyle="width:100px"
                                         autoSubmit="true">
@@ -29,13 +29,15 @@
         </af:gridCell>
         <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3">
           <af:button text="Execute" id="b2" actionListener="#{ProductShortageandBatchBean.onClickButton}"
-                     disabled="#{!bindings.callProductShortageandBatch.enabled}"/>
+                     disabled="#{!bindings.callProductShortageandBatch.enabled}"
+                     binding="#{ProductShortageandBatchBean.executeBtnBinding}"/>
         </af:gridCell>
       </af:gridRow>
       <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
         <af:gridCell marginStart="5px" width="34%" id="gc4">
           <af:inputText value="#{bindings.LV_p1.inputValue}" label="Required Qty"
-                        required="#{bindings.LV_p1.hints.mandatory}" columns="#{bindings.LV_p1.hints.displayWidth}"
+                       
+                         showRequired="true" required="true" columns="#{bindings.LV_p1.hints.displayWidth}"
                         maximumLength="#{bindings.LV_p1.hints.precision}" shortDesc="#{bindings.LV_p1.hints.tooltip}"
                         id="it1" contentStyle="width:180.0px;" labelStyle="width:100px" autoSubmit="true">
             <f:validator binding="#{bindings.LV_p1.validator}"/>

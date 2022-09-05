@@ -19,13 +19,12 @@
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="P49_GROUP_CODE"
-    Kind="where"
+    Name="bindGrpcd"
+    Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[select 'ALL'   AS SUB_GRP_CD  from dual  
-union  
-SELECT SUB_GRP_CD || ',' || SUB_GRP_DESC  SUB_GRP_CD  FROM SUB_GRP_MST  
-WHERE GROUP_CD = :P49_GROUP_CODE  
+  <SQLQuery><![CDATA[select 'ALL'   AS SUB_GRP_CD,'ALL' AS GROUP_CD   from dual        
+union all        
+SELECT SUB_GRP_CD || ',' || SUB_GRP_DESC  SUB_GRP_CD,GROUP_CD  FROM SUB_GRP_MST          
 order by SUB_GRP_CD]]></SQLQuery>
   <ViewAttribute
     Name="SubGrpCd"
@@ -50,6 +49,71 @@ order by SUB_GRP_CD]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="GroupCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GROUP_CD"
+    Expression="GROUP_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="SubGroupCodeVVOCriteria"
+    ViewObjectName="common.viwes.SubGroupCodeVVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="SubGroupCodeVVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="SubGroupCodeVVOCriteria_SubGroupCodeVVOCriteria_row_0_SubGrpCd"
+        ViewAttribute="SubGrpCd"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="SubGroupCodeVVOCriteria_SubGroupCodeVVOCriteria_row_0_GroupCd"
+        ViewAttribute="GroupCd"
+        Operator="="
+        Conjunction="AND"
+        Value=":bindGrpcd"
+        IsBindVarValue="true"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <LOVUIHints
     ListType="105"
     MRUCount="0"

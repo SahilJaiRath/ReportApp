@@ -21,21 +21,51 @@
   <Variable
     Name="P272_UNIT"
     Kind="where"
-    Type="java.lang.String"/>
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <Variable
     Name="P_USER_NAME"
     Kind="where"
-    Type="java.lang.String"/>
-  <SQLQuery><![CDATA[Select LM.SHORT_DESC||'[ '||LM.LOCAT_CODE||']' LOC_NAME, LM.LOCAT_CODE 
-  From Location LM 
- Where UNIT_CD Like :P272_UNIT 
-   AND Exists (Select ULM.LOC_CD 
-                  From LOC_MAPP_IND_ISS ULM 
-                 Where UNIT_CD Like :P272_UNIT 
-                   AND ULM.EMP_CD In (SELECT UM.EMP_ID 
-                                        FROM USER_MASTER UM 
-                                       WHERE UPPER (UM.USER_NAME) = UPPER(:P_USER_NAME)) 
+    Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="DISPLAYHINT"
+          Value="Hide"/>
+      </CustomProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[Select UNIT_CD, LM.SHORT_DESC||'[ '||LM.LOCAT_CODE||']' LOC_NAME, LM.LOCAT_CODE    
+  From Location LM    
+ Where UNIT_CD Like :P272_UNIT    
+   AND Exists (Select ULM.LOC_CD    
+                  From LOC_MAPP_IND_ISS ULM    
+                 Where UNIT_CD Like :P272_UNIT    
+                   AND ULM.EMP_CD In (SELECT UM.EMP_ID    
+                                        FROM USER_MASTER UM    
+                                       WHERE UPPER (UM.USER_NAME) = UPPER(:P_USER_NAME))    
                    AND LM.LOCAT_CODE = ULM.LOC_CD)]]></SQLQuery>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="LocName"
     IsUpdateable="false"
@@ -78,6 +108,63 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewCriteria
+    Name="AR_LocationVVOCriteria"
+    ViewObjectName="common.viwes.AR_LocationVVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="AR_LocationVVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="UnitCd"
+        ViewAttribute="UnitCd"
+        Operator="="
+        Conjunction="AND"
+        Value=":P272_UNIT"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="AR_LocationVVOCriteria_AR_LocationVVOCriteria_row_0_LocName"
+        ViewAttribute="LocName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AR_LocationVVOCriteria_AR_LocationVVOCriteria_row_0_LocatCode"
+        ViewAttribute="LocatCode"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>

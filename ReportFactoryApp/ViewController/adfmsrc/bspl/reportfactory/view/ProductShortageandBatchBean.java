@@ -15,10 +15,14 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.ADFContext;
 import oracle.adf.share.logging.ADFLogger;
 
+import oracle.adf.view.rich.component.rich.nav.RichButton;
+
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
 public class ProductShortageandBatchBean {
+    private RichButton executeBtnBinding;
+
     public ProductShortageandBatchBean() {
     }
     public BindingContainer getBindings() {
@@ -68,6 +72,7 @@ public class ProductShortageandBatchBean {
         operationBinding.getParamsMap().put("LV_SID", SID);
         operationBinding.getParamsMap().put("LV_PRODUCT", ProdCode);
         operationBinding.getParamsMap().put("LV_REQUESTQTY", ReqQty);
+        operationBinding.getParamsMap().put("LV_USERS", EMP);
 
        
         Object result = operationBinding.execute();
@@ -80,6 +85,14 @@ public class ProductShortageandBatchBean {
 
     public void setJaspeReportName(String jaspeReportName) {
         this.jaspeReportName = jaspeReportName;
+    }
+
+    public void setExecuteBtnBinding(RichButton executeBtnBinding) {
+        this.executeBtnBinding = executeBtnBinding;
+    }
+
+    public RichButton getExecuteBtnBinding() {
+        return executeBtnBinding;
     }
 }
 

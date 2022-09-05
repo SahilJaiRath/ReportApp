@@ -19,23 +19,37 @@
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="P272_UNIT"
-    Kind="where"
+    Name="BindLoc"
+    Kind="viewcriteria"
     Type="java.lang.String"/>
   <Variable
-    Name="P272_LOCATION"
-    Kind="where"
+    Name="BindUnit"
+    Kind="viewcriteria"
     Type="java.lang.String"/>
   <Variable
-    Name="P272_ITEM_GROUP"
-    Kind="where"
+    Name="BindGrpCd"
+    Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[Select SUB_GRP_CD S_GROUP, SUB_GRP_DESC S_GROUP_NAME 
-  From VW_ALL_ITEM_MAS 
- Where UNIT_CD = :P272_UNIT 
-   And Default_LOC = :P272_LOCATION 
-   AND GROUP_CODE = DECODE(NVL(:P272_ITEM_GROUP, 'ALL'), 'ALL', GROUP_CODE, :P272_ITEM_GROUP) 
- Group By SUB_GRP_CD, SUB_GRP_DESC]]></SQLQuery>
+  <SQLQuery><![CDATA[Select UNIT_CD,SUB_GRP_CD S_GROUP, SUB_GRP_DESC S_GROUP_NAME,DEFAULT_LOC,GROUP_CODE 
+From VW_ALL_ITEM_MAS  
+Where  
+GROUP_CODE = NVL(GROUP_CODE,'ALL')  
+ Group By UNIT_CD,SUB_GRP_CD, SUB_GRP_DESC,DEFAULT_LOC,GROUP_CODE]]></SQLQuery>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="SGroup"
     IsUpdateable="false"
@@ -53,7 +67,7 @@
     <Properties>
       <SchemaBasedProperties>
         <DISPLAYWIDTH
-          Value="40"/>
+          Value="15"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -78,6 +92,124 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="DefaultLoc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEFAULT_LOC"
+    Expression="DEFAULT_LOC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GroupCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GROUP_CODE"
+    Expression="GROUP_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="AR_SubGroupVVOCriteria"
+    ViewObjectName="common.viwes.AR_SubGroupVVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="AR_SubGroupVVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="UnitCd"
+        ViewAttribute="UnitCd"
+        Operator="="
+        Conjunction="AND"
+        Value=":BindUnit"
+        IsBindVarValue="true"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="AR_SubGroupVVOCriteria_AR_SubGroupVVOCriteria_row_0_SGroup"
+        ViewAttribute="SGroup"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AR_SubGroupVVOCriteria_AR_SubGroupVVOCriteria_row_0_SGroupName"
+        ViewAttribute="SGroupName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AR_SubGroupVVOCriteria_AR_SubGroupVVOCriteria_row_0_DefaultLoc"
+        ViewAttribute="DefaultLoc"
+        Operator="="
+        Conjunction="AND"
+        Value=":BindLoc"
+        IsBindVarValue="true"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="AR_SubGroupVVOCriteria_AR_SubGroupVVOCriteria_row_0_GroupCode"
+        ViewAttribute="GroupCode"
+        Operator="="
+        Conjunction="AND"
+        Value=":BindGrpCd"
+        IsBindVarValue="true"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>

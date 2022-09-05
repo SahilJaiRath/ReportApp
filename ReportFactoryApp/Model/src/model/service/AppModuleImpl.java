@@ -3703,9 +3703,9 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewObjectImpl getProductShortageandBatchReportVO1() {
         return (ViewObjectImpl) findViewObject("ProductShortageandBatchReportVO1");
     }
-    public void callProductShortageandBatch(String LV_UNIT,String LV_PRODUCT , String LV_REQUESTQTY ,  String LV_SID){
+    public void callProductShortageandBatch(String LV_UNIT,String LV_PRODUCT , String LV_REQUESTQTY ,  String LV_SID,String LV_USERS){
         ViewObjectImpl vo = this.getProductShortageandBatchReportVO1();
-     String LV_USERS  = "";
+   //  String LV_USERS  = "";
     
         System.out.println(LV_UNIT + "--" +  LV_PRODUCT +"--" + LV_REQUESTQTY +"--"  /*LV_INV_TYPE + "--" + LV_CUST + "--"*/ );
         
@@ -4708,7 +4708,7 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
                             + LV_ITEM + "-----" + LV_ARNO + "---" + LV_REPTYPE + "----" );
         
         if (LV_UNIT != null && FRDATE != null && TODATE != null && LV_SID != null && LV_LOCATION != null  && LV_GROUP != null && LV_SUBGROUP != null
-                 && LV_ITEM != null && LV_ARNO !=null && LV_REPTYPE != null  ){
+                 && LV_ITEM != null && LV_ARNO !=null){
             
             
             System.out.println("inside condition");

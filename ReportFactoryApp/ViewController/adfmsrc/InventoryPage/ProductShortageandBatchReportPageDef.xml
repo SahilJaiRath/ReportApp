@@ -55,6 +55,7 @@
       <NamedData NDName="LV_PRODUCT" NDType="java.lang.String"/>
       <NamedData NDName="LV_REQUESTQTY" NDType="java.lang.String"/>
       <NamedData NDName="LV_SID" NDType="java.lang.String"/>
+      <NamedData NDName="LV_USERS" NDType="java.lang.String"/>
     </methodAction>
     <methodAction id="fileNameForPrint" RequiresUpdateModel="true" Action="invokeMethod" MethodName="fileNameForPrint"
                   IsViewObjectMethod="false" DataControl="AppModuleDataControl"

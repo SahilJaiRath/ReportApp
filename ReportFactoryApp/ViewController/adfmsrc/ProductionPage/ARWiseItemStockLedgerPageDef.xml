@@ -72,5 +72,6 @@
       <NamedData NDName="TODATE" NDType="java.util.Date"/>
       <NamedData NDName="EMP_CD" NDType="java.lang.String"/>
     </methodAction>
+    <listOfValues IterBinding="DummyVVO1Iterator" StaticList="false" Uses="LOV_AR_Location" id="AR_Location"/>
   </bindings>
 </pageDefinition>

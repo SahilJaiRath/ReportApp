@@ -15,10 +15,14 @@ import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.logging.ADFLogger;
 
+import oracle.adf.view.rich.component.rich.nav.RichButton;
+
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
 public class StockAsOnDateBean {
+    private RichButton executeBtnBinding;
+
     public StockAsOnDateBean() {
     }
     public BindingContainer getBindings() {
@@ -33,6 +37,15 @@ public class StockAsOnDateBean {
         DCIteratorBinding pvIter = (DCIteratorBinding) getBindings().get("DummyVVO1Iterator");
         String Unit = (String) pvIter.getCurrentRow().getAttribute("UnitCode");
         String Location = (String) pvIter.getCurrentRow().getAttribute("LOC");
+            if(Location.equalsIgnoreCase("ALL"))
+            {
+                Location = "%";
+            }
+            else{
+                    Location = Location.split(",")[0];
+                }
+        
+        
 //        String RepType = (String) pvIter.getCurrentRow().getAttribute("rep_type");
         
         oracle.jbo.domain.Date fromDate = (oracle.jbo.domain.Date) pvIter.getCurrentRow().getAttribute("fromDate");
@@ -63,5 +76,13 @@ public class StockAsOnDateBean {
 
     public void setJaspeReportName(String jaspeReportName) {
         this.jaspeReportName = jaspeReportName;
+    }
+
+    public void setExecuteBtnBinding(RichButton executeBtnBinding) {
+        this.executeBtnBinding = executeBtnBinding;
+    }
+
+    public RichButton getExecuteBtnBinding() {
+        return executeBtnBinding;
     }
 }

@@ -9,9 +9,12 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation"
+  RowClass="common.viwes.DummyVVORowImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -31,11 +34,14 @@
     Name="LocVVO1"
     ViewObjectName="common.viwes.LocVVO"
     RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="LocVVOCriteria"
+      FullName="common.viwes.LocVVO.LocVVOCriteria"/>
     <ParameterMap>
-      <PIMap Variable="P70_UNIT">
+      <PIMap Variable="bindUnit">
         <TransientExpression
-          trustMode="untrusted"
-          Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
+          Name="ExpressionScript"
+          trustMode="untrusted"><![CDATA[UnitCode]]></TransientExpression>
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
@@ -51,8 +57,11 @@
     Name="SubGroupCodeVVO1"
     ViewObjectName="common.viwes.SubGroupCodeVVO"
     RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SubGroupCodeVVOCriteria"
+      FullName="common.viwes.SubGroupCodeVVO.SubGroupCodeVVOCriteria"/>
     <ParameterMap>
-      <PIMap Variable="P70_GROUP_CODE">
+      <PIMap Variable="bindGrpcd">
         <TransientExpression
           trustMode="untrusted"
           Name="ExpressionScript"><![CDATA[GroupCd]]></TransientExpression>
@@ -418,8 +427,11 @@
     Name="SRVDetail_LocationFilterVVO1"
     ViewObjectName="common.viwes.SRVDetail_LocationFilterVVO"
     RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SRVDetail_LocationFilterVVOCriteria"
+      FullName="common.viwes.SRVDetail_LocationFilterVVO.SRVDetail_LocationFilterVVOCriteria"/>
     <ParameterMap>
-      <PIMap Variable="P15_UNIT">
+      <PIMap Variable="BindUnit">
         <TransientExpression
           trustMode="untrusted"
           Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
@@ -458,7 +470,11 @@
       <PIMap Variable="P272_UNIT">
         <TransientExpression
           trustMode="untrusted"
-          Name="ExpressionScript"><![CDATA[AR_Unit]]></TransientExpression>
+          Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P_USER_NAME">
+        <TransientExpression
+          Name="ExpressionScript"><![CDATA[adf.context.expressionEvaluator.evaluate('#{pageFlowScope.empCode}')]]></TransientExpression>
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
@@ -466,13 +482,16 @@
     Name="AR_GROUPVVO1"
     ViewObjectName="common.viwes.AR_GROUPVVO"
     RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="AR_GROUPVVOCriteria"
+      FullName="common.viwes.AR_GROUPVVO.AR_GROUPVVOCriteria"/>
     <ParameterMap>
-      <PIMap Variable="P272_LOCATION">
+      <PIMap Variable="BindLoc">
         <TransientExpression
           trustMode="untrusted"
-          Name="ExpressionScript"><![CDATA[LOC]]></TransientExpression>
+          Name="ExpressionScript"><![CDATA[AR_Location]]></TransientExpression>
       </PIMap>
-      <PIMap Variable="P272_UNIT">
+      <PIMap Variable="BindUnit">
         <TransientExpression
           trustMode="untrusted"
           Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
@@ -537,21 +556,24 @@
     Name="AR_SubGroupVVO1"
     ViewObjectName="common.viwes.AR_SubGroupVVO"
     RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="AR_SubGroupVVOCriteria"
+      FullName="common.viwes.AR_SubGroupVVO.AR_SubGroupVVOCriteria"/>
     <ParameterMap>
-      <PIMap Variable="P272_ITEM_GROUP">
-        <TransientExpression
-          trustMode="untrusted"
-          Name="ExpressionScript"><![CDATA[AR_GROUP]]></TransientExpression>
-      </PIMap>
-      <PIMap Variable="P272_LOCATION">
+      <PIMap Variable="BindLoc">
         <TransientExpression
           trustMode="untrusted"
           Name="ExpressionScript"><![CDATA[LOC]]></TransientExpression>
       </PIMap>
-      <PIMap Variable="P272_UNIT">
+      <PIMap Variable="BindUnit">
         <TransientExpression
           trustMode="untrusted"
           Name="ExpressionScript"><![CDATA[UnitCode]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BindGrpCd">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[AR_GROUP]]></TransientExpression>
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
@@ -598,8 +620,7 @@
     Name="LOV_UnitCode"
     ListVOName="UnitVVO1"
     ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="LOV_UnitCode_LOVUIHints_NullValueId"
+    NullValueFlag="none"
     MRUCount="0">
     <AttrArray Name="AttrNames">
       <Item Value="UnitCode"/>
@@ -1059,25 +1080,6 @@
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
-    Name="LOV_LOC"
-    ListVOName="LocVVO1"
-    ListRangeSize="-1"
-    ComboRowCountHint="10"
-    NullValueFlag="none"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="LOC"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="LocCd"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="ShortDesc"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
     Name="LOV_GroupCd"
     ListVOName="GroupCodeVVO1"
     ListRangeSize="-1"
@@ -1093,8 +1095,14 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="GroupCd"/>
+      <Item Value="GroupDesc"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="GroupCodeVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="GroupCodeVVOCriteria"
+      FullName="common.viwes.GroupCodeVVO.GroupCodeVVOCriteria"/>
   </ListBinding>
   <ListBinding
     Name="LOV_SubGroupCd"
@@ -1113,7 +1121,12 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="SubGrpCd"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="SubGroupCodeVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="SubGroupCodeVVOCriteria"
+      FullName="common.viwes.SubGroupCodeVVO.SubGroupCodeVVOCriteria"/>
   </ListBinding>
   <ListBinding
     Name="LOV_DAFILTER"
@@ -1189,7 +1202,12 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Description"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="StockAdjustment_PartNameVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="StockAdjustment_PartNameVVOCriteria"
+      FullName="common.viwes.StockAdjustment_PartNameVVO.StockAdjustment_PartNameVVOCriteria"/>
   </ListBinding>
   <ListBinding
     Name="LOV_PndingSrvForQcVendorCd"
@@ -1790,7 +1808,12 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Code"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="ProductShortageandBatch_ProductNameVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="ProductShortageandBatch_ProductNameVVOCriteria"
+      FullName="common.viwes.ProductShortageandBatch_ProductNameVVO.ProductShortageandBatch_ProductNameVVOCriteria"/>
   </ListBinding>
   <ListBinding
     Name="LOV_ItemWiseTotalInventory_ProductCd"
@@ -1908,8 +1931,9 @@
     ListVOName="SRVDetail_LocationFilterVVO1"
     ListRangeSize="-1"
     ComboRowCountHint="10"
-    NullValueFlag="none"
-    MRUCount="0">
+    NullValueFlag="start"
+    MRUCount="0"
+    NullValueId="ALL">
     <AttrArray Name="AttrNames">
       <Item Value="SRVDetail_LocationFilter"/>
     </AttrArray>
@@ -1920,7 +1944,12 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Description"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="SRVDetail_LocationFilterVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="SRVDetail_LocationFilterVVOCriteria"
+      FullName="common.viwes.SRVDetail_LocationFilterVVO.SRVDetail_LocationFilterVVOCriteria"/>
   </ListBinding>
   <ListBinding
     Name="LOV_DailyStockStatement_LocationFilter"
@@ -2014,7 +2043,12 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="LocName"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="AR_LocationVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="AR_LocationVVOCriteria"
+      FullName="common.viwes.AR_LocationVVO.AR_LocationVVOCriteria"/>
   </ListBinding>
   <ListBinding
     Name="LOV_AR_GROUP"
@@ -2034,7 +2068,12 @@
       <Item Value="GroupCode"/>
       <Item Value="GroupName"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="AR_GROUPVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="AR_GROUPVVOCriteria"
+      FullName="common.viwes.AR_GROUPVVO.AR_GROUPVVOCriteria"/>
   </ListBinding>
   <ListBinding
     Name="LOV_AR_ITEM"
@@ -2093,9 +2132,15 @@
       <Item Value="SGroup"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="SGroup"/>
       <Item Value="SGroupName"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="AR_SubGroupVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="AR_SubGroupVVOCriteria"
+      FullName="common.viwes.AR_SubGroupVVO.AR_SubGroupVVOCriteria"/>
   </ListBinding>
   <ListBinding
     Name="LOV_rep_type"
@@ -2152,6 +2197,31 @@
       <Item Value="ItemName"/>
     </AttrArray>
     <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LOC"
+    ListVOName="LocVVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    MRUCount="0"
+    ComboRowCountHint="10"
+    NullValueId="ALL">
+    <AttrArray Name="AttrNames">
+      <Item Value="LOC"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LocCd"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ShortDesc"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LocVVOCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="LocVVOCriteria"
+      FullName="common.viwes.LocVVO.LocVVOCriteria"/>
   </ListBinding>
   <SQLQuery><![CDATA[select * from Dual]]></SQLQuery>
   <ViewAttribute
@@ -2320,10 +2390,16 @@
       <SchemaBasedProperties>
         <DISPLAYWIDTH
           Value="25"/>
+        <AUTOSUBMIT
+          Value="true"/>
         <CONTROLTYPE
           Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
+    <Dependencies>
+      <Item
+        Value="UnitCode"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewAttribute
     Name="Customer"
@@ -2847,10 +2923,10 @@
     LOVName="LOV_StockAdjustment_PartName">
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <DISPLAYWIDTH
           Value="40"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -3697,10 +3773,10 @@
     LOVName="LOV_LocationFilter">
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <DISPLAYWIDTH
           Value="40"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -3797,10 +3873,10 @@
     LOVName="LOV_AR_Location">
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <AUTOSUBMIT
           Value="true"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -3854,7 +3930,8 @@
     ColumnType="VARCHAR2"
     AliasName="VIEW_ATTR"
     SQLType="VARCHAR"
-    LOVName="LOV_AR_AR_NO">
+    LOVName="LOV_AR_AR_NO"
+    DefaultValue="ALL">
     <Properties>
       <SchemaBasedProperties>
         <AUTOSUBMIT
@@ -3877,10 +3954,10 @@
     LOVName="LOV_AR_SubGroup">
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <AUTOSUBMIT
           Value="true"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -3894,9 +3971,12 @@
     ColumnType="VARCHAR2"
     AliasName="VIEW_ATTR"
     SQLType="VARCHAR"
-    LOVName="LOV_rep_type">
+    LOVName="LOV_rep_type"
+    DefaultValue="PDF">
     <Properties>
       <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
         <CONTROLTYPE
           Value="choice"/>
       </SchemaBasedProperties>

@@ -18,9 +18,9 @@
         ResId="common.viwes.GroupCodeVVO_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
-  <SQLQuery><![CDATA[select 'ALL' GROUP_CD, 1  from dual    
-union    
-SELECT DISTINCT GROUP_CD || ',' || GROUP_DESC  GROUP_CD, 2  FROM GROUP_MST     
+  <SQLQuery><![CDATA[select 'ALL' GROUP_CD, 'ALL' GROUP_DESC,1  from dual       
+union       
+SELECT DISTINCT GROUP_CD , GROUP_DESC, 2  FROM GROUP_MST        
 ORDER BY 2]]></SQLQuery>
   <ViewAttribute
     Name="GroupCd"
@@ -40,6 +40,29 @@ ORDER BY 2]]></SQLQuery>
       <SchemaBasedProperties>
         <AUTOSUBMIT
           Value="true"/>
+        <DISPLAYWIDTH
+          Value="15"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GroupDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GROUP_DESC"
+    Expression="GROUP_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="25"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -57,6 +80,63 @@ ORDER BY 2]]></SQLQuery>
       <Attr Name="_DisplaySize" Value="39"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewCriteria
+    Name="GroupCodeVVOCriteria"
+    ViewObjectName="common.viwes.GroupCodeVVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="GroupCodeVVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        Name="GroupCodeVVOCriteria_GroupCodeVVOCriteria_row_0_GroupCd"
+        ViewAttribute="GroupCd">
+        <ViewCriteria
+          Name="GroupCodeVVOCriteria_GroupCodeVVOCriteria_row_0_GroupCd_itemHolder"
+          ViewObjectName="common.viwes.GroupCodeVVO"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="GroupCodeVVOCriteria_GroupCodeVVOCriteria_row_0_GroupCd_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="GroupCodeVVOCriteria_GroupCodeVVOCriteria_row_0_GroupCd"
+              ViewAttribute="GroupCd"
+              Operator="CONTAINS"
+              Conjunction="AND"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="GroupCodeVVOCriteria_GroupCodeVVOCriteria_row_0_GroupCd_itemHolder_row_1"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="GroupCodeVVOCriteria_GroupCodeVVOCriteria_row_0_GroupCd_GroupCodeVVOCriteria_GroupCodeVVOCriteria_row_0_GroupCd_itemHolder_GroupCodeVVOCriteria_GroupCodeVVOCriteria_row_0_GroupCd_itemHolder_row_1_GroupCd"
+              ViewAttribute="GroupCd"
+              Operator="CONTAINS"
+              Conjunction="AND"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>

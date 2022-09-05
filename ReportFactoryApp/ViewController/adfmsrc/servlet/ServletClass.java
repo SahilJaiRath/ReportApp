@@ -162,7 +162,7 @@ public class ServletClass extends HttpServlet {
     }
     public String newConvertStringToJboDate(String datestring) throws ParseException {
         System.out.println("Inside ADFUtils for date!");
-        if (!datestring.equals("-")) {
+     //   if (datestring.equals("-")) {
             //                    System.out.println("inside else FALSE !(Slash format)");
             //                java.text.SimpleDateFormat sdf1 = new java.text.SimpleDateFormat("mm/dd/yyyy");
             //
@@ -175,13 +175,15 @@ public class ServletClass extends HttpServlet {
             //                        System.out.println("Date error");
             //                }
             //                return new oracle.jbo.domain.Date(sdfsql.format(date));
-            SimpleDateFormat format1 = new SimpleDateFormat("MM/dd/yyyy");
+        // For server  
+         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+       // For Local
+//        SimpleDateFormat format1 = new SimpleDateFormat("MM/dd/yyyy");
             SimpleDateFormat format2 = new SimpleDateFormat("dd-MMM-yy");
             Date date = format1.parse(datestring);
             System.out.println(format2.format(date));
             return format2.format(date);
-            }
-        return "";
+       
     }
     public static boolean isValidFormat(String format, String value) {
             System.out.println("Inside valid format function!");
@@ -273,11 +275,13 @@ public class ServletClass extends HttpServlet {
             
         }else{
             FromDate = request.getParameter("FromDate").toString();
+            System.out.println("=====FromDate========="+FromDate);
         }
         if(null==request.getParameter("ToDate")){
             
         }else{
             ToDate = request.getParameter("ToDate").toString();
+            System.out.println("=====ToDate========="+ToDate);
         }
         
         if(null==request.getParameter("EmpCode")){
@@ -358,8 +362,17 @@ public class ServletClass extends HttpServlet {
                     parameters.put("P_SESSION_ID", SID);
                 }
             if(RepName.equals("SAOD")){
+                
                      parameters.put("p_unit", UnitCode);
-                     parameters.put("p_loc", LocCode);
+                     if(LocCode.equalsIgnoreCase("ALL"))
+                     {
+                         LocCode = "%";
+                     }
+                     else{
+                             LocCode = LocCode.split(",")[0];
+                             parameters.put("p_loc", LocCode);
+                         }
+                    
                      parameters.put("p_as_on_dt",newConvertStringToJboDate(FromDate)  );
                  }
             

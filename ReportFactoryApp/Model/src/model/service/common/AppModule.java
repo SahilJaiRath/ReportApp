@@ -177,7 +177,6 @@ public interface AppModule extends ApplicationModule {
 
     void callProcessProduction(String LV_UNIT, Date FRDATE, Date TODATE);
 
-    void callProductShortageandBatch(String LV_UNIT, String LV_PRODUCT, String LV_REQUESTQTY, String LV_SID);
 
     void callProductionStatistics(String LV_UNIT, Date FRDATE, Date TODATE);
 
@@ -276,5 +275,8 @@ public interface AppModule extends ApplicationModule {
 
     void callStockValuation(String LV_UNIT, String LV_ITEM_CD, String LV_Location, oracle.jbo.domain.Date LV_frmDate,
                             oracle.jbo.domain.Date LV_tDate, String LV_SID);
+
+    void callProductShortageandBatch(String LV_UNIT, String LV_PRODUCT, String LV_REQUESTQTY, String LV_SID,
+                                     String LV_USERS);
 }
 

@@ -15,10 +15,14 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.ADFContext;
 import oracle.adf.share.logging.ADFLogger;
 
+import oracle.adf.view.rich.component.rich.nav.RichButton;
+
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
 public class ArWiseItemStockLedgerBean {
+    private RichButton executeBtnbinding;
+
     public ArWiseItemStockLedgerBean() {
     }
     public BindingContainer getBindings() {
@@ -29,14 +33,50 @@ public class ArWiseItemStockLedgerBean {
     private static final ADFLogger logger = ADFLogger.createADFLogger(AppModuleImpl.class);
 
     public void onClickButton(ActionEvent actionEvent) {
+        String Group =null;
+        String SubGroup =null;
+        String Item    =null;
+        String ArNo   =null;
+        String RepType    =null;
+        String Location=null;
         DCIteratorBinding pvIter = (DCIteratorBinding) getBindings().get("DummyVVO1Iterator");
         String Unit = (String) pvIter.getCurrentRow().getAttribute("UnitCode");
-        String Location = (String) pvIter.getCurrentRow().getAttribute("LOC");
-        String Group = (String) pvIter.getCurrentRow().getAttribute("AR_GROUP");
-        String SubGroup = (String) pvIter.getCurrentRow().getAttribute("AR_SubGroup");
-        String Item = (String) pvIter.getCurrentRow().getAttribute("AR_ITEM");
-        String ArNo = (String) pvIter.getCurrentRow().getAttribute("AR_AR_NO");
-        String RepType = (String) pvIter.getCurrentRow().getAttribute("rep_type");
+         Item = (String) pvIter.getCurrentRow().getAttribute("AR_ITEM");
+        ArNo = (String) pvIter.getCurrentRow().getAttribute("AR_AR_NO");
+        
+        if(null==pvIter.getCurrentRow().getAttribute("AR_Location")){
+            Location="ALL";
+        }
+        else{
+                Location = (String) pvIter.getCurrentRow().getAttribute("AR_Location");
+            }
+        if(null==pvIter.getCurrentRow().getAttribute("AR_GROUP")){
+            Group="ALL";
+        }
+        else{
+                Group = (String) pvIter.getCurrentRow().getAttribute("AR_GROUP");
+            }
+       
+        if(null==pvIter.getCurrentRow().getAttribute("AR_SubGroup")){
+            SubGroup="ALL";
+        }
+        else{
+                SubGroup = (String) pvIter.getCurrentRow().getAttribute("AR_SubGroup");
+            }
+       
+        if(null==pvIter.getCurrentRow().getAttribute("AR_ITEM") ||Item.equalsIgnoreCase("ALL")){
+            Item="ALL";
+        }
+        else{
+                Item = (String) pvIter.getCurrentRow().getAttribute("AR_ITEM");
+            }
+        if(null==pvIter.getCurrentRow().getAttribute("AR_AR_NO") ||ArNo.equalsIgnoreCase("ALL")){
+            ArNo="ALL";
+        }
+        else{
+                ArNo = (String) pvIter.getCurrentRow().getAttribute("AR_AR_NO");
+            }
+    
             
             
         
@@ -81,9 +121,14 @@ public class ArWiseItemStockLedgerBean {
         
         
     }
+
+    public void setExecuteBtnbinding(RichButton executeBtnbinding) {
+        this.executeBtnbinding = executeBtnbinding;
+    }
+
+    public RichButton getExecuteBtnbinding() {
+        return executeBtnbinding;
+    }
 }
-    
-    
-    
-    
+
 

@@ -19,11 +19,28 @@
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="P70_UNIT"
-    Kind="where"
+    Name="bindUnit"
+    Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[SELECT LOC_CD , LOC_CD || ',' ||SHORT_DESC SHORT_DESC FROM UNIT_STORE A,LOCATION B       
-WHERE LOC_CD=LOCAT_CODE AND A.UNIT_CD=:P70_UNIT]]></SQLQuery>
+  <SQLQuery><![CDATA[select 'ALL' UNIT_CD, 'ALL' LOC_CD, 'ALL' SHORT_DESC from dual                                      
+union all                                      
+SELECT A.UNIT_CD, LOC_CD , LOC_CD || ',' ||SHORT_DESC SHORT_DESC FROM UNIT_STORE A,LOCATION B                                                 
+WHERE LOC_CD=LOCAT_CODE]]></SQLQuery>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="LocCd"
     IsUpdateable="false"
@@ -44,22 +61,58 @@ WHERE LOC_CD=LOCAT_CODE AND A.UNIT_CD=:P70_UNIT]]></SQLQuery>
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="30"
+    Precision="37"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     AliasName="SHORT_DESC"
     Expression="SHORT_DESC"
     SQLType="VARCHAR">
     <DesignTime>
-      <Attr Name="_DisplaySize" Value="30"/>
+      <Attr Name="_DisplaySize" Value="37"/>
     </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <DISPLAYWIDTH
-          Value="25"/>
-      </SchemaBasedProperties>
-    </Properties>
   </ViewAttribute>
+  <ViewCriteria
+    Name="LocVVOCriteria"
+    ViewObjectName="common.viwes.LocVVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LocVVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="UnitCd"
+        ViewAttribute="UnitCd"
+        Operator="="
+        Conjunction="AND"
+        Value=":bindUnit"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="LocVVOCriteria_LocVVOCriteria_row_0_ShortDesc"
+        ViewAttribute="ShortDesc"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>

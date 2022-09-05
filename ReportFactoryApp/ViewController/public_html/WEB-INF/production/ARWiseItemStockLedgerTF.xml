@@ -15,6 +15,11 @@
       <value>#{pageFlowScope.SID}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
+    <input-parameter-definition id="__5">
+      <name>unitCode</name>
+      <value>#{pageFlowScope.unitCode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
     <managed-bean id="__1">
       <managed-bean-name>ARWiseItemStockLedgerBean</managed-bean-name>
       <managed-bean-class>bspl.reportfactory.view.ARWiseItemStockLedger</managed-bean-class>

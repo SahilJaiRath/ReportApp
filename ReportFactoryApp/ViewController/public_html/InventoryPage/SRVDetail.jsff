@@ -7,104 +7,104 @@
         <af:gridCell marginStart="5px" width="25%" id="gc1">
           <af:selectOneChoice value="#{bindings.UnitCode.inputValue}" label="Unit Name"
                               required="#{bindings.UnitCode.hints.mandatory}"
-                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:180px;" labelStyle="width:100px" >
+                              shortDesc="#{bindings.UnitCode.hints.tooltip}" id="soc1" contentStyle="width:190px;" labelStyle="width:100px"
+                              autoSubmit="true">
             <f:selectItems value="#{bindings.UnitCode.items}" id="si1"/>
             <f:validator binding="#{bindings.UnitCode.validator}"/>
           </af:selectOneChoice>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" id="gc2">
-          <af:inputComboboxListOfValues id="iclov1"
-                                        popupTitle="Search and Select: #{bindings.SRVDetail_LocationFilter.hints.label}"
-                                        value="#{bindings.SRVDetail_LocationFilter.inputValue}"
-                                        label="Location"
-                                        model="#{bindings.SRVDetail_LocationFilter.listOfValuesModel}"
-                                        required="#{bindings.SRVDetail_LocationFilter.hints.mandatory}"
-                                        columns="#{bindings.SRVDetail_LocationFilter.hints.displayWidth}"
-                                        shortDesc="#{bindings.SRVDetail_LocationFilter.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px">
-            <f:validator binding="#{bindings.SRVDetail_LocationFilter.validator}"/>
-          </af:inputComboboxListOfValues>
-        </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" id="gc3">
-          <af:inputComboboxListOfValues id="stockAdjustment_PartNameId"
-                                        popupTitle="Search and Select: #{bindings.StockAdjustment_PartName.hints.label}"
-                                        value="#{bindings.StockAdjustment_PartName.inputValue}"
-                                        label="Item Name"
-                                        model="#{bindings.StockAdjustment_PartName.listOfValuesModel}"
-                                        required="#{bindings.StockAdjustment_PartName.hints.mandatory}"
-                                        columns="#{bindings.StockAdjustment_PartName.hints.displayWidth}"
-                                        shortDesc="#{bindings.StockAdjustment_PartName.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px">
-            <f:validator binding="#{bindings.StockAdjustment_PartName.validator}"/>
-          </af:inputComboboxListOfValues>
-        </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc4"/>
-      </af:gridRow>
-      <af:gridRow marginTop="5px" height="auto" id="gr2">
-        <af:gridCell marginStart="5px" width="25%" id="gc5">
-          <af:inputComboboxListOfValues id="groupCdId" popupTitle="Search and Select: #{bindings.GroupCd.hints.label}"
-                                        value="#{bindings.GroupCd.inputValue}" label="Group Code"
-                                        model="#{bindings.GroupCd.listOfValuesModel}"
-                                        required="#{bindings.GroupCd.hints.mandatory}"
-                                        columns="#{bindings.GroupCd.hints.displayWidth}"
-                                        shortDesc="#{bindings.GroupCd.hints.tooltip}" contentStyle="width:160px;" labelStyle="width:100px">
-            <f:validator binding="#{bindings.GroupCd.validator}"/>
-          </af:inputComboboxListOfValues>
-        </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" id="gc6">
-          <af:inputComboboxListOfValues id="subGroupCdId"
-                                        popupTitle="Search and Select: #{bindings.SubGroupCd.hints.label}"
-                                        value="#{bindings.SubGroupCd.inputValue}"
-                                        label="Sub Group Code"
-                                        model="#{bindings.SubGroupCd.listOfValuesModel}"
-                                        required="#{bindings.SubGroupCd.hints.mandatory}"
-                                        columns="#{bindings.SubGroupCd.hints.displayWidth}"
-                                        shortDesc="#{bindings.SubGroupCd.hints.tooltip}" contentStyle="width:180px;" labelStyle="width:100px">
-            <f:validator binding="#{bindings.SubGroupCd.validator}"/>
-          </af:inputComboboxListOfValues>
-        </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" id="gc7">
-          <af:selectOneChoice value="#{bindings.SRVDetail_ApproveFilter.inputValue}"
-                              label="Approve "
-                              required="#{bindings.SRVDetail_ApproveFilter.hints.mandatory}"
-                              shortDesc="#{bindings.SRVDetail_ApproveFilter.hints.tooltip}" id="soc2" contentStyle="width:198px;" labelStyle="width:100px">
-            <f:selectItems value="#{bindings.SRVDetail_ApproveFilter.items}" id="si2"/>
-            <f:validator binding="#{bindings.SRVDetail_ApproveFilter.validator}"/>
-          </af:selectOneChoice>
-        </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc8">
-          <af:selectOneChoice value="#{bindings.rep_type.inputValue}" label="Report Type"
-                              required="#{bindings.rep_type.hints.mandatory}"
-                             shortDesc="#{bindings.rep_type.hints.tooltip}" id="soc4" autoSubmit="true" contentStyle="width:180.0px;"
-                                >
-            <f:selectItems value="#{bindings.rep_type.items}" id="si4"/>
-            <f:validator binding="#{bindings.rep_type.validator}"/>
-          </af:selectOneChoice>
-        </af:gridCell>
-      </af:gridRow>
-      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
-        <af:gridCell marginStart="5px" width="25%" id="gc9">
-          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date"
-                        required="#{bindings.fromDate.hints.mandatory}"
+          <af:inputDate value="#{bindings.fromDate.inputValue}" label="From Date" showRequired="true" required="true"
                         columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
-                        id="id13" contentStyle="width:173px;" labelStyle="width:100px">
+                        id="id13" contentStyle="width:173px;" labelStyle="width:100px" autoSubmit="true">
             <f:validator binding="#{bindings.fromDate.validator}"/>
             <af:convertDateTime pattern="#{bindings.fromDate.format}"/>
           </af:inputDate>
         </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" id="gc10">
-          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date"
-                        required="#{bindings.toDate.hints.mandatory}" columns="#{bindings.toDate.hints.displayWidth}"
-                        shortDesc="#{bindings.toDate.hints.tooltip}" id="id12" contentStyle="width:193px;" labelStyle="width:100px">
+        <af:gridCell marginStart="5px" width="25%" id="gc3">
+          <af:inputDate value="#{bindings.toDate.inputValue}" label="To Date" showRequired="true" required="true"
+                        columns="#{bindings.toDate.hints.displayWidth}" shortDesc="#{bindings.toDate.hints.tooltip}"
+                        id="id12" contentStyle="width:193px;" labelStyle="width:100px" autoSubmit="true">
             <f:validator binding="#{bindings.toDate.validator}"/>
             <af:convertDateTime pattern="#{bindings.toDate.format}"/>
           </af:inputDate>
         </af:gridCell>
-        <af:gridCell marginStart="5px" width="25%" id="gc11">
-          <af:selectOneChoice value="#{bindings.SRVDetail_Statusfilter.inputValue}"
-                              label="Status"
-                              required="#{bindings.SRVDetail_Statusfilter.hints.mandatory}"
-                              shortDesc="#{bindings.SRVDetail_Statusfilter.hints.tooltip}" id="soc3" contentStyle="width:198px;" labelStyle="width:100px">
+        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc4">
+          <af:inputComboboxListOfValues id="iclov1"
+                                        popupTitle="Search and Select: #{bindings.SRVDetail_LocationFilter.hints.label}"
+                                        value="#{bindings.SRVDetail_LocationFilter.inputValue}" label="Location"
+                                        showRequired="true" required="true"
+                                        model="#{bindings.SRVDetail_LocationFilter.listOfValuesModel}"
+                                        columns="#{bindings.SRVDetail_LocationFilter.hints.displayWidth}"
+                                        shortDesc="#{bindings.SRVDetail_LocationFilter.hints.tooltip}"
+                                        contentStyle="width:180px;" labelStyle="width:100px" autoSubmit="true">
+            <f:validator binding="#{bindings.SRVDetail_LocationFilter.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" id="gr2">
+        <af:gridCell marginStart="5px" width="25%" id="gc5">
+          <af:inputComboboxListOfValues id="stockAdjustment_PartNameId"
+                                        popupTitle="Search and Select: #{bindings.StockAdjustment_PartName.hints.label}"
+                                        value="#{bindings.StockAdjustment_PartName.inputValue}" label="Item Name"
+                                        showRequired="true" required="true"
+                                        model="#{bindings.StockAdjustment_PartName.listOfValuesModel}"
+                                        columns="#{bindings.StockAdjustment_PartName.hints.displayWidth}"
+                                        shortDesc="#{bindings.StockAdjustment_PartName.hints.tooltip}"
+                                        contentStyle="width:170px;" labelStyle="width:100px" autoSubmit="true">
+            <f:validator binding="#{bindings.StockAdjustment_PartName.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc6">
+          <af:inputComboboxListOfValues id="groupCdId" popupTitle="Search and Select: #{bindings.GroupCd.hints.label}"
+                                        value="#{bindings.GroupCd.inputValue}" label="Group Code"
+                                        model="#{bindings.GroupCd.listOfValuesModel}" showRequired="true"
+                                        required="true" columns="#{bindings.GroupCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.GroupCd.hints.tooltip}" contentStyle="width:160px;"
+                                        labelStyle="width:100px" autoSubmit="true">
+            <f:validator binding="#{bindings.GroupCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc7">
+          <af:inputComboboxListOfValues id="subGroupCdId"
+                                        popupTitle="Search and Select: #{bindings.SubGroupCd.hints.label}"
+                                        value="#{bindings.SubGroupCd.inputValue}" label="Sub Group Code"
+                                        showRequired="true" required="true"
+                                        model="#{bindings.SubGroupCd.listOfValuesModel}"
+                                        columns="#{bindings.SubGroupCd.hints.displayWidth}"
+                                        shortDesc="#{bindings.SubGroupCd.hints.tooltip}" contentStyle="width:180px;"
+                                        labelStyle="width:100px" autoSubmit="true">
+            <f:validator binding="#{bindings.SubGroupCd.validator}"/>
+          </af:inputComboboxListOfValues>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc8"/>
+      </af:gridRow>
+      <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+        <af:gridCell marginStart="5px" width="25%" id="gc9">
+          <af:selectOneChoice value="#{bindings.SRVDetail_ApproveFilter.inputValue}" label="Approve "
+                              showRequired="true" required="true"
+                              shortDesc="#{bindings.SRVDetail_ApproveFilter.hints.tooltip}" id="soc2"
+                              contentStyle="width:198px;" labelStyle="width:100px" autoSubmit="true">
+            <f:selectItems value="#{bindings.SRVDetail_ApproveFilter.items}" id="si2"/>
+            <f:validator binding="#{bindings.SRVDetail_ApproveFilter.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc10">
+          <af:selectOneChoice value="#{bindings.SRVDetail_Statusfilter.inputValue}" label="Status" showRequired="true"
+                              required="true" shortDesc="#{bindings.SRVDetail_Statusfilter.hints.tooltip}" id="soc3"
+                              contentStyle="width:198px;" labelStyle="width:100px" autoSubmit="true">
             <f:selectItems value="#{bindings.SRVDetail_Statusfilter.items}" id="si3"/>
             <f:validator binding="#{bindings.SRVDetail_Statusfilter.validator}"/>
+          </af:selectOneChoice>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" width="25%" id="gc11">
+          <af:selectOneChoice value="#{bindings.rep_type.inputValue}" label="Report Type"
+                              required="#{bindings.rep_type.hints.mandatory}"
+                              contentStyle="width:198px;" labelStyle="width:100px"
+                              shortDesc="#{bindings.rep_type.hints.tooltip}" id="soc4" autoSubmit="true"
+                              >
+            <f:selectItems value="#{bindings.rep_type.items}" id="si4"/>
+            <f:validator binding="#{bindings.rep_type.validator}"/>
           </af:selectOneChoice>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc12">
@@ -118,13 +118,11 @@
     <f:facet name="menus"/>
     <f:facet name="toolbar">
       <af:toolbar id="t1">
-        <af:button text="Execute" id="b2">
+        <af:button text="Export to Excel" id="b2">
           <af:exportCollectionActionListener type="excelHTML" exportedId="t2" filename="SRV Detail Report.xls"
                                              title="SRV Detail Report"/>
         </af:button>
-        <af:button text="PDF" id="b3" targetFrame="_blank"
-                   destination="/reports/ServletClass?defpath=#{SRVDetailBean.jaspeReportName}&amp;Format=PDF&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{row.SrvNo}">
-        </af:button>
+  
         <af:button actionListener="#{bindings.Next.execute}" text="Next" disabled="#{!bindings.Next.enabled}"
                visible="false"    partialSubmit="true" id="b4"/>
       </af:toolbar>
@@ -143,10 +141,10 @@
       </af:column>
       
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SrvNo.name}" filterable="true"
-                 headerText="SRV No" id="c4" sortable="true">
-        <af:link text="" id="l1"
-                 destination="/reports/ServletClass?defpath=#{SRVDetailBean.jaspeReportName}&amp;Format=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{row.SrvNo}">
-          <af:outputText value="#{row.SrvNo}" shortDesc="#{bindings.SRVDetailVO1.hints.SrvNo.tooltip}" id="ot4"/>
+                 headerText="SRV Number" id="c4" sortable="true">
+        <af:link text="" id="l1" targetFrame="_blank"
+          destination="/reports/ServletClass?defpath=#{SRVDetailBean.jaspeReportName}&amp;RepFormat=PDF&amp;RepName=SRV&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{row.SrvNo}">
+           <af:outputText value="#{row.SrvNo}" shortDesc="#{bindings.SRVDetailVO1.hints.SrvNo.tooltip}" id="ot4"/>
         </af:link>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SrvDt.name}" filterable="true" sortable="true"
@@ -162,7 +160,7 @@
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ChallanNo.name}" filterable="true" sortable="true"
-                 headerText="Challan No" id="c6">
+                 headerText="Challan Number" id="c6">
         <af:outputText value="#{row.ChallanNo}" shortDesc="#{bindings.SRVDetailVO1.hints.ChallanNo.tooltip}" id="ot6"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ChallanDt.name}" filterable="true" sortable="true"
@@ -178,7 +176,7 @@
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.InvNo.name}" filterable="true" sortable="true"
-                 headerText="Invoice No" id="c8">
+                 headerText="Invoice Number" id="c8">
         <af:outputText value="#{row.InvNo}" shortDesc="#{bindings.SRVDetailVO1.hints.InvNo.tooltip}" id="ot8"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.InvDt.name}" filterable="true" sortable="true"
@@ -194,7 +192,7 @@
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GtEheadGateEno.name}" filterable="true" sortable="true"
-                 headerText="Gate No" id="c10">
+                 headerText="Gate Number" id="c10">
         <af:outputText value="#{row.GtEheadGateEno}" shortDesc="#{bindings.SRVDetailVO1.hints.GtEheadGateEno.tooltip}"
                        id="ot10"/>
       </af:column>
@@ -222,105 +220,50 @@
                  headerText="Item Code" id="c18">
         <af:outputText value="#{row.ItemCd}" shortDesc="#{bindings.SRVDetailVO1.hints.ItemCd.tooltip}" id="ot18"/>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GateDt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.GateDt.label}" id="c12">
-        <f:facet name="filter">
-          <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.GateDt.value}"
-                        id="id4">
-            <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.GateDt.format}"/>
-          </af:inputDate>
-        </f:facet>
-        <af:outputText value="#{row.GateDt}" shortDesc="#{bindings.SRVDetailVO1.hints.GateDt.tooltip}" id="ot12">
-          <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.GateDt.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.VendorCode.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.VendorCode.label}" id="c2">
-        <af:outputText value="#{row.VendorCode}" shortDesc="#{bindings.SRVDetailVO1.hints.VendorCode.tooltip}"
-                       id="ot2"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.VendorName.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.VendorName.label}" id="c3">
-        <af:outputText value="#{row.VendorName}" shortDesc="#{bindings.SRVDetailVO1.hints.VendorName.tooltip}"
-                       id="ot3"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.Status.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.Status.label}" id="c11">
-        <af:outputText value="#{row.Status}" shortDesc="#{bindings.SRVDetailVO1.hints.Status.tooltip}" id="ot11"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.EWayBillNo.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.EWayBillNo.label}" id="c13">
-        <af:outputText value="#{row.EWayBillNo}" shortDesc="#{bindings.SRVDetailVO1.hints.EWayBillNo.tooltip}"
-                       id="ot13"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.InvoiceValue.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.InvoiceValue.label}" id="c14">
-        <af:outputText value="#{row.InvoiceValue}" shortDesc="#{bindings.SRVDetailVO1.hints.InvoiceValue.tooltip}"
-                       id="ot14">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.InvoiceValue.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GstRegNo.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.GstRegNo.label}" id="c19">
-        <af:outputText value="#{row.GstRegNo}" shortDesc="#{bindings.SRVDetailVO1.hints.GstRegNo.tooltip}" id="ot19"/>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ItemDecs.name}" filterable="true" sortable="true"
+                 headerText="Item Desc" id="c61">
+        <af:outputText value="#{row.ItemDecs}" shortDesc="#{bindings.SRVDetailVO1.hints.ItemDecs.tooltip}" id="ot61"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ChallanQty.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ChallanQty.label}" id="c20">
+                 headerText="Challan Quantity" id="c20">
         <af:outputText value="#{row.ChallanQty}" shortDesc="#{bindings.SRVDetailVO1.hints.ChallanQty.tooltip}"
                        id="ot20">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.ChallanQty.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ReceiptQty.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ReceiptQty.label}" id="c21">
+                 headerText="Receipt Quantity" id="c21">
         <af:outputText value="#{row.ReceiptQty}" shortDesc="#{bindings.SRVDetailVO1.hints.ReceiptQty.tooltip}"
                        id="ot21">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.ReceiptQty.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.Uom.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.Uom.label}" id="c22">
-        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.SRVDetailVO1.hints.Uom.tooltip}" id="ot22"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.AcceptQty.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.AcceptQty.label}" id="c23">
-        <af:outputText value="#{row.AcceptQty}" shortDesc="#{bindings.SRVDetailVO1.hints.AcceptQty.tooltip}" id="ot23">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.AcceptQty.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.CurrencyRate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.CurrencyRate.label}" id="c24">
-        <af:outputText value="#{row.CurrencyRate}" shortDesc="#{bindings.SRVDetailVO1.hints.CurrencyRate.tooltip}"
-                       id="ot24">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.CurrencyRate.format}"/>
-        </af:outputText>
-      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.Location.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.Location.label}" id="c25">
+                 headerText="Location" id="c25">
         <af:outputText value="#{row.Location}" shortDesc="#{bindings.SRVDetailVO1.hints.Location.tooltip}" id="ot25"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.RejectQty.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.RejectQty.label}" id="c26">
+                 headerText="Reject Quantity" id="c26">
         <af:outputText value="#{row.RejectQty}" shortDesc="#{bindings.SRVDetailVO1.hints.RejectQty.tooltip}" id="ot26">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.RejectQty.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ProcSeq.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ProcSeq.label}" id="c27">
+                 headerText="Process Sequence" id="c27">
         <af:outputText value="#{row.ProcSeq}" shortDesc="#{bindings.SRVDetailVO1.hints.ProcSeq.tooltip}" id="ot27">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.ProcSeq.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ProcCd.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ProcCd.label}" id="c28">
+                 headerText="Process Code" id="c28">
         <af:outputText value="#{row.ProcCd}" shortDesc="#{bindings.SRVDetailVO1.hints.ProcCd.tooltip}" id="ot28"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PoNo.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.PoNo.label}" id="c29">
+                 headerText="Purchase Order Number" id="c29">
         <af:outputText value="#{row.PoNo}" shortDesc="#{bindings.SRVDetailVO1.hints.PoNo.tooltip}" id="ot29"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PoDt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.PoDt.label}" id="c30">
+                 headerText="Purchase Order Date" id="c30">
         <f:facet name="filter">
           <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.PoDt.value}"
                         id="id6">
@@ -331,220 +274,134 @@
           <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.PoDt.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PoHeadAmdNo.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.PoHeadAmdNo.label}" id="c31">
-        <af:outputText value="#{row.PoHeadAmdNo}" shortDesc="#{bindings.SRVDetailVO1.hints.PoHeadAmdNo.tooltip}"
-                       id="ot31">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.PoHeadAmdNo.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PayTerm.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.PayTerm.label}" id="c32">
-        <af:outputText value="#{row.PayTerm}" shortDesc="#{bindings.SRVDetailVO1.hints.PayTerm.tooltip}" id="ot32"/>
-      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.NetRate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.NetRate.label}" id="c33">
+                 headerText="Net Rate" id="c33">
         <af:outputText value="#{row.NetRate}" shortDesc="#{bindings.SRVDetailVO1.hints.NetRate.tooltip}" id="ot33">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.NetRate.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.MaterialRate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.MaterialRate.label}" id="c34">
-        <af:outputText value="#{row.MaterialRate}" shortDesc="#{bindings.SRVDetailVO1.hints.MaterialRate.tooltip}"
-                       id="ot34">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.MaterialRate.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.BasicAmount.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.BasicAmount.label}" id="c35">
-        <af:outputText value="#{row.BasicAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.BasicAmount.tooltip}"
-                       id="ot35">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.BasicAmount.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.DiscountRs.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.DiscountRs.label}" id="c36">
-        <af:outputText value="#{row.DiscountRs}" shortDesc="#{bindings.SRVDetailVO1.hints.DiscountRs.tooltip}"
-                       id="ot36">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.DiscountRs.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.DiscountAmount.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.DiscountAmount.label}" id="c37">
-        <af:outputText value="#{row.DiscountAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.DiscountAmount.tooltip}"
-                       id="ot37">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.DiscountAmount.format}"/>
-        </af:outputText>
-      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SalesTaxAmt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.SalesTaxAmt.label}" id="c38">
+                 headerText="Sales Tax Amount" id="c38">
         <af:outputText value="#{row.SalesTaxAmt}" shortDesc="#{bindings.SRVDetailVO1.hints.SalesTaxAmt.tooltip}"
                        id="ot38">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.SalesTaxAmt.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ExcAmt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ExcAmt.label}" id="c39">
+                 headerText="Excise Amount" id="c39">
         <af:outputText value="#{row.ExcAmt}" shortDesc="#{bindings.SRVDetailVO1.hints.ExcAmt.tooltip}" id="ot39">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.ExcAmt.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.FreightUnit.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.FreightUnit.label}" id="c40">
+                 headerText="Fright Unit" id="c40">
         <af:outputText value="#{row.FreightUnit}" shortDesc="#{bindings.SRVDetailVO1.hints.FreightUnit.tooltip}"
                        id="ot40">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.FreightUnit.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.FreightAmount.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.FreightAmount.label}" id="c41">
-        <af:outputText value="#{row.FreightAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.FreightAmount.tooltip}"
-                       id="ot41">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.FreightAmount.format}"/>
-        </af:outputText>
-      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GstCode.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.GstCode.label}" id="c42">
+                 headerText="Gst Code" id="c42">
         <af:outputText value="#{row.GstCode}" shortDesc="#{bindings.SRVDetailVO1.hints.GstCode.tooltip}" id="ot42"/>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ImportIgst.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ImportIgst.label}" id="c43">
-        <af:outputText value="#{row.ImportIgst}" shortDesc="#{bindings.SRVDetailVO1.hints.ImportIgst.tooltip}"
-                       id="ot43">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.ImportIgst.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.RateOfTax.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.RateOfTax.label}" id="c44">
-        <af:outputText value="#{row.RateOfTax}" shortDesc="#{bindings.SRVDetailVO1.hints.RateOfTax.tooltip}" id="ot44">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.RateOfTax.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.IgstRate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.IgstRate.label}" id="c45">
-        <af:outputText value="#{row.IgstRate}" shortDesc="#{bindings.SRVDetailVO1.hints.IgstRate.tooltip}" id="ot45">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.IgstRate.format}"/>
-        </af:outputText>
-      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.IgstAmt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.IgstAmt.label}" id="c46">
+                 headerText="Igst Amt" id="c46">
         <af:outputText value="#{row.IgstAmt}" shortDesc="#{bindings.SRVDetailVO1.hints.IgstAmt.tooltip}" id="ot46">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.IgstAmt.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SgstAmt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.SgstAmt.label}" id="c47">
+                 headerText="Sgst Amt" id="c47">
         <af:outputText value="#{row.SgstAmt}" shortDesc="#{bindings.SRVDetailVO1.hints.SgstAmt.tooltip}" id="ot47">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.SgstAmt.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.CgstAmt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.CgstAmt.label}" id="c48">
+                 headerText="Cgst Amt" id="c48">
         <af:outputText value="#{row.CgstAmt}" shortDesc="#{bindings.SRVDetailVO1.hints.CgstAmt.tooltip}" id="ot48">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.CgstAmt.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SrvHsnCode.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.SrvHsnCode.label}" id="c49">
+                 headerText="Srv Hsn Code" id="c49">
         <af:outputText value="#{row.SrvHsnCode}" shortDesc="#{bindings.SRVDetailVO1.hints.SrvHsnCode.tooltip}"
                        id="ot49"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.CgstRate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.CgstRate.label}" id="c50">
+                 headerText="Cgst Rate" id="c50">
         <af:outputText value="#{row.CgstRate}" shortDesc="#{bindings.SRVDetailVO1.hints.CgstRate.tooltip}" id="ot50">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.CgstRate.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SgstRate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.SgstRate.label}" id="c51">
+                 headerText="Sgst Rate" id="c51">
         <af:outputText value="#{row.SgstRate}" shortDesc="#{bindings.SRVDetailVO1.hints.SgstRate.tooltip}" id="ot51">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.SgstRate.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PackingForward.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.PackingForward.label}" id="c52">
-        <af:outputText value="#{row.PackingForward}" shortDesc="#{bindings.SRVDetailVO1.hints.PackingForward.tooltip}"
-                       id="ot52">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.PackingForward.format}"/>
-        </af:outputText>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.BoeNo.name}" filterable="true" sortable="true"
+                 headerText="Boe No" id="c68">
+        <af:outputText value="#{row.BoeNo}" shortDesc="#{bindings.SRVDetailVO1.hints.BoeNo.tooltip}" id="ot68"/>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PackAmount.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.PackAmount.label}" id="c53">
-        <af:outputText value="#{row.PackAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.PackAmount.tooltip}"
-                       id="ot53">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.PackAmount.format}"/>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.FreightAmount.name}" filterable="true" sortable="true"
+                 headerText="Fright  Amount" id="c41">
+        <af:outputText value="#{row.FreightAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.FreightAmount.tooltip}"
+                       id="ot41">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.FreightAmount.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.CustomDuty.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.CustomDuty.label}" id="c54">
+                 headerText="Custom Duty" id="c54">
         <af:outputText value="#{row.CustomDuty}" shortDesc="#{bindings.SRVDetailVO1.hints.CustomDuty.tooltip}"
                        id="ot54">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.CustomDuty.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.Other1.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.Other1.label}" id="c55">
+                 headerText="Other 1" id="c55">
         <af:outputText value="#{row.Other1}" shortDesc="#{bindings.SRVDetailVO1.hints.Other1.tooltip}" id="ot55">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.Other1.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.Other2.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.Other2.label}" id="c56">
+                 headerText="Other 2" id="c56">
         <af:outputText value="#{row.Other2}" shortDesc="#{bindings.SRVDetailVO1.hints.Other2.tooltip}" id="ot56">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.Other2.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ShortageAllowed.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ShortageAllowed.label}" id="c57">
-        <af:outputText value="#{row.ShortageAllowed}" shortDesc="#{bindings.SRVDetailVO1.hints.ShortageAllowed.tooltip}"
-                       id="ot57">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.ShortageAllowed.format}"/>
-        </af:outputText>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.TransporterDebited.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.TransporterDebited.label}" id="c58">
-        <af:outputText value="#{row.TransporterDebited}"
-                       shortDesc="#{bindings.SRVDetailVO1.hints.TransporterDebited.tooltip}" id="ot58">
-          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.TransporterDebited.format}"/>
-        </af:outputText>
-      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GrandTotal.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.GrandTotal.label}" id="c59">
+                 headerText="Grand Total" id="c59">
         <af:outputText value="#{row.GrandTotal}" shortDesc="#{bindings.SRVDetailVO1.hints.GrandTotal.tooltip}"
                        id="ot59">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.GrandTotal.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.LandedCost.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.LandedCost.label}" id="c60">
+                 headerText="Landed Cost" id="c60">
         <af:outputText value="#{row.LandedCost}" shortDesc="#{bindings.SRVDetailVO1.hints.LandedCost.tooltip}"
                        id="ot60">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.LandedCost.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ItemDecs.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ItemDecs.label}" id="c61">
-        <af:outputText value="#{row.ItemDecs}" shortDesc="#{bindings.SRVDetailVO1.hints.ItemDecs.tooltip}" id="ot61"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GroupCode.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.GroupCode.label}" id="c62">
-        <af:outputText value="#{row.GroupCode}" shortDesc="#{bindings.SRVDetailVO1.hints.GroupCode.tooltip}" id="ot62"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SubGrpCd.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.SubGrpCd.label}" id="c63">
-        <af:outputText value="#{row.SubGrpCd}" shortDesc="#{bindings.SRVDetailVO1.hints.SubGrpCd.tooltip}" id="ot63"/>
-      </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ApproveBy.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ApproveBy.label}" id="c64">
-        <af:outputText value="#{row.ApproveBy}" shortDesc="#{bindings.SRVDetailVO1.hints.ApproveBy.tooltip}" id="ot64"/>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GateDt.name}" filterable="true" sortable="true"
+                 headerText="Gate Dt" id="c12">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.GateDt.value}"
+                        id="id4">
+            <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.GateDt.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.GateDt}" shortDesc="#{bindings.SRVDetailVO1.hints.GateDt.tooltip}" id="ot12">
+          <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.GateDt.format}"/>
+        </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ApproveByName.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.ApproveByName.label}" id="c65">
+                 headerText="Approved By Name" id="c65">
         <af:outputText value="#{row.ApproveByName}" shortDesc="#{bindings.SRVDetailVO1.hints.ApproveByName.tooltip}"
                        id="ot65"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.AuthDt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.AuthDt.label}" id="c66">
+                 headerText="Auth Dt" id="c66">
         <f:facet name="filter">
           <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.AuthDt.value}"
                         id="id7">
@@ -555,17 +412,48 @@
           <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.AuthDt.format}"/>
         </af:outputText>
       </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GroupCode.name}" filterable="true" sortable="true"
+                 headerText="Group Code" id="c62">
+        <af:outputText value="#{row.GroupCode}" shortDesc="#{bindings.SRVDetailVO1.hints.GroupCode.tooltip}" id="ot62"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.SubGrpCd.name}" filterable="true" sortable="true"
+                 headerText="Sub Group Code" id="c63">
+        <af:outputText value="#{row.SubGrpCd}" shortDesc="#{bindings.SRVDetailVO1.hints.SubGrpCd.tooltip}" id="ot63"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.MaterialRate.name}" filterable="true" sortable="true"
+                 headerText="Material Rate" id="c34">
+        <af:outputText value="#{row.MaterialRate}" shortDesc="#{bindings.SRVDetailVO1.hints.MaterialRate.tooltip}"
+                       id="ot34">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.MaterialRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.IgstRate.name}" filterable="true" sortable="true"
+                 headerText="Igst Rate" id="c45">
+        <af:outputText value="#{row.IgstRate}" shortDesc="#{bindings.SRVDetailVO1.hints.IgstRate.tooltip}" id="ot45">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.IgstRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.DiscountRs.name}" filterable="true" sortable="true"
+                 headerText="Discount Rs" id="c36">
+        <af:outputText value="#{row.DiscountRs}" shortDesc="#{bindings.SRVDetailVO1.hints.DiscountRs.tooltip}"
+                       id="ot36">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.DiscountRs.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.DiscountAmount.name}" filterable="true" sortable="true"
+                 headerText="Discount Amount" id="c37">
+        <af:outputText value="#{row.DiscountAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.DiscountAmount.tooltip}"
+                       id="ot37">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.DiscountAmount.format}"/>
+        </af:outputText>
+      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.MaterialType.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.MaterialType.label}" id="c67">
+                 headerText="Material Type" id="c67">
         <af:outputText value="#{row.MaterialType}" shortDesc="#{bindings.SRVDetailVO1.hints.MaterialType.tooltip}"
                        id="ot67"/>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.BoeNo.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.BoeNo.label}" id="c68">
-        <af:outputText value="#{row.BoeNo}" shortDesc="#{bindings.SRVDetailVO1.hints.BoeNo.tooltip}" id="ot68"/>
-      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.BoeDt.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.BoeDt.label}" id="c69">
+                 headerText="Boe Dt" id="c69">
         <f:facet name="filter">
           <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BoeDt.value}"
                         id="id8">
@@ -577,16 +465,127 @@
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.Insurance.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.Insurance.label}" id="c70">
+                 headerText="Insurance" id="c70">
         <af:outputText value="#{row.Insurance}" shortDesc="#{bindings.SRVDetailVO1.hints.Insurance.tooltip}" id="ot70"/>
       </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PayTerm.name}" filterable="true" sortable="true"
+                 headerText="Pay Term" id="c32">
+        <af:outputText value="#{row.PayTerm}" shortDesc="#{bindings.SRVDetailVO1.hints.PayTerm.tooltip}" id="ot32"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.DueDate.name}" filterable="true" sortable="true"
+                 headerText="Due Date" id="c73">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DueDate.value}"
+                        id="id10">
+            <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.DueDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.DueDate}" shortDesc="#{bindings.SRVDetailVO1.hints.DueDate.tooltip}" id="ot73">
+          <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.DueDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.VendorCode.name}" filterable="true" sortable="true"
+                 headerText="Vendor Code" id="c2">
+        <af:outputText value="#{row.VendorCode}" shortDesc="#{bindings.SRVDetailVO1.hints.VendorCode.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.VendorName.name}" filterable="true" sortable="true"
+                 headerText="Vendor Name" id="c3">
+        <af:outputText value="#{row.VendorName}" shortDesc="#{bindings.SRVDetailVO1.hints.VendorName.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.EWayBillNo.name}" filterable="true" sortable="true"
+                 headerText="E Way Bill No" id="c13">
+        <af:outputText value="#{row.EWayBillNo}" shortDesc="#{bindings.SRVDetailVO1.hints.EWayBillNo.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.InvoiceValue.name}" filterable="true" sortable="true"
+                 headerText="Invoice Value" id="c14">
+        <af:outputText value="#{row.InvoiceValue}" shortDesc="#{bindings.SRVDetailVO1.hints.InvoiceValue.tooltip}"
+                       id="ot14">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.InvoiceValue.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.GstRegNo.name}" filterable="true" sortable="true"
+                 headerText="Gst Reg No" id="c19">
+        <af:outputText value="#{row.GstRegNo}" shortDesc="#{bindings.SRVDetailVO1.hints.GstRegNo.tooltip}" id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.Uom.name}" filterable="true" sortable="true"
+                 headerText="Uom" id="c22">
+        <af:outputText value="#{row.Uom}" shortDesc="#{bindings.SRVDetailVO1.hints.Uom.tooltip}" id="ot22"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.AcceptQty.name}" filterable="true" sortable="true"
+                 headerText="Accept Quantity" id="c23">
+        <af:outputText value="#{row.AcceptQty}" shortDesc="#{bindings.SRVDetailVO1.hints.AcceptQty.tooltip}" id="ot23">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.AcceptQty.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.CurrencyRate.name}" filterable="true" sortable="true"
+                 headerText="Currency Rate" id="c24">
+        <af:outputText value="#{row.CurrencyRate}" shortDesc="#{bindings.SRVDetailVO1.hints.CurrencyRate.tooltip}"
+                       id="ot24">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.CurrencyRate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PoHeadAmdNo.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.SRVDetailVO1.hints.PoHeadAmdNo.label}" id="c31">
+        <af:outputText value="#{row.PoHeadAmdNo}" shortDesc="#{bindings.SRVDetailVO1.hints.PoHeadAmdNo.tooltip}"
+                       id="ot31">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.PoHeadAmdNo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.BasicAmount.name}" filterable="true" sortable="true"
+                 headerText="Basic Amount" id="c35">
+        <af:outputText value="#{row.BasicAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.BasicAmount.tooltip}"
+                       id="ot35">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.BasicAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ImportIgst.name}" filterable="true" sortable="true"
+                 headerText="Import Igst" id="c43">
+        <af:outputText value="#{row.ImportIgst}" shortDesc="#{bindings.SRVDetailVO1.hints.ImportIgst.tooltip}"
+                       id="ot43">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.ImportIgst.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.RateOfTax.name}" filterable="true" sortable="true"
+                 headerText="Rate Of Tax" id="c44">
+        <af:outputText value="#{row.RateOfTax}" shortDesc="#{bindings.SRVDetailVO1.hints.RateOfTax.tooltip}" id="ot44">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.RateOfTax.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PackingForward.name}" filterable="true" sortable="true"
+                 headerText="Packing Forward" id="c52">
+        <af:outputText value="#{row.PackingForward}" shortDesc="#{bindings.SRVDetailVO1.hints.PackingForward.tooltip}"
+                       id="ot52">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.PackingForward.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PackAmount.name}" filterable="true" sortable="true"
+                 headerText="Pack Amount" id="c53">
+        <af:outputText value="#{row.PackAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.PackAmount.tooltip}"
+                       id="ot53">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.PackAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ShortageAllowed.name}" filterable="true" sortable="true"
+                 headerText="Shortage Allowed" id="c57">
+        <af:outputText value="#{row.ShortageAllowed}" shortDesc="#{bindings.SRVDetailVO1.hints.ShortageAllowed.tooltip}"
+                       id="ot57">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.ShortageAllowed.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.ApproveBy.name}" filterable="true" sortable="true"
+                 headerText="Approved By" id="c64">
+        <af:outputText value="#{row.ApproveBy}" shortDesc="#{bindings.SRVDetailVO1.hints.ApproveBy.tooltip}" id="ot64"/>
+      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.BillPrepBy.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.BillPrepBy.label}" id="c71">
+                 headerText="Bill Prep By" id="c71">
         <af:outputText value="#{row.BillPrepBy}" shortDesc="#{bindings.SRVDetailVO1.hints.BillPrepBy.tooltip}"
                        id="ot71"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.BillPassDate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.BillPassDate.label}" id="c72">
+                 headerText="Bill Pass Date" id="c72">
         <f:facet name="filter">
           <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BillPassDate.value}"
                         id="id9">
@@ -598,24 +597,12 @@
           <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.BillPassDate.format}"/>
         </af:outputText>
       </af:column>
-      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.DueDate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.DueDate.label}" id="c73">
-        <f:facet name="filter">
-          <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DueDate.value}"
-                        id="id10">
-            <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.DueDate.format}"/>
-          </af:inputDate>
-        </f:facet>
-        <af:outputText value="#{row.DueDate}" shortDesc="#{bindings.SRVDetailVO1.hints.DueDate.tooltip}" id="ot73">
-          <af:convertDateTime pattern="#{bindings.SRVDetailVO1.hints.DueDate.format}"/>
-        </af:outputText>
-      </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.VoucherNo.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.VoucherNo.label}" id="c74">
+                 headerText="Voucher No" id="c74">
         <af:outputText value="#{row.VoucherNo}" shortDesc="#{bindings.SRVDetailVO1.hints.VoucherNo.tooltip}" id="ot74"/>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.VoucherDate.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.VoucherDate.label}" id="c75">
+                 headerText="Voucher Date" id="c75">
         <f:facet name="filter">
           <af:inputDate value="#{bindings.SRVDetailVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.VoucherDate.value}"
                         id="id11">
@@ -628,25 +615,36 @@
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.BillAmount.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.BillAmount.label}" id="c76">
+                 headerText="Bill Amount" id="c76">
         <af:outputText value="#{row.BillAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.BillAmount.tooltip}"
                        id="ot76">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.BillAmount.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.PassedAmount.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.PassedAmount.label}" id="c77">
+                 headerText="Passed Amount" id="c77">
         <af:outputText value="#{row.PassedAmount}" shortDesc="#{bindings.SRVDetailVO1.hints.PassedAmount.tooltip}"
                        id="ot77">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.PassedAmount.format}"/>
         </af:outputText>
       </af:column>
       <af:column sortProperty="#{bindings.SRVDetailVO1.hints.DifferenceAmount.name}" filterable="true" sortable="true"
-                 headerText="#{bindings.SRVDetailVO1.hints.DifferenceAmount.label}" id="c78">
+                 headerText="Difference Amount" id="c78">
         <af:outputText value="#{row.DifferenceAmount}"
                        shortDesc="#{bindings.SRVDetailVO1.hints.DifferenceAmount.tooltip}" id="ot78">
           <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.DifferenceAmount.format}"/>
         </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.TransporterDebited.name}" filterable="true" sortable="true"
+                 headerText="Transporter Debited" id="c58">
+        <af:outputText value="#{row.TransporterDebited}"
+                       shortDesc="#{bindings.SRVDetailVO1.hints.TransporterDebited.tooltip}" id="ot58">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.SRVDetailVO1.hints.TransporterDebited.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.SRVDetailVO1.hints.Status.name}" filterable="true" sortable="true"
+                 headerText="Status" id="c11">
+        <af:outputText value="#{row.Status}" shortDesc="#{bindings.SRVDetailVO1.hints.Status.tooltip}" id="ot11"/>
       </af:column>
     </af:table>
   </af:panelCollection>

@@ -18,7 +18,8 @@
           <af:inputComboboxListOfValues id="lOCId" popupTitle="Search and Select: #{bindings.LOC.hints.label}"
                                         value="#{bindings.LOC.inputValue}" label="Location"
                                         model="#{bindings.LOC.listOfValuesModel}"
-                                        required="#{bindings.LOC.hints.mandatory}"
+                                        
+                                        showRequired="true" required="true"
                                         columns="#{bindings.LOC.hints.displayWidth}"
                                         shortDesc="#{bindings.LOC.hints.tooltip}" contentStyle="width:180.0px;"
                                          labelStyle="width:100px" autoSubmit="true">
@@ -30,7 +31,7 @@
       <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
         <af:gridCell marginStart="5px" width="34%" id="gc4">
           <af:inputDate value="#{bindings.fromDate.inputValue}" label="As On Date"
-                        required="#{bindings.fromDate.hints.mandatory}"
+                         showRequired="true" required="true"
                         columns="#{bindings.fromDate.hints.displayWidth}" shortDesc="#{bindings.fromDate.hints.tooltip}"
                         id="id1" contentStyle="width:180.0px;" labelStyle="width:100px" autoSubmit="true">
             <f:validator binding="#{bindings.fromDate.validator}"/>
@@ -49,7 +50,7 @@
         <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
           <af:button text="Execute" id="b1"
                      destination="/reports/ServletClass?defpath=#{StockAsOnDateBean.jaspeReportName}&amp;RepFormat=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;RepName=SAOD&amp;LocCode=#{bindings.LOC.inputValue}&amp;FromDate=#{bindings.fromDate.inputValue}"
-                     targetFrame="_blank"/>
+                     targetFrame="_blank" binding="#{StockAsOnDateBean.executeBtnBinding}"/>
         </af:gridCell>
       </af:gridRow>
     </af:panelGridLayout>

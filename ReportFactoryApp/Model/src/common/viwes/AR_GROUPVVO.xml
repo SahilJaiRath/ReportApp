@@ -19,19 +19,32 @@
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="P272_UNIT"
-    Kind="where"
+    Name="BindUnit"
+    Kind="viewcriteria"
     Type="java.lang.String"/>
   <Variable
-    Name="P272_LOCATION"
-    Kind="where"
+    Name="BindLoc"
+    Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[Select GROUP_CODE, ITEM_GROUP GROUP_NAME 
-  From VW_ALL_ITEM_MAS 
- Where UNIT_CD = :P272_UNIT 
-   And Default_LOC = :P272_LOCATION 
- Group By GROUP_CODE, ITEM_GROUP 
+  <SQLQuery><![CDATA[Select UNIT_CD,GROUP_CODE, ITEM_GROUP GROUP_NAME ,DEFAULT_LOC 
+  From VW_ALL_ITEM_MAS  
+ Group By UNIT_CD,GROUP_CODE, ITEM_GROUP,DEFAULT_LOC 
  Order By GROUP_CODE, ITEM_GROUP]]></SQLQuery>
+  <ViewAttribute
+    Name="UnitCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_CD"
+    Expression="UNIT_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="GroupCode"
     IsUpdateable="false"
@@ -49,7 +62,7 @@
     <Properties>
       <SchemaBasedProperties>
         <DISPLAYWIDTH
-          Value="40"/>
+          Value="15"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -74,6 +87,93 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="DefaultLoc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEFAULT_LOC"
+    Expression="DEFAULT_LOC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="AR_GROUPVVOCriteria"
+    ViewObjectName="common.viwes.AR_GROUPVVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="AR_GROUPVVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="UnitCd"
+        ViewAttribute="UnitCd"
+        Operator="="
+        Conjunction="AND"
+        Value=":BindUnit"
+        IsBindVarValue="true"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="AR_GROUPVVOCriteria_AR_GROUPVVOCriteria_row_0_GroupCode"
+        ViewAttribute="GroupCode"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AR_GROUPVVOCriteria_AR_GROUPVVOCriteria_row_0_GroupName"
+        ViewAttribute="GroupName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AR_GROUPVVOCriteria_AR_GROUPVVOCriteria_row_0_DefaultLoc"
+        ViewAttribute="DefaultLoc"
+        Operator="="
+        Conjunction="AND"
+        Value=":BindLoc"
+        IsBindVarValue="true"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>

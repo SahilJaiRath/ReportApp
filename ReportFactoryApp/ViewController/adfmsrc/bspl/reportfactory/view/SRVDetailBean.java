@@ -55,7 +55,7 @@ public class  SRVDetailBean {
         DCIteratorBinding pvIter = (DCIteratorBinding) getBindings().get("DummyVVO1Iterator");
         String Unit = (String) pvIter.getCurrentRow().getAttribute("UnitCode");
         String LocationFilter = (String) pvIter.getCurrentRow().getAttribute("SRVDetail_LocationFilter");
-            if(LocationFilter.equalsIgnoreCase("ALL"))
+            if(null==pvIter.getCurrentRow().getAttribute("SRVDetail_LocationFilter") ||LocationFilter.equalsIgnoreCase("ALL"))
             {
                 LocationFilter = "%";
             }

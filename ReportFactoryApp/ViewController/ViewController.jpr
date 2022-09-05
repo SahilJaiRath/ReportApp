@@ -245,6 +245,7 @@
             <hash>
                <url n="content-folder-url" path="adfmsrc/bspl/reportfactory/view/"/>
                <list n="pattern-filters">
+                  <string v="+bspl/reportfactory/view/StockValuationBean.java"/>
                   <string v="+bspl/reportfactory/view/ArWiseItemStockLedgerBean.java"/>
                   <string v="+bspl/reportfactory/view/StockAsOnDateBean.java"/>
                   <string v="+bspl/reportfactory/view/ARWiseItemStockLedger.java"/>
