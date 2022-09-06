@@ -22,6 +22,7 @@ import oracle.binding.OperationBinding;
 
 public class ProductShortageandBatchBean {
     private RichButton executeBtnBinding;
+    private RichButton getReportBinding;
 
     public ProductShortageandBatchBean() {
     }
@@ -78,7 +79,7 @@ public class ProductShortageandBatchBean {
         Object result = operationBinding.execute();
         
         
-        
+        getGetReportBinding().setDisabled(false);
         
         
     }
@@ -93,6 +94,14 @@ public class ProductShortageandBatchBean {
 
     public RichButton getExecuteBtnBinding() {
         return executeBtnBinding;
+    }
+
+    public void setGetReportBinding(RichButton getReportBinding) {
+        this.getReportBinding = getReportBinding;
+    }
+
+    public RichButton getGetReportBinding() {
+        return getReportBinding;
     }
 }
 

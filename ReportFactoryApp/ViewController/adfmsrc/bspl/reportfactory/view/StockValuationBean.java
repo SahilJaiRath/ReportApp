@@ -18,6 +18,7 @@ import oracle.binding.OperationBinding;
 
 public class StockValuationBean {
     private RichButton bindExecutebtn;
+    private RichButton getReportBinding;
 
     public StockValuationBean() {
     }
@@ -68,6 +69,8 @@ public class StockValuationBean {
         operationBinding.getParamsMap().put("LV_SID", SID);
         
         Object result = operationBinding.execute();
+        
+        getGetReportBinding().setDisabled(false);
     }
     public String getJaspeReportName() 
     {
@@ -90,5 +93,13 @@ public class StockValuationBean {
 
     public RichButton getBindExecutebtn() {
         return bindExecutebtn;
+    }
+
+    public void setGetReportBinding(RichButton getReportBinding) {
+        this.getReportBinding = getReportBinding;
+    }
+
+    public RichButton getGetReportBinding() {
+        return getReportBinding;
     }
 }

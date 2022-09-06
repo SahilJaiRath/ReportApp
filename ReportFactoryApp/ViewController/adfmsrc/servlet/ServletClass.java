@@ -108,12 +108,12 @@ public class ServletClass extends HttpServlet {
             if (true) {
                 
                 if(RepFormat.equalsIgnoreCase("PDF")){
-                     fileName = "Doc_" + DocNo + ".pdf";  
+                     fileName = "Doc_" + reportName + ".pdf";  
                     response.setContentType("application/pdf");
                     response.setHeader("Content-Disposition", "inline; filename=\"" + fileName + "\"");
                     exporter = new JRPdfExporter();
                 }else{
-                    fileName = "Doc_" + DocNo + ".xls";  
+                    fileName = "Doc_" + reportName + ".xls";  
                     response.setContentType("application/octet-stream");
                     response.setHeader("Content-Disposition", "inline; filename=\"" + fileName + "\"");
                     exporter = new JRXlsExporter();
@@ -175,10 +175,10 @@ public class ServletClass extends HttpServlet {
             //                        System.out.println("Date error");
             //                }
             //                return new oracle.jbo.domain.Date(sdfsql.format(date));
-        // For server  
-         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+      //   For server  
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
        // For Local
-//        SimpleDateFormat format1 = new SimpleDateFormat("MM/dd/yyyy");
+     //   SimpleDateFormat format1 = new SimpleDateFormat("MM/dd/yyyy");
             SimpleDateFormat format2 = new SimpleDateFormat("dd-MMM-yy");
             Date date = format1.parse(datestring);
             System.out.println(format2.format(date));

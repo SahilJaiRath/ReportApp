@@ -22,6 +22,7 @@ import oracle.binding.OperationBinding;
 
 public class ArWiseItemStockLedgerBean {
     private RichButton executeBtnbinding;
+    private RichButton getReportBinding;
 
     public ArWiseItemStockLedgerBean() {
     }
@@ -117,7 +118,7 @@ public class ArWiseItemStockLedgerBean {
         Object result = operationBinding.execute();
         
         
-        
+        getGetReportBinding().setDisabled(false);
         
         
     }
@@ -128,6 +129,14 @@ public class ArWiseItemStockLedgerBean {
 
     public RichButton getExecuteBtnbinding() {
         return executeBtnbinding;
+    }
+
+    public void setGetReportBinding(RichButton getReportBinding) {
+        this.getReportBinding = getReportBinding;
+    }
+
+    public RichButton getGetReportBinding() {
+        return getReportBinding;
     }
 }
 

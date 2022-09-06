@@ -108,10 +108,10 @@
           </af:selectOneChoice>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc12">
-          <af:button text="Get Report" id="b1"
+          <af:button text="Get Report" id="b1" partialTriggers="b2"
           targetFrame="_blank"
             destination="/reports/ServletClass?defpath=#{ARWiseItemStockLedgerBean.jaspeReportName}&amp;RepFormat=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{bindings.AR_AR_NO.inputValue}&amp;RepName=ARW&amp;ItemCode=#{bindings.AR_ITEM.inputValue}&amp;ItemGroup=#{bindings.AR_GROUP.inputValue}&amp;SubGroup=#{bindings.AR_SubGroup.inputValue}&amp;LocCode=#{bindings.LOC.inputValue}&amp;FromDate=#{bindings.fromDate.inputValue}&amp;ToDate=#{bindings.toDate.inputValue}&amp;EmpCode=#{pageFlowScope.empCode}&amp;SID=#{pageFlowScope.SID}"
-                   disabled="#{bindings.ARwiseItemStockLedgerVO1Iterator.estimatedRowCount==0}">
+                     binding="#{ArWiseItemStockLedgerBean.getReportBinding}" disabled="true">
           </af:button>
           
         </af:gridCell>

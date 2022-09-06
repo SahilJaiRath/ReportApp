@@ -39,9 +39,10 @@
           </af:inputComboboxListOfValues>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="25%" marginEnd="5px" id="gc4">
-          <af:button text="Get Report" id="b2"
-                         destination="/reports/ServletClass?defpath=#{StockValuationBean.jaspeReportName}&amp;RepFormat=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{bindings.ItemCd.inputValue}&amp;RepName=STKV&amp;LocCode=#{bindings.LOC.inputValue}&amp;FromDate=#{bindings.fromDate.inputValue}&amp;ToDate=#{bindings.toDate.inputValue}&amp;SID=#{pageFlowScope.SID}"
-          disabled="#{bindings.StockValuaionVO1Iterator.estimatedRowCount==0}">
+          <af:button text="Get Report" id="b2" partialTriggers="b1"
+                      targetFrame="_blank"   destination="/reports/ServletClass?defpath=#{StockValuationBean.jaspeReportName}&amp;RepFormat=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{bindings.ItemCd.inputValue}&amp;RepName=STKV&amp;LocCode=#{bindings.LOC.inputValue}&amp;FromDate=#{bindings.fromDate.inputValue}&amp;ToDate=#{bindings.toDate.inputValue}&amp;SID=#{pageFlowScope.SID}"
+          disabled="#{bindings.StockValuaionVO1Iterator.estimatedRowCount==0}"
+                     binding="#{StockValuationBean.getReportBinding}">
           </af:button>
         </af:gridCell>
       </af:gridRow>

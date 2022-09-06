@@ -53,11 +53,11 @@
           </af:selectOneChoice>
         </af:gridCell>
         <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc6">
-         <af:button text="Get Report" id="b1"
+         <af:button text="Get Report" id="b1" partialTriggers="b2"
           targetFrame="_blank"
             destination="/reports/ServletClass?defpath=#{ProductShortageandBatchBean.jaspeReportName}&amp;RepFormat=#{bindings.rep_type.inputValue}&amp;UnitCode=#{bindings.UnitCode.inputValue}&amp;DocNo=#{bindings.ProductShortageandBatch_ProductName.inputValue}&amp;RepName=PSB&amp;ReqQty=#{bindings.LV_p1.inputValue}&amp;EmpCode=#{pageFlowScope.empCode}&amp;SID=#{pageFlowScope.SID}"
                    disabled="#{bindings.ProductShortageandBatchReportVO1Iterator.estimatedRowCount==0}"
-                >
+                binding="#{ProductShortageandBatchBean.getReportBinding}">
           </af:button>
         </af:gridCell>
       </af:gridRow>
